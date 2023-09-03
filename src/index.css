@@ -1,0 +1,78 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+}
+
+/* primary button styles */
+.btn__primary {
+  color: #fff;
+  background: #1FBAFF;
+  padding: 7px 20px;
+  border-radius: 50px;
+  border: 1px solid #1FBAFF;
+  transition: all .3s ease-in-out;
+}
+
+.btn__primary:hover {
+  color: #1FBAFF;
+  background: #fff;
+}
+
+.btn__white {
+  color: #1FBAFF;
+  background: #fff;
+  padding: 6px 19px;
+  border-radius: 50px;
+  border: 2px solid #1FBAFF;
+  transition: all .3s ease-in-out;
+}
+
+.btn__white:hover {
+  color: #fff;
+  background: #1FBAFF;
+}
+
+/* input range styles */
+/* Style the track (background bar) */
+.range::-webkit-slider-runnable-track {
+  background: #1FBAFF;
+  height: 6px;
+}
+
+.range::-moz-range-track {
+  background: #1FBAFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* range input styles */
+.rangeslider-horizontal {
+  height: 8px !important;
+  background-color: #A1C7EC !important;
+}
+
+.rangeslider {
+  margin: 0 !important;
+  box-shadow: none !important;
+}
+
+.rangeslider-horizontal .rangeslider__fill {
+  background-color: #1FBAFF !important;
+  box-shadow: none !important;
+}
+
+.rangeslider__handle {
+  height: 22px !important;
+  width: 22px !important;
+  border: 4px solid #1FBAFF !important;
+}
+
+.rangeslider-horizontal .rangeslider__handle:after {
+  display: none !important;
+}
