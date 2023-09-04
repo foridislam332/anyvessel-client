@@ -4,7 +4,9 @@ import BoatSearch from "../sections/BoatSearch";
 import AboutAnyvessel from "../sections/AboutAnyvessel";
 import FeaturedBoats from "../sections/FeaturedBoats";
 
+// image
 import BgImg from '../assets/images/boat-bg.png';
+
 const Home = () => {
     return (
         <>

@@ -3,6 +3,9 @@ import Main from "../layouts/Main";
 import Home from "../pages/Home";
 import Register from "../layouts/Register";
 import RegisterCard from "../sections/RegisterCard";
+import BoatRegister from "../pages/BoatRegister";
+import CrewRegister from "../pages/CrewRegister";
+import BoatServicesRegister from "../pages/BoatServicesRegister";
 
 const Route = createBrowserRouter([
     {
@@ -22,6 +25,18 @@ const Route = createBrowserRouter([
             {
                 path: '/register',
                 element: <RegisterCard />
+            },
+            {
+                path: '/register/boat_register',
+                element: <BoatRegister />
+            },
+            {
+                path: '/register/crew_register',
+                element: <CrewRegister />
+            },
+            {
+                path: '/register/boat_services',
+                element: <BoatServicesRegister />
             }
         ]
     }
