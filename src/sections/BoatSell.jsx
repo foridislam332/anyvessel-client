@@ -1,43 +1,44 @@
 import React, { useEffect, useState } from 'react';
+import BootCard from '../components/BootCard';
 
-import MeetCrewCards from '../components/MeetCrewCards';
 import { Swiper, SwiperSlide } from 'swiper/react';
+
+import BoatCards from '../components/BoatCards';
+
 // Import Swiper styles
 import 'swiper/css';
-
-// import required modules
-import { Autoplay, Pagination, Navigation } from 'swiper/modules';
+import { Autoplay, Navigation, Pagination } from 'swiper/modules';
 import SectionTitle from '../components/SectionTitle';
 
-const MeetCrew = () => {
+const BoatSell = () => {
 
-    const [crewMembers, setCrewMembers] = useState([])
+    const [boats, setBoats] = useState([]);
     useEffect(() => {
-        fetch("crewmember.json")
-            .then((res) => res.json())
-            .then((data) => setCrewMembers(data));
-
+        fetch('/boats.json')
+            .then(res => res.json())
+            .then(data => setBoats(data))
     }, [])
+
     const breakpoints = {
         // small device
         640: {
             slidesPerView: 1,
         },
-        // md,lg device 
+        // // md,lg device 
         768: {
-            slidesPerView: 3,
+            slidesPerView: 2,
         },
     };
 
 
     return (
-        // Meet Your Crew Section
-        <section className='bg-[#F0F6FB]  '>
-            <div className='container py-6'>
+        <section className="bg-[#F0F6FB]">
+            <div className='py-6'>
                 {/* Section Title */}
-                <SectionTitle title='Meet Your Crew' />
-                {/* Crew Cards */}
-                <div className='md:mx-16 py-16'>
+                <SectionTitle title='Boat For Sale' />
+
+                {/* boat Cards   */}
+                <div className='mx-5 md:mx-[530px] py-16' >
                     <Swiper
 
                         spaceBetween={30}
@@ -55,12 +56,13 @@ const MeetCrew = () => {
                         className="mySwiper"
                         breakpoints={breakpoints}
                     >
-                        <div className='grid grid-cols-1 md:grid-cols-3 gap-6 py-5'>
+                        <div className='grid grid-cols-2  gap-6 py-5'>
                             {/* Fixed Swiper Container */}
                             <div className='swiper-container fixed top-0 right-0 bottom-0 left-0'>
-                                {crewMembers.map((crewmember) => (
-                                    <SwiperSlide key={crewmember._id}>
-                                        <MeetCrewCards crewmember={crewmember} />
+                                {boats.map((boat) => (
+                                    <SwiperSlide key={boat._id} >
+                                        <BoatCards boat={boat} />
+
                                     </SwiperSlide>
                                 ))}
 
@@ -68,13 +70,12 @@ const MeetCrew = () => {
                         </div>
                     </Swiper>
                 </div>
-                {/* View More Button  */}
-                <div className='text-center p-4 '>
-                    <button className="text-white text-sm font-light bg-blue px-8 py-3 rounded-[9px] border border-blue hover:bg-transparent hover:text-blue shadow-md hover:shadow-3xl duration-300">View More</button>
-                </div>
+
+
+
             </div>
         </section>
     );
 };
 
-export default MeetCrew;
+export default BoatSell;

@@ -7,6 +7,7 @@ import FeaturedBoats from "../sections/FeaturedBoats";
 import BgImg from '../assets/images/boat-bg.png';
 import MeetCrew from "../sections/MeetCrew";
 import Reviews from "../sections/Reviews";
+import BoatSell from "../sections/BoatSell";
 const Home = () => {
     return (
         <>
@@ -24,6 +25,7 @@ const Home = () => {
             </section>
             <MeetCrew />
             <Reviews />
+            <BoatSell />
         </>
     );
 };
