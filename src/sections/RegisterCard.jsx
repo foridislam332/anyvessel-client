@@ -20,7 +20,7 @@ const RegisterCard = () => {
                         <p className="text-darkBlue text-[21px] leading-8 font-light">a crew <Link to='/' className="font-medium" >member</Link></p>
                     </div>
 
-                    <Link to='/boat_register' className="text-white text-sm font-light bg-blue px-10 py-[9px] rounded-[9px] border border-blue hover:bg-transparent hover:text-blue shadow-md hover:shadow-3xl duration-300">Register</Link>
+                    <Link to='/register/boat_register' className="text-white text-sm font-light bg-blue px-10 py-[9px] rounded-[9px] border border-blue hover:bg-transparent hover:text-blue shadow-md hover:shadow-3xl duration-300">Register</Link>
                 </div>
 
                 {/* crew */}
@@ -35,7 +35,7 @@ const RegisterCard = () => {
                         <p className="text-darkBlue text-[21px] leading-8 font-light">a crew <Link to='/' className="font-medium" >position</Link></p>
                     </div>
 
-                    <Link to='/boat_register' className="text-white text-sm font-light bg-blue px-10 py-[9px] rounded-[9px] border border-blue hover:bg-transparent hover:text-blue shadow-md hover:shadow-3xl duration-300">Register</Link>
+                    <Link to='/register/crew_register' className="text-white text-sm font-light bg-blue px-10 py-[9px] rounded-[9px] border border-blue hover:bg-transparent hover:text-blue shadow-md hover:shadow-3xl duration-300">Register</Link>
                 </div>
 
                 {/* boat services */}
@@ -50,7 +50,7 @@ const RegisterCard = () => {
                         <p className="text-darkBlue text-[21px] leading-8 font-light">a <Link to='/' className="font-medium" >boat for services</Link></p>
                     </div>
 
-                    <Link to='/boat_register' className="text-white text-sm font-light bg-blue px-10 py-[9px] rounded-[9px] border border-blue hover:bg-transparent hover:text-blue shadow-md hover:shadow-3xl duration-300">Register</Link>
+                    <Link to='/register/boat_services' className="text-white text-sm font-light bg-blue px-10 py-[9px] rounded-[9px] border border-blue hover:bg-transparent hover:text-blue shadow-md hover:shadow-3xl duration-300">Register</Link>
                 </div>
             </div>
 
@@ -58,7 +58,7 @@ const RegisterCard = () => {
             <div className="max-w-[880px] mx-auto bg-white bg-opacity-90 py-6 md:pl-[123px] md:pr-[39px] rounded-[10px] flex flex-col md:flex-row items-center gap-4 md:gap-0 justify-between duration-300">
                 <p className="text-darkBlue text-[21px] font-light leading-8">Already a registered member?</p>
 
-                <Link to='/boat_register' className="flex items-center justify-center gap-5 text-white text-sm font-light bg-blue px-10 py-[9px] rounded-[9px] border border-blue hover:bg-transparent hover:text-blue shadow-md hover:shadow-3xl duration-300"><BiLogInCircle size='24' /> Sign In</Link>
+                <Link to='/' className="flex items-center justify-center gap-5 text-white text-sm font-light bg-blue px-10 py-[9px] rounded-[9px] border border-blue hover:bg-transparent hover:text-blue shadow-md hover:shadow-3xl duration-300"><BiLogInCircle size='24' /> Sign In</Link>
             </div>
         </div>
     );

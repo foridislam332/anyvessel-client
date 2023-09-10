@@ -51,9 +51,12 @@ const Header = () => {
                     <Link to='/login' className="btn__primary flex items-center gap-5">
                         <BiLogInCircle size='24' /> Log in
                     </Link>
-                    <Link to='/sign_in' className="btn__white flex items-center gap-5">
+                    <Link to='/register' className="btn__white flex items-center gap-5">
                         <AiOutlineUser size='24' /> Sign In
                     </Link>
+                    {/* <Link to='/sign_in' className="btn__white flex items-center gap-5">
+                        <AiOutlineUser size='24' /> Sign In
+                    </Link> */}
                 </div>
 
                 {/* toggle button */}
