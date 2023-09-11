@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
 // icons image
@@ -7,10 +7,45 @@ import user2 from '../assets/images/user-3.png';
 import email from '../assets/images/email.png';
 import phone from '../assets/images/phone.png';
 import angle from '../assets/images/angle-down.png';
+import useAuth from "../hooks/useAuth";
+import axios from "axios";
 
 const CrewRegister = () => {
-    const { register, handleSubmit, formState: { errors } } = useForm();
-    const onSubmit = data => console.log(data);
+    const { createUser, upDateProfile } = useAuth();
+    const navigate = useNavigate();
+    const { register, handleSubmit, control, formState: { errors } } = useForm();
+    const onSubmit = data => {
+        if (data.password !== data.retypePassword) {
+            return alert('password did not match')
+        }
+
+
+        const newData = {
+            surname: data.surname,
+            email: data.email,
+            fullName: data.fullName,
+            gender: data.gender,
+            phone: data.phone,
+            birthDay: `${data.day}, ${data.month} ${data.year}`
+        }
+
+        createUser(data.email, data.password)
+            .then(result => {
+                upDateProfile(result.user, data.fullName, data?.pictures)
+                    .then(res => {
+                        axios.post('https://anyvessel-server.vercel.app/', newData)
+                            .then(data => {
+                                if (data.status === 200) {
+                                    console.log(data);
+                                    navigate('/', { replace: true })
+                                }
+                            })
+                    })
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    };
 
     return (
         <div className="bg-white bg-opacity-90 px-5 sm:px-10 py-10 md:px-[93px] md:py-[30px] mt-16 rounded-[10px]">

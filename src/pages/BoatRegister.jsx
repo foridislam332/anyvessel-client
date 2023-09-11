@@ -1,5 +1,6 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm, Controller } from "react-hook-form";
+import useAuth from "../hooks/useAuth";
 
 // icons image
 import user from '../assets/images/user2.png';
@@ -7,13 +8,49 @@ import user2 from '../assets/images/user-3.png';
 import email from '../assets/images/email.png';
 import phone from '../assets/images/phone.png';
 import angle from '../assets/images/angle-down.png';
-import { useContext } from "react";
-import { AuthContext } from "../Providers/AuthProvider";
+import axios from "axios";
 
 const BoatRegister = () => {
+    const { createUser, upDateProfile } = useAuth();
+    const navigate = useNavigate();
     const { register, handleSubmit, control, formState: { errors } } = useForm();
-    const onSubmit = data => console.log(data);
-    const { createUser, upDateProfile } = useContext(AuthContext)
+    const onSubmit = data => {
+        if (data.password !== data.retypePassword) {
+            return alert('password did not match')
+        }
+
+        const newData = {
+            surname: data.surname,
+            email: data.email,
+            fullName: data.fullName,
+            description: data.description,
+            gender: data.gender,
+            languages: data.languages,
+            nationality: data.nationality,
+            phone: data.phone,
+            romance: data.romance,
+            picture: data.picture,
+            identityPhoto: data.identityPhoto,
+            birthDay: `${data.day}, ${data.month} ${data.year}`
+        }
+
+        createUser(data.email, data.password)
+            .then(result => {
+                upDateProfile(result.user, data.fullName, data?.pictures)
+                    .then(res => {
+                        axios.post('https://anyvessel-server.vercel.app/', newData)
+                            .then(data => {
+                                if (data.status === 200) {
+                                    console.log(data);
+                                    navigate('/', { replace: true })
+                                }
+                            })
+                    })
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    };
 
 
     return (

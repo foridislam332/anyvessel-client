@@ -1,6 +1,5 @@
 import { Outlet } from "react-router-dom";
 import { Helmet } from "react-helmet";
-import BoatSearch from "../sections/BoatSearch";
 import AboutAnyvessel from "../sections/AboutAnyvessel";
 import FeaturedBoats from "../sections/FeaturedBoats";
 import MeetCrew from "../sections/MeetCrew";
