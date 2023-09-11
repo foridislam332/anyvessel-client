@@ -28,14 +28,12 @@ const FeaturedBoats = () => {
 
 
     return (
-        <section className="py-12 bg-[#F0F6FB]">
+        <section className="py-16 bg-[#F0F6FB]">
             <div className="container">
                 <SectionTitle title='Featured Boats to work in' />
 
-                {/* card  */}
-
                 {/* boat Cards   */}
-                <div className='py-16'>
+                <div className='py-12'>
                     <Swiper
 
                         spaceBetween={30}
@@ -48,6 +46,8 @@ const FeaturedBoats = () => {
                             nextEl: '.swiper-button-next',
                             prevEl: '.swiper-button-prev',
                         }}
+
+                        loop={true}
 
                         modules={[Autoplay, Pagination, Navigation,]}
                         className="mySwiper"
@@ -70,7 +70,7 @@ const FeaturedBoats = () => {
 
 
 
-                <div className="text-center mt-10">
+                <div className="text-center">
                     <button className="text-white text-sm font-light bg-blue px-8 py-3 rounded-[9px] border border-blue hover:bg-transparent hover:text-blue shadow-md hover:shadow-3xl duration-300">View more</button>
                 </div>
             </div>

@@ -52,7 +52,7 @@ const Header = () => {
                         <BiLogInCircle size='24' /> Log in
                     </Link>
                     <Link to='/register' className="btn__white flex items-center gap-5">
-                        <AiOutlineUser size='24' /> Sign In
+                        <AiOutlineUser size='24' /> Sign up
                     </Link>
                     {/* <Link to='/sign_in' className="btn__white flex items-center gap-5">
                         <AiOutlineUser size='24' /> Sign In

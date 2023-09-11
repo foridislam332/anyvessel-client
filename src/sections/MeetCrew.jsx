@@ -32,12 +32,12 @@ const MeetCrew = () => {
 
     return (
         // Meet Your Crew Section
-        <section className='bg-[#F0F6FB]  '>
-            <div className='container py-6'>
+        <section className='py-16 bg-[#F0F6FB]'>
+            <div className='container'>
                 {/* Section Title */}
                 <SectionTitle title='Meet Your Crew' />
                 {/* Crew Cards */}
-                <div className='md:mx-16 py-16'>
+                <div className='py-12'>
                     <Swiper
 
                         spaceBetween={30}
@@ -45,6 +45,7 @@ const MeetCrew = () => {
                         pagination={{
                             clickable: true,
                         }}
+                        loop={true}
 
                         navigation={{
                             nextEl: '.swiper-button-next',
@@ -69,7 +70,7 @@ const MeetCrew = () => {
                     </Swiper>
                 </div>
                 {/* View More Button  */}
-                <div className='text-center p-4 '>
+                <div className='text-center'>
                     <button className="text-white text-sm font-light bg-blue px-8 py-3 rounded-[9px] border border-blue hover:bg-transparent hover:text-blue shadow-md hover:shadow-3xl duration-300">View More</button>
                 </div>
             </div>
