@@ -10,8 +10,10 @@ import { AiOutlineUser } from 'react-icons/ai';
 
 // logo
 import Logo from '../assets/images/logo.png';
+import useAuth from "../hooks/useAuth";
 
 const Header = () => {
+    const { user } = useAuth();
     const [isOpen, setIsOpen] = useState(false);
 
     const toggle = () => {
@@ -32,7 +34,7 @@ const Header = () => {
     }, []);
 
     return (
-        <header className={`fixed w-full shadow-xl duration-300 ease-in-out ${navState ? 'backdrop-blur-md bg-white/60 pt-5 pb-5 shadow-green/10' : 'bg-white pt-9 pb-5 backdrop-blur-md'} z-50`}>
+        <header className={`fixed w-full shadow-xl duration-300 ease-in-out ${navState ? 'backdrop-blur-md bg-white/60 pt-4 pb-4 shadow-green/10' : 'bg-white pt-9 pb-4 backdrop-blur-md'} z-50`}>
             <nav className="flex items-center justify-between px-5">
                 {/* logo */}
                 <div className="relative w-48 h-full">
@@ -48,15 +50,26 @@ const Header = () => {
 
                 {/* login & sign in buttons */}
                 <div className="hidden lg:flex items-center gap-5">
-                    <Link to='/login' className="btn__primary flex items-center gap-5">
-                        <BiLogInCircle size='24' /> Log in
-                    </Link>
-                    <Link to='/register' className="btn__white flex items-center gap-5">
-                        <AiOutlineUser size='24' /> Sign In
-                    </Link>
-                    {/* <Link to='/sign_in' className="btn__white flex items-center gap-5">
-                        <AiOutlineUser size='24' /> Sign In
-                    </Link> */}
+                    {
+                        user?.email ? <div className="flex items-center gap-4 border-2 border-blue py-2 pl-3 pr-5 rounded-[50px]">
+                            <div className="h-[42px] w-[42px] overflow-hidden rounded-full shadow-lg flex items-center justify-center">
+                                {
+                                    user?.photoURL?.length > 0 ? <img className="w-full h-full object-cover object-center" src={user?.photoURL} alt={user?.displayName} /> : <h3 className="text-darkBlue text-xl font-semibold drop-shadow-xl uppercase">{user?.displayName?.slice(0, 2)}</h3>
+                                }
+                            </div>
+                            <div>
+                                <p className="text-blue text-sm">Welcome</p>
+                                <h3 className="text-[#050F36] text-sm">{user?.displayName}</h3>
+                            </div>
+                        </div> : <>
+                            <Link to='/login' className="btn__primary flex items-center gap-5">
+                                <BiLogInCircle size='24' /> Log in
+                            </Link>
+                            <Link to='/register' className="btn__white flex items-center gap-5">
+                                <AiOutlineUser size='24' /> Sign up
+                            </Link>
+                        </>
+                    }
                 </div>
 
                 {/* toggle button */}

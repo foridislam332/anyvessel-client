@@ -32,16 +32,16 @@ const BoatSell = () => {
 
 
     return (
-        <section className="bg-[#F0F6FB]">
-            <div className='py-6'>
+        <section className="bg-[#F0F6FB] py-20">
+            <div className='container'>
                 {/* Section Title */}
                 <SectionTitle title='Boat For Sale' />
 
                 {/* boat Cards   */}
-                <div className='mx-5 md:mx-[530px]  py-16' >
+                <div className='py-12' >
                     <Swiper
 
-                        spaceBetween={50}
+                        spaceBetween={40}
                         centeredSlides={false}
                         pagination={{
                             clickable: true,
@@ -56,17 +56,14 @@ const BoatSell = () => {
                         className="mySwiper"
                         breakpoints={breakpoints}
                     >
-                        <div className='grid grid-cols-2  gap-4 py-5'>
-                            {/* Fixed Swiper Container */}
-                            <div className='swiper-container fixed top-0 right-0 bottom-0 left-0'>
-                                {boats.map((boat) => (
-                                    <SwiperSlide key={boat._id} >
-                                        <BoatCards boat={boat} />
+                        <div className='swiper-container fixed top-0 right-0 bottom-0 left-0'>
+                            {boats.map((boat) => (
+                                <SwiperSlide key={boat._id} >
+                                    <BoatCards boat={boat} />
 
-                                    </SwiperSlide>
-                                ))}
+                                </SwiperSlide>
+                            ))}
 
-                            </div>
                         </div>
                     </Swiper>
                 </div>
