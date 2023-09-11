@@ -10,7 +10,7 @@ const Main = () => {
         return <div className="h-screen flex items-center justify-center"><h1 className="text-3xl text-blue font-medium">Loading ...</h1></div>
     }
     if (user === null) {
-        <Navigate to='/register' replace={true} />
+        return <Navigate to='/register' replace={true} />
     }
     return (
         <>
