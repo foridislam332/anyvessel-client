@@ -1,6 +1,9 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useForm, Controller } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import useAuth from "../hooks/useAuth";
+import axios from "axios";
+import { useState } from "react";
+import { toast } from "react-toastify";
 
 // icons image
 import user from '../assets/images/user2.png';
@@ -8,9 +11,6 @@ import user2 from '../assets/images/user-3.png';
 import email from '../assets/images/email.png';
 import phone from '../assets/images/phone.png';
 import angle from '../assets/images/angle-down.png';
-import axios from "axios";
-import { useState } from "react";
-import { toast } from "react-toastify";
 
 const BoatRegister = () => {
     const { createUser, upDateProfile } = useAuth();
