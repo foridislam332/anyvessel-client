@@ -9,14 +9,69 @@ import email from '../assets/images/email.png';
 import phone from '../assets/images/phone.png';
 import angle from '../assets/images/angle-down.png';
 import axios from "axios";
+import { useState } from "react";
+import { toast } from "react-toastify";
 
 const BoatRegister = () => {
     const { createUser, upDateProfile } = useAuth();
     const navigate = useNavigate();
-    const { register, handleSubmit, control, formState: { errors } } = useForm();
+    const [picture, setPicture] = useState(null);
+    const [identityPhoto, setIdentityPhoto] = useState(null);
+    const { register, handleSubmit, formState: { errors } } = useForm();
+
+    // Image hosting
+    const image_hosting_token = import.meta.env.VITE_Image_Upload_Token;
+    const image_hosting_url = `https://api.imgbb.com/1/upload?key=${image_hosting_token}`;
+
+    //   Picture upload
+    const handlePictureUpload = async (event) => {
+        const picture = event.target.files[0]
+        const formData = new FormData();
+        formData.append('image', picture);
+
+        try {
+            const response = await axios.post(image_hosting_url, formData);
+            setPicture(response.data.data.display_url);
+            toast.success('Photo uploaded!', {
+                position: "top-right",
+                autoClose: 2000,
+            });
+        } catch (error) {
+            console.error('Error uploading image:', error);
+        }
+    }
+
+    //   identity Photo upload
+    const handleIdentityPhotoUpload = async (event) => {
+        const picture = event.target.files[0]
+        const formData = new FormData();
+        formData.append('image', picture);
+
+        try {
+            const response = await axios.post(image_hosting_url, formData);
+            setIdentityPhoto(response.data.data.display_url);
+            toast.success('Photo uploaded!', {
+                position: "top-right",
+                autoClose: 2000,
+            });
+        } catch (error) {
+            console.error('Error uploading image:', error);
+        }
+    }
+
     const onSubmit = data => {
         if (data.password !== data.retypePassword) {
-            return alert('password did not match')
+            return toast.error('password did not match!', {
+                position: "top-right",
+                autoClose: 3000,
+            });
+        }
+
+        if (picture === null || identityPhoto === null) {
+            return toast.warning('Please Upload Photo!', {
+                position: "top-right",
+                autoClose: 3000,
+            });
         }
 
         const newData = {
@@ -29,19 +84,18 @@ const BoatRegister = () => {
             nationality: data.nationality,
             phone: data.phone,
             romance: data.romance,
-            picture: data.picture,
-            identityPhoto: data.identityPhoto,
+            picture: picture,
+            identityPhoto: identityPhoto,
             birthDay: `${data.day}, ${data.month} ${data.year}`
         }
 
         createUser(data.email, data.password)
             .then(result => {
-                upDateProfile(result.user, data.fullName, data?.pictures)
+                upDateProfile(result.user, data.fullName, picture)
                     .then(res => {
-                        axios.post('https://anyvessel-server.vercel.app/', newData)
+                        axios.post('https://anyvessel-server.vercel.app/boats', newData)
                             .then(data => {
                                 if (data.status === 200) {
-                                    console.log(data);
                                     navigate('/', { replace: true })
                                 }
                             })
@@ -289,56 +343,50 @@ const BoatRegister = () => {
 
                     {/* Upload identity photo */}
                     <label htmlFor="identityPhoto" className="md:col-span-2 lg:col-span-1 flex items-center justify-between border-midBlue border rounded-[10px] overflow-hidden py-2 lg:py-0 pr-2">
-                        <p className="text-darkBlue pl-[10px]">Personal Identity verification <span className="text-lightBlue text-[12px]">(upload a passport photo)</span></p>
-                        <Controller
-                            name="identityPhoto"
-                            control={control}
-                            render={({ field }) => (
-                                <>
-                                    <input
-                                        id="identityPhoto"
-                                        type="file"
-                                        style={{ display: 'none' }} // Hide the input
-                                        onChange={(e) => field.onChange(e.target.files[0])}
-                                        className="w-full focus:outline-none border-none p-[10px] text-darkBlue placeholder:text-darkBlue"
-                                    />
-                                    <button
-                                        type="button"
-                                        onClick={() => document.getElementById('identityPhoto').click()}
-                                        className="text-white bg-blue px-5 py-1 rounded-[26px] hover:bg-transparent hover:text-blue border border-blue duration-300"
-                                    >
-                                        Upload
-                                    </button>
-                                </>
-                            )}
-                        />
+                        {
+                            identityPhoto === null ? <p className="text-darkBlue pl-[10px]">Personal Identity verification <span className="text-lightBlue text-[12px]">(upload a passport photo)</span></p> : <p className="text-darkBlue pl-[10px]">{identityPhoto}</p>
+                        }
+                        <>
+                            <input
+                                id="identityPhoto"
+                                name="identityPhoto"
+                                type="file"
+                                accept="image/*"
+                                onChange={handleIdentityPhotoUpload}
+                                className="w-full hidden focus:outline-none border-none p-[10px] text-darkBlue placeholder:text-darkBlue"
+                            />
+                            <button
+                                type="button"
+                                onClick={() => document.getElementById('identityPhoto').click()}
+                                className="text-white bg-blue px-5 py-1 rounded-[26px] hover:bg-transparent hover:text-blue border border-blue duration-300"
+                            >
+                                Upload
+                            </button>
+                        </>
                     </label>
 
                     {/* Upload your picture */}
                     <div className="md:col-span-2 flex items-center justify-between border-midBlue border rounded-[10px] overflow-hidden pr-2 py-4">
-                        <p className="text-darkBlue pl-[10px]">Upload your picture</p>
-                        <Controller
-                            name="picture"
-                            control={control}
-                            render={({ field }) => (
-                                <>
-                                    <input
-                                        id="picture"
-                                        type="file"
-                                        style={{ display: 'none' }} // Hide the input
-                                        onChange={(e) => field.onChange(e.target.files[0])}
-                                        className="w-full focus:outline-none border-none p-[10px] text-darkBlue placeholder:text-darkBlue"
-                                    />
-                                    <button
-                                        type="button"
-                                        onClick={() => document.getElementById('picture').click()}
-                                        className="text-white bg-blue px-5 py-1 rounded-[26px] hover:bg-transparent hover:text-blue border border-blue duration-300"
-                                    >
-                                        Upload
-                                    </button>
-                                </>
-                            )}
-                        />
+                        {
+                            picture === null ? <p className="text-darkBlue pl-[10px]">Upload your picture</p> : <p className="text-darkBlue pl-[10px]">{picture}</p>
+                        }
+                        <>
+                            <input
+                                id="picture"
+                                name="picture"
+                                type="file"
+                                accept="image/*"
+                                onChange={handlePictureUpload}
+                                className="w-full hidden focus:outline-none border-none p-[10px] text-darkBlue placeholder:text-darkBlue"
+                            />
+                            <button
+                                type="button"
+                                onClick={() => document.getElementById('picture').click()}
+                                className="text-white bg-blue px-5 py-1 rounded-[26px] hover:bg-transparent hover:text-blue border border-blue duration-300"
+                            >
+                                Upload
+                            </button>
+                        </>
                     </div>
 
                     {/* description */}

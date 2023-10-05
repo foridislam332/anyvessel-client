@@ -10,14 +10,13 @@ import { Autoplay, Pagination, Navigation } from 'swiper/modules';
 import SectionTitle from '../components/SectionTitle';
 
 const MeetCrew = () => {
-
     const [crewMembers, setCrewMembers] = useState([])
     useEffect(() => {
-        fetch("crewmember.json")
+        fetch("/crewmember.json")
             .then((res) => res.json())
             .then((data) => setCrewMembers(data));
-
     }, [])
+
     const breakpoints = {
         // small device
         640: {
