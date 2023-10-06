@@ -1,8 +1,14 @@
 import { Outlet } from "react-router-dom";
 import { Helmet } from "react-helmet";
+import AboutAnyvessel from "../sections/AboutAnyvessel";
+import FeaturedBoats from "../sections/FeaturedBoats";
+import MeetCrew from "../sections/MeetCrew";
+import Reviews from "../sections/Reviews";
+import BoatSell from "../sections/BoatSell";
 
 // bg  image
 import RegisterBg from '../assets/images/register-bg.png';
+import BgImg from '../assets/images/boat-bg.png';
 
 const RegisterHome = () => {
     return (
@@ -14,7 +20,7 @@ const RegisterHome = () => {
             {/* main */}
             <main>
                 <section style={{ backgroundImage: `url(${RegisterBg})` }}
-                    className='bg-cover bg-center md:h-[915px] py-16 flex flex-col items-center justify-center relative top-[88px] lg:top-[95px]'>
+                    className='bg-cover bg-center md:h-[915px] py-16 flex flex-col items-center justify-center relative top-[88px] lg:top-[92px] mb-28'>
                     <div className="container">
                         {/* register title */}
                         <div className="flex flex-col items-center justify-center text-darkBlue">
@@ -26,6 +32,14 @@ const RegisterHome = () => {
                         <Outlet />
                     </div>
                 </section>
+                <AboutAnyvessel />
+                <FeaturedBoats />
+                <section className="overflow-hidden">
+                    <img className="w-full" src={BgImg} alt="" />
+                </section>
+                <MeetCrew />
+                <Reviews />
+                <BoatSell />
             </main>
         </>
     );

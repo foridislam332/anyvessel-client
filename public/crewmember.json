@@ -1,0 +1,50 @@
+[
+    {
+        "_id": "01",
+        "name": "George Morris",
+        "img": "https://i.ibb.co/m5bBkdB/crew1.png",
+        "experience": "10 years",
+        "country": "USA",
+        "description": "George Morris is a seasoned professional with 10 years of experience in the IT industry. He hails from the United States and specializes in software development."
+    },
+    {
+        "_id": "02",
+        "name": "Anna Pheleps",
+        "img": "https://i.ibb.co/Vgwr1cM/crew2.png",
+        "experience": "6 years",
+        "country": "FRANCE",
+        "description": "Anna Pheleps is a skilled professional with 8 years of experience in marketing. She is based in Spain and excels in digital marketing strategies."
+    },
+    {
+        "_id": "03",
+        "name": "Maria Garett",
+        "experience": "03 years",
+        "img": "https://i.ibb.co/7gkBS4P/crew3.png",
+        "country": "Germany",
+        "description": "Maria Garett is a highly experienced professional with 15 years of expertise in finance. He resides in Canada and has a strong background in financial analysis."
+    },
+    {
+        "_id": "04",
+        "name": "Sophie Müller",
+        "experience": "12 years",
+        "img": "https://i.ibb.co/Vgwr1cM/crew2.png",
+        "country": "Germany",
+        "description": "Sophie Müller is an experienced professional with 12 years of experience in the field of architecture. She is based in Germany and has worked on various architectural projects."
+    },
+    {
+        "_id": "05",
+        "name": "Raj Patel",
+        "experience": "6 years",
+        "img": "https://i.ibb.co/7gkBS4P/crew3.png",
+        "country": "India",
+        "description": "Raj Patel is a young professional with 6 years of experience in the field of data science. He originates from India and specializes in machine learning."
+    },
+    {
+        "_id": "06",
+        "name": "Emily Nguyen",
+        "experience": "9 years",
+        "img": "https://i.ibb.co/m5bBkdB/crew1.png",
+        "country": "Australia",
+        "description": "Emily Nguyen is an experienced professional with 9 years of experience in the field of healthcare. He originates from India and specializes in machine learning"
+    }
+]

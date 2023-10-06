@@ -3,6 +3,15 @@ import Main from "../layouts/Main";
 import Home from "../pages/Home";
 import Register from "../layouts/Register";
 import RegisterCard from "../sections/RegisterCard";
+import BoatRegister from "../pages/BoatRegister";
+import CrewRegister from "../pages/CrewRegister";
+import BoatServicesRegister from "../pages/BoatServicesRegister";
+import Charter from "../Dashboard/DashSection/Charter";
+import Dashboard from "../Dashboard/Dashboard";
+import Vessel from "../Dashboard/DashSection/Vessel";
+import Location from "../Dashboard/DashSection/Location";
+import Advertised from "../Dashboard/DashSection/Advertised";
+import Contact from "../Dashboard/DashSection/Contact";
 
 const Route = createBrowserRouter([
     {
@@ -12,6 +21,32 @@ const Route = createBrowserRouter([
             {
                 path: "/",
                 element: <Home />,
+            },
+            {
+                path: "/dashboard",
+                element: <Dashboard />,
+                children:([
+                    {
+                        path: "/dashboard/charter",
+                        element: <Charter />,
+                    },
+                    {
+                        path: "/dashboard/vessel",
+                        element: <Vessel />,
+                    },
+                    {
+                        path: "/dashboard/location",
+                        element: <Location />,
+                    },
+                    {
+                        path: "/dashboard/contact",
+                        element: <Contact />,
+                    },
+                    {
+                        path: "/dashboard/advertised",
+                        element: <Advertised />,
+                    },
+                ])
             }
         ],
     },
@@ -22,6 +57,18 @@ const Route = createBrowserRouter([
             {
                 path: '/register',
                 element: <RegisterCard />
+            },
+            {
+                path: '/register/boat_register',
+                element: <BoatRegister />
+            },
+            {
+                path: '/register/crew_register',
+                element: <CrewRegister />
+            },
+            {
+                path: '/register/boat_services',
+                element: <BoatServicesRegister />
             }
         ]
     }
