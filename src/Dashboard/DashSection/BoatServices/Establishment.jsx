@@ -75,7 +75,7 @@ const Establishment = () => {
   ];
 
   return (
-    <div className="bg-white bg-opacity-90 px-5 sm:px-10 py-10 md:px-[93px] md:py-[30px] mt-6 rounded-[10px]">
+    <div className="bg-white bg-opacity-90 px-5 sm:px-10 pb-10 md:px-[93px] md:pb-[30px] mt-6 rounded-[10px]">
       <div className="max-w-[715px] mx-auto text-center mb-6">
         <h2 className="text-lightBlue text-[19px]">
           BOAT SERVICES ESTABLISHMENT
@@ -188,7 +188,7 @@ const Establishment = () => {
             type="submit"
             className="text-white text-sm font-light bg-blue bg-opacity-90 px-7 md:px-14 py-[9px] rounded-lg hover:bg-transparent hover:text-blue border border-blue duration-300"
           >
-            Register
+            Confirm
           </button>
 
           <Link
