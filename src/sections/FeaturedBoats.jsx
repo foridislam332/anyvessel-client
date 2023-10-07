@@ -56,8 +56,9 @@ const FeaturedBoats = () => {
 
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-7 mt-12 px-20">
                             {boats.length > 0 ? (
-                                boats.map((boat) => (
-                                    <SwiperSlide key={boat.id}>
+                                boats.map((boat , index) => (
+                                    
+                                    <SwiperSlide key={index}>
                                         <BootCard boat={boat} />
                                     </SwiperSlide>
                                 ))

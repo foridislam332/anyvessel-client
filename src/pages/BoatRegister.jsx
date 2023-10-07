@@ -85,6 +85,7 @@ const BoatRegister = () => {
             phone: data.phone,
             romance: data.romance,
             picture: picture,
+            role: "boat",
             identityPhoto: identityPhoto,
             birthDay: `${data.day}, ${data.month} ${data.year}`
         }

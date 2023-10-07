@@ -47,6 +47,7 @@ const BoatServicesRegister = () => {
       phone,
       email,
       password,
+      role: "boatService",
       birthDay: { day, month, year },
     };
 
