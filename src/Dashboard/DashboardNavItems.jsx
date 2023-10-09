@@ -1,9 +1,9 @@
 import ActiveLink from "../components/ActiveLink";
 // react icons
 const DashboardNavItems = () => {
-  //   const role = "boat";
+    const role = "boat";
   //   const role = "crew";
-  const role = "boatServices";
+  // const role = "boatServices";
 
   // re useable FC
   const listItemFc = (route, text) => {

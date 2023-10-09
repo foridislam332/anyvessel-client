@@ -4,8 +4,10 @@ import Divider from "../../components/Divider";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useState } from "react";
+import useAuth from "../../hooks/useAuth";
 
 const Vessel = () => {
+    const { user } = useAuth()
     const [vesselImage, setVesselImage] = useState(null);
     const [ownerImage, setOwnerImage] = useState(null);
     const { register, handleSubmit, control, formState: { errors } } = useForm();
@@ -60,8 +62,15 @@ const Vessel = () => {
             number_crew: data.number_crew,
             manufacturer_2: data.manufacturer_2,
             vessel_weight: data.vessel_weight,
+            owner: user?.email
         }
         console.log(datatta)
+        // axios.post('http://localhost:5000/boats', newData)
+        //     .then(data => {
+        //         if (data.status === 200) {
+        //             navigate('/', { replace: true })
+        //         }
+        //     })
     }
     return (
         <section className="p-5">
@@ -93,7 +102,7 @@ const Vessel = () => {
                             <div className="md:col-span-6">
                                 <small>Upload Owner Photo</small>
                                 <label htmlFor="owner_photo" className="h-32 p-4 w-32 flex flex-col items-center justify-center border-2 border-dashed border-blue rounded-md bg-blue/20" >
-                                <input
+                                    <input
                                         id="owner_photo"
                                         name="owner_photo"
                                         type="file"
