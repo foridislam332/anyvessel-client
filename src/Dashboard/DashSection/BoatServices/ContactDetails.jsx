@@ -1,14 +1,17 @@
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 // icons image
 import user2 from "../../../assets/images/user-3.png";
 
 // internal file
 import useAuth from "../../../hooks/useAuth";
+import useAxios from "../../../hooks/useAxios";
 
 const ContactDetails = () => {
-  const { createUser, upDateProfile } = useAuth();
+  const { user } = useAuth();
+  const [Axios] = useAxios();
   const navigate = useNavigate();
   const {
     register,
@@ -19,12 +22,23 @@ const ContactDetails = () => {
   const onSubmit = (data) => {
     console.log(data);
 
-    // console.log("newData ", newData);
+    const newData = {
+      userEmail: user?.email,
+      ...data,
+    };
 
-    // axios
-    //   .post("http://localhost:5000/boat-service", signUpData)
-    //   .then((res) => console.log(res))
-    //   .catch((err) => console.log(err));
+    Axios.patch("boat-services-data-contact", newData)
+      .then((res) => {
+        console.log("response - ", res);
+
+        if (res?.status === 200) {
+          toast.success("Boat services location submitted successful!");
+        }
+      })
+      .catch((err) => {
+        toast.error("Somethings else!");
+        console.log(err);
+      });
   };
 
   const inputField = (idName, placeholder, data, icons) => {
@@ -54,11 +68,11 @@ const ContactDetails = () => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="flex flex-col md:gap-x-[37px] gap-y-5 text-sm">
           {/* Name */}
-          {inputField("Name", "Name", "name", user2)}
+          {inputField("Name", "Name", "contactName", user2)}
           {/* Email address */}
-          {inputField("Email", "Email address", "email", user2)}
+          {inputField("Email", "Email address", "contactEmail", user2)}
           {/* Phone number */}
-          {inputField("number", "Phone number", "number", user2)}
+          {inputField("number", "Phone number", "phoneNumber", user2)}
           {/* Skype */}
           {inputField("skype", "Skype", "Skype", user2)}
           {/* Website */}

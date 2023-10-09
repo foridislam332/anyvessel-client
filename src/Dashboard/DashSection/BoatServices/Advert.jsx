@@ -1,12 +1,16 @@
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 // icons image
 
 // internal file
 import useAuth from "../../../hooks/useAuth";
+import useAxios from "../../../hooks/useAxios";
 
 const Advert = () => {
+  const { user } = useAuth();
+  const [Axios] = useAxios();
   const { createUser, upDateProfile } = useAuth();
   const navigate = useNavigate();
   const {
@@ -16,31 +20,26 @@ const Advert = () => {
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => {
-    console.log(data);
+    const { advert } = data;
 
-    // console.log("newData ", newData);
+    const newData = {
+      userEmail: user?.email,
+      advert,
+    };
+    console.log("newData ", newData);
 
-    // axios
-    //   .post("http://localhost:5000/boat-service", signUpData)
-    //   .then((res) => console.log(res))
-    //   .catch((err) => console.log(err));
-  };
+    Axios.patch("boat-services-data-advert", newData)
+      .then((res) => {
+        console.log("response - ", res);
 
-  const inputField = (idName, placeholder, data, icons) => {
-    return (
-      <label
-        htmlFor={idName}
-        className="flex items-center border-midBlue border rounded-[10px] overflow-hidden pr-2"
-      >
-        <input
-          id={idName}
-          placeholder={placeholder}
-          {...register(`${data}`)}
-          className="w-full focus:outline-none border-none p-[10px] text-darkBlue placeholder:text-darkBlue"
-        />
-        <img src={icons} alt={placeholder} />
-      </label>
-    );
+        if (res?.status === 200) {
+          toast.success("Boat services location submitted successful!");
+        }
+      })
+      .catch((err) => {
+        toast.error("Somethings else!");
+        console.log(err);
+      });
   };
 
   return (
@@ -55,6 +54,7 @@ const Advert = () => {
           {/* Advert */}
           <textarea
             rows="7"
+            {...register(`advert`)}
             className="border border-blue rounded-lg outline-none p-3"
             placeholder="In few words describe the services you provide activities for your profile advert…"
           ></textarea>

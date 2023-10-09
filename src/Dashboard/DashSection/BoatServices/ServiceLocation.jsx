@@ -1,14 +1,17 @@
 import { useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 // icons image
 
 // internal file
 import useAuth from "../../../hooks/useAuth";
+import useAxios from "../../../hooks/useAxios";
 
 const ServiceLocation = () => {
-  const { createUser, upDateProfile } = useAuth();
-  const navigate = useNavigate();
+  const { user } = useAuth();
+  const [Axios] = useAxios();
+  // const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -18,45 +21,28 @@ const ServiceLocation = () => {
 
   // form handle
   const onSubmit = (data) => {
-    console.log(data);
-
-    const { day, month, ownerName, paperPhoto, businessLogo, year } = data;
+    const { country, city, specify_address } = data;
 
     const newData = {
-      ownerName,
-      paperPhoto,
-      businessLogo,
-      date: { day, month, year },
+      userEmail: user?.email,
+      country,
+      city,
+      specify_address,
     };
 
-    console.log("newData ", newData);
+    Axios.patch("boat-services-data-location", newData)
+      .then((res) => {
+        console.log("response - ", res);
 
-    //  createUser(email, password)
-    //    .then((result) => {
-    //      upDateProfile(result.user, data.fullName, data?.pictures).then(
-    //        (res) => {
-    //          console.log("upDateProfile ", upDateProfile);
-    //          axios
-    //            .post("http://localhost:5000/boat-service", signUpData)
-    //            .then((data) => {
-    //              if (data.status === 200) {
-    //                console.log(data);
-    //                navigate("/", { replace: true });
-    //              }
-    //            });
-    //        }
-    //      );
-    //    })
-    //    .catch((err) => {
-    //      console.log(err);
-    //    });
-    // axios
-    //   .post("http://localhost:5000/boat-service", signUpData)
-    //   .then((res) => console.log(res))
-    //   .catch((err) => console.log(err));
+        if (res?.status === 200) {
+          toast.success("Boat services location submitted successful!");
+        }
+      })
+      .catch((err) => {
+        toast.error("Somethings else!");
+        console.log(err);
+      });
   };
-
-  const selectedStyle = "";
 
   return (
     <div className="bg-white bg-opacity-90 px-5 sm:px-10 pb-10 md:px-[93px] md:pb-[30px] mt-6 rounded-[10px]">
@@ -83,9 +69,9 @@ const ServiceLocation = () => {
           {/* City */}
           <select
             className="text-darkBlue border-b border-midBlue focus:outline-none focus:border-b focus:border-midBlue pr-1 sm:pr-3 py-[3px]"
-            {...register("country")}
-            name="country"
-            id="country"
+            {...register("city")}
+            name="city"
+            id="city"
           >
             <option value=""> Select Your City </option>
             <option value="pabna"> Pabna </option>
@@ -100,6 +86,7 @@ const ServiceLocation = () => {
           >
             <input
               className="w-full focus:outline-none border-none p-[10px] text-darkBlue placeholder:text-darkBlue"
+              {...register("specify_address")}
               type="text"
               id="specifyAddress"
               placeholder="Add your specify address here"

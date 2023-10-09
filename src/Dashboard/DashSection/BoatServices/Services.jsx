@@ -1,14 +1,17 @@
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 // icons image
 import user2 from "../../../assets/images/user-3.png";
 
 // internal file
 import useAuth from "../../../hooks/useAuth";
+import useAxios from "../../../hooks/useAxios";
 
 const Services = () => {
-  const { createUser, upDateProfile } = useAuth();
+  const { user } = useAuth();
+  const [Axios] = useAxios();
   const navigate = useNavigate();
   const {
     register,
@@ -16,32 +19,25 @@ const Services = () => {
     control,
     formState: { errors },
   } = useForm();
+
   const onSubmit = (data) => {
-    console.log(data);
+    const newData = {
+      userEmail: user?.email,
+      ...data,
+    };
 
-    // console.log("newData ", newData);
+    Axios.patch("boat-services-data-service", newData)
+      .then((res) => {
+        console.log("response - ", res);
 
-    // axios
-    //   .post("http://localhost:5000/boat-service", signUpData)
-    //   .then((res) => console.log(res))
-    //   .catch((err) => console.log(err));
-  };
-
-  const inputField = (idName, placeholder, data, icons) => {
-    return (
-      <label
-        htmlFor={idName}
-        className="flex items-center border-midBlue border rounded-[10px] overflow-hidden pr-2"
-      >
-        <input
-          id={idName}
-          placeholder={placeholder}
-          {...register(`${data}`)}
-          className="w-full focus:outline-none border-none p-[10px] text-darkBlue placeholder:text-darkBlue"
-        />
-        <img src={icons} alt={placeholder} />
-      </label>
-    );
+        if (res?.status === 200) {
+          toast.success("Boat services location submitted successful!");
+        }
+      })
+      .catch((err) => {
+        toast.error("Somethings else!");
+        console.log(err);
+      });
   };
 
   const serviceItems = (data, idName, labelText) => {
@@ -126,8 +122,23 @@ const Services = () => {
             {serviceItems("carRentals", "carRentals", "CAR RENTALS")}
           </div>
 
-          {/* Name */}
-          {inputField("Name", "Name", "name", user2)}
+          {/* others */}
+          <div>
+            <label htmlFor="others"> Others </label>
+
+            <div className="flex items-center justify-between border-midBlue border rounded-[10px] overflow-hidden pr-2">
+              <input
+                id="others"
+                placeholder="You can add an advert IT CAN BE A BOX WITH 100 CHARACTERS TO FILL"
+                {...register(`others`)}
+                className="w-full focus:outline-none border-none p-[10px] text-darkBlue placeholder:text-darkBlue"
+              />
+              <img
+                src={user2}
+                alt="You can add an advert IT CAN BE A BOX WITH 100 CHARACTERS TO FILL"
+              />
+            </div>
+          </div>
         </div>
 
         {/* buttons */}
