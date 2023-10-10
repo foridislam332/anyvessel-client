@@ -1,4 +1,7 @@
+import { useState } from "react";
 import { useForm } from "react-hook-form";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
@@ -8,10 +11,20 @@ import { toast } from "react-toastify";
 import useAuth from "../../../hooks/useAuth";
 import useAxios from "../../../hooks/useAxios";
 
+// text editor module
+const modules = {
+  // toolbar: [
+  //   [{ header: [1, 2, 3, 4, 5, 6, false] }],
+  //   ["bold", "italic", "underline"],
+  //   [{ list: "ordered" }, { list: "bullet" }],
+  //   [{ align: [] }],
+  // ],
+};
+
 const Advert = () => {
   const { user } = useAuth();
   const [Axios] = useAxios();
-  const { createUser, upDateProfile } = useAuth();
+  const [description, setDescription] = useState("");
   const navigate = useNavigate();
   const {
     register,
@@ -58,6 +71,15 @@ const Advert = () => {
             className="border border-blue rounded-lg outline-none p-3"
             placeholder="In few words describe the services you provide activities for your profile advert…"
           ></textarea>
+
+          {/* testing */}
+          <ReactQuill
+            theme="snow"
+            // value={description}
+            // modules={modules}
+            placeholder="Describe Your Job Description best ways..."
+            // onChange={setDescription}
+          />
         </div>
 
         {/* buttons */}
