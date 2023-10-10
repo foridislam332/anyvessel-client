@@ -9,7 +9,9 @@ import BgImg from '../assets/images/boat-bg.png';
 import BoatSell from "../sections/BoatSell";
 import MeetCrew from "../sections/MeetCrew";
 import Reviews from "../sections/Reviews";
+import useAuth from "../hooks/useAuth";
 const Home = () => {
+    const { user } = useAuth()
     return (
         <>
             <Helmet>

@@ -10,6 +10,7 @@ import user2 from "../assets/images/user-3.png";
 import user from "../assets/images/user2.png";
 
 // internal file
+import { toast } from "react-toastify";
 import useAuth from "../hooks/useAuth";
 
 const BoatServicesRegister = () => {
@@ -22,7 +23,6 @@ const BoatServicesRegister = () => {
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => {
-    console.log(data);
     const {
       day,
       email,
@@ -51,31 +51,28 @@ const BoatServicesRegister = () => {
       birthDay: { day, month, year },
     };
 
-    console.log(signUpData);
-
     createUser(email, password)
       .then((result) => {
         upDateProfile(result.user, data.fullName, data?.pictures).then(
           (res) => {
-            console.log("upDateProfile ", upDateProfile);
             axios
               .post("http://localhost:5000/boat-service", signUpData)
               .then((data) => {
                 if (data.status === 200) {
-                  console.log(data);
-                  navigate("/", { replace: true });
+                  toast.success("Sign Up Successful!");
+                  navigate("/dashboard/boat-services-establishment", {
+                    replace: true,
+                  });
                 }
-              });
+              })
+              .catch((err) => toast.error("Something Wrong!"));
           }
         );
       })
       .catch((err) => {
         console.log(err);
+        toast.error("Something Wrong!");
       });
-    // axios
-    //   .post("http://localhost:5000/boat-service", signUpData)
-    //   .then((res) => console.log(res))
-    //   .catch((err) => console.log(err));
   };
 
   // 1950 to 2005

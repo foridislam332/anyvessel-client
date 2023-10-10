@@ -5,7 +5,7 @@ import { Outlet } from 'react-router-dom';
 import Header from '../shared/Header';
 import useAuth from '../hooks/useAuth';
 
-const Dashboard = () => {
+const Profile = () => {
     // const {user}=useAuth()
     // console.log(user)
     return (
@@ -30,4 +30,4 @@ const Dashboard = () => {
     );
 };
 
-export default Dashboard;
+export default Profile;

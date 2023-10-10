@@ -7,7 +7,6 @@ import BoatRegister from "../pages/BoatRegister";
 import CrewRegister from "../pages/CrewRegister";
 import BoatServicesRegister from "../pages/BoatServicesRegister";
 import Charter from "../Dashboard/DashSection/Charter";
-import Dashboard from "../Dashboard/Dashboard";
 import Vessel from "../Dashboard/DashSection/Vessel";
 import Location from "../Dashboard/DashSection/Location";
 import Advertised from "../Dashboard/DashSection/Advertised";
@@ -17,6 +16,7 @@ import ServiceLocation from "../Dashboard/DashSection/BoatServices/ServiceLocati
 import ContactDetails from "../Dashboard/DashSection/BoatServices/ContactDetails";
 import Services from "../Dashboard/DashSection/BoatServices/Services";
 import Advert from "../Dashboard/DashSection/BoatServices/Advert";
+import Profile from "../Dashboard/Profile";
 
 const Route = createBrowserRouter([
   {
@@ -29,7 +29,7 @@ const Route = createBrowserRouter([
       },
       {
         path: "/dashboard",
-        element: <Dashboard />,
+        element: <Profile />,
         children: [
           // boat role
           {
