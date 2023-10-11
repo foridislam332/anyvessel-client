@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 import useAuth from "../../../hooks/useAuth";
 import useAxios from "../../../hooks/useAxios";
 
-const ServiceLocation = () => {
+const BS_ServiceLocation = () => {
   const { user } = useAuth();
   const [Axios] = useAxios();
   // const navigate = useNavigate();
@@ -115,4 +115,4 @@ const ServiceLocation = () => {
   );
 };
 
-export default ServiceLocation;
+export default BS_ServiceLocation;

@@ -9,7 +9,7 @@ import user2 from "../../../assets/images/user-3.png";
 import useAuth from "../../../hooks/useAuth";
 import useAxios from "../../../hooks/useAxios";
 
-const ContactDetails = () => {
+const BS_ContactDetails = () => {
   const { user } = useAuth();
   const [Axios] = useAxios();
   const navigate = useNavigate();
@@ -104,4 +104,4 @@ const ContactDetails = () => {
   );
 };
 
-export default ContactDetails;
+export default BS_ContactDetails;

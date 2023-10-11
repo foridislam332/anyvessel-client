@@ -2,8 +2,8 @@ import ActiveLink from "../components/ActiveLink";
 // react icons
 const DashboardNavItems = () => {
   //   const role = "boat";
-  //   const role = "crew";
-  const role = "boatServices";
+  const role = "crew";
+  // const role = "boatServices";
 
   // re useable FC
   const listItemFc = (route, text) => {
@@ -55,11 +55,15 @@ const DashboardNavItems = () => {
             {/* only crew route */}
             {role === "crew" && (
               <>
-                <li className="w-full">
-                  <ActiveLink to="/dashboard/charter">
-                    <p className="hidden md:inline">CHARTER COMPANY</p>
-                  </ActiveLink>
-                </li>
+                {listItemFc("crew-establishment", "Crew Member")}
+
+                {listItemFc("crew-location", "Location")}
+
+                {listItemFc("crew-contact-details", "Contact details")}
+
+                {listItemFc("crew-service", "Services")}
+
+                {listItemFc("crew-advert", "Advert")}
               </>
             )}
 

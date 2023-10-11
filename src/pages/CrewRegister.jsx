@@ -41,9 +41,11 @@ const CrewRegister = () => {
             axios
               .post("https://anyvessel-server.vercel.app/", newData)
               .then((data) => {
+                console.log(data);
                 if (data.status === 200) {
-                  console.log(data);
-                  navigate("/", { replace: true });
+                  navigate("/dashboard/crew-establishment", {
+                    replace: true,
+                  });
                 }
               });
           }

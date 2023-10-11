@@ -1,22 +1,27 @@
 import { createBrowserRouter } from "react-router-dom";
-import Main from "../layouts/Main";
-import Home from "../pages/Home";
-import Register from "../layouts/Register";
-import RegisterCard from "../sections/RegisterCard";
-import BoatRegister from "../pages/BoatRegister";
-import CrewRegister from "../pages/CrewRegister";
-import BoatServicesRegister from "../pages/BoatServicesRegister";
-import Charter from "../Dashboard/DashSection/Charter";
-import Dashboard from "../Dashboard/Dashboard";
-import Vessel from "../Dashboard/DashSection/Vessel";
-import Location from "../Dashboard/DashSection/Location";
 import Advertised from "../Dashboard/DashSection/Advertised";
+import BS_Advert from "../Dashboard/DashSection/BoatServices/BS_Advert";
+import BS_ContactDetails from "../Dashboard/DashSection/BoatServices/BS_ContactDetails";
+import BS_Establishment from "../Dashboard/DashSection/BoatServices/BS_Establishment";
+import BS_ServiceLocation from "../Dashboard/DashSection/BoatServices/BS_ServiceLocation";
+import BS_Services from "../Dashboard/DashSection/BoatServices/BS_Services";
+import Charter from "../Dashboard/DashSection/Charter";
 import Contact from "../Dashboard/DashSection/Contact";
-import Establishment from "../Dashboard/DashSection/BoatServices/Establishment";
-import ServiceLocation from "../Dashboard/DashSection/BoatServices/ServiceLocation";
-import ContactDetails from "../Dashboard/DashSection/BoatServices/ContactDetails";
-import Services from "../Dashboard/DashSection/BoatServices/Services";
-import Advert from "../Dashboard/DashSection/BoatServices/Advert";
+import Location from "../Dashboard/DashSection/Location";
+import Vessel from "../Dashboard/DashSection/Vessel";
+import Dashboard from "../Dashboard/Dashboard";
+import Main from "../layouts/Main";
+import Register from "../layouts/Register";
+import BoatRegister from "../pages/BoatRegister";
+import BoatServicesRegister from "../pages/BoatServicesRegister";
+import CrewRegister from "../pages/CrewRegister";
+import Home from "../pages/Home";
+import RegisterCard from "../sections/RegisterCard";
+import Cr_Establishment from "../Dashboard/DashSection/Crew/Cr_Establishment";
+import Cr_ServiceLocation from "../Dashboard/DashSection/Crew/Cr_ServiceLocation";
+import Cr_ContactDetails from "../Dashboard/DashSection/Crew/Cr_ContactDetails";
+import Cr_Services from "../Dashboard/DashSection/Crew/Cr_Services";
+import Cr_Advert from "../Dashboard/DashSection/Crew/Cr_Advert";
 
 const Route = createBrowserRouter([
   {
@@ -54,27 +59,47 @@ const Route = createBrowserRouter([
           },
 
           //  crew role
+          {
+            path: "/dashboard/crew-establishment",
+            element: <Cr_Establishment />,
+          },
+          {
+            path: "/dashboard/crew-location",
+            element: <Cr_ServiceLocation />,
+          },
+          {
+            path: "/dashboard/crew-contact-details",
+            element: <Cr_ContactDetails />,
+          },
+          {
+            path: "/dashboard/crew-service",
+            element: <Cr_Services />,
+          },
+          {
+            path: "/dashboard/crew-advert",
+            element: <Cr_Advert />,
+          },
 
           //   boat services role
           {
             path: "/dashboard/boat-services-establishment",
-            element: <Establishment />,
+            element: <BS_Establishment />,
           },
           {
             path: "/dashboard/service-location",
-            element: <ServiceLocation />,
+            element: <BS_ServiceLocation />,
           },
           {
             path: "/dashboard/contact-details",
-            element: <ContactDetails />,
+            element: <BS_ContactDetails />,
           },
           {
             path: "/dashboard/service",
-            element: <Services />,
+            element: <BS_Services />,
           },
           {
             path: "/dashboard/advert",
-            element: <Advert />,
+            element: <BS_Advert />,
           },
         ],
       },

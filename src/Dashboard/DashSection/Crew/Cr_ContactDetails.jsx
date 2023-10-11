@@ -1,44 +1,33 @@
-import { useState } from "react";
 import { useForm } from "react-hook-form";
-import ReactQuill from "react-quill";
-import "react-quill/dist/quill.snow.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+
+// icons image
+import user2 from "../../../assets/images/user-3.png";
 
 // internal file
 import useAuth from "../../../hooks/useAuth";
 import useAxios from "../../../hooks/useAxios";
 
-// text editor module
-const modules = {
-  toolbar: [
-    [{ header: [1, 2, 3, 4, 5, 6, false] }],
-    ["bold", "italic", "underline"],
-    [{ list: "ordered" }, { list: "bullet" }],
-    [{ align: [] }],
-  ],
-};
-
-const Advert = () => {
+const Cr_ContactDetails = () => {
   const { user } = useAuth();
   const [Axios] = useAxios();
-  const [advertQ, setAdvert] = useState("");
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
     control,
     formState: { errors },
   } = useForm();
-
   const onSubmit = (data) => {
-    const { advert } = data;
+    console.log(data);
 
     const newData = {
       userEmail: user?.email,
-      advert: advertQ,
+      ...data,
     };
-    console.log("newData ", newData);
 
-    Axios.patch("boat-services-data-advert", newData)
+    Axios.patch("boat-services-data-contact", newData)
       .then((res) => {
         console.log("response - ", res);
 
@@ -52,28 +41,46 @@ const Advert = () => {
       });
   };
 
+  const inputField = (idName, placeholder, data, icons) => {
+    return (
+      <label
+        htmlFor={idName}
+        className="flex items-center border-midBlue border rounded-[10px] overflow-hidden pr-2"
+      >
+        <input
+          id={idName}
+          placeholder={placeholder}
+          {...register(`${data}`)}
+          className="w-full focus:outline-none border-none p-[10px] text-darkBlue placeholder:text-darkBlue"
+        />
+        <img src={icons} alt={placeholder} />
+      </label>
+    );
+  };
+
   return (
     <div className="bg-white bg-opacity-90 px-5 sm:px-10 pb-10 md:px-[93px] md:pb-[30px] mt-6 rounded-[10px]">
       <div className="max-w-[715px] mx-auto text-center mb-6">
-        <h2 className="text-lightBlue text-[19px]">Services to provide</h2>
+        <h2 className="text-lightBlue text-[19px]">Contact details</h2>
       </div>
 
       {/* form */}
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="flex flex-col md:gap-x-[37px] gap-y-5 text-sm">
-          {/* Advert */}
-          <div>
-            <ReactQuill
-              theme="snow"
-              rows="7"
-              value={advertQ}
-              modules={modules}
-              {...register(`advert`)}
-              placeholder="Describe Your Job Advert best ways..."
-              onChange={setAdvert}
-              className="h-60"
-            />
-          </div>
+          {/* Name */}
+          {inputField("Name", "Name", "contactName", user2)}
+          {/* Email address */}
+          {inputField("Email", "Email address", "contactEmail", user2)}
+          {/* Phone number */}
+          {inputField("number", "Phone number", "phoneNumber", user2)}
+          {/* Skype */}
+          {inputField("skype", "Skype", "Skype", user2)}
+          {/* Website */}
+          {inputField("website", "website", "Website", user2)}
+          {/* Facebook */}
+          {inputField("facebook", "Facebook", "facebook", user2)}
+          {/* instagram */}
+          {inputField("instagram", "Instagram", "instagram", user2)}
         </div>
 
         {/* buttons */}
@@ -97,4 +104,4 @@ const Advert = () => {
   );
 };
 
-export default Advert;
+export default Cr_ContactDetails;

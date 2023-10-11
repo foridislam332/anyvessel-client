@@ -9,7 +9,7 @@ import user2 from "../../../assets/images/user-3.png";
 import useAuth from "../../../hooks/useAuth";
 import useAxios from "../../../hooks/useAxios";
 
-const Services = () => {
+const Cr_Services = () => {
   const { user } = useAuth();
   const [Axios] = useAxios();
   const navigate = useNavigate();
@@ -162,4 +162,4 @@ const Services = () => {
   );
 };
 
-export default Services;
+export default Cr_Services;
