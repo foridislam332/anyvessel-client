@@ -2,10 +2,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import { Link, useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
-
-// icons image
+import { Link } from "react-router-dom";
 
 // internal file
 import useAuth from "../../../hooks/useAuth";
@@ -13,31 +10,31 @@ import useAxios from "../../../hooks/useAxios";
 
 // text editor module
 const modules = {
-  // toolbar: [
-  //   [{ header: [1, 2, 3, 4, 5, 6, false] }],
-  //   ["bold", "italic", "underline"],
-  //   [{ list: "ordered" }, { list: "bullet" }],
-  //   [{ align: [] }],
-  // ],
+  toolbar: [
+    [{ header: [1, 2, 3, 4, 5, 6, false] }],
+    ["bold", "italic", "underline"],
+    [{ list: "ordered" }, { list: "bullet" }],
+    [{ align: [] }],
+  ],
 };
 
 const Advert = () => {
   const { user } = useAuth();
   const [Axios] = useAxios();
-  const [description, setDescription] = useState("");
-  const navigate = useNavigate();
+  const [advertQ, setAdvert] = useState("");
   const {
     register,
     handleSubmit,
     control,
     formState: { errors },
   } = useForm();
+
   const onSubmit = (data) => {
     const { advert } = data;
 
     const newData = {
       userEmail: user?.email,
-      advert,
+      advert: advertQ,
     };
     console.log("newData ", newData);
 
@@ -65,21 +62,18 @@ const Advert = () => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="flex flex-col md:gap-x-[37px] gap-y-5 text-sm">
           {/* Advert */}
-          <textarea
-            rows="7"
-            {...register(`advert`)}
-            className="border border-blue rounded-lg outline-none p-3"
-            placeholder="In few words describe the services you provide activities for your profile advert…"
-          ></textarea>
-
-          {/* testing */}
-          <ReactQuill
-            theme="snow"
-            // value={description}
-            // modules={modules}
-            placeholder="Describe Your Job Description best ways..."
-            // onChange={setDescription}
-          />
+          <div>
+            <ReactQuill
+              theme="snow"
+              rows="7"
+              value={advertQ}
+              modules={modules}
+              {...register(`advert`)}
+              placeholder="Describe Your Job Advert best ways..."
+              onChange={setAdvert}
+              className="h-60"
+            />
+          </div>
         </div>
 
         {/* buttons */}
