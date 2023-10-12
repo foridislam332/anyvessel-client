@@ -1,3 +1,4 @@
+import { Country, State } from "country-state-city";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -16,6 +17,7 @@ const Cr_ServiceLocation = () => {
     register,
     handleSubmit,
     control,
+    watch,
     formState: { errors },
   } = useForm();
 
@@ -44,6 +46,14 @@ const Cr_ServiceLocation = () => {
       });
   };
 
+  // Country, State, Province
+  const selectedCountry = watch("country", "");
+  const countryData = Country.getAllCountries();
+  const filteredCountry = countryData.find(
+    (country) => country.name == selectedCountry
+  );
+  const stateData = State.getStatesOfCountry(filteredCountry?.isoCode);
+
   return (
     <div className="bg-white bg-opacity-90 px-5 sm:px-10 pb-10 md:px-[93px] md:pb-[30px] mt-6 rounded-[10px]">
       <div className="max-w-[715px] mx-auto text-center mb-6">
@@ -56,15 +66,16 @@ const Cr_ServiceLocation = () => {
           {/* Country */}
           <select
             className="text-darkBlue border-b border-midBlue focus:outline-none focus:border-b focus:border-midBlue pr-1 sm:pr-3 py-[3px]"
-            {...register("country")}
+            {...register("country", { required: true })}
             name="country"
             id="country"
           >
             <option value=""> Select Your Country </option>
-            <option value="bangladesh"> Bangladesh </option>
-            <option value="india"> India </option>
-            <option value="united_states"> United States </option>
-            <option value="oman"> Oman </option>
+            {countryData?.map((country, i) => (
+              <option key={i} value={country.name}>
+                {country.name}
+              </option>
+            ))}
           </select>
 
           {/* City */}
@@ -75,9 +86,11 @@ const Cr_ServiceLocation = () => {
             id="city"
           >
             <option value=""> Select Your City </option>
-            <option value="pabna"> Pabna </option>
-            <option value="rajbari"> Rajbari </option>
-            <option value="khulna"> khulna </option>
+            {stateData?.map((state, i) => (
+              <option key={i} value={state.name}>
+                {state.name}
+              </option>
+            ))}
           </select>
 
           {/* Specify Address */}
