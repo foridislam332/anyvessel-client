@@ -71,7 +71,7 @@ const BS_Establishment = () => {
       advert: { advert: null },
     };
 
-    Axios.post("boat-services-data-location", newData)
+    Axios.post("boat-services-data", newData)
       .then((res) => {
         if (res?.data?.insertedId) {
           toast.success("Boat services Establishment submit Successful!");
@@ -168,7 +168,10 @@ const BS_Establishment = () => {
           {/* UPLOAD BUSINESS PHOTO OR LOGO */}
           <div className="md:col-span-2 flex items-center justify-between border-midBlue border rounded-[10px] overflow-hidden pr-2 py-4">
             {businessLogoUpload === null ? (
-              <label className="text-darkBlue pl-[10px]">
+              <label
+                htmlFor="businessLogoUpload"
+                className="text-darkBlue pl-[10px]"
+              >
                 UPLOAD BUSINESS PHOTO OR LOGO
               </label>
             ) : (
@@ -198,7 +201,7 @@ const BS_Establishment = () => {
           {/* business paper */}
           <div className="md:col-span-2 flex items-center justify-between border-midBlue border rounded-[10px] overflow-hidden pr-2 py-4">
             {paperPhoto === null ? (
-              <label className="text-darkBlue pl-[10px]">
+              <label htmlFor="paperPhoto" className="text-darkBlue pl-[10px]">
                 Upload wall paper photo
               </label>
             ) : (

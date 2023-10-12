@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 // internal file
 import useAuth from "../../../hooks/useAuth";
@@ -36,12 +37,9 @@ const BS_Advert = () => {
       userEmail: user?.email,
       advert: advertQ,
     };
-    console.log("newData ", newData);
 
     Axios.patch("boat-services-data-advert", newData)
       .then((res) => {
-        console.log("response - ", res);
-
         if (res?.status === 200) {
           toast.success("Boat services location submitted successful!");
         }

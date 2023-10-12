@@ -71,14 +71,16 @@ const Cr_Establishment = () => {
       advert: { advert: null },
     };
 
-    Axios.post("boat-services-data-location", newData)
+    console.log("new Data", newData);
+
+    Axios.post("crew-data", newData)
       .then((res) => {
         if (res?.data?.insertedId) {
-          toast.success("Boat services Establishment submit Successful!");
+          toast.success("Crew Establishment submit Successful!");
         }
 
         if (res?.status === 201) {
-          toast.success("Boat services Establishment already submitted!");
+          toast.success("Crew Establishment already submitted!");
         }
       })
       .catch((err) => console.log(err));
@@ -143,9 +145,7 @@ const Cr_Establishment = () => {
   return (
     <div className="bg-white bg-opacity-90 px-5 sm:px-10 pb-10 md:px-[93px] md:pb-[30px] mt-6 rounded-[10px]">
       <div className="max-w-[715px] mx-auto text-center mb-6">
-        <h2 className="text-lightBlue text-[19px]">
-          BOAT SERVICES ESTABLISHMENT
-        </h2>
+        <h2 className="text-lightBlue text-[19px]">Crew Member</h2>
       </div>
 
       {/* form */}
@@ -153,11 +153,11 @@ const Cr_Establishment = () => {
         <div className="flex flex-col md:gap-x-[37px] gap-y-5 text-sm">
           {/* Name of the owner */}
           <label
-            htmlFor="Name_owner"
+            htmlFor="name_owner"
             className="flex items-center border-midBlue border rounded-[10px] overflow-hidden pr-2"
           >
             <input
-              id="Name_owner"
+              id="name_owner"
               placeholder="Name of the owner"
               {...register("ownerName")}
               className="w-full focus:outline-none border-none p-[10px] text-darkBlue placeholder:text-darkBlue"
@@ -168,7 +168,10 @@ const Cr_Establishment = () => {
           {/* UPLOAD BUSINESS PHOTO OR LOGO */}
           <div className="md:col-span-2 flex items-center justify-between border-midBlue border rounded-[10px] overflow-hidden pr-2 py-4">
             {businessLogoUpload === null ? (
-              <label className="text-darkBlue pl-[10px]">
+              <label
+                htmlFor="businessLogoUpload"
+                className="text-darkBlue pl-[10px]"
+              >
                 UPLOAD BUSINESS PHOTO OR LOGO
               </label>
             ) : (
@@ -198,7 +201,7 @@ const Cr_Establishment = () => {
           {/* business paper */}
           <div className="md:col-span-2 flex items-center justify-between border-midBlue border rounded-[10px] overflow-hidden pr-2 py-4">
             {paperPhoto === null ? (
-              <label className="text-darkBlue pl-[10px]">
+              <label htmlFor="paperPhoto" className="text-darkBlue pl-[10px]">
                 Upload wall paper photo
               </label>
             ) : (

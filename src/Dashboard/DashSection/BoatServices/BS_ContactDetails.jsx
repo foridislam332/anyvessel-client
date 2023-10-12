@@ -20,8 +20,6 @@ const BS_ContactDetails = () => {
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => {
-    console.log(data);
-
     const newData = {
       userEmail: user?.email,
       ...data,
@@ -29,8 +27,6 @@ const BS_ContactDetails = () => {
 
     Axios.patch("boat-services-data-contact", newData)
       .then((res) => {
-        console.log("response - ", res);
-
         if (res?.status === 200) {
           toast.success("Boat services location submitted successful!");
         }

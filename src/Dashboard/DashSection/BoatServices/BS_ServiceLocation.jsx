@@ -100,7 +100,7 @@ const BS_ServiceLocation = () => {
             type="submit"
             className="text-white text-sm font-light bg-blue bg-opacity-90 px-7 md:px-14 py-[9px] rounded-lg hover:bg-transparent hover:text-blue border border-blue duration-300"
           >
-            Register
+            Confirm
           </button>
 
           <Link

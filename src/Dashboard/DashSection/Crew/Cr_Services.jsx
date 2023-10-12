@@ -12,7 +12,7 @@ import useAxios from "../../../hooks/useAxios";
 const Cr_Services = () => {
   const { user } = useAuth();
   const [Axios] = useAxios();
-  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -26,10 +26,9 @@ const Cr_Services = () => {
       ...data,
     };
 
-    Axios.patch("boat-services-data-service", newData)
+    // update server
+    Axios.patch("crew-data-service", newData)
       .then((res) => {
-        console.log("response - ", res);
-
         if (res?.status === 200) {
           toast.success("Boat services location submitted successful!");
         }
@@ -44,7 +43,7 @@ const Cr_Services = () => {
     return (
       <label
         className="flex items-center justify-between border border-lightBlue rounded-lg px-2 py-1 cursor-pointer"
-        for={idName}
+        htmlFor={idName}
       >
         {" "}
         <p> {labelText} </p>

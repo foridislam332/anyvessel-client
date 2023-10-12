@@ -12,7 +12,6 @@ import useAxios from "../../../hooks/useAxios";
 const Cr_ContactDetails = () => {
   const { user } = useAuth();
   const [Axios] = useAxios();
-  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -27,7 +26,7 @@ const Cr_ContactDetails = () => {
       ...data,
     };
 
-    Axios.patch("boat-services-data-contact", newData)
+    Axios.patch("crew-data-contact", newData)
       .then((res) => {
         console.log("response - ", res);
 

@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 // internal file
 import useAuth from "../../../hooks/useAuth";
@@ -21,7 +22,7 @@ const modules = {
 const Cr_Advert = () => {
   const { user } = useAuth();
   const [Axios] = useAxios();
-  const [advertQ, setAdvert] = useState("");
+  const [advertQ, setAdvertQ] = useState("");
   const {
     register,
     handleSubmit,
@@ -38,7 +39,7 @@ const Cr_Advert = () => {
     };
     console.log("newData ", newData);
 
-    Axios.patch("boat-services-data-advert", newData)
+    Axios.patch("crew-data-advert", newData)
       .then((res) => {
         console.log("response - ", res);
 
@@ -55,7 +56,7 @@ const Cr_Advert = () => {
   return (
     <div className="bg-white bg-opacity-90 px-5 sm:px-10 pb-10 md:px-[93px] md:pb-[30px] mt-6 rounded-[10px]">
       <div className="max-w-[715px] mx-auto text-center mb-6">
-        <h2 className="text-lightBlue text-[19px]">Services to provide</h2>
+        <h2 className="text-lightBlue text-[19px]">Crew Member</h2>
       </div>
 
       {/* form */}
@@ -65,13 +66,13 @@ const Cr_Advert = () => {
           <div>
             <ReactQuill
               theme="snow"
-              rows="7"
               value={advertQ}
               modules={modules}
+              name="advert"
               {...register(`advert`)}
               placeholder="Describe Your Job Advert best ways..."
-              onChange={setAdvert}
-              className="h-60"
+              onChange={setAdvertQ}
+              className="h-60 w-full focus:outline-none border-none p-[10px] placeholder:text-darkBlue"
             />
           </div>
         </div>
