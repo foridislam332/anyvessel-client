@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 // internal file
@@ -20,6 +20,7 @@ const modules = {
 };
 
 const BS_Advert = () => {
+  const navigate = useNavigate();
   const { user } = useAuth();
   const [Axios] = useAxios();
   const [advertQ, setAdvert] = useState("");
@@ -41,6 +42,7 @@ const BS_Advert = () => {
     Axios.patch("boat-services-data-advert", newData)
       .then((res) => {
         if (res?.status === 200) {
+          navigate("/profile");
           toast.success("Boat services location submitted successful!");
         }
       })
