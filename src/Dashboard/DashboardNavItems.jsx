@@ -9,7 +9,7 @@ const DashboardNavItems = () => {
     return (
       <li className="w-full">
         <ActiveLink to={`/dashboard/${route}`}>
-          <p className="hidden md:inline"> {text} </p>
+          <p className="hidden md:inline text-sm"> {text} </p>
         </ActiveLink>
       </li>
     );
@@ -25,27 +25,34 @@ const DashboardNavItems = () => {
               <>
                 <li className="w-full">
                   <ActiveLink to="/dashboard/charter">
-                    <p className="hidden md:inline">CHARTER COMPANY</p>
+                    <p className="hidden md:inline text-sm">CHARTER COMPANY</p>
                   </ActiveLink>
                 </li>
                 <li className="w-full">
                   <ActiveLink to="/dashboard/vessel">
-                    <p className="hidden md:inline">Vessel</p>
+                    <p className="hidden md:inline text-sm">Vessel</p>
                   </ActiveLink>
                 </li>
                 <li className="w-full">
                   <ActiveLink to="/dashboard/location">
-                    <p className="hidden md:inline">Location</p>
+                    <p className="hidden md:inline text-sm">Location</p>
                   </ActiveLink>
                 </li>
                 <li className="w-full">
                   <ActiveLink to="/dashboard/contact">
-                    <p className="hidden md:inline">Contact details</p>
+                    <p className="hidden md:inline text-sm">Contact details</p>
                   </ActiveLink>
                 </li>
                 <li className="w-full">
                   <ActiveLink to="/dashboard/advertised">
-                    <p className="hidden md:inline">Advertised Position</p>
+                    <p className="hidden md:inline text-sm">
+                      Advertised Position
+                    </p>
+                  </ActiveLink>
+                </li>
+                <li className="w-full">
+                  <ActiveLink to="/dashboard/booking">
+                    <p className="hidden md:inline text-sm">Booking calendar</p>
                   </ActiveLink>
                 </li>
               </>

@@ -1,7 +1,5 @@
 import ActiveLink from "./ActiveLink";
 
-// react icons
-
 const NavItems = () => {
   return (
     <>

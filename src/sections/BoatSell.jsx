@@ -9,9 +9,11 @@ import BoatCards from '../components/BoatCards';
 import 'swiper/css';
 import { Autoplay, Navigation, Pagination } from 'swiper/modules';
 import SectionTitle from '../components/SectionTitle';
+import useAllBoatSailingPost from '../hooks/useAllBoatSailingPost';
 
 const BoatSell = () => {
-
+    const { boatSellPost } = useAllBoatSailingPost()
+    console.log(boatSellPost)
     const [boats, setBoats] = useState([]);
     useEffect(() => {
         fetch('/boats.json')
@@ -32,7 +34,7 @@ const BoatSell = () => {
 
 
     return (
-        <section className="bg-[#F0F6FB] py-20">
+        <section className="bg-[#F0F6FB] py-28">
             <div className='container'>
                 {/* Section Title */}
                 <SectionTitle title='Boat For Sale' />

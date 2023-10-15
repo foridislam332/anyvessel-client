@@ -4,8 +4,14 @@ import Divider from "../../components/Divider";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useState } from "react";
+import useAuth from "../../hooks/useAuth";
+import useCurrentUser from "../../hooks/useCurrentUser";
+import useAxios from "../../hooks/useAxios";
 
 const Vessel = () => {
+    const { currentUser } = useCurrentUser();
+    const [Axios] = useAxios();
+    const { user } = useAuth();
     const [vesselImage, setVesselImage] = useState(null);
     const [ownerImage, setOwnerImage] = useState(null);
     const { register, handleSubmit, control, formState: { errors } } = useForm();
@@ -49,19 +55,48 @@ const Vessel = () => {
     }
     const onSubmit = (data) => {
 
-        const datatta = {
-            registry: data.registry,
-            vesselImage: vesselImage,
-            ownerImage: ownerImage,
-            category: data.category,
-            sailing_boats: data.category,
-            manufacturer: data.manufacturer,
-            vessel_length: data.vessel_length,
-            number_crew: data.number_crew,
-            manufacturer_2: data.manufacturer_2,
-            vessel_weight: data.vessel_weight,
+        const newData = {
+            ownerUserId: currentUser?._id,
+            ownerUserEmail: currentUser?.email,
+            vessel: {
+                registry: data.registry,
+                vesselImage: vesselImage,
+                ownerImage: ownerImage,
+                category: data.category,
+                sailing_boats: data.sailing_boats,
+                manufacturer: data.manufacturer,
+                vessel_length: data.vessel_length,
+                number_crew: data.number_crew,
+                manufacturer_2: data.manufacturer_2,
+                vessel_weight: data.vessel_weight,
+                owner: currentUser?.email
+            },
+            location: {
+                boarding_country: null,
+                sailing_country: null,
+                boarding_city: null,
+                sailing_city: null
+            },
+            contact: {
+                sellerName: null,
+                sellerEmail: null,
+                seller_Number: null,
+                seller_skype: null
+            },
         }
-        console.log(datatta)
+        console.log(newData)
+
+        Axios.post("boatSailing", newData)
+            .then((res) => {
+                if (res?.data?.insertedId) {
+                    toast.success("Boat Sailing post submit Successful!");
+                }
+
+                if (res?.status === 201) {
+                    toast.success("Boat Sailing post already submitted!");
+                }
+            })
+            .catch((err) => console.log(err));
     }
     return (
         <section className="p-5">
@@ -93,7 +128,7 @@ const Vessel = () => {
                             <div className="md:col-span-6">
                                 <small>Upload Owner Photo</small>
                                 <label htmlFor="owner_photo" className="h-32 p-4 w-32 flex flex-col items-center justify-center border-2 border-dashed border-blue rounded-md bg-blue/20" >
-                                <input
+                                    <input
                                         id="owner_photo"
                                         name="owner_photo"
                                         type="file"
