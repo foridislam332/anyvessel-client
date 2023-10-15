@@ -1,5 +1,7 @@
 // local image
 import userBgImg from "../assets/images/user-bg.jpg";
+
+// internal files
 import BoatServiceProfile from "../components/Profile/BoatServiceProfile";
 import CrewProfile from "../components/Profile/CrewProfile";
 import BoatProfile from "../components/Profile/boatProfile";
@@ -10,7 +12,7 @@ const Profile = () => {
 
   return (
     <>
-      <section className="relative top-[95px] lg:top-[110px]">
+      <section className="">
         <div
           style={{ backgroundImage: `url(${userBgImg})` }}
           className="h-[300px] md:h-[350px] flex items-center justify-center bg-cover bg-center"

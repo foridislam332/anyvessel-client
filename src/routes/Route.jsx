@@ -17,9 +17,14 @@ import Vessel from "../Dashboard/DashSection/Vessel";
 import Dashboard from "../Dashboard/Dashboard";
 import Main from "../layouts/Main";
 import Register from "../layouts/Register";
+import About_Us from "../pages/About_Us";
 import BoatRegister from "../pages/BoatRegister";
 import BoatServicesRegister from "../pages/BoatServicesRegister";
+import Boat_Sale from "../pages/Boat_Sale";
+import Boat_Search from "../pages/Boat_Search";
+import Boat_Services from "../pages/Boat_Services";
 import CrewRegister from "../pages/CrewRegister";
+import Crew_Search from "../pages/Crew_Search";
 import Home from "../pages/Home";
 import Profile from "../pages/Profile";
 import RegisterCard from "../sections/RegisterCard";
@@ -32,6 +37,26 @@ const Route = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
+      },
+      {
+        path: "/about_us",
+        element: <About_Us />,
+      },
+      {
+        path: "/crew_search",
+        element: <Crew_Search />,
+      },
+      {
+        path: "/boat_search",
+        element: <Boat_Search />,
+      },
+      {
+        path: "/boat_sale",
+        element: <Boat_Sale />,
+      },
+      {
+        path: "/boat_services",
+        element: <Boat_Services />,
       },
       {
         path: "/profile",
