@@ -17,6 +17,8 @@ import ContactDetails from "../Dashboard/DashSection/BoatServices/ContactDetails
 import Services from "../Dashboard/DashSection/BoatServices/Services";
 import Advert from "../Dashboard/DashSection/BoatServices/Advert";
 import Profile from "../Dashboard/Profile";
+import Booking_Calender from "../Dashboard/DashSection/Booking_Calender";
+import BoatSell from "../sections/BoatSell";
 
 const Route = createBrowserRouter([
   {
@@ -26,6 +28,10 @@ const Route = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
+      },
+      {
+        path: "/boat_sale",
+        element: <BoatSell />,
       },
       {
         path: "/dashboard",
@@ -51,6 +57,10 @@ const Route = createBrowserRouter([
           {
             path: "/dashboard/advertised",
             element: <Advertised />,
+          },
+          {
+            path: "/dashboard/booking",
+            element: <Booking_Calender />,
           },
 
           //  crew role

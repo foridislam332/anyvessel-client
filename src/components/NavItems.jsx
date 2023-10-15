@@ -40,12 +40,12 @@ const NavItems = () => {
                     Boat services
                 </ActiveLink>
             </li>
-            {/* <li>
-                <ActiveLink to='/forum'>
-                    Forum
+            <li>
+                <ActiveLink to='/profile'>
+                    Profile
                 </ActiveLink>
             </li>
-            <li>
+            {/* <li>
                 <ActiveLink to='/contact_us'>
                     Contact us
                 </ActiveLink>
