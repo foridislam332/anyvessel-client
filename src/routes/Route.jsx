@@ -15,6 +15,7 @@ import Cr_ServiceLocation from "../Dashboard/DashSection/Crew/Cr_ServiceLocation
 import Cr_Services from "../Dashboard/DashSection/Crew/Cr_Services";
 import Location from "../Dashboard/DashSection/Location";
 import Vessel from "../Dashboard/DashSection/Vessel";
+import Dashboard from "../Dashboard/Dashboard";
 import Main from "../layouts/Main";
 import Register from "../layouts/Register";
 import About_Us from "../pages/About_Us";
@@ -64,7 +65,7 @@ const Route = createBrowserRouter([
       },
       {
         path: "/dashboard",
-        element: <Profile />,
+        element: <Dashboard />,
         children: [
           // boat role
           {

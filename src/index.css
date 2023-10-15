@@ -79,12 +79,10 @@
 
 /* Toggle A */
 input:checked ~ .dot {
-  transform: translateX(100%);
-  background-color: #48bb78;
+  transform: translateX(130%);
+  background-color: #FFFFFF;
 }
-
-/* Toggle B */
-input:checked ~ .dot {
-  transform: translateX(100%);
-  background-color: #48bb78;
+input:checked ~ .dot_Bg {
+  /* transform: translateX(100%); */
+  background-color: #1FBAFF;
 }

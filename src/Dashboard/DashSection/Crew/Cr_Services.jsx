@@ -16,6 +16,7 @@ const Cr_Services = () => {
   const {
     register,
     handleSubmit,
+    watch,
     control,
     formState: { errors },
   } = useForm();
@@ -41,19 +42,25 @@ const Cr_Services = () => {
 
   const serviceItems = (data, idName, labelText) => {
     return (
-      <label
-        className="flex items-center justify-between border border-lightBlue rounded-lg px-2 py-1 cursor-pointer"
-        htmlFor={idName}
-      >
-        {" "}
-        <p> {labelText} </p>
-        <input
-          {...register(`${data}`)}
-          type="checkbox"
-          id={idName}
-          name={idName}
-        />
-      </label>
+      <div class="flex items-center justify-center w-full border border-[#A1C7EC] rounded-xl px-2 py-3">
+        <label
+          htmlFor={idName}
+          class="w-full flex justify-between items-center cursor-pointer"
+        >
+          <p> {labelText} </p>
+          <div class="relative">
+            <input
+              {...register(`${data}`)}
+              id={idName}
+              name={idName}
+              type="checkbox"
+              class="sr-only"
+            />
+            <div class="dot_Bg block bg-[#A1C7EC] w-10 h-5 rounded-full transition"></div>
+            <div class="dot absolute left-1 top-[3px] bg-[#486786] w-3.5 h-3.5 rounded-full transition"></div>
+          </div>
+        </label>
+      </div>
     );
   };
 
