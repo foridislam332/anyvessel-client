@@ -1,9 +1,8 @@
 import ActiveLink from "../components/ActiveLink";
+import useCurrentUser from "../hooks/useCurrentUser";
 // react icons
 const DashboardNavItems = () => {
-  //   const role = "boat";
-  // const role = "crew";
-  const role = "boatServices";
+  const { currentUser } = useCurrentUser();
 
   // re useable FC
   const listItemFc = (route, text) => {
@@ -22,7 +21,7 @@ const DashboardNavItems = () => {
         <div className="col-span-8">
           <ul className="flex justify-evenly items-center gap-1 ">
             {/* only boat route */}
-            {role === "boat" && (
+            {currentUser?.role === "boat" && (
               <>
                 <li className="w-full">
                   <ActiveLink to="/dashboard/charter">
@@ -53,7 +52,7 @@ const DashboardNavItems = () => {
             )}
 
             {/* only crew route */}
-            {role === "crew" && (
+            {currentUser?.role === "crew" && (
               <>
                 {listItemFc("crew-establishment", "Crew Member")}
 
@@ -68,7 +67,7 @@ const DashboardNavItems = () => {
             )}
 
             {/* only crew route */}
-            {role === "boatServices" && (
+            {currentUser?.role === "boatServices" && (
               <>
                 {listItemFc(
                   "boat-services-establishment",

@@ -3,10 +3,6 @@ import ActiveLink from "./ActiveLink";
 // react icons
 
 const NavItems = () => {
-  //   const role = "boat";
-  //   const role = "crew";
-  const role = "boatServices";
-
   return (
     <>
       <li>

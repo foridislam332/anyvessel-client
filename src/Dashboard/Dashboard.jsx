@@ -9,7 +9,7 @@ const Dashboard = () => {
   return (
     <section
       style={{ backgroundImage: `url(${BannerBg})` }}
-      className="relative  h-[500px] md:h-[730px] bg-cover bg-center pt-36 "
+      className="relative  h-[500px] md:h-[730px] bg-cover bg-center pt-14"
     >
       <div className="container grid grid-cols-11 gap-8">
         <div className="col-span-8 ">
