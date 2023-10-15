@@ -23,7 +23,7 @@ const Main = () => {
     <>
       <Header />
 
-      <main className="relative top-[95px] lg:top-[120px]">
+      <main className="relative top-[85px] lg:top-[110px]">
         <Outlet />
       </main>
 
