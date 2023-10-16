@@ -1,34 +1,45 @@
+import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router-dom";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
+import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
-
-// icons image
 
 // internal file
 import useAuth from "../../../hooks/useAuth";
 import useAxios from "../../../hooks/useAxios";
 
-const Advert = () => {
+// text editor module
+const modules = {
+  toolbar: [
+    [{ header: [1, 2, 3, 4, 5, 6, false] }],
+    ["bold", "italic", "underline"],
+    [{ list: "ordered" }, { list: "bullet" }],
+    [{ align: [] }],
+  ],
+};
+
+const Cr_Advert = () => {
   const { user } = useAuth();
   const [Axios] = useAxios();
-  const { createUser, upDateProfile } = useAuth();
-  const navigate = useNavigate();
+  const [advertQ, setAdvertQ] = useState("");
   const {
     register,
     handleSubmit,
     control,
     formState: { errors },
   } = useForm();
+
   const onSubmit = (data) => {
     const { advert } = data;
 
     const newData = {
       userEmail: user?.email,
-      advert,
+      advert: advertQ,
     };
     console.log("newData ", newData);
 
-    Axios.patch("boat-services-data-advert", newData)
+    Axios.patch("crew-data-advert", newData)
       .then((res) => {
         console.log("response - ", res);
 
@@ -45,19 +56,25 @@ const Advert = () => {
   return (
     <div className="bg-white bg-opacity-90 px-5 sm:px-10 pb-10 md:px-[93px] md:pb-[30px] mt-6 rounded-[10px]">
       <div className="max-w-[715px] mx-auto text-center mb-6">
-        <h2 className="text-lightBlue text-[19px]">Services to provide</h2>
+        <h2 className="text-lightBlue text-[19px]">Crew Member</h2>
       </div>
 
       {/* form */}
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="flex flex-col md:gap-x-[37px] gap-y-5 text-sm">
           {/* Advert */}
-          <textarea
-            rows="7"
-            {...register(`advert`)}
-            className="border border-blue rounded-lg outline-none p-3"
-            placeholder="In few words describe the services you provide activities for your profile advert…"
-          ></textarea>
+          <div>
+            <ReactQuill
+              theme="snow"
+              value={advertQ}
+              modules={modules}
+              name="advert"
+              {...register(`advert`)}
+              placeholder="Describe Your Job Advert best ways..."
+              onChange={setAdvertQ}
+              className="h-60 w-full focus:outline-none border-none p-[10px] placeholder:text-darkBlue"
+            />
+          </div>
         </div>
 
         {/* buttons */}
@@ -81,4 +98,4 @@ const Advert = () => {
   );
 };
 
-export default Advert;
+export default Cr_Advert;

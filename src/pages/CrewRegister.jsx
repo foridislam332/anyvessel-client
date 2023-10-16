@@ -1,16 +1,20 @@
-import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 import { useForm } from "react-hook-form";
+import { Link, useNavigate } from "react-router-dom";
 
 // icons image
-import user from "../assets/images/user2.png";
-import user2 from "../assets/images/user-3.png";
+import angle from "../assets/images/angle-down.png";
 import email from "../assets/images/email.png";
 import phone from "../assets/images/phone.png";
-import angle from "../assets/images/angle-down.png";
+import user2 from "../assets/images/user-3.png";
+import user from "../assets/images/user2.png";
+
+// internal files
 import useAuth from "../hooks/useAuth";
-import axios from "axios";
+import useAxios from "../hooks/useAxios";
 
 const CrewRegister = () => {
+  const [Axios] = useAxios();
   const { createUser, upDateProfile } = useAuth();
   const navigate = useNavigate();
   const {
@@ -38,14 +42,13 @@ const CrewRegister = () => {
       .then((result) => {
         upDateProfile(result.user, data.fullName, data?.pictures).then(
           (res) => {
-            axios
-              .post("https://anyvessel-server.vercel.app/", newData)
-              .then((data) => {
-                if (data.status === 200) {
-                  console.log(data);
-                  navigate("/", { replace: true });
-                }
-              });
+            Axios.post("/crew", newData).then((data) => {
+              if (data.status === 200) {
+                navigate("/dashboard/crew-establishment", {
+                  replace: true,
+                });
+              }
+            });
           }
         );
       })

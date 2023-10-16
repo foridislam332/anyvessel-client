@@ -9,10 +9,9 @@ import user2 from "../../../assets/images/user-3.png";
 import useAuth from "../../../hooks/useAuth";
 import useAxios from "../../../hooks/useAxios";
 
-const ContactDetails = () => {
+const Cr_ContactDetails = () => {
   const { user } = useAuth();
   const [Axios] = useAxios();
-  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -27,7 +26,7 @@ const ContactDetails = () => {
       ...data,
     };
 
-    Axios.patch("boat-services-data-contact", newData)
+    Axios.patch("crew-data-contact", newData)
       .then((res) => {
         console.log("response - ", res);
 
@@ -104,4 +103,4 @@ const ContactDetails = () => {
   );
 };
 
-export default ContactDetails;
+export default Cr_ContactDetails;

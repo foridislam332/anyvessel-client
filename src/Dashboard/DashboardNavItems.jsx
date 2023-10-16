@@ -1,9 +1,8 @@
 import ActiveLink from "../components/ActiveLink";
+import useCurrentUser from "../hooks/useCurrentUser";
 // react icons
 const DashboardNavItems = () => {
-    const role = "boat";
-  //   const role = "crew";
-  // const role = "boatServices";
+  const { currentUser } = useCurrentUser();
 
   // re useable FC
   const listItemFc = (route, text) => {
@@ -22,7 +21,7 @@ const DashboardNavItems = () => {
         <div className="col-span-8">
           <ul className="flex justify-evenly items-center gap-1 ">
             {/* only boat route */}
-            {role === "boat" && (
+            {currentUser?.role === "boat" && (
               <>
                 <li className="w-full">
                   <ActiveLink to="/dashboard/charter">
@@ -46,7 +45,9 @@ const DashboardNavItems = () => {
                 </li>
                 <li className="w-full">
                   <ActiveLink to="/dashboard/advertised">
-                    <p className="hidden md:inline text-sm">Advertised Position</p>
+                    <p className="hidden md:inline text-sm">
+                      Advertised Position
+                    </p>
                   </ActiveLink>
                 </li>
                 <li className="w-full">
@@ -58,18 +59,22 @@ const DashboardNavItems = () => {
             )}
 
             {/* only crew route */}
-            {role === "crew" && (
+            {currentUser?.role === "crew" && (
               <>
-                <li className="w-full">
-                  <ActiveLink to="/dashboard/charter">
-                    <p className="hidden md:inline text-sm">CHARTER COMPANY</p>
-                  </ActiveLink>
-                </li>
+                {listItemFc("crew-establishment", "Crew Member")}
+
+                {listItemFc("crew-location", "Location")}
+
+                {listItemFc("crew-contact-details", "Contact details")}
+
+                {listItemFc("crew-service", "Services")}
+
+                {listItemFc("crew-advert", "Advert")}
               </>
             )}
 
             {/* only crew route */}
-            {role === "boatServices" && (
+            {currentUser?.role === "boatServices" && (
               <>
                 {listItemFc(
                   "boat-services-establishment",

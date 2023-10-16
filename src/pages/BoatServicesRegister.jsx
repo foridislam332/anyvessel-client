@@ -1,4 +1,3 @@
-import axios from "axios";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -12,8 +11,10 @@ import user from "../assets/images/user2.png";
 // internal file
 import { toast } from "react-toastify";
 import useAuth from "../hooks/useAuth";
+import useAxios from "../hooks/useAxios";
 
 const BoatServicesRegister = () => {
+  const [Axios] = useAxios();
   const { createUser, upDateProfile } = useAuth();
   const navigate = useNavigate();
   const {
@@ -55,8 +56,7 @@ const BoatServicesRegister = () => {
       .then((result) => {
         upDateProfile(result.user, data.fullName, data?.pictures).then(
           (res) => {
-            axios
-              .post("http://localhost:5000/boat-service", signUpData)
+            Axios.post("boat-service", signUpData)
               .then((data) => {
                 if (data.status === 200) {
                   toast.success("Sign Up Successful!");

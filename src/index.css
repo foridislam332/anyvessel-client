@@ -76,3 +76,13 @@
 .rangeslider-horizontal .rangeslider__handle:after {
   display: none !important;
 }
+
+/* Toggle A */
+input:checked ~ .dot {
+  transform: translateX(130%);
+  background-color: #FFFFFF;
+}
+input:checked ~ .dot_Bg {
+  /* transform: translateX(100%); */
+  background-color: #1FBAFF;
+}
