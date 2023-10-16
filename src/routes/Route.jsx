@@ -16,6 +16,7 @@ import Cr_Services from "../Dashboard/DashSection/Crew/Cr_Services";
 import Location from "../Dashboard/DashSection/Location";
 import Vessel from "../Dashboard/DashSection/Vessel";
 import Dashboard from "../Dashboard/Dashboard";
+import MainProfile from "../Profile/Profile";
 import Main from "../layouts/Main";
 import Register from "../layouts/Register";
 import About_Us from "../pages/About_Us";
@@ -50,6 +51,10 @@ const Route = createBrowserRouter([
       {
         path: "/boat_search",
         element: <Boat_Search />,
+      },
+      {
+        path: "/profile",
+        element: <MainProfile />,
       },
       {
         path: "/boat_sale",
