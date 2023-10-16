@@ -1,6 +1,8 @@
 import { MdAccountCircle } from "react-icons/md";
+import { BsBoxArrowUpRight } from "react-icons/bs";
+import { BiCalendar } from "react-icons/bi";
 const BoatProfile = ({ user }) => {
-    const { identityPhoto, picture, fullName, gender } = user;
+    const { identityPhoto, picture, fullName, gender, birthDay } = user;
     return (
         <section>
             <div>
@@ -26,7 +28,7 @@ const BoatProfile = ({ user }) => {
                                     <span className=""> PIV</span>
                                 </div>
                                 <p>
-                                    Personal Identity
+                                    Personal Identity Verified
                                 </p>
 
                             </div>
@@ -37,6 +39,12 @@ const BoatProfile = ({ user }) => {
                     <img className="w-40 h-40 border-2 border-red-700  -mt-24" src={picture} alt="" />
                 </div>
 
+                <p className="flex items-center gap-1"><BiCalendar /> <span className="uppercase">Available</span> <span className="">currently unavailable</span> <span className="text-xs">since {birthDay}</span> </p>
+                <p className="ml-11">Unavailable - Found a Crew</p>
+                <p className="ml-11  flex items-center">SY - Sailing Yacht (Sloop) , 12.2m(40 ft) , sail , catamarna , <span className="font-semibold flex items-center">Catana <BsBoxArrowUpRight /> 40</span></p>
+                <p>Owner & Captain/Skipper - always or often abroad</p>
+
+                <h3>Location</h3>
             </div>
         </section>
     );

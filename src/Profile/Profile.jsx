@@ -10,6 +10,9 @@ const Profile = () => {
                 {
                     currentUser?.role === "boat" && <BoatProfile user={currentUser} />
                 }
+                {/* {
+                    currentUser?.role === "boat" && <BoatProfile user={currentUser} />
+                } */}
             </div>
 
         </section>
