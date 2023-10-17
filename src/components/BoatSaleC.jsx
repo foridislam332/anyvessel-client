@@ -59,12 +59,12 @@ const BoatSaleC = ({ boat }) => {
         <div className="mt-7 mb-3 flex items-center justify-between">
           <Link
             className="font-sm py-[9px] px-14 bg-yellow rounded-[50px] hover:bg-blue shadow-md hover:shadow-3xl hover:text-white duration-300"
-            to={`#`}
+            to={`/BoatSellDetails/${_id}`}
           >
             {" "}
             View Details{" "}
           </Link>
-          <p className="text-xl font-semibold">$3450</p>
+          <p className="text-xl font-semibold">${vessel?.vessel_price} </p>
         </div>
       </div>
     </div>

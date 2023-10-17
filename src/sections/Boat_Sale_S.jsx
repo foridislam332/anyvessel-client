@@ -9,7 +9,7 @@ const Boat_Sale_S = () => {
 
   useEffect(() => {
     setSaleDate(allBoatSaleData);
-  }, []);
+  }, [allBoatSaleData]);
 
   return (
     <section className="py-16 bg-[#F0F6FB]">
