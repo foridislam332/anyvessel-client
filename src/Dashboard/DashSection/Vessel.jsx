@@ -7,11 +7,13 @@ import { useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import useCurrentUser from "../../hooks/useCurrentUser";
 import useAxios from "../../hooks/useAxios";
+import { useNavigate } from "react-router-dom";
 
 const Vessel = () => {
     const { currentUser } = useCurrentUser();
     const [Axios] = useAxios();
-    const { user } = useAuth();
+    const navigate = useNavigate();
+
     const [vesselImage, setVesselImage] = useState(null);
     const [ownerImage, setOwnerImage] = useState(null);
     const { register, handleSubmit, control, formState: { errors } } = useForm();
@@ -58,6 +60,7 @@ const Vessel = () => {
         const newData = {
             ownerUserId: currentUser?._id,
             ownerUserEmail: currentUser?.email,
+            postDate: Date.now(),
             vessel: {
                 registry: data.registry,
                 vesselImage: vesselImage,
@@ -66,22 +69,24 @@ const Vessel = () => {
                 sailing_boats: data.sailing_boats,
                 manufacturer: data.manufacturer,
                 vessel_length: data.vessel_length,
-                number_crew: data.number_crew,
-                manufacturer_2: data.manufacturer_2,
+                vessel_area: data.vessel_area,
+                vesselName: data.vesselName,
+                vessel_price: data.vessel_price,
+                vessel_description: data.vessel_description,
                 vessel_weight: data.vessel_weight,
                 owner: currentUser?.email
             },
             location: {
-                boarding_country: null,
-                sailing_country: null,
-                boarding_city: null,
-                sailing_city: null
+                boarding_country: String,
+                sailing_country: String,
+                boarding_city: String,
+                sailing_city: String
             },
             contact: {
-                sellerName: null,
-                sellerEmail: null,
-                seller_Number: null,
-                seller_skype: null
+                sellerName: String,
+                sellerEmail: String,
+                seller_Number: String,
+                seller_skype: String
             },
         }
         console.log(newData)
@@ -89,7 +94,7 @@ const Vessel = () => {
         Axios.post("boatSailing", newData)
             .then((res) => {
                 if (res?.data?.insertedId) {
-                    toast.success("Boat Sailing post submit Successful!");
+                    toast.success("Boat Sailing post submit Successful! Now Update the location");
                 }
 
                 if (res?.status === 201) {
@@ -160,10 +165,20 @@ const Vessel = () => {
                                     className="text-darkBlue w-full border border-midBlue rounded-md focus:outline-none focus:border-b focus:border-midBlue p-2 sm:pr-3 py-[3px]"
                                 >
                                     <option value="">Vessel Category</option>
-                                    <option value="2000">2000</option>
-                                    <option value="2001">2001</option>
-                                    <option value="2002">2002</option>
-                                    <option value="2003">2003</option>
+                                    <option value="Cruise Ships">Cruise Ships</option>
+                                    <option value="Ferries">Ferries</option>
+                                    <option value="Yachts">Yachts</option>
+                                    <option value="Catamarans">Catamarans</option>
+                                    <option value="Submarines">Submarines</option>
+                                    <option value="Frigates">Frigates</option>
+                                    <option value="Coast Guard Cutters">Coast Guard Cutters</option>
+                                    <option value="Patrol Boats">Patrol Boats</option>
+                                    <option value="Submersibles">Submersibles</option>
+                                    <option value="Battleships">Battleships</option>
+                                    <option value="Icebreakers">Icebreakers</option>
+                                    <option value="Destroyers">Destroyers</option>
+                                    <option value="Fireboats">Fireboats</option>
+                                    <option value="Aircraft Carriers">Aircraft Carriers</option>
                                 </select>
                             </div>
                             <div className="sm:px-[3px] py-[7px]">
@@ -213,6 +228,20 @@ const Vessel = () => {
                                 </label>
                             </div>
                             <div>
+                                <small className="text-darkBlue ">VESSEL Area</small>
+                                <label htmlFor="vessel_area"
+                                    className="flex items-center border-midBlue border rounded-md overflow-hidden pr-2"
+                                >
+                                    <input
+                                        id="vessel_area"
+                                        type="number"
+                                        placeholder="METERS(ft)"
+                                        {...register("vessel_area")}
+                                        className="text-xs w-full focus:outline-none border-none p-2 text-darkBlue placeholder:text-gray"
+                                    />
+                                </label>
+                            </div>
+                            <div>
                                 <small className="text-darkBlue ">Number of crew on board ?</small>
                                 <label htmlFor="number_crew"
                                     className="flex items-center border-midBlue border rounded-md overflow-hidden pr-2"
@@ -231,7 +260,7 @@ const Vessel = () => {
 
                         <div className="md:col-span-6 space-y-2">
                             <div>
-                                <small className="text-darkBlue ">VESSEL Manufacturer_2/ MODEL</small>
+                                <small className="text-darkBlue ">Vessel Name</small>
                                 <label htmlFor="text"
                                     className="flex items-center border-midBlue border rounded-md overflow-hidden pr-2"
                                 >
@@ -239,7 +268,7 @@ const Vessel = () => {
                                         id="text"
                                         type="text"
                                         placeholder="Your text here"
-                                        {...register("manufacturer_2")}
+                                        {...register("vesselName")}
                                         className="text-xs w-full focus:outline-none border-none p-2 text-darkBlue placeholder:text-gray"
                                     />
                                 </label>
@@ -257,6 +286,35 @@ const Vessel = () => {
                                         className="text-xs w-full focus:outline-none border-none p-2 text-darkBlue placeholder:text-gray"
                                     />
                                 </label>
+                            </div>
+                            <div>
+                                <small className="text-darkBlue ">Vessel Price ($)</small>
+                                <label htmlFor="vessel_price"
+                                    className="flex items-center border-midBlue border rounded-md overflow-hidden pr-2"
+                                >
+                                    <input
+                                        id="vessel_price"
+                                        type="number"
+                                        placeholder="Price ($)"
+                                        {...register("vessel_price")}
+                                        className="text-xs w-full focus:outline-none border-none p-2 text-darkBlue placeholder:text-gray"
+                                    />
+                                </label>
+                            </div>
+                            <div>
+                                <small className="text-darkBlue ">Vessel Description</small>
+                                <label htmlFor="vessel_description"
+                                    className="flex items-center border-midBlue border rounded-md overflow-hidden pr-2"
+                                >
+                                    <input
+                                        id="vessel_description"
+                                        type="text"
+                                        placeholder="description "
+                                        {...register("vessel_description")}
+                                        className="text-xs w-full focus:outline-none border-none p-2 text-darkBlue placeholder:text-gray"
+                                    />
+                                </label>
+
                             </div>
                         </div>
                     </div>

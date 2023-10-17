@@ -10,8 +10,12 @@ import BoatSell from "../sections/BoatSell";
 import MeetCrew from "../sections/MeetCrew";
 import Reviews from "../sections/Reviews";
 import useAuth from "../hooks/useAuth";
+import useCurrentUser from "../hooks/useCurrentUser";
+import Dashboard from "../Dashboard/Dashboard";
 const Home = () => {
     const { user } = useAuth()
+    const {currentUser} = useCurrentUser();
+    console.log(currentUser)
     return (
         <>
             <Helmet>
@@ -20,6 +24,9 @@ const Home = () => {
 
             {/* sections */}
             <HeroBanner />
+            {
+                currentUser && <Dashboard/>
+            }
             <BoatSearch />
             <AboutAnyvessel />
             <FeaturedBoats />
