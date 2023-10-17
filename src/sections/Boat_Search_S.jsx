@@ -5,6 +5,7 @@ import useAllBoat from "../hooks/useAllBoat";
 
 const Boat_Search_S = () => {
   const { allBoatData } = useAllBoat();
+  console.log(allBoatData)
   const [filteredData, setFilteredData] = useState(allBoatData);
   const {
     register,

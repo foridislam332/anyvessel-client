@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 
 // react icons
 import { HiOutlineLocationMarker } from 'react-icons/hi';
-import { AiOutlineUser } from 'react-icons/ai';
 
 // icons
 import Area from '../assets/images/area.png';

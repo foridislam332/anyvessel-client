@@ -12,25 +12,15 @@ import SectionTitle from '../components/SectionTitle';
 import useAllBoatSailingPost from '../hooks/useAllBoatSailingPost';
 
 const BoatSell = () => {
-    const { boatSellPost } = useAllBoatSailingPost()
-    console.log(boatSellPost)
+    const { boatSellPost } = useAllBoatSailingPost();
+ 
+    console.log( boatSellPost)
     const [boats, setBoats] = useState([]);
     useEffect(() => {
         fetch('/boats.json')
             .then(res => res.json())
             .then(data => setBoats(data))
     }, [])
-
-    const breakpoints = {
-        // small device
-        640: {
-            slidesPerView: 1,
-        },
-        // // md,lg device 
-        768: {
-            slidesPerView: 2,
-        },
-    };
 
 
     return (
@@ -41,33 +31,13 @@ const BoatSell = () => {
 
                 {/* boat Cards   */}
                 <div className='py-12' >
-                    <Swiper
 
-                        spaceBetween={40}
-                        centeredSlides={false}
-                        pagination={{
-                            clickable: true,
-                        }}
+                    <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5'>
+                        {boatSellPost?.map((boat, index) => (
+                            <BoatCards key={index} boat={boat} />
+                        ))}
 
-                        navigation={{
-                            nextEl: '.swiper-button-next',
-                            prevEl: '.swiper-button-prev',
-                        }}
-
-                        modules={[Autoplay, Pagination, Navigation,]}
-                        className="mySwiper"
-                        breakpoints={breakpoints}
-                    >
-                        <div className='swiper-container fixed top-0 right-0 bottom-0 left-0'>
-                            {boats.map((boat) => (
-                                <SwiperSlide key={boat._id} >
-                                    <BoatCards boat={boat} />
-
-                                </SwiperSlide>
-                            ))}
-
-                        </div>
-                    </Swiper>
+                    </div>
                 </div>
 
 

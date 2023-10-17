@@ -30,6 +30,11 @@ import Crew_Search from "../pages/Crew_Search";
 import Home from "../pages/Home";
 import Profile from "../pages/Profile";
 import RegisterCard from "../sections/RegisterCard";
+import BoatSell from "../sections/BoatSell";
+import BoatSellDetails from "../components/BoatDetails";
+
+// const baseURL = 'https://hire-wave.onrender.com/api';
+const baseURL = "http://localhost:5000/";
 
 const Route = createBrowserRouter([
   {
@@ -58,7 +63,12 @@ const Route = createBrowserRouter([
       },
       {
         path: "/boat_sale",
-        element: <Boat_Sale />,
+        element: <BoatSell />,
+      },
+      {
+        path: "/boat_details/:id",
+        element: <BoatSellDetails />,
+        loader: ({ params }) => fetch(`http://localhost:5000/boatDetails/${params.id}`)
       },
       {
         path: "/boat_services",

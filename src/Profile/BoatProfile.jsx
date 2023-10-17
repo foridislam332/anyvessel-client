@@ -1,7 +1,11 @@
 import { MdAccountCircle } from "react-icons/md";
 import { BsBoxArrowUpRight } from "react-icons/bs";
 import { BiCalendar } from "react-icons/bi";
+import useProfileData from "../hooks/useProfileData";
 const BoatProfile = ({ user }) => {
+    const { profileData }=useProfileData();
+
+    console.log(profileData)
     const { identityPhoto, picture, fullName, gender, birthDay } = user;
     return (
         <section>
