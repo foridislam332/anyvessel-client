@@ -1,12 +1,10 @@
-import useBoatSale from "../hooks/useBoatSale";
+import Boat_Sale_S from "../sections/Boat_Sale_S";
 
 const Boat_Sale = () => {
-  const { allBoatSaleData } = useBoatSale();
-  console.log(" allBoatSaleData ", allBoatSaleData);
   return (
-    <div>
-      <p> Crew Search Coming Soon... </p>
-    </div>
+    <>
+      <Boat_Sale_S />
+    </>
   );
 };
 
