@@ -8,7 +8,7 @@ const BoatSearchCard = ({ service }) => {
   const status = true;
 
   return (
-    <div className="flex gap-4 border border-midBlue p-4 rounded-md">
+    <div className="flex gap-4 border border-midBlue p-4 rounded-md bg-white">
       <figure className="w-56">
         <img src={establishment?.paperPhoto} />
         <Link
