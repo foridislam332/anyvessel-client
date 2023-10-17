@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import BoatSearchCard from "../components/BoatSearchCard";
+import CrewSearchCard from "../components/CrewSearchCard";
 import useAllBoat from "../hooks/useAllBoat";
 
 const Boat_Search_S = () => {
   const { allBoatData } = useAllBoat();
-  console.log(allBoatData)
+  console.log(allBoatData);
   const [filteredData, setFilteredData] = useState(allBoatData);
   const {
     register,
@@ -60,7 +60,7 @@ const Boat_Search_S = () => {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
               {filteredData.map((service, i) => (
                 <div key={i}>
-                  <BoatSearchCard service={service} />{" "}
+                  <CrewSearchCard service={service} />{" "}
                 </div>
               ))}
             </div>
