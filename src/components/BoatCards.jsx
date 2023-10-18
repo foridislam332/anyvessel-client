@@ -48,11 +48,11 @@ const BoatCards = ({ boat }) => {
                         <div className="px-5 mt-10 mb-2 flex items-center justify-between">
                             <div>
                                 <div >
-                                    <div className="text-center">
-                                        <button onClick={() => { setModal(true) }} className="font-sm py-2 px-3 bg-yellow rounded-l-full border-l-2 border-white hover:bg-blue shadow-md hover:shadow-3xl hover:text-white duration-300">Contact Owner</button>
+                                    <div className="text-center flex flex-col lg:flex-row">
+                                        <button onClick={() => { setModal(true) }} className=" py-2 px-3 bg-yellow rounded-full lg:rounded-l-full border-l-2 border-white hover:bg-blue shadow-md hover:shadow-3xl hover:text-white duration-300">Contact Owner</button>
 
                                         <Link to={`/boat_details/${_id}`}
-                                            className="font-sm py-2 px-8 bg-yellow rounded-r-full border-l-2 border-white hover:bg-blue shadow-md hover:shadow-3xl hover:text-white duration-300"
+                                            className="font-sm py-2 px-8 bg-yellow rounded-full md:rounded-r-full mt-2 lg:mt-0 border-l-2 border-white hover:bg-blue shadow-md hover:shadow-3xl hover:text-white duration-300"
                                         >See Details</Link>
                                     </div>
 

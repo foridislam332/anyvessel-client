@@ -17,25 +17,24 @@ import Location from "../Dashboard/DashSection/Location";
 import Vessel from "../Dashboard/DashSection/Vessel";
 import Dashboard from "../Dashboard/Dashboard";
 import MainProfile from "../Profile/Profile";
+import BoatSellDetails from "../components/BoatDetails";
 import Main from "../layouts/Main";
 import Register from "../layouts/Register";
 import About_Us from "../pages/About_Us";
 import BoatRegister from "../pages/BoatRegister";
 import BoatServicesRegister from "../pages/BoatServicesRegister";
-import Boat_Sale from "../pages/Boat_Sale";
 import Boat_Search from "../pages/Boat_Search";
 import Boat_Services from "../pages/Boat_Services";
+import CrewDetails from "../pages/CrewDetails";
 import CrewRegister from "../pages/CrewRegister";
 import Crew_Search from "../pages/Crew_Search";
 import Home from "../pages/Home";
 import Profile from "../pages/Profile";
-import RegisterCard from "../sections/RegisterCard";
 import BoatSell from "../sections/BoatSell";
-import BoatSellDetails from "../components/BoatDetails";
 import BoatSaleC from "../components/BoatSaleC";
+import RegisterCard from "../sections/RegisterCard";
 
-// const baseURL = 'https://hire-wave.onrender.com/api';
-const baseURL = "http://localhost:5000/";
+const baseURL = "http://localhost:5000";
 
 const Route = createBrowserRouter([
   {
@@ -53,6 +52,11 @@ const Route = createBrowserRouter([
       {
         path: "/crew_search",
         element: <Crew_Search />,
+      },
+      {
+        path: "/crew-details/:id",
+        element: <CrewDetails />,
+        loader: ({ params }) => fetch(`http://localhost:5000/crew-data/${params.id}`)
       },
       {
         path: "/boat_search",
