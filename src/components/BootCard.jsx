@@ -1,64 +1,92 @@
-import { Link } from "react-router-dom";
+// import { HiOutlineLocationMarker } from 'react-icons/hi';
+// // icons
+// import Area from '../assets/images/area.png';
+// import User from '../assets/images/user.png';
+// import Seat from '../assets/images/seat.png';
+// import { Link } from 'react-router-dom';
+// import { FaMinus } from 'react-icons/fa6';
+// import { useState } from 'react';
+// const BoatCards = ({ boat }) => {
+//     const { _id, vessel, contact, location } = boat;
+//     const [modal, setModal] = useState(false);
+//     return (
+//         <>
+//             {/* single card */}
+//             <div className='shadow-sm bg-white rounded-lg overflow-hidden'>
+//                 {/* img */}
+//                 <div className='h-[316px] overflow-auto'>
+//                     <img className='w-full h-full object-cover object-center' src={vessel.vesselImage} alt="" />
+//                 </div>
+//                 {/* details */}
+//                 <div className='flex justify-between p-4'>
+//                     <h6 className='text-xl font-medium'>{vessel.manufacturer}</h6>
+//                     <p className='text-darkBlue flex items-center gap-3'> <span className='text-base'><HiOutlineLocationMarker /></span>{location.boarding_city}</p>
 
-// react icons
-import { HiOutlineLocationMarker } from 'react-icons/hi';
+//                 </div>
+//                 <p className='p-4 text-lightBlue text-sm font-light'>
+//                     {vessel.vessel_description}
 
-// icons
-import Area from '../assets/images/area.png';
-import User from '../assets/images/user.png';
-import Seat from '../assets/images/seat.png';
+//                 </p>
+//                 <div className='text-center border-t border-blue'>
+//                     {/* boat bottom area */}
+//                     <div className="py-3">
+//                         <div className="lg:px-8 flex items-center justify-center gap-10 md:gap-14 font-light">
+//                             <p className="flex items-center gap-3">
+//                                 <img src={vessel.vessel_length} alt="" />
+//                                 {/* {area} M */}
+//                             </p>
+//                             <p className="flex items-center gap-3">
+//                                 <img src={User} alt="" />
+//                                 {/* {people} M */}
+//                             </p>
+//                             <p className="flex items-center gap-3">
+//                                 <img src={Seat} alt="" />
+//                                 {vessel.number_crew}
+//                             </p>
+//                         </div>
 
-const BootCard = ({ boat }) => {
-    const { _id, name, image, location, des, area, people, seat, price } = boat;
-    return (
-        <div className="bg-white rounded-[10px] hover:shadow-3xl duration-300">
-            {/* boat image */}
-            <div className="rounded-t-[10px] overflow-hidden">
-                <img
-                    className="w-full object-cover object-center"
-                    src={image} alt={name} />
-            </div>
+//                         <div className="px-5 mt-10 mb-2 flex items-center justify-between">
+//                             <div>
+//                                 <div >
+//                                     <div className="text-center">
+//                                         <button onClick={() => { setModal(true) }} className="font-sm py-2 px-3 bg-yellow rounded-l-full border-l-2 border-white hover:bg-blue shadow-md hover:shadow-3xl hover:text-white duration-300">Contact Owner</button>
 
-            {/* boat details */}
-            <div className="border-b border-midBlue px-3 pb-4">
-                <div className="flex items-center justify-between py-4">
-                    <h1 className="text-xl font-medium">{name}</h1>
+//                                         <Link to={`/boat_details/${_id}`}
+//                                             className="font-sm py-2 px-8 bg-yellow rounded-r-full border-l-2 border-white hover:bg-blue shadow-md hover:shadow-3xl hover:text-white duration-300"
+//                                         >See Details</Link>
+//                                     </div>
 
-                    <p className="flex items-center gap-3 text-darkBlue">
-                        <HiOutlineLocationMarker />{location}
-                    </p>
-                </div>
+//                                     {/* {
+//                                         modal &&
 
-                <p className="text-lightBlue text-sm font-thin leading-[22.5px] line-clamp-3">{des}</p>
-            </div>
 
-            {/* boat bottom area */}
-            <div className="py-3">
-                <div className="px-8 flex items-center justify-between font-light">
-                    <p className="flex items-center gap-3">
-                        <img src={Area} alt="" />
-                        {area} M
-                    </p>
-                    <p className="flex items-center gap-3">
-                        <img src={User} alt="" />
-                        {people} M
-                    </p>
-                    <p className="flex items-center gap-3">
-                        <img src={Seat} alt="" />
-                        {seat}
-                    </p>
-                </div>
+//                                         <div className="absolute top-32 left-1/4 right-1/4 w-2/4 text-center  text-white h-[70vh]  overflow-x-auto bg-black bg-opacity-75 rounded-md ">
+//                                             <button
+//                                                 onClick={() => { setModal(false) }}
+//                                                 className="absolute top-4 right-6 bg-error p-3 rounded-full">
+//                                                 <FaMinus />
+//                                             </button>
+//                                             <div className="mt-16 px-8">
+//                                                 <p>
+//                                                     Phone : {contact.seller_Number}
+//                                                 </p>
+//                                                 <p> Phone : {contact.sellerEmail}</p>
+//                                                 <p>  Phone : {contact.seller_skype}</p>
+//                                             </div>
 
-                <div className="px-5 mt-6 flex items-center justify-between">
-                    <Link to={`/boat_details/${_id}`}
-                        className="font-sm py-[9px] px-14 bg-yellow rounded-[50px] hover:bg-blue shadow-md hover:shadow-3xl hover:text-white duration-300"
-                    >See More</Link>
+//                                         </div>
+//                                     } */}
+//                                 </div>
 
-                    <p className="text-xl font-semibold">${price}</p>
-                </div>
-            </div>
-        </div>
-    );
-};
+//                             </div>
 
-export default BootCard;
+//                             <p className="text-xl font-semibold">${vessel.vessel_price}</p>
+//                         </div>
+//                     </div>
+//                 </div>
+//             </div>
+//         </>
+//     );
+// };
+
+// export default BoatCards;

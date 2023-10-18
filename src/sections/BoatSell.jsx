@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import BootCard from '../components/BootCard';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 

@@ -55,14 +55,19 @@ const Vessel = () => {
             console.error('Error uploading image:', error);
         }
     }
+    
+    const currentDate = new Date();
+    const formattedDate = currentDate.toDateString();
+
     const onSubmit = (data) => {
 
         const newData = {
             ownerUserId: currentUser?._id,
             ownerUserEmail: currentUser?.email,
-            postDate: Date.now(),
+            postDate: formattedDate,
             vessel: {
                 registry: data.registry,
+                number_crew: data.number_crew,
                 vesselImage: vesselImage,
                 ownerImage: ownerImage,
                 category: data.category,
@@ -77,16 +82,16 @@ const Vessel = () => {
                 owner: currentUser?.email
             },
             location: {
-                boarding_country: String,
-                sailing_country: String,
-                boarding_city: String,
-                sailing_city: String
+                boarding_country: null,
+                sailing_country: null,
+                boarding_city: null,
+                sailing_city: null
             },
             contact: {
-                sellerName: String,
-                sellerEmail: String,
-                seller_Number: String,
-                seller_skype: String
+                sellerName: null,
+                sellerEmail: null,
+                seller_Number: null,
+                seller_skype: null
             },
         }
         console.log(newData)

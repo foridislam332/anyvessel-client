@@ -1,15 +1,15 @@
 import { HiOutlineLocationMarker } from "react-icons/hi";
-import { Link } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 
-const BoatSaleC = ({ boat }) => {
-  console.log("saleData ", boat);
+const BoatSaleC = () => {
+  const boat = useLoaderData();
   const { _id, ownerUserId, vessel, location, contact } = boat;
   return (
-    <div className="gap-4 border border-midBlue p-4 rounded-md bg-white">
+    <section className="gap-4 py-24 border border-midBlue p-4 rounded-md bg-white">
       {/* boat image */}
-      <figure className="max-h-72">
+      <figure className="">
         <img
-          className="w-full h-48 md:h-60 lg:h-72  object-cover object-center"
+          className="h-96 w-[800px] mx-auto"
           src={vessel?.vesselImage}
           alt="Boat Image"
         />
@@ -50,24 +50,33 @@ const BoatSaleC = ({ boat }) => {
             <p> Vessel weight: {vessel?.vessel_weight} </p>
           </div>
         </div>
+        {/* location  */}
+        <div className="mt-4 shadow-md rounded-lg p-3">
+          <div className="flex items-center justify-between">
+            <p> Boating Location: {location?.boarding_city} , {location?.boarding_country} </p>
+            <p>Sailing Location: {location?.sailing_city} , {location?.sailing_country} </p>
+          </div>
+          
+        </div>
 
         {/* Manufacturer */}
         <div className="shadow-md rounded-lg p-3 mt-4 mb-2">
-          <p> Manufacturer: {vessel?.manufacturer} </p>
+          <p> <span className="text-midBlue">About Our Boat :</span>  {vessel?.vessel_description} </p>
         </div>
 
         <div className="mt-7 mb-3 flex items-center justify-between">
           <Link
             className="font-sm py-[9px] px-14 bg-yellow rounded-[50px] hover:bg-blue shadow-md hover:shadow-3xl hover:text-white duration-300"
-            to={`/BoatSellDetails/${_id}`}
+            // to={`/BoatSellDetails/${_id}`}
           >
             {" "}
-            View Details{" "}
+            Contact With Boat Owner
+            {" "}
           </Link>
-          <p className="text-xl font-semibold">${vessel?.vessel_price} </p>
+          <p className="text-xl font-semibold">Price : ${vessel?.vessel_price} <span className="text-midBlue text-xs ">Negotiable</span> </p>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 
