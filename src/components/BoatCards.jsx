@@ -56,7 +56,7 @@ const BoatCards = ({ boat }) => {
                                         >See Details</Link>
                                     </div>
 
-                                    {
+                                    {/* {
                                         modal &&
 
 
@@ -75,7 +75,7 @@ const BoatCards = ({ boat }) => {
                                             </div>
 
                                         </div>
-                                    }
+                                    } */}
                                 </div>
 
                             </div>

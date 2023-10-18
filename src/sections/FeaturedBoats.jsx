@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import SectionTitle from "../components/SectionTitle";
-import BootCard from "../components/BootCard";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 // Import Swiper styles
 import 'swiper/css';
 import { Autoplay, Navigation, Pagination } from 'swiper/modules';
+import { Link } from "react-router-dom";
+import BoatCards from "../components/BoatCards";
+import useAllBoatSailingPost from "../hooks/useAllBoatSailingPost";
 
 const FeaturedBoats = () => {
     const [boats, setBoats] = useState([]);
@@ -14,7 +16,7 @@ const FeaturedBoats = () => {
             .then(res => res.json())
             .then(data => setBoats(data))
     }, [])
-
+    const { boatSellPost } = useAllBoatSailingPost();
     const breakpoints = {
         // small device
         640: {
@@ -55,25 +57,22 @@ const FeaturedBoats = () => {
                     >
 
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-7 mt-12 px-20">
-                            {boats.length > 0 ? (
-                                boats.map((boat , index) => (
-                                    
-                                    <SwiperSlide key={index}>
-                                        <BootCard boat={boat} />
-                                    </SwiperSlide>
-                                ))
-                            ) : (
-                                <h1>Loading ...</h1>
-                            )}
+                            {boatSellPost?.map((boat, index) => (
+                                <SwiperSlide key={index}><BoatCards key={index} boat={boat} /></SwiperSlide>
+
+                            ))
+                            }
                         </div>
                     </Swiper>
                 </div>
 
 
-
-                <div className="text-center">
+                <Link to='/boat_sale'>
+                    <div className="text-center">
                     <button className="text-white text-sm font-light bg-blue px-8 py-3 rounded-[9px] border border-blue hover:bg-transparent hover:text-blue shadow-md hover:shadow-3xl duration-300">View more</button>
                 </div>
+                </Link>
+                
             </div>
         </section>
     );

@@ -8,8 +8,10 @@ import { FaXmark } from "react-icons/fa6";
 
 // logo
 import Logo from "../assets/images/logo.png";
+import useAuth from "../hooks/useAuth";
 
 const SideNav = ({ isOpen, toggle }) => {
+  const { user } = useAuth();
   return (
     <>
       <aside
@@ -38,14 +40,16 @@ const SideNav = ({ isOpen, toggle }) => {
         </ul>
 
         {/* login & sign in buttons */}
-        <div className="flex flex-col items-center justify-center gap-5 mt-5">
-          <Link to="/login" className="btn__primary flex items-center gap-5">
-            <BiLogInCircle size="24" /> Log in
-          </Link>
-          <Link to="/sign_in" className="btn__white flex items-center gap-5">
-            <AiOutlineUser size="24" /> Sign In
-          </Link>
-        </div>
+        {!user?.email && (
+          <div className="flex flex-col items-center justify-center gap-5 mt-5">
+            <Link to="/login" className="btn__primary flex items-center gap-5">
+              <BiLogInCircle size="24" /> Log in
+            </Link>
+            <Link to="/sign_in" className="btn__white flex items-center gap-5">
+              <AiOutlineUser size="24" /> Sign In
+            </Link>
+          </div>
+        )}
       </aside>
       {/* overlay */}
       <div

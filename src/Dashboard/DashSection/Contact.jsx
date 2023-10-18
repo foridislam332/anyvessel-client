@@ -3,15 +3,23 @@ import useAuth from "../../hooks/useAuth";
 import useCurrentUser from "../../hooks/useCurrentUser";
 import useAxios from "../../hooks/useAxios";
 import { toast } from "react-toastify";
+import useAllBoatSailingPost from "../../hooks/useAllBoatSailingPost";
 
 const Contact = () => {
     const { user } = useAuth();
     const [Axios] = useAxios();
+    const { boatSellPost } = useAllBoatSailingPost();
     const { currentUser } = useCurrentUser();
     const { register, handleSubmit, control, formState: { errors } } = useForm();
 
+    if (boatSellPost === undefined) {
+        return <h2>Loading...</h2>
+      }
+    const newPostID = boatSellPost[boatSellPost.length -1]?._id
+    console.log(newPostID)
     const onSubmit = (data) => {
         const newData = {
+            newPostID: newPostID,
             ownerUserId: currentUser?._id,
             ownerUserEmail: currentUser?.email,
             sellerName: data.sellerName,

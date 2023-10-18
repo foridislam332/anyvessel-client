@@ -22,6 +22,7 @@ import Main from "../layouts/Main";
 import Register from "../layouts/Register";
 import About_Us from "../pages/About_Us";
 import BoatRegister from "../pages/BoatRegister";
+import BoatServiceDetails from "../pages/BoatServiceDetails";
 import BoatServicesRegister from "../pages/BoatServicesRegister";
 import Boat_Search from "../pages/Boat_Search";
 import Boat_Services from "../pages/Boat_Services";
@@ -78,6 +79,11 @@ const Route = createBrowserRouter([
       {
         path: "/boat_services",
         element: <Boat_Services />,
+      },
+      {
+        path: "/boat-service/:id",
+        element: <BoatServiceDetails />,
+        loader: ({ params }) => fetch(`${baseURL}/boat-service/${params.id}`),
       },
       {
         path: "/profile",
