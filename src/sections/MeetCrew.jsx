@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from 'react';
-
-import MeetCrewCards from '../components/MeetCrewCards';
 import { Swiper, SwiperSlide } from 'swiper/react';
 // Import Swiper styles
 import 'swiper/css';
@@ -8,14 +6,11 @@ import 'swiper/css';
 // import required modules
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
 import SectionTitle from '../components/SectionTitle';
+import useAllCrew from '../hooks/useAllCrew';
+import CrewSearchCard from '../components/CrewSearchCard';
 
 const MeetCrew = () => {
-    const [crewMembers, setCrewMembers] = useState([])
-    useEffect(() => {
-        fetch("/crewmember.json")
-            .then((res) => res.json())
-            .then((data) => setCrewMembers(data));
-    }, [])
+    const { allCrewData } = useAllCrew();
 
     const breakpoints = {
         // small device
@@ -58,9 +53,9 @@ const MeetCrew = () => {
                         <div className='grid grid-cols-1 md:grid-cols-3 gap-6 py-5'>
                             {/* Fixed Swiper Container */}
                             <div className='swiper-container fixed top-0 right-0 bottom-0 left-0'>
-                                {crewMembers.map((crewmember) => (
-                                    <SwiperSlide key={crewmember._id}>
-                                        <MeetCrewCards crewmember={crewmember} />
+                                {allCrewData?.crews?.map((service, index) => (
+                                    <SwiperSlide key={index}>
+                                        <CrewSearchCard service={service} />{" "}
                                     </SwiperSlide>
                                 ))}
 
