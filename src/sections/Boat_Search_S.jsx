@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import CrewSearchCard from "../components/CrewSearchCard";
+import BoatSearchCard from "../components/BoatSearchCard";
 import useAllBoat from "../hooks/useAllBoat";
 
 const Boat_Search_S = () => {
@@ -57,10 +57,10 @@ const Boat_Search_S = () => {
         <div>
           <p className="mb-4">Boat items: {filteredData?.length}</p>
           {filteredData?.length > 0 ? (
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {filteredData.map((service, i) => (
                 <div key={i}>
-                  <CrewSearchCard service={service} />{" "}
+                  <BoatSearchCard service={service} />{" "}
                 </div>
               ))}
             </div>
