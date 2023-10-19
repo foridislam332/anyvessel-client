@@ -4,7 +4,7 @@ import SectionTitle from "./SectionTitle";
 const BoatSellDetails = () => {
     const BoatData = useLoaderData();
     const { vessel, contact, location } = BoatData;
-    console.log(BoatData)
+    
     return (
         <section className="py-24">
             <div>

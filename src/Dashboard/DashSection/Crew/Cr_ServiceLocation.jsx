@@ -1,6 +1,6 @@
 import { Country, State } from "country-state-city";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 // icons image
@@ -12,7 +12,7 @@ import useAxios from "../../../hooks/useAxios";
 const Cr_ServiceLocation = () => {
   const { user } = useAuth();
   const [Axios] = useAxios();
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -34,10 +34,10 @@ const Cr_ServiceLocation = () => {
 
     Axios.patch("crew-data-location", newData)
       .then((res) => {
-        console.log("response - ", res);
-
         if (res?.status === 200) {
-          toast.success("Boat services location submitted successful!");
+          navigate("/crew-sign-up-step/crew-contact-details", {
+            replace: true,
+          });
         }
       })
       .catch((err) => {

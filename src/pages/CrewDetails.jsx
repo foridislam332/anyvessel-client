@@ -8,7 +8,7 @@ const CrewDetails = () => {
   const { establishment, contact, location, services, advert } = loadData;
 
   return (
-    <section className="gap-4 py-12 md:py-26 border border-midBlue p-4 rounded-md bg-white">
+    <section className="gap-4 py-12 md:py-26 p-4 rounded-md bg-white">
       <div className="container">
         <SectionTitle title="Crew Details" />
 
@@ -16,14 +16,14 @@ const CrewDetails = () => {
           {/* boat image */}
           <figure className="">
             <img
-              className="h-96 w-[800px] mx-auto border border-darkBlue border-opacity-90 rounded-md p-4"
+              className="h-96 w-[800px] mx-auto rounded-md p-4"
               src={establishment?.paperPhoto}
               alt="Boat Image"
             />
           </figure>
 
           {/* boat content */}
-          <div className="border border-darkBlue border-opacity-50 rounded-md p-4">
+          <div className=" rounded-md p-4">
             {/* Vessel Details */}
             <div className="flex gap-5 shadow-md rounded-lg p-3">
               <div>

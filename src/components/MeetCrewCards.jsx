@@ -3,7 +3,6 @@ import React from "react";
 import { CiRollingSuitcase } from "react-icons/Ci";
 import { HiOutlineLocationMarker } from "react-icons/hi";
 const MeetCrewCards = ({ crewmember }) => {
-  // console.log(crewmember)
   return (
     <>
       {/* single card */}

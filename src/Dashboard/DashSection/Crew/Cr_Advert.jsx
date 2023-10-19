@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 // internal file
@@ -23,6 +23,7 @@ const Cr_Advert = () => {
   const { user } = useAuth();
   const [Axios] = useAxios();
   const [advertQ, setAdvertQ] = useState("");
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -31,20 +32,16 @@ const Cr_Advert = () => {
   } = useForm();
 
   const onSubmit = (data) => {
-    const { advert } = data;
-
     const newData = {
       userEmail: user?.email,
       advert: advertQ,
     };
-    console.log("newData ", newData);
 
     Axios.patch("crew-data-advert", newData)
       .then((res) => {
-        console.log("response - ", res);
-
         if (res?.status === 200) {
           toast.success("Boat services location submitted successful!");
+          navigate("/profile");
         }
       })
       .catch((err) => {

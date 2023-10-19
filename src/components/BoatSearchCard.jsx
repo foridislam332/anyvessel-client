@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 const BoatSearchCard = ({ service }) => {
   const { _id, establishment, location, services, userId, advert } = service;
 
-  console.log({ establishment, location, services, userId, advert });
   const status = true;
   let description = advert?.advert && advert?.advert?.slice(0, 100);
 
@@ -62,7 +61,7 @@ const BoatSearchCard = ({ service }) => {
 
         <div className="text-center py-5">
           <Link
-            to={`/crew-details/${_id}`}
+            to={`/boat-service/${_id}`}
             className="font-sm py-[9px] px-14 bg-yellow rounded-[50px] hover:bg-blue shadow-md hover:shadow-3xl hover:text-white duration-300"
           >
             Details Boat

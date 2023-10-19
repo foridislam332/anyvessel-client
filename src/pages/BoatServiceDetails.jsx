@@ -1,5 +1,6 @@
 import { HiOutlineLocationMarker } from "react-icons/hi";
 import { Link, useLoaderData } from "react-router-dom";
+import { toast } from "react-toastify";
 import SectionTitle from "../components/SectionTitle";
 
 const BoatServiceDetails = () => {
@@ -13,7 +14,7 @@ const BoatServiceDetails = () => {
     userEmail,
     userId,
   } = boatData;
-  console.log("BoatData ", boatData);
+
   const {
     arrangementsAndDeliveries,
     carRentals,
@@ -35,13 +36,16 @@ const BoatServiceDetails = () => {
 
         <div className="py-12 container mx-auto ">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
+            {/* Images */}
             <div className="col-span-6">
               <img
-                className="w-full h-[400px]"
+                className="w-full h-[400px] rounded-md shadow-md p-4 border-darkBlue"
                 src={establishment?.paperPhoto}
                 alt=""
               />
             </div>
+
+            {/* Contents */}
             <div className="col-span-6">
               <div className="flex items-center justify-between flex-col lg:flex-row gap-3 md:gap-5 shadow-md p-4 rounded-md">
                 <div className="flex items-center gap-3">
@@ -62,6 +66,7 @@ const BoatServiceDetails = () => {
                     </p>
                   </div>
                 </div>
+
                 <div>
                   <Link
                     // to={``}
@@ -161,7 +166,7 @@ const BoatServiceDetails = () => {
                 </ul>
               </div>
 
-              {/* Advert */}
+              {/* Description */}
               <div className="p-4 shadow-md rounded-md mt-2">
                 <h3 className="text-lg font-bold mb-2"> Description </h3>
                 <p
@@ -169,6 +174,18 @@ const BoatServiceDetails = () => {
                     __html: advert?.advert,
                   }}
                 ></p>
+              </div>
+
+              {/* Buttons */}
+              <div className="p-4 text-center mt-2">
+                <button
+                  onClick={() => {
+                    toast.warn("waiting Coming Soo..");
+                  }}
+                  className="w-[155px] py-2 px-3 bg-yellow rounded-full lg:rounded-l-full border-l-2 border-white hover:bg-blue shadow-md hover:shadow-3xl hover:text-white duration-300"
+                >
+                  Contact Service
+                </button>
               </div>
             </div>
           </div>
