@@ -42,7 +42,7 @@ const BS_ContactDetails = () => {
       });
   };
 
-  const inputField = (idName, placeholder, data, icons) => {
+  const inputField = (idName, placeholder, data, icons, type = "text") => {
     return (
       <label
         htmlFor={idName}
@@ -52,6 +52,7 @@ const BS_ContactDetails = () => {
           id={idName}
           placeholder={placeholder}
           {...register(`${data}`)}
+          type={type}
           className="w-full focus:outline-none border-none p-[10px] text-darkBlue placeholder:text-darkBlue"
         />
         <img src={icons} alt={placeholder} />
@@ -73,7 +74,7 @@ const BS_ContactDetails = () => {
           {/* Email address */}
           {inputField("Email", "Email address", "contactEmail", user2)}
           {/* Phone number */}
-          {inputField("number", "Phone number", "phoneNumber", user2)}
+          {inputField("number", "Phone number", "phoneNumber", user2, "number")}
           {/* Skype */}
           {inputField("skype", "Skype", "Skype", user2)}
           {/* Website */}

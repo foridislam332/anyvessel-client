@@ -20,10 +20,8 @@ const Cr_ContactDetails = () => {
     control,
     formState: { errors },
   } = useForm();
-  
-  const onSubmit = (data) => {
-    console.log(data);
 
+  const onSubmit = (data) => {
     const newData = {
       userEmail: user?.email,
       ...data,
@@ -37,7 +35,6 @@ const Cr_ContactDetails = () => {
       })
       .catch((err) => {
         toast.error("Somethings else!");
-        console.log(err);
       });
   };
 

@@ -46,22 +46,22 @@ const BS_Services = () => {
 
   const serviceItems = (data, idName, labelText) => {
     return (
-      <div class="flex items-center justify-center w-full border border-[#A1C7EC] rounded-xl px-2 py-3">
+      <div className="flex items-center justify-center w-full border border-[#A1C7EC] rounded-xl px-2 py-3">
         <label
           htmlFor={idName}
-          class="w-full flex justify-between items-center cursor-pointer"
+          className="w-full flex justify-between items-center cursor-pointer"
         >
           <p> {labelText} </p>
-          <div class="relative">
+          <div className="relative">
             <input
               {...register(`${data}`)}
               id={idName}
               name={idName}
               type="checkbox"
-              class="sr-only"
+              className="sr-only"
             />
-            <div class="dot_Bg block bg-[#A1C7EC] w-10 h-5 rounded-full transition"></div>
-            <div class="dot absolute left-1 top-[3px] bg-[#486786] w-3.5 h-3.5 rounded-full transition"></div>
+            <div className="dot_Bg block bg-[#A1C7EC] w-10 h-5 rounded-full transition"></div>
+            <div className="dot absolute left-1 top-[3px] bg-[#486786] w-3.5 h-3.5 rounded-full transition"></div>
           </div>
         </label>
       </div>

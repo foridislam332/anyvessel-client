@@ -1,8 +1,23 @@
 import { createBrowserRouter } from "react-router-dom";
-import MainProfile from "../Profile/Profile";
+import Profile from "../Profile/Profile";
+import Advertised from "../SignUpSteps/Boat/Advertised";
+import Booking_Calender from "../SignUpSteps/Boat/Booking_Calender";
 import Charter from "../SignUpSteps/Boat/Charter";
+import Contact from "../SignUpSteps/Boat/Contact";
+import Location from "../SignUpSteps/Boat/Location";
+import Vessel from "../SignUpSteps/Boat/Vessel";
+import BS_Advert from "../SignUpSteps/BoatServices/BS_Advert";
+import BS_ContactDetails from "../SignUpSteps/BoatServices/BS_ContactDetails";
+import BS_Establishment from "../SignUpSteps/BoatServices/BS_Establishment";
+import BS_ServiceLocation from "../SignUpSteps/BoatServices/BS_ServiceLocation";
+import BS_Services from "../SignUpSteps/BoatServices/BS_Services";
+import Cr_Advert from "../SignUpSteps/Crew/Cr_Advert";
+import Cr_ContactDetails from "../SignUpSteps/Crew/Cr_ContactDetails";
+import Cr_Establishment from "../SignUpSteps/Crew/Cr_Establishment";
+import Cr_ServiceLocation from "../SignUpSteps/Crew/Cr_ServiceLocation";
+import Cr_Services from "../SignUpSteps/Crew/Cr_Services";
 import StepsOutlet from "../SignUpSteps/StepsOutlet";
-import BoatSellDetails from "../components/BoatDetails";
+import BoatSaleC from "../components/BoatSaleC";
 import Main from "../layouts/Main";
 import Register from "../layouts/Register";
 import About_Us from "../pages/About_Us";
@@ -17,22 +32,6 @@ import Crew_Search from "../pages/Crew_Search";
 import Home from "../pages/Home";
 import BoatSell from "../sections/BoatSell";
 import RegisterCard from "../sections/RegisterCard";
-import Vessel from "../SignUpSteps/Boat/Vessel";
-import Location from "../SignUpSteps/Boat/Location";
-import Contact from "../SignUpSteps/Boat/Contact";
-import Advertised from "../SignUpSteps/Boat/Advertised";
-import Booking_Calender from "../SignUpSteps/Boat/Booking_Calender";
-import Cr_Establishment from "../SignUpSteps/Crew/Cr_Establishment";
-import Cr_ServiceLocation from "../SignUpSteps/Crew/Cr_ServiceLocation";
-import Cr_ContactDetails from "../SignUpSteps/Crew/Cr_ContactDetails";
-import Cr_Services from "../SignUpSteps/Crew/Cr_Services";
-import Cr_Advert from "../SignUpSteps/Crew/Cr_Advert";
-import BS_Establishment from "../SignUpSteps/BoatServices/BS_Establishment";
-import BS_ServiceLocation from "../SignUpSteps/BoatServices/BS_ServiceLocation";
-import BS_ContactDetails from "../SignUpSteps/BoatServices/BS_ContactDetails";
-import BS_Services from "../SignUpSteps/BoatServices/BS_Services";
-import BS_Advert from "../SignUpSteps/BoatServices/BS_Advert";
-import BoatSaleC from "../components/BoatSaleC";
 
 const baseURL = "http://localhost:5000";
 
@@ -70,7 +69,7 @@ const Route = createBrowserRouter([
       },
       {
         path: "/profile",
-        element: <MainProfile />,
+        element: <Profile />,
       },
       {
         path: "/boat_sale",
@@ -79,7 +78,7 @@ const Route = createBrowserRouter([
       {
         path: "/boat_details/:id",
         element: <BoatSaleC />,
-        loader: ({ params }) =>  fetch(`${baseURL}/boatDetails/${params.id}`)
+        loader: ({ params }) => fetch(`${baseURL}/boatDetails/${params.id}`),
       },
       {
         path: "/boat_services",

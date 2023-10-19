@@ -60,7 +60,7 @@ const BoatServicesRegister = () => {
               .then((data) => {
                 if (data.status === 200) {
                   toast.success("Sign Up Successful!");
-                  navigate("/dashboard/boat-services-establishment", {
+                  navigate("/sign-up-step/boat-services-establishment", {
                     replace: true,
                   });
                 }
@@ -159,7 +159,7 @@ const BoatServicesRegister = () => {
           >
             <input
               id="phone"
-              type="phone"
+              type="number"
               placeholder="Phone number"
               {...register("phone")}
               className="w-full focus:outline-none border-none p-[10px] text-darkBlue placeholder:text-darkBlue"

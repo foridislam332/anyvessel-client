@@ -140,7 +140,7 @@ const CrewRegister = () => {
           >
             <input
               id="phone"
-              type="phone"
+              type="number"
               placeholder="Phone number"
               {...register("phone")}
               className="w-full focus:outline-none border-none p-[10px] text-darkBlue placeholder:text-darkBlue"

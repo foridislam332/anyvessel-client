@@ -1,6 +1,6 @@
 import { Country, State } from "country-state-city";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 // icons image
@@ -12,6 +12,7 @@ import useAxios from "../../hooks/useAxios";
 const BS_ServiceLocation = () => {
   const { user } = useAuth();
   const [Axios] = useAxios();
+  const navigate = useNavigate();
 
   const {
     register,
