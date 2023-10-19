@@ -46,12 +46,13 @@ const BoatProfile = ({ user }) => {
 
     const age = calculateAge(birthDay);
 
-    console.log(age)
-
     return (
         <section>
             <div>
-                <img className="w-full h-[400px]" src={picture} alt="" />
+                <div className="">
+                    {/* <p className="absolute top-2 left-2 border-2 border-white text-white bg-midBlue rounded-full px-3">{role} Profile</p> */}
+                    <img className="w-full h-[400px]" src={picture} alt="" />
+                </div>
                 <div className="flex justify-between mr-3">
                     <div className="flex gap-2">
                         <div>
@@ -97,15 +98,15 @@ const BoatProfile = ({ user }) => {
                 </div>
 
                 {/* TODO  */}
-                <div  className="mt-4 shadow-md rounded-lg p-5">
-                       <p className="flex items-center gap-1"><BiCalendar /> <span className="uppercase">Available</span> <span className="">currently unavailable</span> <span className="text-xs">since {birthDay}</span> </p>
+                <div className="mt-4 shadow-md rounded-lg p-5">
+                    <p className="flex items-center gap-1"><BiCalendar /> <span className="uppercase">Available</span> <span className="">currently unavailable</span> <span className="text-xs">since {birthDay}</span> </p>
 
                 </div>
-             
-                <div  className="mt-4 shadow-md rounded-lg p-5">
+
+                <div className="mt-4 shadow-md rounded-lg p-5">
                     <p className="">Unavailable - Found a Crew</p>
                 </div>
-                
+
                 {/* <p className="  flex items-center">SY - Sailing Yacht (Sloop) , 12.2m(40 ft) , sail , catamarna , <span className="font-semibold flex items-center">Catana <BsBoxArrowUpRight /> 40</span></p> */}
             </div>
         </section>

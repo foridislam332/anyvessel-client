@@ -34,7 +34,7 @@ const CrewRegister = () => {
       gender: data.gender,
       phone: data.phone,
       role: "crew",
-      birthDay: `${data.day}, ${data.month} ${data.year}`,
+      birthDay: `${data.day}, ${data.month} , ${data.year}`,
     };
 
     createUser(data.email, data.password)

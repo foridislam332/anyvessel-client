@@ -7,10 +7,12 @@ import { BsSearch } from "react-icons/bs";
 
 // images
 import AngleDown from "../assets/images/angle-down.png";
+import useCurrentUser from "../hooks/useCurrentUser";
 
 const BoatSearch = () => {
   const [length, setLength] = useState(0);
   const [price, setPrice] = useState(0);
+  const { currentUser }=useCurrentUser()
 
   // hook form
   const {
@@ -23,7 +25,7 @@ const BoatSearch = () => {
   const onSubmit = (data) => console.log(data);
 
   return (
-    <section className="relative sm:-mt-48 md:-mt-28">
+    <section className={`${currentUser ? "relative  md:mt-0" : "relative sm:-mt-48 md:-mt-28"}`}>
       <div className="container">
         <form
           onSubmit={handleSubmit(onSubmit)}

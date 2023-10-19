@@ -93,7 +93,7 @@ const BoatRegister = () => {
       picture: picture,
       role: "boat",
       identityPhoto: identityPhoto,
-      birthDay: `${data.day}, ${data.month} ${data.year}`,
+      birthDay: `${data.day}, ${data.month} , ${data.year}`,
     };
 
     createUser(data.email, data.password)

@@ -33,6 +33,7 @@ import BS_ContactDetails from "../SignUpSteps/BoatServices/BS_ContactDetails";
 import BS_Services from "../SignUpSteps/BoatServices/BS_Services";
 import BS_Advert from "../SignUpSteps/BoatServices/BS_Advert";
 import BoatSaleC from "../components/BoatSaleC";
+import User_Login from "../pages/User_Login";
 
 const baseURL = "http://localhost:5000";
 
@@ -45,6 +46,76 @@ const Route = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
+        children: [
+          {
+            path: "/",
+            element: <Charter />,
+          },
+          {
+            path: "/vessel",
+            element: <Vessel />,
+          },
+          {
+            path: "/location",
+            element: <Location />,
+          },
+          {
+            path: "/contact",
+            element: <Contact />,
+          },
+          {
+            path: "/advertised",
+            element: <Advertised />,
+          },
+          {
+            path: "/booking",
+            element: <Booking_Calender />,
+          },
+
+          //  crew role
+          {
+            path: "/crew-establishment",
+            element: <Cr_Establishment />,
+          },
+          {
+            path: "/crew-location",
+            element: <Cr_ServiceLocation />,
+          },
+          {
+            path: "/crew-contact-details",
+            element: <Cr_ContactDetails />,
+          },
+          {
+            path: "/crew-service",
+            element: <Cr_Services />,
+          },
+          {
+            path: "/crew-advert",
+            element: <Cr_Advert />,
+          },
+
+          //   boat services role
+          {
+            path: "/boat-services-establishment",
+            element: <BS_Establishment />,
+          },
+          {
+            path: "/service-location",
+            element: <BS_ServiceLocation />,
+          },
+          {
+            path: "/contact-details",
+            element: <BS_ContactDetails />,
+          },
+          {
+            path: "/boat-service",
+            element: <BS_Services />,
+          },
+          {
+            path: "/advert",
+            element: <BS_Advert />,
+          },
+        ]
       },
       {
         path: "/about_us",
@@ -79,7 +150,7 @@ const Route = createBrowserRouter([
       {
         path: "/boat_details/:id",
         element: <BoatSaleC />,
-        loader: ({ params }) =>  fetch(`${baseURL}/boatDetails/${params.id}`)
+        loader: ({ params }) => fetch(`${baseURL}/boatDetails/${params.id}`)
       },
       {
         path: "/boat_services",
@@ -91,6 +162,11 @@ const Route = createBrowserRouter([
         loader: ({ params }) => fetch(`${baseURL}/boat-service/${params.id}`),
       },
     ],
+
+  },
+  {
+    path: '/login',
+    element: <User_Login />
   },
   // Registration
   {
@@ -115,81 +191,81 @@ const Route = createBrowserRouter([
       },
     ],
   },
-  {
-    path: "sign-up-step",
-    element: <StepsOutlet />,
-    children: [
-      // boat role
-      {
-        path: "/sign-up-step/charter",
-        element: <Charter />,
-      },
-      {
-        path: "/sign-up-step/vessel",
-        element: <Vessel />,
-      },
-      {
-        path: "/sign-up-step/location",
-        element: <Location />,
-      },
-      {
-        path: "/sign-up-step/contact",
-        element: <Contact />,
-      },
-      {
-        path: "/sign-up-step/advertised",
-        element: <Advertised />,
-      },
-      {
-        path: "/sign-up-step/booking",
-        element: <Booking_Calender />,
-      },
+  // {
+  //   path: "/",
+  //   element: <StepsOutlet />,
+  //   children: [
+  //     // boat role
+  //     {
+  //       path: "/",
+  //       element: <Charter />,
+  //     },
+  //     {
+  //       path: "/vessel",
+  //       element: <Vessel />,
+  //     },
+  //     {
+  //       path: "/location",
+  //       element: <Location />,
+  //     },
+  //     {
+  //       path: "/contact",
+  //       element: <Contact />,
+  //     },
+  //     {
+  //       path: "/advertised",
+  //       element: <Advertised />,
+  //     },
+  //     {
+  //       path: "/booking",
+  //       element: <Booking_Calender />,
+  //     },
 
-      //  crew role
-      {
-        path: "/sign-up-step/crew-establishment",
-        element: <Cr_Establishment />,
-      },
-      {
-        path: "/sign-up-step/crew-location",
-        element: <Cr_ServiceLocation />,
-      },
-      {
-        path: "/sign-up-step/crew-contact-details",
-        element: <Cr_ContactDetails />,
-      },
-      {
-        path: "/sign-up-step/crew-service",
-        element: <Cr_Services />,
-      },
-      {
-        path: "/sign-up-step/crew-advert",
-        element: <Cr_Advert />,
-      },
+  //     //  crew role
+  //     {
+  //       path: "/crew-establishment",
+  //       element: <Cr_Establishment />,
+  //     },
+  //     {
+  //       path: "/crew-location",
+  //       element: <Cr_ServiceLocation />,
+  //     },
+  //     {
+  //       path: "/crew-contact-details",
+  //       element: <Cr_ContactDetails />,
+  //     },
+  //     {
+  //       path: "/crew-service",
+  //       element: <Cr_Services />,
+  //     },
+  //     {
+  //       path: "/crew-advert",
+  //       element: <Cr_Advert />,
+  //     },
 
-      //   boat services role
-      {
-        path: "/sign-up-step/boat-services-establishment",
-        element: <BS_Establishment />,
-      },
-      {
-        path: "/sign-up-step/service-location",
-        element: <BS_ServiceLocation />,
-      },
-      {
-        path: "/sign-up-step/contact-details",
-        element: <BS_ContactDetails />,
-      },
-      {
-        path: "/sign-up-step/boat-service",
-        element: <BS_Services />,
-      },
-      {
-        path: "/sign-up-step/advert",
-        element: <BS_Advert />,
-      },
-    ],
-  },
+  //     //   boat services role
+  //     {
+  //       path: "/boat-services-establishment",
+  //       element: <BS_Establishment />,
+  //     },
+  //     {
+  //       path: "/service-location",
+  //       element: <BS_ServiceLocation />,
+  //     },
+  //     {
+  //       path: "/contact-details",
+  //       element: <BS_ContactDetails />,
+  //     },
+  //     {
+  //       path: "/boat-service",
+  //       element: <BS_Services />,
+  //     },
+  //     {
+  //       path: "/advert",
+  //       element: <BS_Advert />,
+  //     },
+  //   ],
+  // },
 ]);
 
 export default Route;

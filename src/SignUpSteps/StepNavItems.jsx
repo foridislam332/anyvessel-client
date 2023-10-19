@@ -8,7 +8,7 @@ const StepNavItems = () => {
   const listItemFc = (route, text) => {
     return (
       <li className="w-full">
-        <ActiveLink to={`/sign-up-step/${route}`}>
+        <ActiveLink to={`/${route}`}>
           <p className="hidden md:inline text-sm"> {text} </p>
         </ActiveLink>
       </li>
@@ -23,7 +23,7 @@ const StepNavItems = () => {
             {/* only boat route */}
             {currentUser?.role === "boat" && (
               <>
-                {listItemFc("charter", "CHARTER COMPANY")}
+                {listItemFc("", "CHARTER COMPANY")}
 
                 {listItemFc("vessel", "Vessel")}
 
