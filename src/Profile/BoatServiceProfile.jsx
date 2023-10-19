@@ -1,24 +1,20 @@
+
 import { MdAccountCircle } from "react-icons/md";
-import { BsBoxArrowUpRight, BsFillFlagFill, BsTelephoneOutbound } from "react-icons/bs";
+import { BsBoxArrowUpRight, BsFillFlagFill, BsPencil, BsPencilFill, BsTelephoneOutbound } from "react-icons/bs";
 import { BiCalendar } from "react-icons/bi";
-import { LuLanguages } from "react-icons/lu";
+import { TbCornerRightUp } from "react-icons/tb";
 import { MdOutlineEmail } from "react-icons/md";
-import useProfileData from "../hooks/useProfileData";
-const BoatProfile = ({ user }) => {
-    const { profileData } = useProfileData();
-    const { surname,
-        email,
-        fullName,
-        description,
+
+
+const BoatServiceProfile = ({ user }) => {
+    const { fullName,
+        surName,
         gender,
-        languages,
-        nationality,
         phone,
-        romance,
-        picture,
+        email,
+        password,
         role,
-        identityPhoto,
-        birthDay } = user;
+        birthDay } = user
 
     const calculateAge = (birthDate) => {
         const today = new Date();
@@ -43,19 +39,15 @@ const BoatProfile = ({ user }) => {
             return today.getFullYear() - birthYear;
         }
     }
-
     const age = calculateAge(birthDay);
-
-    console.log(age)
-
     return (
         <section>
             <div>
-                <img className="w-full h-[400px]" src={identityPhoto} alt="" />
+                <img className="w-full h-[400px]" src={user.identityPhoto ? identityPhoto : "https://i.ibb.co/jZNpRKn/parts-service-header.jpg"} alt="" />
                 <div className="flex justify-between mr-3">
                     <div className="flex gap-2">
                         <div>
-                            <img src={picture} className="w-10 h-10 rounded-full" alt="" />
+                            <img src={user.picture ? picture : "https://i.ibb.co/P5wMksM/images.jpg"} className="w-10 h-10 rounded-full" alt="" />
                         </div>
                         <div>
                             <div className="flex gap-2">
@@ -80,12 +72,12 @@ const BoatProfile = ({ user }) => {
 
 
                     </div>
-                    <img className="w-40 h-40 rounded-full hover:scale-105 border-2 border-red-700  -mt-24" src={picture} alt="" />
+                    <img className="w-40 h-40 rounded-full hover:scale-105 border-2 border-red-700  -mt-24" src={user.picture ? picture : "https://i.ibb.co/P5wMksM/images.jpg"} alt="" />
                 </div>
 
                 <div className="flex gap-3 py-2 items-center">
-                    <p className=" flex items-center gap-2 border-2 border-midBlue px-4 py-2 duration-300 rounded-full hover:bg-transparent hover:shadow-lg hover:border-0"><BsFillFlagFill />  <span className="text-xs "> {nationality}</span></p>
-                    <p className=" flex items-center gap-2 border-2 border-midBlue px-4 py-2 duration-300 rounded-full hover:bg-transparent hover:shadow-lg hover:border-0"><LuLanguages />  <span className="text-xs "> {languages}</span></p>
+                    {/* <p className=" flex items-center gap-2 border-2 border-midBlue px-4 py-2 duration-300 rounded-full hover:bg-transparent hover:shadow-lg hover:border-0"><BsFillFlagFill />  <span className="text-xs "> {nationality}</span></p> */}
+                    {/* <p className=" flex items-center gap-2 border-2 border-midBlue px-4 py-2 duration-300 rounded-full hover:bg-transparent hover:shadow-lg hover:border-0"><LuLanguages />  <span className="text-xs "> {languages}</span></p> */}
                 </div>
                 <div className="flex gap-3 py-2 items-center">
                     <p className=" flex items-center gap-2 border-2 border-midBlue px-4 py-2 duration-300 rounded-full hover:bg-transparent hover:shadow-lg hover:border-0"><MdOutlineEmail />  <span className="text-xs "> {email}</span></p>
@@ -93,23 +85,27 @@ const BoatProfile = ({ user }) => {
                 </div>
                 <div className="mt-4 shadow-md rounded-lg p-5">
                     <p className="underline mb-2">About Me :</p>
-                    {description}
+                    {/* {description} */}
                 </div>
 
                 {/* TODO  */}
-                <div  className="mt-4 shadow-md rounded-lg p-5">
-                       <p className="flex items-center gap-1"><BiCalendar /> <span className="uppercase">Available</span> <span className="">currently unavailable</span> <span className="text-xs">since {birthDay}</span> </p>
+                <div className="mt-4 shadow-md rounded-lg p-5">
+                    <p className="flex items-center gap-1"><BiCalendar /> <span className="uppercase">Available</span> <span className="">currently unavailable</span> <span className="text-xs">since {birthDay}</span> </p>
 
                 </div>
-             
-                <div  className="mt-4 shadow-md rounded-lg p-5">
-                    <p className="">Unavailable - Found a Crew</p>
+
+                <div className="mt-4 shadow-md rounded-lg p-5">
+                    <p className="flex items-center">Available To Service Boat <TbCornerRightUp className="text-green-500 text-2xl"/></p>
                 </div>
-                
+
                 {/* <p className="  flex items-center">SY - Sailing Yacht (Sloop) , 12.2m(40 ft) , sail , catamarna , <span className="font-semibold flex items-center">Catana <BsBoxArrowUpRight /> 40</span></p> */}
+                <div className="mt-4 shadow-md rounded-lg p-5 w-52  flex items-center justify-center mx-auto gap-2">
+
+                    <button className="">Update Profile</button><BsPencilFill className="text-2xl" />
+                </div>
             </div>
         </section>
     );
 };
 
-export default BoatProfile;
+export default BoatServiceProfile;

@@ -1,4 +1,6 @@
 import { Helmet } from "react-helmet";
+
+// internal files
 import AboutAnyvessel from "../sections/AboutAnyvessel";
 import BoatSearch from "../sections/BoatSearch";
 import FeaturedBoats from "../sections/FeaturedBoats";

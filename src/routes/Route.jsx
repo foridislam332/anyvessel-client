@@ -17,7 +17,6 @@ import Location from "../Dashboard/DashSection/Location";
 import Vessel from "../Dashboard/DashSection/Vessel";
 import Dashboard from "../Dashboard/Dashboard";
 import MainProfile from "../Profile/Profile";
-import BoatSellDetails from "../components/BoatDetails";
 import Main from "../layouts/Main";
 import Register from "../layouts/Register";
 import About_Us from "../pages/About_Us";
@@ -57,7 +56,7 @@ const Route = createBrowserRouter([
       {
         path: "/crew-details/:id",
         element: <CrewDetails />,
-        loader: ({ params }) => fetch(`http://localhost:5000/crew-data/${params.id}`)
+        loader: ({ params }) => fetch(`${baseURL}/crew-data/${params.id}`),
       },
       {
         path: "/boat_search",

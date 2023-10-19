@@ -3,22 +3,19 @@ import { BsBoxArrowUpRight, BsFillFlagFill, BsTelephoneOutbound } from "react-ic
 import { BiCalendar } from "react-icons/bi";
 import { LuLanguages } from "react-icons/lu";
 import { MdOutlineEmail } from "react-icons/md";
-import useProfileData from "../hooks/useProfileData";
-const BoatProfile = ({ user }) => {
-    const { profileData } = useProfileData();
-    const { surname,
+
+
+const CrewProfile = ({user}) => {
+
+    const {
+        surname,
         email,
         fullName,
-        description,
         gender,
-        languages,
-        nationality,
         phone,
-        romance,
-        picture,
         role,
-        identityPhoto,
-        birthDay } = user;
+        birthDay
+      }=user
 
     const calculateAge = (birthDate) => {
         const today = new Date();
@@ -51,11 +48,11 @@ const BoatProfile = ({ user }) => {
     return (
         <section>
             <div>
-                <img className="w-full h-[400px]" src={identityPhoto} alt="" />
+            <img className="w-full h-[400px]" src={user.identityPhoto ? identityPhoto : "https://i.ibb.co/jZNpRKn/parts-service-header.jpg"} alt="" />
                 <div className="flex justify-between mr-3">
                     <div className="flex gap-2">
                         <div>
-                            <img src={picture} className="w-10 h-10 rounded-full" alt="" />
+                        <img src={user.picture ? picture : "https://i.ibb.co/P5wMksM/images.jpg"} className="w-10 h-10 rounded-full" alt="" />
                         </div>
                         <div>
                             <div className="flex gap-2">
@@ -80,12 +77,12 @@ const BoatProfile = ({ user }) => {
 
 
                     </div>
-                    <img className="w-40 h-40 rounded-full hover:scale-105 border-2 border-red-700  -mt-24" src={picture} alt="" />
+                    <img className="w-40 h-40 rounded-full hover:scale-105 border-2 border-red-700  -mt-24" src={user.picture ? picture : "https://i.ibb.co/P5wMksM/images.jpg"} alt="" />
                 </div>
 
                 <div className="flex gap-3 py-2 items-center">
-                    <p className=" flex items-center gap-2 border-2 border-midBlue px-4 py-2 duration-300 rounded-full hover:bg-transparent hover:shadow-lg hover:border-0"><BsFillFlagFill />  <span className="text-xs "> {nationality}</span></p>
-                    <p className=" flex items-center gap-2 border-2 border-midBlue px-4 py-2 duration-300 rounded-full hover:bg-transparent hover:shadow-lg hover:border-0"><LuLanguages />  <span className="text-xs "> {languages}</span></p>
+                    <p className=" flex items-center gap-2 border-2 border-midBlue px-4 py-2 duration-300 rounded-full hover:bg-transparent hover:shadow-lg hover:border-0"><BsFillFlagFill />  <span className="text-xs "> {user.nationality?nationality : "N/A"}</span></p>
+                    <p className=" flex items-center gap-2 border-2 border-midBlue px-4 py-2 duration-300 rounded-full hover:bg-transparent hover:shadow-lg hover:border-0"><LuLanguages />  <span className="text-xs "> {user.languages?languages : "N/A"}</span></p>
                 </div>
                 <div className="flex gap-3 py-2 items-center">
                     <p className=" flex items-center gap-2 border-2 border-midBlue px-4 py-2 duration-300 rounded-full hover:bg-transparent hover:shadow-lg hover:border-0"><MdOutlineEmail />  <span className="text-xs "> {email}</span></p>
@@ -93,7 +90,7 @@ const BoatProfile = ({ user }) => {
                 </div>
                 <div className="mt-4 shadow-md rounded-lg p-5">
                     <p className="underline mb-2">About Me :</p>
-                    {description}
+                    {user.description?description:'N/A'}
                 </div>
 
                 {/* TODO  */}
@@ -110,6 +107,13 @@ const BoatProfile = ({ user }) => {
             </div>
         </section>
     );
+
+
+    return (
+        <div>
+            
+        </div>
+    );
 };
 
-export default BoatProfile;
+export default CrewProfile;

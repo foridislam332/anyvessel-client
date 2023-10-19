@@ -49,7 +49,7 @@ const BoatServicesRegister = () => {
       email,
       password,
       role: "boatService",
-      birthDay: { day, month, year },
+      birthDay: `${day} , ${month} , ${year}`,
     };
 
     createUser(email, password)

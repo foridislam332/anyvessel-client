@@ -27,7 +27,7 @@ const Main = () => {
         <Outlet />
       </main>
 
-      {/* {location.pathname !== "/dashboard" && <Footer />} */}
+      {location.pathname !== "/dashboard" && <Footer />}
 
       <ToastContainer />
     </>

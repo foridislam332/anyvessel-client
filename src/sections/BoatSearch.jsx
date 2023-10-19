@@ -12,15 +12,18 @@ const BoatSearch = () => {
   const [length, setLength] = useState(0);
   const [price, setPrice] = useState(0);
 
+  // hook form
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
+
+  // handle submit data
   const onSubmit = (data) => console.log(data);
 
   return (
-    <section className="relative -mt-3">
+    <section className="relative sm:-mt-48 md:-mt-28">
       <div className="container">
         <form
           onSubmit={handleSubmit(onSubmit)}
@@ -37,7 +40,7 @@ const BoatSearch = () => {
                 <option value="">Boat Type 1</option>
                 <option value="">Boat Type 2</option>
               </select>
-              <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+              <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr -3">
                 <img src={AngleDown} alt="Custom Arrow" className="w-5" />
               </div>
             </div>
