@@ -56,8 +56,7 @@ const Route = createBrowserRouter([
       {
         path: "/crew-details/:id",
         element: <CrewDetails />,
-        loader: async ({ params }) =>
-          await fetch(`${baseURL}/crew-data/${params.id}`),
+        loader: ({ params }) => fetch(`${baseURL}/crew-data/${params.id}`),
       },
       {
         path: "/boat_search",

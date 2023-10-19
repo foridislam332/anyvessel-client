@@ -6,6 +6,11 @@
   margin: 0;
   font-family: 'Poppins', sans-serif;
   font-weight: 400;
+  transition: 0.4s;
+}
+
+body {
+  min-width: 310px;
 }
 
 /* primary button styles */

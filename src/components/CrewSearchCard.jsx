@@ -5,9 +5,12 @@ import { Link } from "react-router-dom";
 const CrewSearchCard = ({ service }) => {
   const { _id, establishment, location, services, userId, advert } = service;
 
-  console.log({ establishment, location, services, userId, advert });
+  // console.log({ establishment, location, services, userId, advert });
   const status = true;
-  let description = advert?.advert && advert?.advert?.slice(0, 100);
+  let description =
+    advert?.advert?.length > 99
+      ? advert?.advert?.slice(0, 100) + "...."
+      : advert?.advert;
 
   return (
     <>
@@ -39,7 +42,6 @@ const CrewSearchCard = ({ service }) => {
                 <CiRollingSuitcase />
               </span>
               10 years
-              {/* {crewmember.experience} */}
             </p>
           </div>
           <p className="text-darkBlue flex items-center gap-1">
@@ -50,13 +52,15 @@ const CrewSearchCard = ({ service }) => {
           </p>
         </div>
 
-        <article className="px-4">
-          {advert && (
+        <article className="px-4 h-18 md:h-20">
+          {advert.advert !== null ? (
             <p
               dangerouslySetInnerHTML={{
                 __html: description,
               }}
             ></p>
+          ) : (
+            "N/A"
           )}
         </article>
 
