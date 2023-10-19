@@ -20,7 +20,9 @@ const BoatSearch = () => {
   } = useForm();
 
   // handle submit data
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (data) => {
+    // console.log(data);
+  };
 
   return (
     <section className="relative sm:-mt-48 md:-mt-28">

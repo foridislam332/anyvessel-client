@@ -7,10 +7,7 @@ import useAllBoatSailingPost from "../../hooks/useAllBoatSailingPost";
 
 const Location = () => {
   const { boatSellPost } = useAllBoatSailingPost();
-  console.log(boatSellPost)
 
-
-  // console.log(boatSellPost[0]?._id)
   const [Axios] = useAxios();
   const { currentUser } = useCurrentUser();
 
@@ -27,7 +24,7 @@ const Location = () => {
   }
 
   const newPostID = boatSellPost[boatSellPost.length -1]?._id
-  console.log(newPostID)
+
   const onSubmit = (data) => {
     const newData = {
       newPostID: newPostID,
@@ -38,18 +35,16 @@ const Location = () => {
       boarding_city: data.boarding_city,
       sailing_city: data.sailing_city,
     };
-    console.log(newData);
+    
     Axios.patch("boatSailing-location", newData)
       .then((res) => {
-        console.log("response - ", res);
-
         if (res?.status === 200) {
           toast.success("Boat Sailing location update successful!");
         }
       })
       .catch((err) => {
         toast.error("Somethings else!");
-        console.log(err);
+        // console.log(err);
       });
   };
 

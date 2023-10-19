@@ -42,7 +42,7 @@ const Cr_ServiceLocation = () => {
       })
       .catch((err) => {
         toast.error("Somethings else!");
-        console.log(err);
+        // console.log(err); 
       });
   };
 

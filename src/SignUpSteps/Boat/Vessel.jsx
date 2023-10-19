@@ -111,7 +111,10 @@ const Vessel = () => {
           toast.success("Boat Sailing post already submitted!");
         }
       })
-      .catch((err) => console.log(err));
+        .catch((err) => {
+          toast.error("Something Wrong!");
+        // console.log(err)
+      });
   };
   return (
     <section className="p-5">

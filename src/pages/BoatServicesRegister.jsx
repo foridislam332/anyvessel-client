@@ -70,7 +70,7 @@ const BoatServicesRegister = () => {
         );
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
         toast.error("Something Wrong!");
       });
   };

@@ -35,7 +35,7 @@ const Cr_Services = () => {
       })
       .catch((err) => {
         toast.error("Somethings else!");
-        console.log(err);
+        // console.log(err);
       });
   };
 

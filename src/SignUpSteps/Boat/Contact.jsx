@@ -21,7 +21,7 @@ const Contact = () => {
     return <h2>Loading...</h2>;
   }
   const newPostID = boatSellPost[boatSellPost.length - 1]?._id;
-  console.log(newPostID);
+
   const onSubmit = (data) => {
     const newData = {
       newPostID: newPostID,
@@ -32,18 +32,16 @@ const Contact = () => {
       seller_Number: data.seller_Number,
       seller_skype: data.seller_skype,
     };
-    console.log(newData);
+
     Axios.patch("boatSailing-contact", newData)
       .then((res) => {
-        console.log("response - ", res);
-
         if (res?.status === 200) {
           toast.success("Boat Sailing location update successful!");
         }
       })
       .catch((err) => {
         toast.error("Somethings else!");
-        console.log(err);
+        // console.log(err);
       });
   };
   return (

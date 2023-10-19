@@ -11,7 +11,7 @@ const FilterSearch = ({ filteredData, setFilteredData, originalData }) => {
   } = useForm();
 
   const onSubmit = (data) => {
-    console.log("onSubmit ", data);
+    // console.log("onSubmit ", data);
   };
 
   const searchText = watch("searchText");

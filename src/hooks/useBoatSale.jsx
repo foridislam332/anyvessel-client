@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import useAxios from "./useAxios";
+import { toast } from "react-toastify";
 
 const useBoatSale = () => {
   const [Axios] = useAxios();
@@ -8,7 +9,10 @@ const useBoatSale = () => {
   useEffect(() => {
     Axios(`boat-sale-data`)
       .then((res) => setAllBoatSaleData(res?.data))
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        toast.error("Something Wrong!");
+        // console.log(err)
+      });
   }, []);
 
   return { allBoatSaleData };

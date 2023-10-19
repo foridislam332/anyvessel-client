@@ -46,8 +46,6 @@ const BoatProfile = ({ user }) => {
 
     const age = calculateAge(birthDay);
 
-    console.log(age)
-
     return (
         <section>
             <div>

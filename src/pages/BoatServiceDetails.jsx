@@ -1,5 +1,5 @@
 import { HiOutlineLocationMarker } from "react-icons/hi";
-import { Link, useLoaderData } from "react-router-dom";
+import { useLoaderData } from "react-router-dom";
 import { toast } from "react-toastify";
 import SectionTitle from "../components/SectionTitle";
 
@@ -68,19 +68,19 @@ const BoatServiceDetails = () => {
                 </div>
 
                 <div>
-                  <Link
+                  {/* <Link
                     // to={``}
                     className="font-sm py-[9px] px-4 bg-yellow rounded-[50px] hover:bg-blue shadow-md hover:shadow-3xl hover:text-white duration-300"
                   >
                     {" "}
                     View Profile{" "}
-                  </Link>
+                  </Link> */}
                 </div>
               </div>
 
               {/* services */}
               <div className="p-4 shadow-md rounded-md mt-2">
-                <h3 className="text-lg font-bold"> Services : </h3>
+                <h3 className="text-lg font-semibold"> Services : </h3>
 
                 <ul className="list-disc pl-4">
                   {arrangementsAndDeliveries && (
@@ -158,7 +158,7 @@ const BoatServiceDetails = () => {
                   {others && (
                     <li>
                       <p>
-                        <span> others: </span>
+                        <span className="font-semibold"> others: </span>
                         {others}
                       </p>
                     </li>

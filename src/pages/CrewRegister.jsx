@@ -11,6 +11,7 @@ import user from "../assets/images/user2.png";
 // internal files
 import useAuth from "../hooks/useAuth";
 import useAxios from "../hooks/useAxios";
+import { toast } from "react-toastify";
 
 const CrewRegister = () => {
   const [Axios] = useAxios();
@@ -52,7 +53,8 @@ const CrewRegister = () => {
         );
       })
       .catch((err) => {
-        console.log(err);
+        toast.error("Something Wrong!");
+        // console.log(err);
       });
   };
 

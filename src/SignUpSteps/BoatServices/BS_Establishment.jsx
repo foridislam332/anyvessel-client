@@ -77,7 +77,10 @@ const BS_Establishment = () => {
           });
         }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        toast.error("Somethings else!");
+        // console.log(err);
+      });
   };
 
   //   Picture upload

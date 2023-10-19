@@ -79,7 +79,10 @@ const Cr_Establishment = () => {
           navigate("/sign-up-step/crew-location", { replace: true });
         }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        toast.error("Somethings else!");
+        // console.log(err);
+      });
   };
 
   //   Picture upload

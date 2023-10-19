@@ -109,6 +109,7 @@ const BoatRegister = () => {
         });
       })
       .catch((err) => {
+        toast.error("Something Wrong!");
         console.log(err);
       });
   };
