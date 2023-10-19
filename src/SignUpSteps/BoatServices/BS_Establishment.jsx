@@ -5,14 +5,13 @@ import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 // icons image
-import user2 from "../../../assets/images/user-3.png";
+import user2 from "../../assets/images/user-3.png";
 
 // internal file
-import useAuth from "../../../hooks/useAuth";
-import useAxios from "../../../hooks/useAxios";
-import useCurrentUser from "../../../hooks/useCurrentUser";
+import useAxios from "../../hooks/useAxios";
+import useCurrentUser from "../../hooks/useCurrentUser";
 
-const Cr_Establishment = () => {
+const BS_Establishment = () => {
   const [Axios] = useAxios();
   const image_hosting_token = import.meta.env.VITE_Image_Upload_Token;
   const image_hosting_url = `https://api.imgbb.com/1/upload?key=${image_hosting_token}`;
@@ -70,14 +69,12 @@ const Cr_Establishment = () => {
       advert: { advert: null },
     };
 
-    Axios.post("crew-data", newData)
+    Axios.post("boat-services-data", newData)
       .then((res) => {
         if (res?.data?.insertedId) {
-          navigate("/crew-sign-up-step/crew-location", { replace: true });
-        }
-
-        if (res?.status === 201 || res?.status === 200) {
-          navigate("/crew-sign-up-step/crew-location", { replace: true });
+          navigate("/sign-up-step/service-location", {
+            replace: true,
+          });
         }
       })
       .catch((err) => console.log(err));
@@ -141,7 +138,9 @@ const Cr_Establishment = () => {
   return (
     <div className="bg-white bg-opacity-90 px-5 sm:px-10 pb-10 md:px-[93px] md:pb-[30px] mt-6 rounded-[10px]">
       <div className="max-w-[715px] mx-auto text-center mb-6">
-        <h2 className="text-lightBlue text-[19px]">Crew Member</h2>
+        <h2 className="text-lightBlue text-[19px]">
+          BOAT SERVICES ESTABLISHMENT
+        </h2>
       </div>
 
       {/* form */}
@@ -149,11 +148,11 @@ const Cr_Establishment = () => {
         <div className="flex flex-col md:gap-x-[37px] gap-y-5 text-sm">
           {/* Name of the owner */}
           <label
-            htmlFor="name_owner"
+            htmlFor="Name_owner"
             className="flex items-center border-midBlue border rounded-[10px] overflow-hidden pr-2"
           >
             <input
-              id="name_owner"
+              id="Name_owner"
               placeholder="Name of the owner"
               {...register("ownerName")}
               className="w-full focus:outline-none border-none p-[10px] text-darkBlue placeholder:text-darkBlue"
@@ -282,7 +281,7 @@ const Cr_Establishment = () => {
             type="submit"
             className="text-white text-sm font-light bg-blue bg-opacity-90 px-7 md:px-14 py-[9px] rounded-lg hover:bg-transparent hover:text-blue border border-blue duration-300"
           >
-            Next
+            Confirm
           </button>
 
           <Link
@@ -297,4 +296,4 @@ const Cr_Establishment = () => {
   );
 };
 
-export default Cr_Establishment;
+export default BS_Establishment;

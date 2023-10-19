@@ -3,11 +3,11 @@ import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 // icons image
-import user2 from "../../../assets/images/user-3.png";
+import user2 from "../../assets/images/user-3.png";
 
 // internal file
-import useAuth from "../../../hooks/useAuth";
-import useAxios from "../../../hooks/useAxios";
+import useAuth from "../../hooks/useAuth";
+import useAxios from "../../hooks/useAxios";
 
 const BS_Services = () => {
   const { user } = useAuth();
@@ -28,10 +28,14 @@ const BS_Services = () => {
 
     Axios.patch("boat-services-data-service", newData)
       .then((res) => {
-        console.log("response - ", res);
+        navigate("/sign-up-step/advert", {
+          replace: true,
+        });
 
         if (res?.status === 200) {
-          toast.success("Boat services location submitted successful!");
+          navigate("/sign-up-step/advert", {
+            replace: true,
+          });
         }
       })
       .catch((err) => {

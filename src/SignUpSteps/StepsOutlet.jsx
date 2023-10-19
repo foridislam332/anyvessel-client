@@ -1,9 +1,8 @@
-import React from "react";
 import { Outlet } from "react-router-dom";
 import BannerBg from "../assets/images/hero-bg.png";
-import DashboardNavItems from "./DashboardNavItems";
+import StepNavItems from "./StepNavItems";
 
-const Dashboard = () => {
+const StepsOutlet = () => {
   // const {user}=useAuth()
   // console.log(user)
   return (
@@ -14,7 +13,7 @@ const Dashboard = () => {
       <div className="container grid grid-cols-11 gap-8">
         <div className="col-span-8 ">
           {/* Sidebar */}
-          <DashboardNavItems />
+          <StepNavItems />
 
           {/* Outlet */}
           <main className="bg-white p-2 mt-5">
@@ -27,4 +26,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default StepsOutlet;

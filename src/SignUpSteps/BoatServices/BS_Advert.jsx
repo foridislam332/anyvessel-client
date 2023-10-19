@@ -6,8 +6,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 // internal file
-import useAuth from "../../../hooks/useAuth";
-import useAxios from "../../../hooks/useAxios";
+import useAuth from "../../hooks/useAuth";
+import useAxios from "../../hooks/useAxios";
 
 // text editor module
 const modules = {
@@ -42,7 +42,7 @@ const BS_Advert = () => {
     Axios.patch("boat-services-data-advert", newData)
       .then((res) => {
         if (res?.status === 200) {
-          navigate("/profile");
+          navigate("/profile", { replace: true });
           toast.success("Boat services location submitted successful!");
         }
       })

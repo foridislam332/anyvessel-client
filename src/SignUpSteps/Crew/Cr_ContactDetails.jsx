@@ -3,11 +3,11 @@ import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 // icons image
-import user2 from "../../../assets/images/user-3.png";
+import user2 from "../../assets/images/user-3.png";
 
 // internal file
-import useAuth from "../../../hooks/useAuth";
-import useAxios from "../../../hooks/useAxios";
+import useAuth from "../../hooks/useAuth";
+import useAxios from "../../hooks/useAxios";
 
 const Cr_ContactDetails = () => {
   const { user } = useAuth();
@@ -20,6 +20,7 @@ const Cr_ContactDetails = () => {
     control,
     formState: { errors },
   } = useForm();
+  
   const onSubmit = (data) => {
     console.log(data);
 
@@ -31,7 +32,7 @@ const Cr_ContactDetails = () => {
     Axios.patch("crew-data-contact", newData)
       .then((res) => {
         if (res?.status === 200) {
-          navigate("/crew-sign-up-step/crew-service", { replace: true });
+          navigate("/sign-up-step/crew-service", { replace: true });
         }
       })
       .catch((err) => {

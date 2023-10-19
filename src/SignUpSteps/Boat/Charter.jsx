@@ -51,6 +51,7 @@ const Charter = () => {
       console.error("Error uploading image:", error);
     }
   };
+
   return (
     <section className="p-5">
       <div>
@@ -60,6 +61,7 @@ const Charter = () => {
               Add new Post's
             </button>
           </div>
+
           <div className="flex gap-8 py-5">
             <div className="relative">
               <img

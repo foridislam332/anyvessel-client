@@ -5,18 +5,16 @@ import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 // icons image
-import user2 from "../../../assets/images/user-3.png";
+import user2 from "../../assets/images/user-3.png";
 
 // internal file
-import useAuth from "../../../hooks/useAuth";
-import useAxios from "../../../hooks/useAxios";
-import useCurrentUser from "../../../hooks/useCurrentUser";
+import useAxios from "../../hooks/useAxios";
+import useCurrentUser from "../../hooks/useCurrentUser";
 
-const BS_Establishment = () => {
+const Cr_Establishment = () => {
   const [Axios] = useAxios();
   const image_hosting_token = import.meta.env.VITE_Image_Upload_Token;
   const image_hosting_url = `https://api.imgbb.com/1/upload?key=${image_hosting_token}`;
-  const { createUser, upDateProfile } = useAuth();
   const { currentUser } = useCurrentUser();
   const navigate = useNavigate();
   const [businessLogoUpload, setBusinessLogoUpload] = useState(null);
@@ -71,14 +69,14 @@ const BS_Establishment = () => {
       advert: { advert: null },
     };
 
-    Axios.post("boat-services-data", newData)
+    Axios.post("crew-data", newData)
       .then((res) => {
         if (res?.data?.insertedId) {
-          toast.success("Boat services Establishment submit Successful!");
+          navigate("/crew-sign-up-step/crew-location", { replace: true });
         }
 
-        if (res?.status === 201) {
-          toast.success("Boat services Establishment already submitted!");
+        if (res?.status === 201 || res?.status === 200) {
+          navigate("/crew-sign-up-step/crew-location", { replace: true });
         }
       })
       .catch((err) => console.log(err));
@@ -142,9 +140,7 @@ const BS_Establishment = () => {
   return (
     <div className="bg-white bg-opacity-90 px-5 sm:px-10 pb-10 md:px-[93px] md:pb-[30px] mt-6 rounded-[10px]">
       <div className="max-w-[715px] mx-auto text-center mb-6">
-        <h2 className="text-lightBlue text-[19px]">
-          BOAT SERVICES ESTABLISHMENT
-        </h2>
+        <h2 className="text-lightBlue text-[19px]">Crew Member</h2>
       </div>
 
       {/* form */}
@@ -152,11 +148,11 @@ const BS_Establishment = () => {
         <div className="flex flex-col md:gap-x-[37px] gap-y-5 text-sm">
           {/* Name of the owner */}
           <label
-            htmlFor="Name_owner"
+            htmlFor="name_owner"
             className="flex items-center border-midBlue border rounded-[10px] overflow-hidden pr-2"
           >
             <input
-              id="Name_owner"
+              id="name_owner"
               placeholder="Name of the owner"
               {...register("ownerName")}
               className="w-full focus:outline-none border-none p-[10px] text-darkBlue placeholder:text-darkBlue"
@@ -285,7 +281,7 @@ const BS_Establishment = () => {
             type="submit"
             className="text-white text-sm font-light bg-blue bg-opacity-90 px-7 md:px-14 py-[9px] rounded-lg hover:bg-transparent hover:text-blue border border-blue duration-300"
           >
-            Confirm
+            Next
           </button>
 
           <Link
@@ -300,4 +296,4 @@ const BS_Establishment = () => {
   );
 };
 
-export default BS_Establishment;
+export default Cr_Establishment;
