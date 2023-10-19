@@ -6,8 +6,8 @@ import { toast } from "react-toastify";
 // icons image
 
 // internal file
-import useAuth from "../../../hooks/useAuth";
-import useAxios from "../../../hooks/useAxios";
+import useAuth from "../../hooks/useAuth";
+import useAxios from "../../hooks/useAxios";
 
 const Cr_ServiceLocation = () => {
   const { user } = useAuth();
@@ -35,7 +35,7 @@ const Cr_ServiceLocation = () => {
     Axios.patch("crew-data-location", newData)
       .then((res) => {
         if (res?.status === 200) {
-          navigate("/crew-sign-up-step/crew-contact-details", {
+          navigate("/sign-up-step/crew-contact-details", {
             replace: true,
           });
         }

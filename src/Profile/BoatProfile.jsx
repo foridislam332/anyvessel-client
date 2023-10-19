@@ -51,11 +51,11 @@ const BoatProfile = ({ user }) => {
     return (
         <section>
             <div>
-                <img className="w-full h-[400px]" src={identityPhoto} alt="" />
+                <img className="w-full h-[400px]" src={picture} alt="" />
                 <div className="flex justify-between mr-3">
                     <div className="flex gap-2">
                         <div>
-                            <img src={picture} className="w-10 h-10 rounded-full" alt="" />
+                            <img src={identityPhoto} className="w-10 h-10 rounded-full" alt="" />
                         </div>
                         <div>
                             <div className="flex gap-2">
@@ -80,7 +80,7 @@ const BoatProfile = ({ user }) => {
 
 
                     </div>
-                    <img className="w-40 h-40 rounded-full hover:scale-105 border-2 border-red-700  -mt-24" src={picture} alt="" />
+                    <img className="w-40 h-40 rounded-full hover:scale-105 border-2 border-red-700  -mt-24" src={identityPhoto} alt="" />
                 </div>
 
                 <div className="flex gap-3 py-2 items-center">

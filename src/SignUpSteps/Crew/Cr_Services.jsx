@@ -3,11 +3,11 @@ import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 // icons image
-import user2 from "../../../assets/images/user-3.png";
+import user2 from "../../assets/images/user-3.png";
 
 // internal file
-import useAuth from "../../../hooks/useAuth";
-import useAxios from "../../../hooks/useAxios";
+import useAuth from "../../hooks/useAuth";
+import useAxios from "../../hooks/useAxios";
 
 const Cr_Services = () => {
   const { user } = useAuth();
@@ -31,7 +31,7 @@ const Cr_Services = () => {
     // update server
     Axios.patch("crew-data-service", newData)
       .then((res) => {
-        navigate("/crew-sign-up-step/crew-advert", { replace: true });
+        navigate("/sign-up-step/crew-advert", { replace: true });
       })
       .catch((err) => {
         toast.error("Somethings else!");

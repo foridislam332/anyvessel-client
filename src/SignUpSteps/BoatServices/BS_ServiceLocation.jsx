@@ -6,8 +6,8 @@ import { toast } from "react-toastify";
 // icons image
 
 // internal file
-import useAuth from "../../../hooks/useAuth";
-import useAxios from "../../../hooks/useAxios";
+import useAuth from "../../hooks/useAuth";
+import useAxios from "../../hooks/useAxios";
 
 const BS_ServiceLocation = () => {
   const { user } = useAuth();
@@ -34,10 +34,10 @@ const BS_ServiceLocation = () => {
 
     Axios.patch("boat-services-data-location", newData)
       .then((res) => {
-        console.log("response - ", res);
-
         if (res?.status === 200) {
-          toast.success("Boat services location submitted successful!");
+          navigate("/sign-up-step/contact-details", {
+            replace: true,
+          });
         }
       })
       .catch((err) => {
