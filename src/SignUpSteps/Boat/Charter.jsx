@@ -99,8 +99,8 @@ const Charter = () => {
             <p>Photo Gallery</p>
             <div className="flex gap-2">
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2 w-auto lg:w-[800px] ">
-                {images.map((image) => (
-                  <div className="relative">
+                {images.map((image, i) => (
+                  <div key={i} className="relative">
                     <img className=" h-44 rounded-lg" src={image} alt="" />
                     <AiFillHeart className="text-3xl absolute top-1 right-2 text-white" />
                   </div>

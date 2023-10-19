@@ -1,8 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css'; // import the styles
+
 
 const Booking_Calender = () => {
     const { register, handleSubmit, control, formState: { errors } } = useForm();
+    const [selectedDate, setSelectedDate] = useState(null);
+    const handleDateChange = (date) => {
+        setSelectedDate(date);
+    };
+    console.log(selectedDate)
     return (
         <section>
             <form
@@ -12,7 +20,11 @@ const Booking_Calender = () => {
                 <div className="mb-6 grid grid-cols-12 gap-8">
 
                     <div className="col-span-6 ">
-                        calender
+                        <div>
+                            <h2>Date Picker Calendar</h2>
+                            <DatePicker selected={selectedDate} onChange={handleDateChange} />
+                        </div>
+
                     </div>
                     <div className="col-span-6 space-y-1">
                         <div>
