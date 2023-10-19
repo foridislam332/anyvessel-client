@@ -11,11 +11,10 @@ const FilterSearch = ({ filteredData, setFilteredData, originalData }) => {
   } = useForm();
 
   const onSubmit = (data) => {
-    console.log(data);
+    console.log("onSubmit ", data);
   };
 
   const searchText = watch("searchText");
-  console.log("searchText ", searchText);
 
   useEffect(() => {
     const searching = searchText ? searchText?.toLowerCase() : "";

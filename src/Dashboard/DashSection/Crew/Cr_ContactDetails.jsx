@@ -12,6 +12,8 @@ import useAxios from "../../../hooks/useAxios";
 const Cr_ContactDetails = () => {
   const { user } = useAuth();
   const [Axios] = useAxios();
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -28,10 +30,8 @@ const Cr_ContactDetails = () => {
 
     Axios.patch("crew-data-contact", newData)
       .then((res) => {
-        console.log("response - ", res);
-
         if (res?.status === 200) {
-          toast.success("Boat services location submitted successful!");
+          navigate("/crew-sign-up-step/crew-service", { replace: true });
         }
       })
       .catch((err) => {

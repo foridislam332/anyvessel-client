@@ -16,7 +16,6 @@ const Cr_Establishment = () => {
   const [Axios] = useAxios();
   const image_hosting_token = import.meta.env.VITE_Image_Upload_Token;
   const image_hosting_url = `https://api.imgbb.com/1/upload?key=${image_hosting_token}`;
-  const { createUser, upDateProfile } = useAuth();
   const { currentUser } = useCurrentUser();
   const navigate = useNavigate();
   const [businessLogoUpload, setBusinessLogoUpload] = useState(null);
@@ -71,16 +70,14 @@ const Cr_Establishment = () => {
       advert: { advert: null },
     };
 
-    console.log("new Data", newData);
-
     Axios.post("crew-data", newData)
       .then((res) => {
         if (res?.data?.insertedId) {
-          toast.success("Crew Establishment submit Successful!");
+          navigate("/crew-sign-up-step/crew-location", { replace: true });
         }
 
-        if (res?.status === 201) {
-          toast.success("Crew Establishment already submitted!");
+        if (res?.status === 201 || res?.status === 200) {
+          navigate("/crew-sign-up-step/crew-location", { replace: true });
         }
       })
       .catch((err) => console.log(err));
@@ -122,10 +119,9 @@ const Cr_Establishment = () => {
     }
   };
 
-  // 100 years
-  const yearsRange = Array.from({ length: 100 }, (_, i) => 1950 + i);
-
-  // 1 to 31 dates
+  // 1900 to 2025
+  const yearsRange = Array.from({ length: 126 }, (_, i) => 1900 + i);
+  // 1 to 31
   const daysRange = Array.from({ length: 31 }, (_, i) => 1 + i);
   const months = [
     "January",
@@ -286,7 +282,7 @@ const Cr_Establishment = () => {
             type="submit"
             className="text-white text-sm font-light bg-blue bg-opacity-90 px-7 md:px-14 py-[9px] rounded-lg hover:bg-transparent hover:text-blue border border-blue duration-300"
           >
-            Confirm
+            Next
           </button>
 
           <Link

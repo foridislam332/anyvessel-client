@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 // icons image
@@ -12,6 +12,7 @@ import useAxios from "../../../hooks/useAxios";
 const Cr_Services = () => {
   const { user } = useAuth();
   const [Axios] = useAxios();
+  const navigate = useNavigate();
 
   const {
     register,
@@ -30,9 +31,7 @@ const Cr_Services = () => {
     // update server
     Axios.patch("crew-data-service", newData)
       .then((res) => {
-        if (res?.status === 200) {
-          toast.success("Boat services location submitted successful!");
-        }
+        navigate("/crew-sign-up-step/crew-advert", { replace: true });
       })
       .catch((err) => {
         toast.error("Somethings else!");

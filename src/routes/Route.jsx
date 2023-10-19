@@ -29,9 +29,7 @@ import CrewDetails from "../pages/CrewDetails";
 import CrewRegister from "../pages/CrewRegister";
 import Crew_Search from "../pages/Crew_Search";
 import Home from "../pages/Home";
-import Profile from "../pages/Profile";
 import BoatSell from "../sections/BoatSell";
-import BoatSaleC from "../components/BoatSaleC";
 import RegisterCard from "../sections/RegisterCard";
 
 const baseURL = "http://localhost:5000";
@@ -63,6 +61,11 @@ const Route = createBrowserRouter([
         element: <Boat_Search />,
       },
       {
+        path: "/boat_search/:id",
+        element: <Boat_Search />,
+        loader: ({ params }) => fetch(`${baseURL}/boatDetails/${params.id}`),
+      },
+      {
         path: "/profile",
         element: <MainProfile />,
       },
@@ -83,10 +86,6 @@ const Route = createBrowserRouter([
         path: "/boat-service/:id",
         element: <BoatServiceDetails />,
         loader: ({ params }) => fetch(`${baseURL}/boat-service/${params.id}`),
-      },
-      {
-        path: "/profile",
-        element: <Profile />,
       },
       {
         path: "/dashboard",
@@ -120,23 +119,23 @@ const Route = createBrowserRouter([
 
           //  crew role
           {
-            path: "/dashboard/crew-establishment",
+            path: "/crew-sign-up-step/crew-establishment",
             element: <Cr_Establishment />,
           },
           {
-            path: "/dashboard/crew-location",
+            path: "/crew-sign-up-step/crew-location",
             element: <Cr_ServiceLocation />,
           },
           {
-            path: "/dashboard/crew-contact-details",
+            path: "/crew-sign-up-step/crew-contact-details",
             element: <Cr_ContactDetails />,
           },
           {
-            path: "/dashboard/crew-service",
+            path: "/crew-sign-up-step/crew-service",
             element: <Cr_Services />,
           },
           {
-            path: "/dashboard/crew-advert",
+            path: "/crew-sign-up-step/crew-advert",
             element: <Cr_Advert />,
           },
 

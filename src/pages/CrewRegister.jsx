@@ -1,4 +1,3 @@
-import axios from "axios";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -44,7 +43,7 @@ const CrewRegister = () => {
           (res) => {
             Axios.post("/crew", newData).then((data) => {
               if (data.status === 200) {
-                navigate("/dashboard/crew-establishment", {
+                navigate("/crew-sign-up-step/crew-establishment", {
                   replace: true,
                 });
               }
@@ -56,6 +55,25 @@ const CrewRegister = () => {
         console.log(err);
       });
   };
+
+  // 1900 to 2025
+  const yearsRange = Array.from({ length: 126 }, (_, i) => 1900 + i);
+  // 1 to 31
+  const daysRange = Array.from({ length: 31 }, (_, i) => 1 + i);
+  const months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
 
   return (
     <div className="bg-white bg-opacity-90 px-5 sm:px-10 py-10 md:px-[93px] md:py-[30px] mt-16 rounded-[10px]">
@@ -199,10 +217,12 @@ const CrewRegister = () => {
                   className="text-darkBlue border-b border-midBlue focus:outline-none focus:border-b focus:border-midBlue pr-1 sm:pr-3 py-[3px]"
                 >
                   <option value="">Year</option>
-                  <option value="2000">2000</option>
-                  <option value="2001">2001</option>
-                  <option value="2002">2002</option>
-                  <option value="2003">2003</option>
+                  {yearsRange &&
+                    yearsRange.map((y) => (
+                      <option key={y} value={y}>
+                        {y}
+                      </option>
+                    ))}
                 </select>
               </div>
 
@@ -213,12 +233,12 @@ const CrewRegister = () => {
                   className="text-darkBlue border-b border-midBlue focus:outline-none focus:border-b focus:border-midBlue pr-1 sm:pr-2 py-[3px]"
                 >
                   <option value="">Month</option>
-                  <option value="January">January</option>
-                  <option value="February">February</option>
-                  <option value="March">March</option>
-                  <option value="April">April</option>
-                  <option value="May">May</option>
-                  <option value="June	">June </option>
+                  {months &&
+                    months.map((m) => (
+                      <option key={m} value={m}>
+                        {m}
+                      </option>
+                    ))}
                 </select>
               </div>
 
@@ -229,12 +249,12 @@ const CrewRegister = () => {
                   className="text-darkBlue border-b border-midBlue focus:outline-none focus:border-b focus:border-midBlue pr-1 sm:pr-3 py-[3px]"
                 >
                   <option value="">Day</option>
-                  <option value="01">01</option>
-                  <option value="02">02</option>
-                  <option value="03">03</option>
-                  <option value="04">04</option>
-                  <option value="05">05</option>
-                  <option value="06">06</option>
+                  {daysRange &&
+                    daysRange.map((d) => (
+                      <option key={d} value={d}>
+                        {d}
+                      </option>
+                    ))}
                 </select>
               </div>
             </div>

@@ -10,7 +10,7 @@ import User from "../assets/images/user.png";
 const BoatCards = ({ boat }) => {
   const { _id, vessel, contact, location } = boat;
   const [modal, setModal] = useState(false);
-  console.log(boat);
+
   return (
     <>
       {/* single card */}

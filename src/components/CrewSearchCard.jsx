@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 const CrewSearchCard = ({ service }) => {
   const { _id, establishment, location, services, userId, advert } = service;
 
-  // console.log({ establishment, location, services, userId, advert });
   const status = true;
   let description =
     advert?.advert?.length > 99

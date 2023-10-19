@@ -5,7 +5,6 @@ import useBoatSale from "../hooks/useBoatSale";
 const Boat_Sale_S = () => {
   const { allBoatSaleData } = useBoatSale();
   const [saleData, setSaleDate] = useState(null);
-  console.log(" saleData ", saleData);
 
   useEffect(() => {
     setSaleDate(allBoatSaleData);

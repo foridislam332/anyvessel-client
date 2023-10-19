@@ -13,19 +13,6 @@ const BoatServiceCard = ({ service }) => {
     userId,
   } = service;
 
-  console.log("boat Service ", service);
-
-  console.log({
-    _id,
-    advert,
-    contact,
-    establishment,
-    location,
-    services,
-    userEmail,
-    userId,
-  });
-
   let description =
     advert?.advert?.length > 99
       ? advert?.advert?.slice(0, 100) + "...."

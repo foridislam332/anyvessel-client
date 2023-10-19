@@ -1,27 +1,40 @@
-import useCurrentUser from "../hooks/useCurrentUser";
+// internal files
+import BoatServiceProfile from "../components/Profile/BoatServiceProfile";
+import CrewProfile from "../components/Profile/CrewProfile";
+import useProfileData from "../hooks/useProfileData";
 import BoatProfile from "./BoatProfile";
 import BoatServiceProfile from "./BoatServiceProfile";
 import CrewProfile from "./CrewProfile";
 
-const Profile = () => {
-    const { currentUser } = useCurrentUser();
-    console.log(currentUser)
-    return (
-        <section className="py-20">
-            <div className="w-1/2 mx-auto ">
-                {
-                    currentUser?.role === "boat" && <BoatProfile user={currentUser} />
-                }
-                {
-                    currentUser?.role === "boatServices" && <BoatServiceProfile user={currentUser} />
-                }
-                {
-                    currentUser?.role === "crew" && <CrewProfile user={currentUser} />
-                }
-            </div>
+// local image
+import userBgImg from "../assets/images/user-bg.jpg";
 
-        </section>
-    );
+const Profile = () => {
+  const { profileData } = useProfileData();
+  console.log(profileData);
+
+  return (
+    <>
+      <section className="">
+        <div
+          style={{ backgroundImage: `url(${userBgImg})` }}
+          className="h-[300px] md:h-[350px] flex items-center justify-center bg-cover bg-center"
+        ></div>
+
+        <div>
+          {profileData?.role == "crew" ? (
+            <CrewProfile profileData={profileData} />
+          ) : profileData?.role == "boatServices" ? (
+            <BoatServiceProfile profileData={profileData} />
+          ) : (
+            profileData?.role == "boat" && (
+              <BoatProfile profileData={profileData} />
+            )
+          )}
+        </div>
+      </section>
+    </>
+  );
 };
 
 export default Profile;
