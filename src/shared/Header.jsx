@@ -44,13 +44,10 @@ const Header = () => {
       <nav className="flex items-center justify-between px-5">
         {/* logo */}
         <div className="relative w-48 h-full">
-          <Link
-            to="/"
-            className="absolute -top-16 left-0 w-full h-24 bg-white flex items-center justify-center rounded-b-[10px] shadow-3xl"
-          >
-            <img className="w-[80px]" src={Logo} alt="anyVessel" />
-          </Link>
-        </div>
+                    <Link to="/" className="absolute -top-16 left-0 w-full h-48 bg-white flex items-center justify-center rounded-b-[10px] shadow-3xl">
+                        <img className="w-[120px]" src={Logo} alt="anyvessel" />
+                    </Link>
+                </div>
 
         {/* nav items */}
         <ul className="hidden lg:flex items-center gap-5">

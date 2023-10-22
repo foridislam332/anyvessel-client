@@ -8,9 +8,12 @@ import "swiper/css";
 // import required modules
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import SectionTitle from "../components/SectionTitle";
+import useAllCrew from "../hooks/useAllCrew";
 
 const MeetCrew = () => {
   const [crewMembers, setCrewMembers] = useState([]);
+  const { allCrewData } = useAllCrew()
+  console.log(allCrewData?.crews)
   useEffect(() => {
     fetch("/crewmember.json")
       .then((res) => res.json())

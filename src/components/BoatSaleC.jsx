@@ -56,7 +56,7 @@ const BoatSaleC = () => {
             <p> Boating Location: {location?.boarding_city} , {location?.boarding_country} </p>
             <p>Sailing Location: {location?.sailing_city} , {location?.sailing_country} </p>
           </div>
-          
+
         </div>
 
         {/* Manufacturer */}
@@ -67,7 +67,7 @@ const BoatSaleC = () => {
         <div className="mt-7 mb-3 flex items-center justify-between">
           <Link
             className="font-sm py-[9px] px-14 bg-yellow rounded-[50px] hover:bg-blue shadow-md hover:shadow-3xl hover:text-white duration-300"
-            // to={`/BoatSellDetails/${_id}`}
+          // to={`/BoatSellDetails/${_id}`}
           >
             {" "}
             Contact With Boat Owner

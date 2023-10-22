@@ -6,17 +6,18 @@ import { toast } from "react-toastify";
 // internal files
 import Seat from "../assets/images/seat.png";
 import User from "../assets/images/user.png";
+import Area from "../assets/images/area.png";
 
 const BoatCards = ({ boat }) => {
   const { _id, vessel, contact, location } = boat;
   const [modal, setModal] = useState(false);
-
+console.log(vessel);
   return (
     <>
       {/* single card */}
       <div className="shadow-sm bg-white rounded-lg overflow-hidden">
         {/* img */}
-        <div className="h-[316px] overflow-auto">
+        <div className="h-[215px]">
           <img
             className="w-full h-full object-cover object-center"
             src={vessel.vesselImage}
@@ -34,20 +35,25 @@ const BoatCards = ({ boat }) => {
             {location.boarding_city}
           </p>
         </div>
-        <p className="p-4 text-lightBlue text-sm font-light">
+        <div className="px-4 py-2">  
+           <p className=" text-lightBlue text-sm font-light line-clamp-3">
           {vessel.vessel_description}
         </p>
-        <div className="text-center border-t border-blue">
+        </div>
+        
+        <div className="text-center border-t mt-3 border-blue">
           {/* boat bottom area */}
           <div className="py-3">
             <div className="lg:px-8 flex items-center justify-center gap-10 md:gap-14 font-light">
               <p className="flex items-center gap-3">
-                <img src={vessel.vessel_length} alt="" />
+                <img src={Area} alt="" />
+                {vessel.vessel_area} M
                 {/* {area} M */}
               </p>
               <p className="flex items-center gap-3">
                 <img src={User} alt="" />
                 {/* {people} M */}
+                520 M
               </p>
               <p className="flex items-center gap-3">
                 <img src={Seat} alt="" />
@@ -55,10 +61,10 @@ const BoatCards = ({ boat }) => {
               </p>
             </div>
 
-            <div className="px-5 mt-10 mb-2 grid grid-cols-12 items-center justify-between">
+            <div className="px-5 mt-6 mb-2 grid grid-cols-12 items-center justify-between">
               <div className="col-span-9">
                 <div className="text-center flex flex-wrap gap-3">
-                  <button
+                  {/* <button
                     onClick={() => {
                       toast.warn("waiting Coming Soo..");
                       setModal(true);
@@ -66,13 +72,13 @@ const BoatCards = ({ boat }) => {
                     className="w-[155px] py-2 px-3 bg-yellow rounded-full lg:rounded-l-full border-l-2 border-white hover:bg-blue shadow-md hover:shadow-3xl hover:text-white duration-300"
                   >
                     Contact buyer
-                  </button>
+                  </button> */}
 
                   <Link
                     to={`/boat_details/${_id}`}
                     className="w-[155px] font-sm py-2 px-8 bg-yellow rounded-full md:rounded-r-full mt-2 lg:mt-0 border-l-2 border-white hover:bg-blue shadow-md hover:shadow-3xl hover:text-white duration-300"
                   >
-                    See Details
+                    See More
                   </Link>
                 </div>
               </div>
