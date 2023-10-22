@@ -42,13 +42,14 @@ const CrewSearchCard = ({ service }) => {
               </span>
               10 years
             </p>
+            <p className="text-darkBlue flex items-center gap-1">
+              <span className="text-base">
+                <HiOutlineLocationMarker />
+              </span>
+              {location?.country}
+            </p>
           </div>
-          <p className="text-darkBlue flex items-center gap-1">
-            <span className="text-base">
-              <HiOutlineLocationMarker />
-            </span>
-            {location?.country}
-          </p>
+
         </div>
 
         <article className="px-4 h-18 md:h-20">
@@ -68,7 +69,7 @@ const CrewSearchCard = ({ service }) => {
             to={`/crew-details/${_id}`}
             className="font-sm py-[9px] px-14 bg-yellow rounded-[50px] hover:bg-blue shadow-md hover:shadow-3xl hover:text-white duration-300"
           >
-            Details Crew
+            Contact
           </Link>
         </div>
       </div>
