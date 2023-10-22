@@ -43,7 +43,7 @@ const CrewRegister = () => {
           (res) => {
             Axios.post("/crew", newData).then((data) => {
               if (data.status === 200) {
-                navigate("/sign-up-step/crew-establishment", {
+                navigate("/login", {
                   replace: true,
                 });
               }
