@@ -9,10 +9,11 @@ import "swiper/css";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import SectionTitle from "../components/SectionTitle";
 import useAllCrew from "../hooks/useAllCrew";
+import CrewSearchCard from "../components/CrewSearchCard";
 
 const MeetCrew = () => {
   const [crewMembers, setCrewMembers] = useState([]);
-  const { allCrewData } = useAllCrew()
+  const { allCrewData } = useAllCrew();
   console.log(allCrewData?.crews)
   useEffect(() => {
     fetch("/crewmember.json")
@@ -61,9 +62,9 @@ const MeetCrew = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 py-5">
               {/* Fixed Swiper Container */}
               <div className="swiper-container fixed top-0 right-0 bottom-0 left-0">
-                {crewMembers.map((crewmember) => (
-                  <SwiperSlide key={crewmember._id}>
-                    <MeetCrewCards crewmember={crewmember} />
+                {allCrewData?.crews.map((service, i) => (
+                  <SwiperSlide key={i}>
+                    <CrewSearchCard service={service} />
                   </SwiperSlide>
                 ))}
               </div>
