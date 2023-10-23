@@ -1,18 +1,21 @@
 import { Helmet } from "react-helmet";
-import HeroBanner from "../sections/HeroBanner";
-import BoatSearch from "../sections/BoatSearch";
+
+// internal files
 import AboutAnyvessel from "../sections/AboutAnyvessel";
+import BoatSearch from "../sections/BoatSearch";
 import FeaturedBoats from "../sections/FeaturedBoats";
+import HeroBanner from "../sections/HeroBanner";
 
 // image
-import BgImg from '../assets/images/boat-bg.png';
+import BgImg from "../assets/images/boat-bg.png";
 import BoatSell from "../sections/BoatSell";
 import MeetCrew from "../sections/MeetCrew";
 import Reviews from "../sections/Reviews";
-import useAuth from "../hooks/useAuth";
-import BoatProfile from "../sections/BoatProfile/BoatProfile";
+import useCurrentUser from "../hooks/useCurrentUser";
+import StepsOutlet from "../SignUpSteps/StepsOutlet";
+
 const Home = () => {
-    const { user } = useAuth();
+    const { currentUser } = useCurrentUser()
     return (
         <>
             <Helmet>
@@ -20,9 +23,11 @@ const Home = () => {
             </Helmet>
 
             {/* sections */}
-            {
-                user === null ? <HeroBanner /> : <BoatProfile />
-            }
+
+            {/* <HeroBanner /> */}
+            <div>
+                {currentUser ? <StepsOutlet /> : <HeroBanner />}
+            </div>
             <BoatSearch />
             <AboutAnyvessel />
             <FeaturedBoats />

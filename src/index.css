@@ -6,6 +6,11 @@
   margin: 0;
   font-family: 'Poppins', sans-serif;
   font-weight: 400;
+  transition: 0.4s;
+}
+
+body {
+  min-width: 310px;
 }
 
 /* primary button styles */
@@ -75,4 +80,14 @@
 
 .rangeslider-horizontal .rangeslider__handle:after {
   display: none !important;
+}
+
+/* Toggle A */
+input:checked ~ .dot {
+  transform: translateX(130%);
+  background-color: #FFFFFF;
+}
+input:checked ~ .dot_Bg {
+  /* transform: translateX(100%); */
+  background-color: #1FBAFF;
 }
