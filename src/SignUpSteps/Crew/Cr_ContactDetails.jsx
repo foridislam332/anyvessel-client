@@ -29,9 +29,7 @@ const Cr_ContactDetails = () => {
 
     Axios.patch("crew-data-contact", newData)
       .then((res) => {
-        if (res?.status === 200) {
-          navigate("/sign-up-step/crew-service", { replace: true });
-        }
+        navigate("/sign-up-step/crew-service", { replace: true });
       })
       .catch((err) => {
         toast.error("Somethings else!");
