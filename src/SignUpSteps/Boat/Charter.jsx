@@ -1,5 +1,4 @@
 import { AiFillHeart } from "react-icons/ai";
-import { LuUploadCloud } from "react-icons/lu";
 
 
 // images

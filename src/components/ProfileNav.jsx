@@ -4,7 +4,7 @@ import ProfileLink from "./ProfileLink";
 const ProfileNav = () => {
     const { currentUser } = useAuth();
     return (
-        <nav>
+        <nav className="bg-white px-8 py-5 rounded-lg">
             <ul className="flex items-center flex-wrap gap-x-10 gap-y-1">
                 <li>
                     <ProfileLink to=''>CHARTER COMPANY</ProfileLink>
