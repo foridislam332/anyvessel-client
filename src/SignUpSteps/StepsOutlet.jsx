@@ -11,7 +11,7 @@ const StepsOutlet = () => {
       className="relative min-h-[500px] md:min-h-[730px] bg-cover bg-center py-14"
     >
       <div className="container grid grid-cols-11 gap-8">
-        <div className="col-span-8 ">
+        <div className="col-span-11">
           {/* Sidebar */}
           <StepNavItems />
 
@@ -20,7 +20,7 @@ const StepsOutlet = () => {
             <Outlet />
           </main>
         </div>
-        <div className="col-span-3 border-2">Chat</div>
+        {/* <div className="col-span-3 border-2">Chat</div> */}
       </div>
     </section>
   );

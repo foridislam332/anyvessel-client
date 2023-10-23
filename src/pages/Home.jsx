@@ -13,6 +13,7 @@ import MeetCrew from "../sections/MeetCrew";
 import Reviews from "../sections/Reviews";
 import useCurrentUser from "../hooks/useCurrentUser";
 import StepsOutlet from "../SignUpSteps/StepsOutlet";
+import ProfileMain from "../sections/BoatProfile/ProfileMain";
 
 const Home = () => {
     const { currentUser } = useCurrentUser()
@@ -26,7 +27,7 @@ const Home = () => {
 
             {/* <HeroBanner /> */}
             <div>
-                {currentUser ? <StepsOutlet /> : <HeroBanner />}
+                {currentUser ? <ProfileMain /> : <HeroBanner />}
             </div>
             <BoatSearch />
             <AboutAnyvessel />
