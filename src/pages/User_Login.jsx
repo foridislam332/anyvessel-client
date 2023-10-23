@@ -17,10 +17,11 @@ const User_Login = () => {
     const onSubmit = data => {
 
         console.log(data)
-        console.log(login)
+        console.log(signIn)
         signIn(data.email, data.password)
             .then(data => {
-                console.log(data)
+                console.log(data.user)
+                navigate('/')
             })
             .catch(error => {
                 console.log(error)

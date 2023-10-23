@@ -26,14 +26,8 @@ const CrewSearchCard = ({ service }) => {
         {/* details */}
         <div className="p-4">
           <div className="flex justify-between">
-            <h1 className="text-base lg:text-xl xl:text-2xl font-medium flex items-center gap-2 justify-start">
+            <h1 className="text-base lg:text-xl  font-medium flex items-center gap-2 justify-start">
               {establishment?.ownerName}
-
-              {status ? (
-                <span className="w-3 h-3 rounded-full bg-green-500 shadow-md shadow-green-100"></span>
-              ) : (
-                <span className="w-3 h-3 rounded-full bg-gray shadow-md shadow-gray"></span>
-              )}
             </h1>
 
             <p className="text-darkBlue flex items-center gap-1">
