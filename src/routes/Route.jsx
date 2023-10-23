@@ -34,10 +34,13 @@ import BS_Services from "../SignUpSteps/BoatServices/BS_Services";
 import BS_Advert from "../SignUpSteps/BoatServices/BS_Advert";
 import BoatSaleC from "../components/BoatSaleC";
 import User_Login from "../pages/User_Login";
+import useCurrentUser from "../hooks/useCurrentUser";
 
 const baseURL = "http://localhost:5000";
-
+// const { currentUser }=useCurrentUser();
+// console.log("currentUser",currentUser)
 const Route = createBrowserRouter([
+  
   // Main Route
   {
     path: "/",
@@ -48,7 +51,7 @@ const Route = createBrowserRouter([
         element: <Home />,
         children: [
           {
-            path: "/",
+            path: "/charter",
             element: <Charter />,
           },
           {

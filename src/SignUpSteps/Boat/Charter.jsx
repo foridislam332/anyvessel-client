@@ -29,7 +29,7 @@ const Charter = () => {
       numberOfLoveReact: 500,
     },
   ];
-  posts.map((im) => console.log(im));
+  // posts.map((im) => console.log(im));
 
   // Image hosting
   const image_hosting_token = import.meta.env.VITE_Image_Upload_Token;

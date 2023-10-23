@@ -14,7 +14,7 @@ import CrewSearchCard from "../components/CrewSearchCard";
 const MeetCrew = () => {
   const [crewMembers, setCrewMembers] = useState([]);
   const { allCrewData } = useAllCrew();
-  console.log(allCrewData?.crews)
+  // console.log(allCrewData?.crews)
   useEffect(() => {
     fetch("/crewmember.json")
       .then((res) => res.json())

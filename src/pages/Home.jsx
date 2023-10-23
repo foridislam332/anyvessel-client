@@ -25,7 +25,7 @@ const Home = () => {
       {/* sections */}
 
       {/* <HeroBanner /> */}
-      <div>
+      <div className="">
         {currentUser ? <StepsOutlet /> : <HeroBanner />}
       </div>
       <BoatSearch />
