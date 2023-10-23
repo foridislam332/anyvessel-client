@@ -59,7 +59,6 @@ const BoatServicesRegister = () => {
             Axios.post("boat-service", signUpData)
               .then((data) => {
                 if (data.status === 200) {
-                  toast.success("Sign Up Successful!");
                   navigate("/sign-up-step/boat-services-establishment", {
                     replace: true,
                   });
