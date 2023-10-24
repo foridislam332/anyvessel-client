@@ -103,7 +103,7 @@ const BoatRegister = () => {
             .post("boats", newData)
             .then((data) => {
               if (data.status === 200) {
-                navigate("/login", { replace: true });
+                navigate("/", { replace: true });
               }
             });
         });

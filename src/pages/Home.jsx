@@ -13,32 +13,33 @@ import MeetCrew from "../sections/MeetCrew";
 import Reviews from "../sections/Reviews";
 import useCurrentUser from "../hooks/useCurrentUser";
 import StepsOutlet from "../SignUpSteps/StepsOutlet";
+import ProfileMain from "../sections/BoatProfile/ProfileMain";
 
 const Home = () => {
-  const { currentUser } = useCurrentUser()
-  return (
-    <>
-      <Helmet>
-        <title>Home | Anyvessel</title>
-      </Helmet>
+    const { currentUser } = useCurrentUser()
+    return (
+        <>
+            <Helmet>
+                <title>Home | Anyvessel</title>
+            </Helmet>
 
-      {/* sections */}
+            {/* sections */}
 
-      {/* <HeroBanner /> */}
-      <div>
-        {currentUser ? <StepsOutlet /> : <HeroBanner />}
-      </div>
-      <BoatSearch />
-      <AboutAnyvessel />
-      <FeaturedBoats />
-      <section className="overflow-hidden">
-        <img className="w-full" src={BgImg} alt="" />
-      </section>
-      <MeetCrew />
-      <Reviews />
-      <BoatSell />
-    </>
-  );
+            {/* <HeroBanner /> */}
+            <div>
+                {currentUser ? <ProfileMain /> : <HeroBanner />}
+            </div>
+            <BoatSearch />
+            <AboutAnyvessel />
+            <FeaturedBoats />
+            <section className="overflow-hidden">
+                <img className="w-full" src={BgImg} alt="" />
+            </section>
+            <MeetCrew />
+            <Reviews />
+            <BoatSell />
+        </>
+    );
 };
 
 export default Home;
