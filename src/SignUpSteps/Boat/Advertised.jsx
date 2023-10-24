@@ -105,8 +105,8 @@ const Advertised = () => {
               </div>
             </div>
             <div className="">
-              <button className="text-white text-sm font-light bg-blue px-8 py-3 rounded-[9px] border border-blue hover:bg-transparent hover:text-blue shadow-md hover:shadow-3xl duration-300">
-                Add new Location
+              <button type="submit" className="text-white text-sm font-light bg-blue px-8 py-3 rounded-[9px] border border-blue hover:bg-transparent hover:text-blue shadow-md hover:shadow-3xl duration-300">
+              Add new Position
               </button>
             </div>
           </div>
@@ -349,23 +349,24 @@ const Advertised = () => {
 
             </div>
 
-            <div className="col-span-12 md:col-span-6 space-y-4">
+            <div className="col-span-12 md:col-span-6 space-y-3">
               {/* JOB ADVERT   */}
-              <div className="">
-                <p className="text-darkBlue font-semibold">JOB ADVERT </p>
+             
+              <div>
                 <label
                   htmlFor="Job_advert"
-                  className="flex items-center text-sm border-midBlue border rounded-md overflow-hidden pr-2"
+                  className="text-darkBlue text-sm inline-block mb-2"
                 >
-                  <textarea
-                    id="Job_advert"
-                    rows={5}
-                    type="text"
-                    placeholder="In few words describe what you need for your profile advert…"
-                    {...register("jobAdvert")}
-                    className="text-xs w-full focus:outline-none border-none p-2 text-darkBlue placeholder:text-gray "
-                  />
+                 JOB ADVERT 
                 </label>
+                <textarea
+                  id="Job_advert"
+                  rows={4}
+                  type="text"
+                  placeholder="In few words describe what you need for your profile advert…"
+                  {...register("jobAdvert")}
+                  className="text-sm w-full outline-none p-[10px] text-darkBlue border-midBlue border rounded-[10px] placeholder:text-darkBlue/40"
+                />
               </div>
 
               {/* EXPERIENCE NEEDED   */}
@@ -454,7 +455,7 @@ const Advertised = () => {
             </div>
           </div>
 
-          <div className=" flex justify-center gap-12 mt-8">
+          {/* <div className=" flex justify-center gap-12 mt-8">
             <button className="text-white text-sm font-light bg-blue px-8 py-3 rounded-[9px] border border-blue hover:bg-transparent hover:text-blue shadow-md hover:shadow-3xl duration-300 w-48">
               Confirm
             </button>
@@ -462,7 +463,7 @@ const Advertised = () => {
             <div className="cursor-pointer text-sm font-light text-center px-8 py-3 rounded-[9px] border border-blue w-48 hover:text-blue shadow-md hover:shadow-3xl duration-300">
               Cancel
             </div>
-          </div>
+          </div> */}
 
         </form>
       </div>
