@@ -52,7 +52,7 @@ const StepNavItems = () => {
               </>
             )}
 
-            {/* only crew route */}
+            {/* only boat service route */}
             {currentUser?.role === "boatServices" && (
               <>
                 {listItemFc(
