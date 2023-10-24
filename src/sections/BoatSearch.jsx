@@ -22,7 +22,9 @@ const BoatSearch = () => {
   } = useForm();
 
   // handle submit data
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (data) => {
+    // console.log(data);
+  };
 
   return (
     <section className={`${currentUser ? "relative  md:mt-0" : "relative sm:-mt-48 md:-mt-28"}`}>

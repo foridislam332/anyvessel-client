@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import useAxios from "./useAxios";
+import { toast } from "react-toastify";
 
 const useAllCrew = () => {
   const [Axios] = useAxios();
@@ -8,7 +9,10 @@ const useAllCrew = () => {
   useEffect(() => {
     Axios(`crew-data`)
       .then((res) => setAllCrewData(res?.data))
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        toast.error("Something Wrong!");
+        // console.log(err)
+      });
   }, []);
 
   return { allCrewData };

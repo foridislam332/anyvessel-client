@@ -6,160 +6,149 @@ import useCurrentUser from "../../hooks/useCurrentUser";
 import useAllBoatSailingPost from "../../hooks/useAllBoatSailingPost";
 
 const Location = () => {
-  const { boatSellPost } = useAllBoatSailingPost();
-  console.log(boatSellPost)
+    const { boatSellPost } = useAllBoatSailingPost();
 
+    const [Axios] = useAxios();
+    const { currentUser } = useCurrentUser();
 
-  // console.log(boatSellPost[0]?._id)
-  const [Axios] = useAxios();
-  const { currentUser } = useCurrentUser();
+    const {
+        register,
+        handleSubmit,
+        control,
+        watch,
+        formState: { errors },
+    } = useForm();
 
-  const {
-    register,
-    handleSubmit,
-    control,
-    watch,
-    formState: { errors },
-  } = useForm();
+    if (boatSellPost === undefined) {
+        return <h2>Loading...</h2>
+    }
 
-  if (boatSellPost === undefined) {
-    return <h2>Loading...</h2>
-  }
+    const newPostID = boatSellPost[boatSellPost.length - 1]?._id
 
-  const newPostID = boatSellPost[boatSellPost.length -1]?._id
-  console.log(newPostID)
-  const onSubmit = (data) => {
-    const newData = {
-      newPostID: newPostID,
-      ownerUserId: currentUser?._id,
-      ownerUserEmail: currentUser?.email,
-      boarding_country: data.boarding_country,
-      sailing_country: data.sailing_country,
-      boarding_city: data.boarding_city,
-      sailing_city: data.sailing_city,
+    const onSubmit = (data) => {
+        const newData = {
+            newPostID: newPostID,
+            ownerUserId: currentUser?._id,
+            ownerUserEmail: currentUser?.email,
+            boarding_country: data.boarding_country,
+            sailing_country: data.sailing_country,
+            boarding_city: data.boarding_city,
+            sailing_city: data.sailing_city,
+        };
+
+        Axios.patch("boatSailing-location", newData)
+            .then((res) => {
+                if (res?.status === 200) {
+                    toast.success("Boat Sailing location update successful!");
+                }
+            })
+            .catch((err) => {
+                toast.error("Somethings else!");
+                // console.log(err);
+            });
     };
-    console.log(newData);
-    Axios.patch("boatSailing-location", newData)
-      .then((res) => {
-        console.log("response - ", res);
 
-        if (res?.status === 200) {
-          toast.success("Boat Sailing location update successful!");
-        }
-      })
-      .catch((err) => {
-        toast.error("Somethings else!");
-        console.log(err);
-      });
-  };
+    // All Country
+    const countryData = Country.getAllCountries();
 
-  // All Country
-  const countryData = Country.getAllCountries();
+    //  State
+    const selectedBoardingCountry = watch("boarding_country", "");
+    const selectedSailingCountry = watch("sailing_country", "");
 
-  //  State
-  const selectedBoardingCountry = watch("boarding_country", "");
-  const selectedSailingCountry = watch("sailing_country", "");
+    // filtered country
+    const filteredBoardingCountry = countryData.find(
+        (country) => country.name == selectedBoardingCountry
+    );
+    const filteredSailingCountry = countryData.find(
+        (country) => country.name == selectedSailingCountry
+    );
 
-  // filtered country
-  const filteredBoardingCountry = countryData.find(
-    (country) => country.name == selectedBoardingCountry
-  );
-  const filteredSailingCountry = countryData.find(
-    (country) => country.name == selectedSailingCountry
-  );
+    // filtered State
+    const BoardingStateData = State.getStatesOfCountry(
+        filteredBoardingCountry?.isoCode
+    );
+    const SailingStateData = State.getStatesOfCountry(
+        filteredSailingCountry?.isoCode
+    );
 
-  // filtered State
-  const BoardingStateData = State.getStatesOfCountry(
-    filteredBoardingCountry?.isoCode
-  );
-  const SailingStateData = State.getStatesOfCountry(
-    filteredSailingCountry?.isoCode
-  );
-
-  return (
-    <section className="p-10">
-      <div className="flex justify-end">
-        <button className="text-white text-sm font-light bg-blue px-8 py-3 rounded-[9px] border border-blue hover:bg-transparent hover:text-blue shadow-md hover:shadow-3xl duration-300">
-          Add new Location
-        </button>
-      </div>
-      <div className="p-10 w-[700px] mx-auto">
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="mb-6">
-            <h3 className="text-midBlue">Boarding location</h3>
-
-            <div className="sm:px-[3px] py-[7px]">
-              <select
-                {...register("boarding_country", { required: true })}
-                className="text-darkBlue w-full border border-midBlue rounded-md focus:outline-none focus:border-b focus:border-midBlue p-2 sm:pr-3 py-[3px]"
-              >
-                <option value="">Country</option>
-                {countryData?.map((country, i) => (
-                  <option key={i} value={country.name}>
-                    {country.name}
-                  </option>
-                ))}
-              </select>
+    return (
+        <section>
+            <div className="flex justify-end mb-12">
+                <button className="text-white font-light bg-blue px-4 py-2 rounded-[9px] border border-blue hover:bg-transparent hover:text-blue hover:shadow-lg hover:shadow-blue/20 duration-300">
+                    Add new Location
+                </button>
             </div>
 
-            <div className="sm:px-[3px] py-[7px]">
-              <select
-                {...register("boarding_city", { required: true })}
-                className="text-darkBlue w-full border border-midBlue rounded-md focus:outline-none focus:border-b focus:border-midBlue p-2 sm:pr-3 py-[3px]"
-              >
-                <option value="">City</option>
-                {BoardingStateData?.map((state, i) => (
-                  <option key={i} value={state.name}>
-                    {state.name}
-                  </option>
-                ))}
-              </select>
-            </div>
-          </div>
-          <div>
-            <h1 className="text-midBlue">Sailing Destination</h1>
+            <div className="max-w-[677px] mx-auto">
+                <form onSubmit={handleSubmit(onSubmit)}>
+                    <div className="mb-14 space-y-5">
+                        <h3 className="text-darkBlue text-lg font-medium leading-7">Boarding location</h3>
 
-            <div className="sm:px-[3px] py-[7px]">
-              <select
-                {...register("sailing_country", { required: true })}
-                className="text-darkBlue w-full border border-midBlue rounded-md focus:outline-none focus:border-b focus:border-midBlue p-2 sm:pr-3 py-[3px]"
-              >
-                <option value="">Country</option>
-                {countryData?.map((state, i) => (
-                  <option key={i} value={state.name}>
-                    {state.name}
-                  </option>
-                ))}
-              </select>
-            </div>
+                        <select
+                            {...register("boarding_country", { required: true })}
+                            className="text-darkBlue w-full border border-midBlue rounded-md outline-none focus:border-blue px-2 py-[10px]"
+                        >
+                            <option value="">Country</option>
+                            {countryData?.map((country, i) => (
+                                <option key={i} value={country.name}>
+                                    {country.name}
+                                </option>
+                            ))}
+                        </select>
 
-            <div className="sm:px-[3px] py-[7px]">
-              <select
-                {...register("sailing_city", { required: true })}
-                className="text-darkBlue w-full border border-midBlue rounded-md focus:outline-none focus:border-b focus:border-midBlue p-2 sm:pr-3 py-[3px]"
-              >
-                <option value="">City</option>
-                {SailingStateData?.map((state, i) => (
-                  <option key={i} value={state.name}>
-                    {state.name}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div className=" flex justify-center gap-12 mt-8">
-              <button className="text-white text-sm font-light bg-blue px-8 py-3 rounded-[9px] border border-blue hover:bg-transparent hover:text-blue shadow-md hover:shadow-3xl duration-300 w-48">
-                Confirm
-              </button>
+                        <select
+                            {...register("boarding_city", { required: true })}
+                            className="text-darkBlue w-full border border-midBlue rounded-md outline-none focus:border-blue px-2 py-[10px]"
+                        >
+                            <option value="">City</option>
+                            {BoardingStateData?.map((state, i) => (
+                                <option key={i} value={state.name}>
+                                    {state.name}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
+                    <div className="space-y-5">
+                        <h1 className="text-darkBlue text-lg font-medium leading-7">Sailing Destination</h1>
 
-              <div className="cursor-pointer text-sm font-light text-center px-8 py-3 rounded-[9px] border border-blue w-48 hover:text-blue shadow-md hover:shadow-3xl duration-300">
-                Cancel
-              </div>
+                        <select
+                            {...register("sailing_country", { required: true })}
+                            className="text-darkBlue w-full border border-midBlue rounded-md outline-none focus:border-blue px-2 py-[10px]"
+                        >
+                            <option value="">Country</option>
+                            {countryData?.map((state, i) => (
+                                <option key={i} value={state.name}>
+                                    {state.name}
+                                </option>
+                            ))}
+                        </select>
+
+                        <select
+                            {...register("sailing_city", { required: true })}
+                            className="text-darkBlue w-full border border-midBlue rounded-md outline-none focus:border-blue px-2 py-[10px]"
+                        >
+                            <option value="">City</option>
+                            {SailingStateData?.map((state, i) => (
+                                <option key={i} value={state.name}>
+                                    {state.name}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
+
+                    <div className="flex justify-center gap-10 my-16">
+                        <button className="text-white font-light bg-blue py-[7px] rounded-[9px] border-2 border-blue hover:bg-transparent hover:text-blue hover:shadow-lg hover:shadow-blue/20 duration-300 w-48 grid place-items-center">
+                            Confirm
+                        </button>
+
+                        <div className="cursor-pointer text-blue font-light bg-transparent py-[7px] rounded-[9px] border-2 border-blue hover:bg-blue hover:text-white hover:shadow-lg hover:shadow-blue/20 duration-300 w-48 grid place-items-center">
+                            Cancel
+                        </div>
+                    </div>
+                </form>
             </div>
-          </div>
-        </form>
-      </div>
-    </section>
-  );
+        </section>
+    );
 };
 
 export default Location;

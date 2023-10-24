@@ -72,14 +72,17 @@ const Cr_Establishment = () => {
     Axios.post("crew-data", newData)
       .then((res) => {
         if (res?.data?.insertedId) {
-          navigate("/crew-sign-up-step/crew-location", { replace: true });
+          navigate("/sign-up-step/crew-location", { replace: true });
         }
 
         if (res?.status === 201 || res?.status === 200) {
-          navigate("/crew-sign-up-step/crew-location", { replace: true });
+          navigate("/sign-up-step/crew-location", { replace: true });
         }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        toast.error("Somethings else!");
+        // console.log(err);
+      });
   };
 
   //   Picture upload

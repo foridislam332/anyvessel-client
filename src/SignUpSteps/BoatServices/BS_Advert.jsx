@@ -48,31 +48,36 @@ const BS_Advert = () => {
       })
       .catch((err) => {
         toast.error("Somethings else!");
-        console.log(err);
+        // console.log(err);
       });
   };
 
   return (
     <div className="bg-white bg-opacity-90 px-5 sm:px-10 pb-10 md:px-[93px] md:pb-[30px] mt-6 rounded-[10px]">
       <div className="max-w-[715px] mx-auto text-center mb-6">
-        <h2 className="text-lightBlue text-[19px]">Services to provide</h2>
+        <h2 className="text-[#13518E] text-[25px]">Services to provide</h2>
       </div>
 
       {/* form */}
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="flex flex-col md:gap-x-[37px] gap-y-5 text-sm">
           {/* Advert */}
-          <div>
+          <label htmlFor="advert" className="space-y-2">
+            <span className="text-[#13518E]">Advert</span>
             <ReactQuill
+              id="advert"
               theme="snow"
               rows="7"
               value={advertQ}
               modules={modules}
               {...register(`advert`)}
-              placeholder="Describe Your Job Advert best ways..."
+              placeholder="In few words describe the services you provide activities for your profile advert…"
               onChange={setAdvert}
-              className="h-60"
+              className="h-60 placeholder:text-[#13518E66] "
             />
+          </label>
+          <div>
+
           </div>
         </div>
 

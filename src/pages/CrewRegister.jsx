@@ -11,6 +11,7 @@ import user from "../assets/images/user2.png";
 // internal files
 import useAuth from "../hooks/useAuth";
 import useAxios from "../hooks/useAxios";
+import { toast } from "react-toastify";
 
 const CrewRegister = () => {
   const [Axios] = useAxios();
@@ -43,7 +44,7 @@ const CrewRegister = () => {
           (res) => {
             Axios.post("/crew", newData).then((data) => {
               if (data.status === 200) {
-                navigate("/login", {
+                navigate("/sign-up-step/crew-establishment", {
                   replace: true,
                 });
               }
@@ -52,7 +53,8 @@ const CrewRegister = () => {
         );
       })
       .catch((err) => {
-        console.log(err);
+        toast.error("Something Wrong!");
+        // console.log(err);
       });
   };
 
@@ -140,7 +142,7 @@ const CrewRegister = () => {
           >
             <input
               id="phone"
-              type="phone"
+              type="number"
               placeholder="Phone number"
               {...register("phone")}
               className="w-full focus:outline-none border-none p-[10px] text-darkBlue placeholder:text-darkBlue"

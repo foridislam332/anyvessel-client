@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import useAxios from "./useAxios";
+import { toast } from "react-toastify";
 
 const useAllBoatService = () => {
   const [Axios] = useAxios();
@@ -8,7 +9,10 @@ const useAllBoatService = () => {
   useEffect(() => {
     Axios(`boat-service`)
       .then((res) => setAllCrewData(res?.data))
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        toast.error("Something Wrong!");
+        // console.log(err)
+      });
   }, []);
 
   return { allBoatService };

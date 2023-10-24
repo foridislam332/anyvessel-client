@@ -46,7 +46,7 @@ const Cr_Advert = () => {
       })
       .catch((err) => {
         toast.error("Somethings else!");
-        console.log(err);
+        // console.log(err);
       });
   };
 
@@ -60,7 +60,8 @@ const Cr_Advert = () => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="flex flex-col md:gap-x-[37px] gap-y-5 text-sm">
           {/* Advert */}
-          <div>
+          <label htmlFor="advert" className="space-y-2">
+            <span className="text-[#13518E]">Advert</span>
             <ReactQuill
               theme="snow"
               value={advertQ}
@@ -71,6 +72,9 @@ const Cr_Advert = () => {
               onChange={setAdvertQ}
               className="h-60 w-full focus:outline-none border-none p-[10px] placeholder:text-darkBlue"
             />
+          </label>
+          <div>
+
           </div>
         </div>
 

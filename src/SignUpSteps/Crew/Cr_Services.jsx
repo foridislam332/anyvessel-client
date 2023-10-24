@@ -35,28 +35,28 @@ const Cr_Services = () => {
       })
       .catch((err) => {
         toast.error("Somethings else!");
-        console.log(err);
+        // console.log(err);
       });
   };
 
   const serviceItems = (data, idName, labelText) => {
     return (
-      <div class="flex items-center justify-center w-full border border-[#A1C7EC] rounded-xl px-2 py-3">
+      <div className="flex items-center justify-center w-full border border-[#A1C7EC] rounded-xl px-2 py-3">
         <label
           htmlFor={idName}
-          class="w-full flex justify-between items-center cursor-pointer"
+          className="w-full flex justify-between items-center cursor-pointer"
         >
           <p> {labelText} </p>
-          <div class="relative">
+          <div className="relative">
             <input
               {...register(`${data}`)}
               id={idName}
               name={idName}
               type="checkbox"
-              class="sr-only"
+              className="sr-only"
             />
-            <div class="dot_Bg block bg-[#A1C7EC] w-10 h-5 rounded-full transition"></div>
-            <div class="dot absolute left-1 top-[3px] bg-[#486786] w-3.5 h-3.5 rounded-full transition"></div>
+            <div className="dot_Bg block bg-[#A1C7EC] w-10 h-5 rounded-full transition"></div>
+            <div className="dot absolute left-1 top-[3px] bg-[#486786] w-3.5 h-3.5 rounded-full transition"></div>
           </div>
         </label>
       </div>
@@ -109,6 +109,9 @@ const Cr_Services = () => {
               "FLOWER ARRANGEMENTS AND DELIVERIES"
             )}
 
+             {/* CATERING */}
+             {serviceItems("catering", "catering", "CATERING")}
+
             {/* MUSIC BANDS AND SOLO MUSICIANS */}
             {serviceItems(
               "musicBands",
@@ -128,20 +131,18 @@ const Cr_Services = () => {
           </div>
 
           {/* others */}
-          <div>
+         {/* others */}
+         <div>
             <label htmlFor="others"> Others </label>
 
-            <div className="flex items-center justify-between border-midBlue border rounded-[10px] overflow-hidden pr-2">
+            <div className="flex items-center justify-between border-midBlue border rounded-[10px] overflow-hidden pr-2 mt-1">
               <input
                 id="others"
                 placeholder="You can add an advert IT CAN BE A BOX WITH 100 CHARACTERS TO FILL"
                 {...register(`others`)}
-                className="w-full focus:outline-none border-none p-[10px] text-darkBlue placeholder:text-darkBlue"
+                className="text-sm w-full outline-none p-[10px] text-darkBlue border-midBlue  placeholder:text-darkBlue/40"
               />
-              <img
-                src={user2}
-                alt="You can add an advert IT CAN BE A BOX WITH 100 CHARACTERS TO FILL"
-              />
+             
             </div>
           </div>
         </div>

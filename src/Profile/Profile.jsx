@@ -1,8 +1,8 @@
 // internal files
-import BoatServiceProfile from "../components/Profile/BoatServiceProfile";
-import CrewProfile from "../components/Profile/CrewProfile";
 import useCurrentUser from "../hooks/useCurrentUser";
 import BoatProfile from "./BoatProfile";
+import BoatServiceProfile from "./BoatServiceProfile";
+import CrewProfile from "./CrewProfile";
 
 const Profile = () => {
   const { currentUser } = useCurrentUser();

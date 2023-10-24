@@ -5,7 +5,7 @@ import useAllBoatService from "../hooks/useAllBoatService";
 const Boat_Services = () => {
   const { allBoatService } = useAllBoatService();
   const [filteredData, setFilteredData] = useState(allBoatService?.boatService);
-  console.log(allBoatService)
+
   useEffect(() => {
     setFilteredData(allBoatService?.boatService);
   }, []);
@@ -21,7 +21,9 @@ const Boat_Services = () => {
         </div>
 
         <div>
-          <p className="mb-4">Boat Service items: {allBoatService?.boatService?.length}</p>
+          <p className="mb-4">
+            Boat Service items: {allBoatService?.boatService?.length}
+          </p>
           {allBoatService?.boatService?.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
               {allBoatService?.boatService?.map((service, i) => (

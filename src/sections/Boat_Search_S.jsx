@@ -15,7 +15,7 @@ const Boat_Search_S = () => {
   } = useForm();
 
   const onSubmit = (data) => {
-    console.log(data);
+    // console.log(data);
   };
 
   const boat_Search = watch("boat_Search");
