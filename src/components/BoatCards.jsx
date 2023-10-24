@@ -11,7 +11,7 @@ import Area from "../assets/images/area.png";
 const BoatCards = ({ boat }) => {
   const { _id, vessel, contact, location } = boat;
   const [modal, setModal] = useState(false);
-console.log(vessel);
+// console.log(vessel);
   return (
     <>
       {/* single card */}

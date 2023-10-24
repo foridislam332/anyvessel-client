@@ -126,6 +126,7 @@ const Vessel = () => {
                     Add new Vessel
                 </button>
             </div>
+            
             {/* form */}
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-16 border-b border-midBlue pb-8 mb-6">

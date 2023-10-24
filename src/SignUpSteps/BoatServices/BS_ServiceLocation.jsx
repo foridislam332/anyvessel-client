@@ -66,7 +66,7 @@ const BS_ServiceLocation = () => {
         <div className="flex flex-col md:gap-x-[37px] gap-y-5 text-sm">
           {/* Country */}
           <select
-            className="text-darkBlue border-b border-midBlue focus:outline-none focus:border-b focus:border-midBlue pr-1 sm:pr-3 py-[3px]"
+               className="text-sm w-full outline-none p-[10px] text-darkBlue border-midBlue border rounded-[10px] placeholder:text-darkBlue/40"
             {...register("country", { required: true })}
             name="country"
             id="country"
@@ -81,7 +81,7 @@ const BS_ServiceLocation = () => {
 
           {/* City */}
           <select
-            className="text-darkBlue border-b border-midBlue focus:outline-none focus:border-b focus:border-midBlue pr-1 sm:pr-3 py-[3px]"
+                 className="text-sm w-full outline-none p-[10px] text-darkBlue border-midBlue border rounded-[10px] placeholder:text-darkBlue/40"
             {...register("city")}
             name="city"
             id="city"
@@ -95,18 +95,24 @@ const BS_ServiceLocation = () => {
           </select>
 
           {/* Specify Address */}
-          <label
-            htmlFor="specifyAddress"
-            className="flex items-center border-midBlue border rounded-[10px] overflow-hidden pr-2"
-          >
-            <input
-              className="w-full focus:outline-none border-none p-[10px] text-darkBlue placeholder:text-darkBlue"
-              {...register("specify_address")}
-              type="text"
-              id="specifyAddress"
-              placeholder="Add your specify address here"
-            />
-          </label>
+
+          <div>
+               <label
+                htmlFor="manufacturer"
+                className="text-darkBlue text-sm inline-block mb-2"
+                 >
+                  Specify Address
+                 </label>
+                    <input
+                    id="manufacturer"
+                    type="text"
+                    placeholder="Your text here"
+                    {...register("specify_address")}
+                    className="text-sm w-full outline-none p-[10px] text-darkBlue border-midBlue border rounded-[10px] placeholder:text-darkBlue/40"
+                      />
+                    </div>
+
+         
         </div>
 
         {/* buttons */}

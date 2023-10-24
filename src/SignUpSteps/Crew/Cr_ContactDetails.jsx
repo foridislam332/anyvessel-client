@@ -3,8 +3,14 @@ import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 // icons image
+// icons image
 import user2 from "../../assets/images/user-3.png";
-
+import emailIcon from "../../assets/images/email.png";
+import phoneIcon from "../../assets/images/phone.png";
+import skypeIcon from "../../assets/images/skype.png";
+import facebookIcon from "../../assets/images/facebook.png";
+import instaIcon from "../../assets/images/insta.png";
+import internetIcon from "../../assets/images/internet.png";
 // internal file
 import useAuth from "../../hooks/useAuth";
 import useAxios from "../../hooks/useAxios";
@@ -48,7 +54,7 @@ const Cr_ContactDetails = () => {
           {...register(`${data}`)}
           className="w-full focus:outline-none border-none p-[10px] text-darkBlue placeholder:text-darkBlue"
         />
-        <img src={icons} alt={placeholder} />
+        <img className="max-w-[18px] opacity-70" src={icons} alt={placeholder} />
       </label>
     );
   };
@@ -65,17 +71,17 @@ const Cr_ContactDetails = () => {
           {/* Name */}
           {inputField("Name", "Name", "contactName", user2)}
           {/* Email address */}
-          {inputField("Email", "Email address", "contactEmail", user2)}
+          {inputField("Email", "Email address", "contactEmail", emailIcon)}
           {/* Phone number */}
-          {inputField("number", "Phone number", "phoneNumber", user2)}
+          {inputField("number", "Phone number", "phoneNumber", phoneIcon)}
           {/* Skype */}
-          {inputField("skype", "Skype", "Skype", user2)}
+          {inputField("skype", "Skype", "Skype", skypeIcon)}
           {/* Website */}
-          {inputField("website", "website", "Website", user2)}
+          {inputField("website", "website", "Website", internetIcon)}
           {/* Facebook */}
-          {inputField("facebook", "Facebook", "facebook", user2)}
+          {inputField("facebook", "Facebook", "facebook", facebookIcon)}
           {/* instagram */}
-          {inputField("instagram", "Instagram", "instagram", user2)}
+          {inputField("instagram", "Instagram", "instagram", instaIcon)}
         </div>
 
         {/* buttons */}

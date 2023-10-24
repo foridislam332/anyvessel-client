@@ -38,6 +38,7 @@ import RegisterCard from "../sections/RegisterCard";
 const baseURL = "https://any-vessel.vercel.app";
 
 const Route = createBrowserRouter([
+  
   // Main Route
   {
     path: "/",
@@ -48,7 +49,7 @@ const Route = createBrowserRouter([
         element: <Home />,
         children: [
           {
-            path: "/",
+            path: "/charter",
             element: <Charter />,
           },
           {

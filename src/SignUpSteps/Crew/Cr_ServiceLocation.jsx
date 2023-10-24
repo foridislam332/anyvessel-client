@@ -65,7 +65,7 @@ const Cr_ServiceLocation = () => {
         <div className="flex flex-col md:gap-x-[37px] gap-y-5 text-sm">
           {/* Country */}
           <select
-            className="text-darkBlue border-b border-midBlue focus:outline-none focus:border-b focus:border-midBlue pr-1 sm:pr-3 py-[3px]"
+           className="text-sm w-full outline-none p-[10px] text-darkBlue border-midBlue border rounded-[10px] placeholder:text-darkBlue/40"
             {...register("country", { required: true })}
             name="country"
             id="country"
@@ -80,7 +80,7 @@ const Cr_ServiceLocation = () => {
 
           {/* City */}
           <select
-            className="text-darkBlue border-b border-midBlue focus:outline-none focus:border-b focus:border-midBlue pr-1 sm:pr-3 py-[3px]"
+           className="text-sm w-full outline-none p-[10px] text-darkBlue border-midBlue border rounded-[10px] placeholder:text-darkBlue/40"
             {...register("city")}
             name="city"
             id="city"
@@ -99,7 +99,7 @@ const Cr_ServiceLocation = () => {
             className="flex items-center border-midBlue border rounded-[10px] overflow-hidden pr-2"
           >
             <input
-              className="w-full focus:outline-none border-none p-[10px] text-darkBlue placeholder:text-darkBlue"
+              className="text-sm w-full outline-none p-[10px] text-darkBlue border-midBlue  placeholder:text-darkBlue/40"
               {...register("specify_address")}
               type="text"
               id="specifyAddress"

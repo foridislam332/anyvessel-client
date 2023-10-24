@@ -51,14 +51,14 @@ const BS_Services = () => {
           htmlFor={idName}
           className="w-full flex justify-between items-center cursor-pointer"
         >
-          <p> {labelText} </p>
+          <p className="text-[#13518E]"> {labelText} </p>
           <div className="relative">
             <input
               {...register(`${data}`)}
               id={idName}
               name={idName}
               type="checkbox"
-              className="sr-only"
+              className="sr-only text-[#13518E]"
             />
             <div className="dot_Bg block bg-[#A1C7EC] w-10 h-5 rounded-full transition"></div>
             <div className="dot absolute left-1 top-[3px] bg-[#486786] w-3.5 h-3.5 rounded-full transition"></div>
@@ -71,7 +71,7 @@ const BS_Services = () => {
   return (
     <div className="bg-white bg-opacity-90 px-5 sm:px-10 pb-10 md:px-[93px] md:pb-[30px] mt-6 rounded-[10px]">
       <div className="max-w-[715px] mx-auto text-center mb-6">
-        <h2 className="text-lightBlue text-[19px]">Services to provide</h2>
+        <h2 className="text-[#13518E] text-[25px]">Services to provide</h2>
       </div>
 
       {/* form */}
@@ -107,12 +107,16 @@ const BS_Services = () => {
             {/* MECHANICS */}
             {serviceItems("mechanics", "mechanics", "MECHANICS")}
 
+
             {/* FLOWER ARRANGEMENTS AND DELIVERIES */}
             {serviceItems(
               "arrangementsAndDeliveries",
               "arrangementsAndDeliveries",
               "FLOWER ARRANGEMENTS AND DELIVERIES"
             )}
+
+            {/* CATERING */}
+            {serviceItems("catering", "catering", "CATERING")}
 
             {/* MUSIC BANDS AND SOLO MUSICIANS */}
             {serviceItems(
@@ -141,12 +145,9 @@ const BS_Services = () => {
                 id="others"
                 placeholder="You can add an advert IT CAN BE A BOX WITH 100 CHARACTERS TO FILL"
                 {...register(`others`)}
-                className="w-full focus:outline-none border-none p-[10px] text-darkBlue placeholder:text-darkBlue"
+                className="text-sm w-full outline-none p-[10px] text-darkBlue border-midBlue border rounded-[10px] placeholder:text-darkBlue/40"
               />
-              <img
-                src={user2}
-                alt="You can add an advert IT CAN BE A BOX WITH 100 CHARACTERS TO FILL"
-              />
+             
             </div>
           </div>
         </div>

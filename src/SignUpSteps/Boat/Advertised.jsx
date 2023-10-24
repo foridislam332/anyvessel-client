@@ -13,6 +13,27 @@ const Advertised = () => {
     formState: { errors },
   } = useForm();
 
+
+  // 2023 to 2033
+  const yearsRange = Array.from({ length: 10 }, (_, i) => 2023 + i);
+  // 1 to 31
+  const daysRange = Array.from({ length: 31 }, (_, i) => 1 + i);
+  const months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+
+
   const onSubmit = (data) => {
     const newData = {
       ownerUserId: currentUser?._id,
@@ -31,6 +52,7 @@ const Advertised = () => {
       to_from_expenses: data.to_from_expenses,
       tattoos: data.tattoos,
       interview: data.interview,
+      availability: `${data.availabilityStartDay}, ${data.availabilityStartMonth} , ${data.availabilityStartYear} to ${data.availabilityEndDay}, ${data.availabilityEndMonth} , ${data.availabilityEndYear} `
     };
     Axios.post("boatOwner-advertised", newData)
       .then((res) => {
@@ -46,14 +68,15 @@ const Advertised = () => {
   };
   return (
     <section>
-      <div className="p-10">
+      <div className="">
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="flex justify-between mb-5">
-            <div className="w-[550px]">
+
+          <div className="flex justify-between flex-col md:flex-row mb-5">
+            <div className="w-auto md:w-[750px]">
               <div className="sm:px-[3px] py-[7px]">
                 <select
                   {...register("expertise_level", { required: true })}
-                  className="text-darkBlue w-full border border-midBlue rounded-md focus:outline-none focus:border-b focus:border-midBlue p-2 sm:pr-3 py-[3px]"
+                  className="text-sm w-full outline-none p-[10px] text-darkBlue border-midBlue border rounded-[10px] placeholder:text-darkBlue/40"
                 >
                   <option value="">Expertise Level</option>
                   <option value="Professional">Professional</option>
@@ -63,7 +86,7 @@ const Advertised = () => {
               <div className="sm:px-[3px] py-[7px]">
                 <select
                   {...register("payroll_status", { required: true })}
-                  className="text-darkBlue w-full border border-midBlue rounded-md focus:outline-none focus:border-b focus:border-midBlue p-2 sm:pr-3 py-[3px]"
+                 className="text-sm w-full outline-none p-[10px] text-darkBlue border-midBlue border rounded-[10px] placeholder:text-darkBlue/40"
                 >
                   <option value="">Payroll Status</option>
                   <option value="paid">Paid Position</option>
@@ -73,7 +96,7 @@ const Advertised = () => {
               <div className="sm:px-[3px] py-[7px]">
                 <select
                   {...register("experience", { required: true })}
-                  className="text-darkBlue w-full border border-midBlue rounded-md focus:outline-none focus:border-b focus:border-midBlue p-2 sm:pr-3 py-[3px]"
+                 className="text-sm w-full outline-none p-[10px] text-darkBlue border-midBlue border rounded-[10px] placeholder:text-darkBlue/40"
                 >
                   <option value=""> Skilled Crew / No Experience</option>
                   <option value="skilled">Skilled Crew</option>
@@ -82,23 +105,25 @@ const Advertised = () => {
               </div>
             </div>
             <div className="">
-              <button className="text-white text-sm font-light bg-blue px-8 py-3 rounded-[9px] border border-blue hover:bg-transparent hover:text-blue shadow-md hover:shadow-3xl duration-300">
-                Add new Location
+              <button type="submit" className="text-white text-sm font-light bg-blue px-8 py-3 rounded-[9px] border border-blue hover:bg-transparent hover:text-blue shadow-md hover:shadow-3xl duration-300">
+              Add new Position
               </button>
             </div>
           </div>
 
           <div className="mb-6 grid grid-cols-12 gap-8">
-            <div className="col-span-6 ">
+
+            <div className="col-span-12 md:col-span-6 space-y-3 ">
               {/* POSITION */}
               <div>
-                <small className="text-darkBlue ">POSITION </small>
-                <div className="sm:px-[3px] py-[7px]">
+                <small className="text-darkBlue font-semibold">POSITION </small>
+                <label htmlFor="advertisedPosition" className="sm:px-[3px] py-[70px]">
                   <select
+                    id="advertisedPosition"
                     {...register("advertised_Position", { required: true })}
-                    className="text-darkBlue w-full border border-midBlue rounded-md focus:outline-none focus:border-b focus:border-midBlue p-2 sm:pr-3 py-[3px]"
+                    className="text-sm w-full outline-none p-[10px] text-darkBlue border-midBlue border rounded-[10px] placeholder:text-darkBlue/40"
                   >
-                    <option value="">Captain</option>
+                    <option value="">Position</option>
                     <option value="Captain">Captain</option>
                     <option value="Chief Officer">Chief Officer</option>
                     <option value="Second Officer">Second Officer</option>
@@ -110,16 +135,16 @@ const Advertised = () => {
                     <option value="Chief Engineer">Chief Engineer</option>
                     <option value="Third Officer">Third Officer</option>
                   </select>
-                </div>
+                </label>
               </div>
 
               {/* WAGE */}
               <div>
-                <small className="text-darkBlue ">WAGE</small>
+                <small className="text-darkBlue font-semibold">WAGE</small>
                 <div className="sm:px-[3px] py-[7px]">
                   <select
                     {...register("wage", { required: true })}
-                    className="text-darkBlue w-full border border-midBlue rounded-md focus:outline-none focus:border-b focus:border-midBlue p-2 sm:pr-3 py-[3px]"
+                    className="text-sm w-full outline-none p-[10px] text-darkBlue border-midBlue border rounded-[10px] placeholder:text-darkBlue/40"
                   >
                     <option value="">Will be discussed with the Owner</option>
                     <option value="10k_15k">10,000 - 15,000</option>
@@ -140,13 +165,13 @@ const Advertised = () => {
 
               {/* GENDER WANTED FOR THE JOB */}
               <div>
-                <small className="text-darkBlue ">
+                <small className="text-darkBlue font-semibold">
                   GENDER WANTED FOR THE JOB
                 </small>
                 <div className="sm:px-[3px] py-[7px]">
                   <select
                     {...register("gender", { required: true })}
-                    className="text-darkBlue w-full border border-midBlue rounded-md focus:outline-none focus:border-b focus:border-midBlue p-2 sm:pr-3 py-[3px]"
+                    className="text-sm w-full outline-none p-[10px] text-darkBlue border-midBlue border rounded-[10px] placeholder:text-darkBlue/40"
                   >
                     <option value="">Gender</option>
                     <option value="Male">Male</option>
@@ -158,11 +183,11 @@ const Advertised = () => {
 
               {/* CERTIFICATION */}
               <div>
-                <small className="text-darkBlue ">CERTIFICATION NEEDED</small>
+                <small className="text-darkBlue font-semibold">CERTIFICATION NEEDED</small>
                 <div className="sm:px-[3px] py-[7px]">
                   <select
                     {...register("certificate", { required: true })}
-                    className="text-darkBlue w-full border border-midBlue rounded-md focus:outline-none focus:border-b focus:border-midBlue p-2 sm:pr-3 py-[3px]"
+                    className="text-sm w-full outline-none p-[10px] text-darkBlue border-midBlue border rounded-[10px] placeholder:text-darkBlue/40"
                   >
                     <option value="Captain's License">Captain's License</option>
                     <option value="Engineering License">
@@ -187,28 +212,116 @@ const Advertised = () => {
               {/* AVAILABILITY */}
 
               <div>
-                <small className="text-darkBlue ">AVAILABILITY</small>
+                <small className="text-darkBlue font-semibold">AVAILABILITY</small>
                 <label
                   htmlFor="availability"
-                  className="flex items-center border-midBlue border rounded-md overflow-hidden pr-2"
+                  className="flex items-center py-1 px-4 border-midBlue border rounded-md overflow-hidden pr-2"
                 >
-                  <input
-                    id="availability"
-                    type="text"
-                    placeholder="Day 10-02-2023 To 10-03-2023"
-                    {...register("availability")}
-                    className="text-xs w-full focus:outline-none border-none p-2 text-darkBlue placeholder:text-gray"
-                  />
+                  <div className="flex items-center justify-center gap-3">
+                    <span className="text-[#13518E] text-sm pr-5">Day</span>
+
+                    <div className="flex items-center bg-midBlue pl-1 gap-1">
+                      {/* day */}
+                      <select
+                        {...register("availabilityStartDay", { required: true })}
+                        className=" bg-midBlue pl-1 text-sm"
+                      >
+                        <option value="">Day</option>
+                        {daysRange &&
+                          daysRange.map((d) => (
+                            <option key={d} value={d}>
+                              {d}
+                            </option>
+                          ))}
+                      </select>
+
+                      {/* month */}
+                      <select
+                        {...register("availabilityStartMonth", { required: true })}
+                        className=" bg-midBlue  text-sm"
+                      >
+                        <option value="">Month</option>
+                        {months &&
+                          months.map((m) => (
+                            <option key={m} value={m}>
+                              {m}
+                            </option>
+                          ))}
+                      </select>
+
+                      {/* year */}
+                      <select
+                        {...register("availabilityStartYear", { required: true })}
+                        className=" bg-midBlue pr-1 text-sm"
+                      >
+                        <option value="">Year</option>
+                        {yearsRange &&
+                          yearsRange.map((y) => (
+                            <option key={y} value={y}>
+                              {y}
+                            </option>
+                          ))}
+                      </select>
+
+                    </div>
+                    <span className="text-[#13518E] px-5">to</span>
+
+                    <div className="flex items-center bg-midBlue pl-1 gap-1">
+                      {/* day */}
+                      <select
+                        {...register("availabilityEndDay", { required: true })}
+                        className=" bg-midBlue pl-1 text-sm"
+                      >
+                        <option value="">Day</option>
+                        {daysRange &&
+                          daysRange.map((d) => (
+                            <option key={d} value={d}>
+                              {d}
+                            </option>
+                          ))}
+                      </select>
+
+                      {/* month */}
+                      <select
+                        {...register("availabilityEndMonth", { required: true })}
+                        className=" bg-midBlue  text-sm"
+                      >
+                        <option value="">Month</option>
+                        {months &&
+                          months.map((m) => (
+                            <option key={m} value={m}>
+                              {m}
+                            </option>
+                          ))}
+                      </select>
+
+                      {/* year */}
+                      <select
+                        {...register("availabilityEndYear", { required: true })}
+                        className=" bg-midBlue pr-1 text-sm"
+                      >
+                        <option value="">Year</option>
+                        {yearsRange &&
+                          yearsRange.map((y) => (
+                            <option key={y} value={y}>
+                              {y}
+                            </option>
+                          ))}
+                      </select>
+
+                    </div>
+                  </div>
                 </label>
+
               </div>
 
               {/* EXPENSES ONBOARD */}
               <div>
-                <small className="text-darkBlue ">EXPENSES ONBOARD</small>
+                <small className="text-darkBlue font-semibold">EXPENSES ONBOARD</small>
                 <div className="sm:px-[3px] py-[7px]">
                   <select
                     {...register("registry", { required: true })}
-                    className="text-darkBlue w-full border border-midBlue rounded-md focus:outline-none focus:border-b focus:border-midBlue p-2 sm:pr-3 py-[3px]"
+                    className="text-sm w-full outline-none p-[10px] text-darkBlue border-midBlue border rounded-[10px] placeholder:text-darkBlue/40"
                   >
                     <option value="">Paid by </option>
                     <option value="Paid by boat owner">
@@ -218,13 +331,14 @@ const Advertised = () => {
                   </select>
                 </div>
               </div>
+
               {/* TEAM OR SOLO  */}
               <div>
-                <small className="text-darkBlue ">TEAM OR SOLO</small>
+                <small className="text-darkBlue font-semibold">TEAM OR SOLO</small>
                 <div className="sm:px-[3px] py-[7px]">
                   <select
                     {...register("collaborative", { required: true })}
-                    className="text-darkBlue w-full border border-midBlue rounded-md focus:outline-none focus:border-b focus:border-midBlue p-2 sm:pr-3 py-[3px]"
+                    className="text-sm w-full outline-none p-[10px] text-darkBlue border-midBlue border rounded-[10px] placeholder:text-darkBlue/40"
                   >
                     <option value="">Collaborative Crew</option>
                     <option value="not important">Not important</option>
@@ -232,49 +346,55 @@ const Advertised = () => {
                   </select>
                 </div>
               </div>
+
             </div>
-            <div className="col-span-6 space-y-1">
+
+            <div className="col-span-12 md:col-span-6 space-y-3">
               {/* JOB ADVERT   */}
-              <div className="">
-                <small className="text-darkBlue ">JOB ADVERT </small>
+             
+              <div>
                 <label
                   htmlFor="Job_advert"
-                  className="flex items-center border-midBlue border rounded-md overflow-hidden pr-2"
+                  className="text-darkBlue text-sm inline-block mb-2"
                 >
-                  <textarea
-                    id="Job_advert"
-                    rows={5}
-                    type="text"
-                    placeholder="In few words describe what you need for your profile advert…"
-                    {...register("jobAdvert")}
-                    className="text-xs w-full focus:outline-none border-none p-2 text-darkBlue placeholder:text-gray h-"
-                  />
+                 JOB ADVERT 
                 </label>
+                <textarea
+                  id="Job_advert"
+                  rows={4}
+                  type="text"
+                  placeholder="In few words describe what you need for your profile advert…"
+                  {...register("jobAdvert")}
+                  className="text-sm w-full outline-none p-[10px] text-darkBlue border-midBlue border rounded-[10px] placeholder:text-darkBlue/40"
+                />
               </div>
+
               {/* EXPERIENCE NEEDED   */}
+             
               <div>
-                <small className="text-darkBlue ">EXPERIENCE NEEDED </small>
                 <label
                   htmlFor="experience"
-                  className="flex items-center border-midBlue border rounded-md overflow-hidden pr-2"
+                  className="text-darkBlue text-sm inline-block mb-2"
                 >
-                  <input
-                    id="experience"
-                    type="number"
-                    placeholder="At least -- Years"
-                    {...register("job_experience")}
-                    className="text-xs w-full focus:outline-none border-none p-2 text-darkBlue placeholder:text-gray"
-                  />
+                  EXPERIENCE NEEDED 
                 </label>
+                <input
+                  id="experience"
+                  type="number"
+                  placeholder="At least -- Years"
+                  {...register("job_experience")}
+                  className="text-sm w-full outline-none p-[10px] text-darkBlue border-midBlue border rounded-[10px] placeholder:text-darkBlue/40"
+                />
               </div>
 
               {/* VISAS NEEDED */}
+
               <div>
-                <small className="text-darkBlue ">VISAS NEEDED</small>
+                <small className="text-darkBlue font-semibold">VISAS NEEDED</small>
                 <div className="sm:px-[3px] py-[7px]">
                   <select
                     {...register("visa", { required: true })}
-                    className="text-darkBlue w-full border border-midBlue rounded-md focus:outline-none focus:border-b focus:border-midBlue p-2 sm:pr-3 py-[3px]"
+                    className="text-sm w-full outline-none p-[10px] text-darkBlue border-midBlue border rounded-[10px] placeholder:text-darkBlue/40"
                   >
                     <option value="">Yes / No</option>
                     <option value="b1/b2 visa">B1/B2 US VISA</option>
@@ -285,13 +405,13 @@ const Advertised = () => {
 
               {/* EXPENSES TO/FROM THE BOAT */}
               <div>
-                <small className="text-darkBlue ">
+                <small className="text-darkBlue font-semibold">
                   EXPENSES TO/FROM THE BOAT
                 </small>
                 <div className="sm:px-[3px] py-[7px]">
                   <select
                     {...register("to_from_expenses", { required: true })}
-                    className="text-darkBlue w-full border border-midBlue rounded-md focus:outline-none focus:border-b focus:border-midBlue p-2 sm:pr-3 py-[3px]"
+                    className="text-sm w-full outline-none p-[10px] text-darkBlue border-midBlue border rounded-[10px] placeholder:text-darkBlue/40"
                   >
                     <option value="">Paid by </option>
                     <option value="Paid by crew">Paid by crew</option>
@@ -299,13 +419,14 @@ const Advertised = () => {
                   </select>
                 </div>
               </div>
+
               {/* TATTOOS  */}
               <div>
-                <small className="text-darkBlue ">TATTOOS</small>
+                <small className="text-darkBlue font-semibold">TATTOOS</small>
                 <div className="sm:px-[3px] py-[7px]">
                   <select
                     {...register("tattoos", { required: true })}
-                    className="text-darkBlue w-full border border-midBlue rounded-md focus:outline-none focus:border-b focus:border-midBlue p-2 sm:pr-3 py-[3px]"
+                    className="text-sm w-full outline-none p-[10px] text-darkBlue border-midBlue border rounded-[10px] placeholder:text-darkBlue/40"
                   >
                     <option value=""> Tattoos Will</option>
                     <option value="No visible tattoos">
@@ -315,13 +436,14 @@ const Advertised = () => {
                   </select>
                 </div>
               </div>
+
               {/* INTERVIEW */}
               <div>
-                <small className="text-darkBlue ">INTERVIEW</small>
+                <small className="text-darkBlue font-semibold">INTERVIEW</small>
                 <div className="sm:px-[3px] py-[7px]">
                   <select
                     {...register("interview", { required: true })}
-                    className="text-darkBlue w-full border border-midBlue rounded-md focus:outline-none focus:border-b focus:border-midBlue p-2 sm:pr-3 py-[3px]"
+                    className="text-sm w-full outline-none p-[10px] text-darkBlue border-midBlue border rounded-[10px] placeholder:text-darkBlue/40"
                   >
                     <option value="">Interview System</option>
                     <option value="Private messaging">Private messaging</option>
@@ -329,9 +451,11 @@ const Advertised = () => {
                   </select>
                 </div>
               </div>
+
             </div>
           </div>
-          <div className=" flex justify-center gap-12 mt-8">
+
+          {/* <div className=" flex justify-center gap-12 mt-8">
             <button className="text-white text-sm font-light bg-blue px-8 py-3 rounded-[9px] border border-blue hover:bg-transparent hover:text-blue shadow-md hover:shadow-3xl duration-300 w-48">
               Confirm
             </button>
@@ -339,7 +463,8 @@ const Advertised = () => {
             <div className="cursor-pointer text-sm font-light text-center px-8 py-3 rounded-[9px] border border-blue w-48 hover:text-blue shadow-md hover:shadow-3xl duration-300">
               Cancel
             </div>
-          </div>
+          </div> */}
+
         </form>
       </div>
     </section>

@@ -109,6 +109,9 @@ const Cr_Services = () => {
               "FLOWER ARRANGEMENTS AND DELIVERIES"
             )}
 
+             {/* CATERING */}
+             {serviceItems("catering", "catering", "CATERING")}
+
             {/* MUSIC BANDS AND SOLO MUSICIANS */}
             {serviceItems(
               "musicBands",
@@ -128,20 +131,18 @@ const Cr_Services = () => {
           </div>
 
           {/* others */}
-          <div>
+         {/* others */}
+         <div>
             <label htmlFor="others"> Others </label>
 
-            <div className="flex items-center justify-between border-midBlue border rounded-[10px] overflow-hidden pr-2">
+            <div className="flex items-center justify-between border-midBlue border rounded-[10px] overflow-hidden pr-2 mt-1">
               <input
                 id="others"
                 placeholder="You can add an advert IT CAN BE A BOX WITH 100 CHARACTERS TO FILL"
                 {...register(`others`)}
-                className="w-full focus:outline-none border-none p-[10px] text-darkBlue placeholder:text-darkBlue"
+                className="text-sm w-full outline-none p-[10px] text-darkBlue border-midBlue  placeholder:text-darkBlue/40"
               />
-              <img
-                src={user2}
-                alt="You can add an advert IT CAN BE A BOX WITH 100 CHARACTERS TO FILL"
-              />
+             
             </div>
           </div>
         </div>
