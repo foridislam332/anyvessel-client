@@ -10,6 +10,7 @@ import user from "../assets/images/user2.png";
 
 // internal file
 import { toast } from "react-toastify";
+import InputField from "../components/InputField";
 import useAuth from "../hooks/useAuth";
 import useAxios from "../hooks/useAxios";
 
@@ -75,7 +76,7 @@ const BoatServicesRegister = () => {
   };
 
   // 1900 to 2025
-  const yearsRange = Array.from({ length: 126 }, (_, i) => 1900 + i);
+  const yearsRange = Array.from({ length: 126 }, (_, i) => 1900 + i).reverse();
   // 1 to 31
   const daysRange = Array.from({ length: 31 }, (_, i) => 1 + i);
   const months = [
@@ -109,95 +110,59 @@ const BoatServicesRegister = () => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="md:grid md:grid-cols-2 flex flex-col md:gap-x-[37px] gap-y-12 text-sm">
           {/* surname */}
-          <label
-            htmlFor="surname"
-            className="flex items-center border-midBlue border rounded-[10px] overflow-hidden pr-2"
-          >
-            <input
-              id="surname"
-              placeholder="Surname"
-              {...register("surname")}
-              className="w-full focus:outline-none border-none p-[10px] text-darkBlue placeholder:text-darkBlue"
-            />
-            <img src={user} alt="surname" />
-          </label>
+          <InputField
+            id="surname"
+            placeholder="Surname"
+            icons={user}
+            {...register("surname")}
+          />
 
           {/* Full name */}
-          <label
-            htmlFor="full_name"
-            className="flex items-center border-midBlue border rounded-[10px] overflow-hidden pr-2"
-          >
-            <input
-              id="full_name"
-              placeholder="Full name"
-              {...register("fullName")}
-              className="w-full focus:outline-none border-none p-[10px] text-darkBlue placeholder:text-darkBlue"
-            />
-            <img src={user2} alt="fullName" />
-          </label>
+          <InputField
+            id="full_name"
+            placeholder="Full name"
+            icons={user2}
+            {...register("fullName")}
+          />
 
           {/* Email address */}
-          <label
-            htmlFor="email"
-            className="flex items-center border-midBlue border rounded-[10px] overflow-hidden pr-2"
-          >
-            <input
-              id="email"
-              type="email"
-              placeholder="Email address"
-              {...register("email")}
-              className="w-full focus:outline-none border-none p-[10px] text-darkBlue placeholder:text-darkBlue"
-            />
-            <img src={email} alt="email" />
-          </label>
+          <InputField
+            id="email"
+            type="email"
+            placeholder="Email address"
+            icons={email}
+            {...register("email")}
+          />
 
           {/* Phone number */}
-          <label
-            htmlFor="phone"
-            className="flex items-center border-midBlue border rounded-[10px] overflow-hidden pr-2"
-          >
-            <input
-              id="phone"
-              type="number"
-              placeholder="Phone number"
-              {...register("phone")}
-              className="w-full focus:outline-none border-none p-[10px] text-darkBlue placeholder:text-darkBlue"
-            />
-            <img src={phone} alt="phone" />
-          </label>
+          <InputField
+            id="phone"
+            type="number"
+            placeholder="Phone number"
+            icons={phone}
+            {...register("phone")}
+          />
 
           {/* password */}
-          <label
-            htmlFor="password"
-            className="flex items-center border-midBlue border rounded-[10px] overflow-hidden pr-2"
-          >
-            <input
-              id="password"
-              type="password"
-              placeholder="Password"
-              {...register("password")}
-              className="w-full focus:outline-none border-none p-[10px] text-darkBlue placeholder:text-darkBlue"
-            />
-            <img src={angle} alt="angle" />
-          </label>
+          <InputField
+            id="password"
+            type="password"
+            placeholder="Password"
+            icons={angle}
+            {...register("password")}
+          />
 
           {/* Retype password */}
-          <label
-            htmlFor="retypePassword"
-            className="flex items-center border-midBlue border rounded-[10px] overflow-hidden pr-2"
-          >
-            <input
-              id="retypePassword"
-              type="password"
-              placeholder="Retype password"
-              {...register("retypePassword")}
-              className="w-full focus:outline-none border-none p-[10px] text-darkBlue placeholder:text-darkBlue"
-            />
-            <img src={angle} alt="angle" />
-          </label>
+          <InputField
+            id="retypePassword"
+            type="password"
+            placeholder="Retype password"
+            icons={angle}
+            {...register("retypePassword")}
+          />
 
           {/* gender */}
-          <div className="flex items-center justify-between border-midBlue border rounded-[10px] overflow-hidden pr-2">
+          <div className="flex items-center justify-between border-midBlue border rounded-[10px] overflow-hidden pr-2 focus-within:border-blue-500 focus-within:scale-105 focus-within:shadow-md focus-within:shadow-midBlue">
             <span className="text-darkBlue pl-[10px]">Gender</span>
             <div className="p-[10px] flex items-center gap-[30px]">
               <label htmlFor="male" className="text-darkBlue flex gap-[19px]">
@@ -225,19 +190,25 @@ const BoatServicesRegister = () => {
           </div>
 
           {/* Birthday */}
-          <div className="flex items-center justify-between border-midBlue border rounded-[10px] overflow-hidden pr-2">
+          <div className="flex items-center justify-between border-midBlue border rounded-[10px] overflow-hidden pr-2 focus-within:scale-105 focus-within:shadow-md focus-within:shadow-midBlue">
             <span className="text-darkBlue pl-[10px]">Birthday : </span>
             <div className="px-[10px] flex items-center gap-2 sm:gap-[30px]">
               {/* year */}
               <div className="sm:px-[3px] py-[7px]">
                 <select
                   {...register("year", { required: true })}
-                  className="text-darkBlue border-b border-midBlue focus:outline-none focus:border-b focus:border-midBlue pr-1 sm:pr-3 py-[3px]"
+                  className="text-darkBlue border-b border-midBlue focus:outline-none focus:border-b focus:border-midBlue pr-1 sm:pr-3 py-[3px] focus-within:border-blue-500 focus-within:scale-105 focus-within:shadow-md focus-within:shadow-midBlue"
                 >
-                  <option value="year">Year</option>
+                  <option className="px-5 block w-24 text-center" value="year">
+                    Year
+                  </option>
                   {yearsRange &&
                     yearsRange.map((y) => (
-                      <option key={y} value={y}>
+                      <option
+                        className="px-5 block w-24 text-center"
+                        key={y}
+                        value={y}
+                      >
                         {y}
                       </option>
                     ))}
@@ -248,7 +219,7 @@ const BoatServicesRegister = () => {
               <div className="sm:px-[3px] py-[7px]">
                 <select
                   {...register("month", { required: true })}
-                  className="text-darkBlue border-b border-midBlue focus:outline-none focus:border-b focus:border-midBlue pr-1 sm:pr-2 py-[3px]"
+                  className="text-darkBlue border-b border-midBlue focus:outline-none focus:border-b focus:border-midBlue pr-1 sm:pr-2 py-[3px] focus-within:scale-105 focus-within:shadow-md focus-within:shadow-midBlue"
                 >
                   {months &&
                     months.map((m) => (
@@ -263,7 +234,7 @@ const BoatServicesRegister = () => {
               <div className="sm:px-[3px] py-[7px]">
                 <select
                   {...register("day", { required: true })}
-                  className="text-darkBlue border-b border-midBlue focus:outline-none focus:border-b focus:border-midBlue pr-1 sm:pr-3 py-[3px]"
+                  className="text-darkBlue border-b border-midBlue focus:outline-none focus:border-b focus:border-midBlue pr-1 sm:pr-3 py-[3px] focus-within:scale-105 focus-within:shadow-md focus-within:shadow-midBlue"
                 >
                   <option value="">Day</option>
                   {daysRange &&

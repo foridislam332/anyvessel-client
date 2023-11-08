@@ -16,7 +16,7 @@ import useAxios from "../hooks/useAxios";
 const BoatRegister = () => {
   const { createUser, upDateProfile } = useAuth();
   const navigate = useNavigate();
-  const [Axios] = useAxios()
+  const [Axios] = useAxios();
   const [picture, setPicture] = useState(null);
   const [identityPhoto, setIdentityPhoto] = useState(null);
   const {
@@ -99,13 +99,11 @@ const BoatRegister = () => {
     createUser(data.email, data.password)
       .then((result) => {
         upDateProfile(result.user, data.fullName, picture).then((res) => {
-          Axios
-            .post("boats", newData)
-            .then((data) => {
-              if (data.status === 200) {
-                navigate("/", { replace: true });
-              }
-            });
+          Axios.post("boats", newData).then((data) => {
+            if (data.status === 200) {
+              navigate("/", { replace: true });
+            }
+          });
         });
       })
       .catch((err) => {
@@ -114,7 +112,7 @@ const BoatRegister = () => {
       });
   };
   // 1900 to 2025
-  const yearsRange = Array.from({ length: 126 }, (_, i) => 1900 + i);
+  const yearsRange = Array.from({ length: 126 }, (_, i) => 1900 + i).reverse();
   // 1 to 31
   const daysRange = Array.from({ length: 31 }, (_, i) => 1 + i);
   const months = [
