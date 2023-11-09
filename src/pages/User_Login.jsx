@@ -3,6 +3,8 @@ import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import useAuth from '../hooks/useAuth';
+import { toast } from 'react-toastify';
+
 
 const User_Login = () => {
     const { signIn } = useAuth()
@@ -17,16 +19,20 @@ const User_Login = () => {
     const onSubmit = data => {
 
         console.log(data)
-        console.log(signIn)
+        // console.log(signIn)
         signIn(data.email, data.password)
             .then(data => {
                 console.log(data.user)
                 navigate('/')
             })
             .catch(error => {
-                console.log(error)
+                console.log(error);
+                toast.error("User Not Found", {
+                    position: "top-center",
+                    autoClose: 3000,
+                    theme: "light",
+                })
             })
-
     };
     return (
         <div className="hero min-h-screen bg-base-200">

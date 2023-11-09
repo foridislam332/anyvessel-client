@@ -1,6 +1,9 @@
 import { Navigate, Outlet, useLocation } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+
+
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import useAuth from "../hooks/useAuth";
 import Footer from "../shared/Footer";
 import Header from "../shared/Header";
@@ -29,7 +32,7 @@ const Main = () => {
 
       {location.pathname !== "/dashboard" && <Footer />}
       {/* <DatePickerComponent /> */}
-      <ToastContainer />
+       <ToastContainer /> 
     </>
   );
 };

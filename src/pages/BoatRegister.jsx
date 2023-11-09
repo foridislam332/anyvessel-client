@@ -25,6 +25,49 @@ const BoatRegister = () => {
     formState: { errors },
   } = useForm();
 
+  // const [searchTerm, setSearchTerm] = useState('');
+  // const [filteredLanguages, setFilteredLanguages] = useState([]);
+  // const languages = ['বাংলা', 'ইংরেজি', 'হিন্দি', 'স্প্যানিশ', 'ফরাসি', 'জার্মান', 'জাপানি', 'চীনা', 'আরবি'];
+
+
+  // const handleInputChange = (event) => {
+  //   const currentInput = event.target.value;
+  //   setSearchTerm(currentInput);
+
+  //   const filtered = languages.filter((language) => language.startsWith(currentInput));
+  //   setFilteredLanguages(filtered);
+  // };
+
+  const [inputValue, setInputValue] = useState('');
+  const [suggestions, setSuggestions] = useState([]);
+  const [selectedLanguages, setSelectedLanguages] = useState([]);
+
+  // Sample list of languages
+  const languageList = ['English', 'Spanish', 'French', 'German', 'Chinese', 'Japanese'];
+
+  const handleInputChange = (e) => {
+    const newInputValue = e.target.value.toLowerCase();
+    setInputValue(newInputValue);
+    const filteredLanguages = languageList.filter((language) =>
+      language.toLowerCase().includes(newInputValue)
+    );
+    setSuggestions(filteredLanguages);
+  };
+
+  const handleSuggestionClick = (language) => {
+    if (!selectedLanguages.includes(language)) {
+      setSelectedLanguages([...selectedLanguages, language]);
+      setInputValue('');
+      setSuggestions([]);
+    }
+  };
+
+  const handleRemoveLanguage = (language) => {
+    const updatedLanguages = selectedLanguages.filter((lang) => lang !== language);
+    setSelectedLanguages(updatedLanguages);
+  };
+
+
   // Image hosting
   const image_hosting_token = import.meta.env.VITE_Image_Upload_Token;
   const image_hosting_url = `https://api.imgbb.com/1/upload?key=${image_hosting_token}`;
@@ -86,7 +129,7 @@ const BoatRegister = () => {
       fullName: data.fullName,
       description: data.description,
       gender: data.gender,
-      languages: data.languages,
+      languages: selectedLanguages,
       nationality: data.nationality,
       phone: data.phone,
       romance: data.romance,
@@ -95,7 +138,7 @@ const BoatRegister = () => {
       identityPhoto: identityPhoto,
       birthDay: `${data.day}, ${data.month} , ${data.year}`,
     };
-
+    // console.log(newData)
     createUser(data.email, data.password)
       .then((result) => {
         upDateProfile(result.user, data.fullName, picture).then((res) => {
@@ -132,6 +175,10 @@ const BoatRegister = () => {
     "December",
   ];
 
+
+
+
+
   return (
     <div className="bg-white bg-opacity-90 px-5 sm:px-10 py-10 md:px-[93px] md:py-[30px] mt-6 rounded-[10px]">
       <div className="max-w-[715px] mx-auto text-center mb-6">
@@ -147,6 +194,7 @@ const BoatRegister = () => {
       {/* form */}
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="md:grid md:grid-cols-2 flex flex-col md:gap-x-[37px] gap-y-5 text-sm">
+
           {/* surname */}
           <label
             htmlFor="surname"
@@ -332,19 +380,43 @@ const BoatRegister = () => {
           </label>
 
           {/* languages */}
-          <label
-            htmlFor="languages"
-            className="flex items-center border-midBlue border rounded-[10px] overflow-hidden pr-2"
-          >
-            <input
-              id="languages"
-              placeholder="Languages spoken on board"
-              {...register("languages")}
-              className="w-full focus:outline-none border-none p-[10px] text-darkBlue placeholder:text-darkBlue"
-            />
-            <img src={angle} alt="angle" />
-          </label>
+          <div className="relative">
+            <label
+              htmlFor="languages"
+              className="flex items-center flex-col border-midBlue border rounded-[10px] overflow-hidden pr-2"
+            >
+              <input
+                id="languages"
+                type="text"
 
+                className="w-full focus:outline-none border-none p-[10px] text-darkBlue placeholder:text-darkBlue "
+                value={inputValue}
+                onChange={handleInputChange}
+                placeholder="Languages spoken on board"
+              />
+              <div className="absolute right-0 top-10 border border-x-midBlue p-2 rounded">
+                {suggestions.length > 0 && (
+                  <div>
+                    {suggestions.map((language, index) => (
+                      <div key={index} onClick={() => handleSuggestionClick(language)}>
+                        {language}
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+              <div
+                className=" top-10 p-2 absolute md:col-span-2 lg:col-span-1 flex items-center justify-between border-midBlue border rounded-[10px] overflow-hidden pr-2"
+              >
+                {selectedLanguages.map((language, index) => (
+                  <div key={index} className="">
+                    {language}{' '}
+                    <button className="mr-5" onClick={() => handleRemoveLanguage(language)}>delete</button>
+                  </div>
+                ))}
+              </div>
+            </label>
+          </div>
           {/* romance */}
           <div className="md:col-span-2 lg:col-span-1 flex items-center justify-between border-midBlue border rounded-[10px] overflow-hidden pr-2">
             <span className="text-darkBlue pl-[10px]">
