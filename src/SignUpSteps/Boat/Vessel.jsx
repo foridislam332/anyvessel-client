@@ -72,6 +72,7 @@ const Vessel = () => {
             ownerUserId: currentUser?._id,
             ownerUserEmail: currentUser?.email,
             postDate: formattedDate,
+            postId:Math.floor(1000000000 + Math.random() * 900000),
             vessel: {
                 registry: data.registry,
                 number_crew: data.number_crew,
@@ -101,6 +102,8 @@ const Vessel = () => {
                 seller_skype: null,
             },
         };
+
+        console.log(newData)
 
         Axios.post("boatSailing", newData)
             .then((res) => {

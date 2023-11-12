@@ -4,6 +4,7 @@ import useAllBoatSailingPost from "../../hooks/useAllBoatSailingPost";
 import useAuth from "../../hooks/useAuth";
 import useAxios from "../../hooks/useAxios";
 import useCurrentUser from "../../hooks/useCurrentUser";
+import Swal from "sweetalert2";
 
 const Contact = () => {
     const { user } = useAuth();
@@ -20,29 +21,39 @@ const Contact = () => {
     if (boatSellPost === undefined) {
         return <h2>Loading...</h2>;
     }
-    const newPostID = boatSellPost[boatSellPost.length - 1]?._id;
-
+    const newPost = boatSellPost[boatSellPost.length - 1]
+    const newPostID = newPost?._id;
+    const skypeLink = "https://join.skype.com/invite/"
     const onSubmit = (data) => {
-        const newData = {
-            newPostID: newPostID,
-            ownerUserId: currentUser?._id,
-            ownerUserEmail: currentUser?.email,
-            sellerName: data.sellerName,
-            sellerEmail: data.sellerEmail,
-            seller_Number: data.seller_Number,
-            seller_skype: data.seller_skype,
-        };
 
-        Axios.patch("boatSailing-contact", newData)
-            .then((res) => {
-                if (res?.status === 200) {
-                    toast.success("Boat Sailing location update successful!");
-                }
-            })
-            .catch((err) => {
-                toast.error("Somethings else!");
-                // console.log(err);
-            });
+        if (skypeLink === data.seller_skype.slice(0, 30)) {
+            console.log("correct link")
+            const newData = {
+                newPostID: newPostID,
+                ownerUserId: currentUser?._id,
+                ownerUserEmail: currentUser?.email,
+                sellerName: data.sellerName,
+                sellerEmail: data.sellerEmail,
+                seller_Number: data.seller_Number,
+                seller_skype: data.seller_skype,
+            };
+
+            Axios.patch("boatSailing-contact", newData)
+                .then((res) => {
+                    if (res?.status === 200) {
+                        toast.success("Boat Sailing Contact Info update successful!");
+                    }
+                })
+                .catch((err) => {
+                    toast.error("Somethings else!");
+                    // console.log(err);
+                });
+
+        } else {
+            toast.success("Skype Link Isn't Valid")
+
+        }
+
     };
     return (
         <section>
@@ -96,11 +107,13 @@ const Contact = () => {
                             </label>
                             <input
                                 id="phone_number"
-                                type="number"
+                                type="text"
                                 placeholder="Your Phone Number"
+                                defaultValue={newPost?.contact?.seller_Number}
                                 {...register("seller_Number")}
-                                className="text-sm w-full outline-none p-[10px] text-darkBlue border-midBlue border rounded-[10px] placeholder:text-darkBlue/40"
+                                className=" appearance-none  text-sm w-full outline-none p-[10px] text-darkBlue border-midBlue border rounded-[10px] placeholder:text-darkBlue/40"
                             />
+
                         </div>
                         <div>
                             <label
@@ -112,7 +125,8 @@ const Contact = () => {
                             <input
                                 id="skype"
                                 type="url"
-                                placeholder="Your Skype Account Link"
+                                defaultValue={newPost?.contact?.seller_skype}
+                                placeholder="https://join.skype.com/invite/..."
                                 {...register("seller_skype")}
                                 className="text-sm w-full outline-none p-[10px] text-darkBlue border-midBlue border rounded-[10px] placeholder:text-darkBlue/40"
                             />

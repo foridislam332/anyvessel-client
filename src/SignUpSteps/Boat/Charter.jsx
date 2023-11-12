@@ -33,7 +33,7 @@ const Charter = () => {
         },
     ];
     posts.map((im) => {
-        // console.log(im)
+        console.log(im)
     });
 
     // Image hosting

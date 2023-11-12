@@ -147,18 +147,25 @@ const Advertised = () => {
                     className="text-sm w-full outline-none p-[10px] text-darkBlue border-midBlue border rounded-[10px] placeholder:text-darkBlue/40"
                   >
                     <option value="">Will be discussed with the Owner</option>
-                    <option value="10k_15k">10,000 - 15,000</option>
-                    <option value="15k_20k">15,000 - 20,000</option>
-                    <option value="20k_25k">20,000 - 25,000</option>
-                    <option value="25k_30k">25,000 - 30,000</option>
-                    <option value="30k_35k">30,000 - 35,000</option>
-                    <option value="35k_40k">35,000 - 40,000</option>
-                    <option value="40k_45k">40,000 - 45,000</option>
-                    <option value="45k_50k">45,000 - 50,000</option>
-                    <option value="50k_60k">50,000 - 60,000</option>
-                    <option value="60k_70k">60,000 - 70,000</option>
-                    <option value="70k_80k">70,000 - 80,000</option>
-                    <option value="80k_90k">80,000 - 90,000</option>
+                    <option value="1000 - 1500">1000 - 1500</option>
+                    <option value="1500 - 2000">1500 - 2000</option>
+                    <option value="2000 - 2500">2000 - 2500</option>
+                    <option value="2500 - 3000">2500 - 3000</option>
+                    <option value="3000 - 3500">3000 - 3500</option>
+                    <option value="3500 - 4000">3500 - 4000</option>
+                    <option value="4000 - 4500">4000 - 4500</option>
+                    <option value="4500 - 5000">4500 - 5000</option>
+                    <option value="5000 - 5500">5000 - 5500</option>
+                    <option value="5500 - 6000">5500 - 6000</option>
+                    <option value="6000 - 6500">6000 - 6500</option>
+                    <option value="6500 - 7000">6500 - 7000</option>
+                    <option value="7000 - 7500">7000 - 7500</option>
+                    <option value="7500 - 8000">7500 - 8000</option>
+                    <option value="8000 - 8500">8000 - 8500</option>
+                    <option value="8500 - 9000">8500 - 9000</option>
+                    <option value="9000 - 9500">9000 - 9500</option>
+                    <option value="9500 - 10,000">9500 - 10,000</option>
+                    <option value="negotiation">Negotiation</option>
                   </select>
                 </div>
               </div>
