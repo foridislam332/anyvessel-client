@@ -1,7 +1,8 @@
+import { useState } from "react";
 import { useForm } from "react-hook-form";
-import useCurrentUser from "../../hooks/useCurrentUser";
+import RadioBox from "../../components/RadioBox";
 import useAxios from "../../hooks/useAxios";
-import { toast } from "react-toastify";
+import useCurrentUser from "../../hooks/useCurrentUser";
 
 const Advertised = () => {
   const [Axios] = useAxios();
@@ -12,7 +13,11 @@ const Advertised = () => {
     control,
     formState: { errors },
   } = useForm();
-
+  const [radioValue, setRadioValue] = useState({
+    expertise_level: null,
+    payroll_status: null,
+    experience: null,
+  });
 
   // 2023 to 2033
   const yearsRange = Array.from({ length: 10 }, (_, i) => 2023 + i);
@@ -33,14 +38,13 @@ const Advertised = () => {
     "December",
   ];
 
-
   const onSubmit = (data) => {
     const newData = {
       ownerUserId: currentUser?._id,
       ownerUserEmail: currentUser?.email,
-      expertise_level: data.expertise_level,
-      payroll_status: data.payroll_status,
-      experience: data.experience,
+      expertise_level: radioValue?.expertise_level,
+      payroll_status: radioValue?.payroll_status,
+      experience: radioValue?.experience,
       advertised_Position: data.advertised_Position,
       wage: data.wage,
       gender: data.gender,
@@ -52,8 +56,9 @@ const Advertised = () => {
       to_from_expenses: data.to_from_expenses,
       tattoos: data.tattoos,
       interview: data.interview,
-      availability: `${data.availabilityStartDay}, ${data.availabilityStartMonth} , ${data.availabilityStartYear} to ${data.availabilityEndDay}, ${data.availabilityEndMonth} , ${data.availabilityEndYear} `
+      availability: `${data.availabilityStartDay}, ${data.availabilityStartMonth} , ${data.availabilityStartYear} to ${data.availabilityEndDay}, ${data.availabilityEndMonth} , ${data.availabilityEndYear} `,
     };
+
     Axios.post("boatOwner-advertised", newData)
       .then((res) => {
         if (res?.data?.insertedId) {
@@ -66,58 +71,60 @@ const Advertised = () => {
       })
       .catch((err) => console.log(err));
   };
+
   return (
     <section>
-      <div className="">
+      <div
+        className="max-h-[650px] overflow-y-scroll no-scrollbar"
+        title="Scroll Now"
+      >
         <form onSubmit={handleSubmit(onSubmit)}>
-
           <div className="flex justify-between flex-col md:flex-row mb-5">
             <div className="w-auto md:w-[750px]">
-              <div className="sm:px-[3px] py-[7px]">
-                <select
-                  {...register("expertise_level", { required: true })}
-                  className="text-sm w-full outline-none p-[10px] text-darkBlue border-midBlue border rounded-[10px] placeholder:text-darkBlue/40"
-                >
-                  <option value="">Expertise Level</option>
-                  <option value="Professional">Professional</option>
-                  <option value="Recreational">Recreational</option>
-                </select>
-              </div>
-              <div className="sm:px-[3px] py-[7px]">
-                <select
-                  {...register("payroll_status", { required: true })}
-                 className="text-sm w-full outline-none p-[10px] text-darkBlue border-midBlue border rounded-[10px] placeholder:text-darkBlue/40"
-                >
-                  <option value="">Payroll Status</option>
-                  <option value="paid">Paid Position</option>
-                  <option value="unpaid">Unpaid Position</option>
-                </select>
-              </div>
-              <div className="sm:px-[3px] py-[7px]">
-                <select
-                  {...register("experience", { required: true })}
-                 className="text-sm w-full outline-none p-[10px] text-darkBlue border-midBlue border rounded-[10px] placeholder:text-darkBlue/40"
-                >
-                  <option value=""> Skilled Crew / No Experience</option>
-                  <option value="skilled">Skilled Crew</option>
-                  <option value="fresher">No Experience</option>
-                </select>
-              </div>
+              <RadioBox
+                serial="1"
+                idName="expertise_level"
+                radioValue={radioValue}
+                setRadioValue={setRadioValue}
+                labelText1={{ value: "Professional", text: "Professional" }}
+                labelText2={{ value: "Recreational", text: "Recreational" }}
+              />
+              <RadioBox
+                serial="2"
+                idName="payroll_status"
+                radioValue={radioValue}
+                setRadioValue={setRadioValue}
+                labelText1={{ value: "paid", text: "Paid Position" }}
+                labelText2={{ value: "unpaid", text: "Unpaid Position" }}
+              />
+              <RadioBox
+                serial="3"
+                radioValue={radioValue}
+                setRadioValue={setRadioValue}
+                idName="experience"
+                labelText1={{ value: "skilled", text: "Skilled Crew" }}
+                labelText2={{ value: "fresher", text: "No Experience" }}
+              />
             </div>
             <div className="">
-              <button type="submit" className="text-white text-sm font-light bg-blue px-8 py-3 rounded-[9px] border border-blue hover:bg-transparent hover:text-blue shadow-md hover:shadow-3xl duration-300">
-              Add new Position
+              <button
+                type="submit"
+                className="text-white text-sm font-light bg-blue px-8 py-3 rounded-[9px] border border-blue hover:bg-transparent hover:text-blue shadow-md hover:shadow-3xl duration-300"
+              >
+                Add new Position
               </button>
             </div>
           </div>
 
           <div className="mb-6 grid grid-cols-12 gap-8">
-
             <div className="col-span-12 md:col-span-6 space-y-3 ">
               {/* POSITION */}
               <div>
                 <small className="text-darkBlue font-semibold">POSITION </small>
-                <label htmlFor="advertisedPosition" className="sm:px-[3px] py-[70px]">
+                <label
+                  htmlFor="advertisedPosition"
+                  className="sm:px-[3px] py-[70px]"
+                >
                   <select
                     id="advertisedPosition"
                     {...register("advertised_Position", { required: true })}
@@ -190,7 +197,9 @@ const Advertised = () => {
 
               {/* CERTIFICATION */}
               <div>
-                <small className="text-darkBlue font-semibold">CERTIFICATION NEEDED</small>
+                <small className="text-darkBlue font-semibold">
+                  CERTIFICATION NEEDED
+                </small>
                 <div className="sm:px-[3px] py-[7px]">
                   <select
                     {...register("certificate", { required: true })}
@@ -219,7 +228,9 @@ const Advertised = () => {
               {/* AVAILABILITY */}
 
               <div>
-                <small className="text-darkBlue font-semibold">AVAILABILITY</small>
+                <small className="text-darkBlue font-semibold">
+                  AVAILABILITY
+                </small>
                 <label
                   htmlFor="availability"
                   className="flex items-center py-1 px-4 border-midBlue border rounded-md overflow-hidden pr-2"
@@ -230,7 +241,9 @@ const Advertised = () => {
                     <div className="flex items-center bg-midBlue pl-1 gap-1">
                       {/* day */}
                       <select
-                        {...register("availabilityStartDay", { required: true })}
+                        {...register("availabilityStartDay", {
+                          required: true,
+                        })}
                         className=" bg-midBlue pl-1 text-sm"
                       >
                         <option value="">Day</option>
@@ -244,7 +257,9 @@ const Advertised = () => {
 
                       {/* month */}
                       <select
-                        {...register("availabilityStartMonth", { required: true })}
+                        {...register("availabilityStartMonth", {
+                          required: true,
+                        })}
                         className=" bg-midBlue  text-sm"
                       >
                         <option value="">Month</option>
@@ -258,7 +273,9 @@ const Advertised = () => {
 
                       {/* year */}
                       <select
-                        {...register("availabilityStartYear", { required: true })}
+                        {...register("availabilityStartYear", {
+                          required: true,
+                        })}
                         className=" bg-midBlue pr-1 text-sm"
                       >
                         <option value="">Year</option>
@@ -269,7 +286,6 @@ const Advertised = () => {
                             </option>
                           ))}
                       </select>
-
                     </div>
                     <span className="text-[#13518E] px-5">to</span>
 
@@ -290,7 +306,9 @@ const Advertised = () => {
 
                       {/* month */}
                       <select
-                        {...register("availabilityEndMonth", { required: true })}
+                        {...register("availabilityEndMonth", {
+                          required: true,
+                        })}
                         className=" bg-midBlue  text-sm"
                       >
                         <option value="">Month</option>
@@ -315,16 +333,16 @@ const Advertised = () => {
                             </option>
                           ))}
                       </select>
-
                     </div>
                   </div>
                 </label>
-
               </div>
 
               {/* EXPENSES ONBOARD */}
               <div>
-                <small className="text-darkBlue font-semibold">EXPENSES ONBOARD</small>
+                <small className="text-darkBlue font-semibold">
+                  EXPENSES ONBOARD
+                </small>
                 <div className="sm:px-[3px] py-[7px]">
                   <select
                     {...register("registry", { required: true })}
@@ -341,7 +359,9 @@ const Advertised = () => {
 
               {/* TEAM OR SOLO  */}
               <div>
-                <small className="text-darkBlue font-semibold">TEAM OR SOLO</small>
+                <small className="text-darkBlue font-semibold">
+                  TEAM OR SOLO
+                </small>
                 <div className="sm:px-[3px] py-[7px]">
                   <select
                     {...register("collaborative", { required: true })}
@@ -353,18 +373,17 @@ const Advertised = () => {
                   </select>
                 </div>
               </div>
-
             </div>
 
             <div className="col-span-12 md:col-span-6 space-y-3">
               {/* JOB ADVERT   */}
-             
+
               <div>
                 <label
                   htmlFor="Job_advert"
                   className="text-darkBlue text-sm inline-block mb-2"
                 >
-                 JOB ADVERT 
+                  JOB ADVERT
                 </label>
                 <textarea
                   id="Job_advert"
@@ -377,13 +396,13 @@ const Advertised = () => {
               </div>
 
               {/* EXPERIENCE NEEDED   */}
-             
+
               <div>
                 <label
                   htmlFor="experience"
                   className="text-darkBlue text-sm inline-block mb-2"
                 >
-                  EXPERIENCE NEEDED 
+                  EXPERIENCE NEEDED
                 </label>
                 <input
                   id="experience"
@@ -397,7 +416,9 @@ const Advertised = () => {
               {/* VISAS NEEDED */}
 
               <div>
-                <small className="text-darkBlue font-semibold">VISAS NEEDED</small>
+                <small className="text-darkBlue font-semibold">
+                  VISAS NEEDED
+                </small>
                 <div className="sm:px-[3px] py-[7px]">
                   <select
                     {...register("visa", { required: true })}
@@ -458,7 +479,6 @@ const Advertised = () => {
                   </select>
                 </div>
               </div>
-
             </div>
           </div>
 
@@ -471,7 +491,6 @@ const Advertised = () => {
               Cancel
             </div>
           </div> */}
-
         </form>
       </div>
     </section>
