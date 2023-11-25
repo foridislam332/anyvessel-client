@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import BoatServiceCard from "../components/BoatServiceCard";
 import useAllBoatService from "../hooks/useAllBoatService";
+import { Helmet } from "react-helmet";
 
 const Boat_Services = () => {
   const { allBoatService } = useAllBoatService();
@@ -11,6 +12,9 @@ const Boat_Services = () => {
   }, []);
   return (
     <section className="py-16 bg-[#F0F6FB]">
+      <Helmet>
+        <title> Boat Services | Anyvessel</title>
+      </Helmet>
       <div className="container">
         <div className="mb-10">
           {/* <FilterSearch

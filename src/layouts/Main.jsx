@@ -1,10 +1,12 @@
 import { Navigate, Outlet, useLocation } from "react-router-dom";
+
 import useAuth from "../hooks/useAuth";
 import Footer from "../shared/Footer";
 import Header from "../shared/Header";
 
 import { ToastContainer } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
+
 const Main = () => {
   const { user, loading } = useAuth();
   const location = useLocation();
@@ -28,8 +30,8 @@ const Main = () => {
       </main>
 
       {location.pathname !== "/dashboard" && <Footer />}
-      {/* <DatePickerComponent /> */}
-       <ToastContainer /> 
+
+      <ToastContainer />
     </>
   );
 };

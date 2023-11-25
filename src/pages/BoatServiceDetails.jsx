@@ -2,6 +2,7 @@ import { HiOutlineLocationMarker } from "react-icons/hi";
 import { useLoaderData } from "react-router-dom";
 import { toast } from "react-toastify";
 import SectionTitle from "../components/SectionTitle";
+import { Helmet } from "react-helmet";
 
 const BoatServiceDetails = () => {
   const boatData = useLoaderData();
@@ -33,6 +34,10 @@ const BoatServiceDetails = () => {
       <div>
         {/* Section Title */}
         <SectionTitle title="Boat Service Details" />
+
+        <Helmet>
+          <title>Boat Service Details | Anyvessel</title>
+        </Helmet>
 
         <div className="py-12 container mx-auto ">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8">

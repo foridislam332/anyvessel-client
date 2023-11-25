@@ -1,11 +1,12 @@
+import { useState } from "react";
+import { Helmet } from "react-helmet";
+import { useForm } from "react-hook-form";
 import { BiCalendar } from "react-icons/bi";
 import { BsFillFlagFill, BsTelephoneOutbound } from "react-icons/bs";
 import { LuLanguages } from "react-icons/lu";
 import { MdAccountCircle, MdOutlineEmail } from "react-icons/md";
 import CustomModal from "../components/CustomModal";
-import { useState } from "react";
 import useAxios from "../hooks/useAxios";
-import { useForm } from "react-hook-form";
 
 const CrewProfile = ({ user, currentUserLoading, refetch }) => {
   const { surname, email, fullName, gender, phone, role, birthDay } = user;
@@ -51,17 +52,22 @@ const CrewProfile = ({ user, currentUserLoading, refetch }) => {
 
   const age = calculateAge(birthDay);
 
-  const { register, handleSubmit, watch, setValue, reset, formState: { errors } } = useForm();
+  const {
+    register,
+    handleSubmit,
+    watch,
+    setValue,
+    reset,
+    formState: { errors },
+  } = useForm();
   const [Axios] = useAxios();
   const [isBasicInfoModalOpen, setIsBasicInfoModalOpen] = useState(false);
 
-
-
   const handleBasicInfoModal = (e) => {
-    if (e == "cancel") setIsBasicInfoModalOpen(false)
-  }
+    if (e == "cancel") setIsBasicInfoModalOpen(false);
+  };
 
-  const onBasicInfoSubmit = data => {
+  const onBasicInfoSubmit = (data) => {
     const updateData = {
       email: email,
       fullName: data.fullName,
@@ -69,24 +75,26 @@ const CrewProfile = ({ user, currentUserLoading, refetch }) => {
       phone: data.phone,
       // languages: data.languages,
       // description: data.description
-    }
-    console.log(updateData)
-    Axios.patch('/crew/basic', updateData)
-      .then(res => {
+    };
+    console.log(updateData);
+    Axios.patch("/crew/basic", updateData)
+      .then((res) => {
         if (res.status === 200) {
           refetch();
-          setIsBasicInfoModalOpen(false)
+          setIsBasicInfoModalOpen(false);
           // reset()
         }
       })
-      .catch(error => {
+      .catch((error) => {
         console.log(error);
-      })
-
-
-  }
+      });
+  };
   return (
     <section>
+      <Helmet>
+        <title> {fullName} - Profile | Anyvessel</title>
+      </Helmet>
+
       <div>
         {/* Banner */}
         <img
@@ -178,38 +186,47 @@ const CrewProfile = ({ user, currentUserLoading, refetch }) => {
           <p className="">Unavailable - Found a Crew</p>
         </div>
         <div className="mt-4 shadow-md rounded-lg p-5 flex justify-center">
-          <button className="px-5 py-2 border-2 rounded-md border-purple-600 hover:border-red-800 duration-300" onClick={() => setIsBasicInfoModalOpen(!isBasicInfoModalOpen)}>Update Profile Information</button>
+          <button
+            className="px-5 py-2 border-2 rounded-md border-purple-600 hover:border-red-800 duration-300"
+            onClick={() => setIsBasicInfoModalOpen(!isBasicInfoModalOpen)}
+          >
+            Update Profile Information
+          </button>
         </div>
         {/* <p className="  flex items-center">SY - Sailing Yacht (Sloop) , 12.2m(40 ft) , sail , catamarna , <span className="font-semibold flex items-center">Catana <BsBoxArrowUpRight /> 40</span></p> */}
       </div>
-      {
-        isBasicInfoModalOpen &&
+      {isBasicInfoModalOpen && (
         <CustomModal
           isModalOpen={isBasicInfoModalOpen}
           setIsModalOpen={setIsBasicInfoModalOpen}
           handleModal={handleBasicInfoModal}
         >
-          <form className='text-black'
+          <form
+            className="text-black"
             onSubmit={handleSubmit(onBasicInfoSubmit)}
           >
-            <h3 className="font-bold text-xl mb-2">Update Your Basic Profile Information</h3>
-            <p className='border-t border-dark mb-5'></p>
+            <h3 className="font-bold text-xl mb-2">
+              Update Your Basic Profile Information
+            </h3>
+            <p className="border-t border-dark mb-5"></p>
 
-            <div className='sm:flex gap-5'>
+            <div className="sm:flex gap-5">
               {/* Name */}
-              <div className='w-full'>
-                <label htmlFor="full_name" className='text-dark text-sm'>Name:</label>
+              <div className="w-full">
+                <label htmlFor="full_name" className="text-dark text-sm">
+                  Name:
+                </label>
                 <input
                   id="full_name"
                   {...register("fullName")}
                   defaultValue={fullName}
-                  placeholder='Your full name'
-                  className='w-full border text-black bg-white border-dark/40 p-2 rounded-md focus:outline-none focus:border-primary mb-1 sm:mb-3'
+                  placeholder="Your full name"
+                  className="w-full border text-black bg-white border-dark/40 p-2 rounded-md focus:outline-none focus:border-primary mb-1 sm:mb-3"
                 />
               </div>
             </div>
 
-            <div className='sm:flex gap-5'>
+            <div className="sm:flex gap-5">
               {/* nationality */}
               {/* <div className='w-full'>
                 <label htmlFor="nationality" className='text-dark text-sm'>Nationality:</label>
@@ -221,17 +238,18 @@ const CrewProfile = ({ user, currentUserLoading, refetch }) => {
                   className='w-full border  text-black bg-white border-dark/40 p-2 rounded-md focus:outline-none focus:border-primary mb-1 sm:mb-3'
                 />
               </div> */}
-          
 
               {/* phone */}
-              <div className='w-full'>
-                <label htmlFor="number" className='text-dark text-sm'>Contact Number:</label>
+              <div className="w-full">
+                <label htmlFor="number" className="text-dark text-sm">
+                  Contact Number:
+                </label>
                 <input
                   id="number"
                   {...register("phone")}
                   defaultValue={phone}
-                  placeholder='New Phone Number'
-                  className='w-full border text-black bg-white border-dark/40 p-2 rounded-md focus:outline-none focus:border-primary mb-1 sm:mb-3'
+                  placeholder="New Phone Number"
+                  className="w-full border text-black bg-white border-dark/40 p-2 rounded-md focus:outline-none focus:border-primary mb-1 sm:mb-3"
                 />
               </div>
             </div>
@@ -266,7 +284,7 @@ const CrewProfile = ({ user, currentUserLoading, refetch }) => {
           </form>
           <p>There is no more data for Update</p>
         </CustomModal>
-      }
+      )}
     </section>
   );
 

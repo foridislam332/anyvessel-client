@@ -2,6 +2,7 @@ import { HiOutlineLocationMarker } from "react-icons/hi";
 import { Link, useLoaderData } from "react-router-dom";
 import { toast } from "react-toastify";
 import SectionTitle from "../components/SectionTitle";
+import { Helmet } from "react-helmet";
 
 const CrewDetails = () => {
   const loadData = useLoaderData();
@@ -9,6 +10,10 @@ const CrewDetails = () => {
 
   return (
     <section className="gap-4 py-12 md:py-26 p-4 rounded-md bg-white">
+      <Helmet>
+        <title> Crew Details | Anyvessel</title>
+      </Helmet>
+
       <div className="container">
         <SectionTitle title="Crew Details" />
 

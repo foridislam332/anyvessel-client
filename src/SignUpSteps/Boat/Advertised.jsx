@@ -238,13 +238,13 @@ const Advertised = () => {
                   <div className="flex items-center justify-center gap-3">
                     <span className="text-[#13518E] text-sm pr-5">Day</span>
 
-                    <div className="flex items-center bg-midBlue pl-1 gap-1">
+                    <div className="flex items-center pl-1 gap-1">
                       {/* day */}
                       <select
                         {...register("availabilityStartDay", {
                           required: true,
                         })}
-                        className=" bg-midBlue pl-1 text-sm"
+                        className="pl-1 text-sm scroll-smooth"
                       >
                         <option value="">Day</option>
                         {daysRange &&
@@ -260,7 +260,7 @@ const Advertised = () => {
                         {...register("availabilityStartMonth", {
                           required: true,
                         })}
-                        className=" bg-midBlue  text-sm"
+                        className=" text-sm"
                       >
                         <option value="">Month</option>
                         {months &&
@@ -276,7 +276,7 @@ const Advertised = () => {
                         {...register("availabilityStartYear", {
                           required: true,
                         })}
-                        className=" bg-midBlue pr-1 text-sm"
+                        className=" pr-1 text-sm"
                       >
                         <option value="">Year</option>
                         {yearsRange &&
@@ -289,11 +289,11 @@ const Advertised = () => {
                     </div>
                     <span className="text-[#13518E] px-5">to</span>
 
-                    <div className="flex items-center bg-midBlue pl-1 gap-1">
+                    <div className="flex items-center pl-1 gap-1">
                       {/* day */}
                       <select
                         {...register("availabilityEndDay", { required: true })}
-                        className=" bg-midBlue pl-1 text-sm"
+                        className="pl-1 text-sm"
                       >
                         <option value="">Day</option>
                         {daysRange &&
@@ -309,7 +309,7 @@ const Advertised = () => {
                         {...register("availabilityEndMonth", {
                           required: true,
                         })}
-                        className=" bg-midBlue  text-sm"
+                        className="text-sm"
                       >
                         <option value="">Month</option>
                         {months &&
@@ -323,7 +323,7 @@ const Advertised = () => {
                       {/* year */}
                       <select
                         {...register("availabilityEndYear", { required: true })}
-                        className=" bg-midBlue pr-1 text-sm"
+                        className="pr-1 text-sm"
                       >
                         <option value="">Year</option>
                         {yearsRange &&

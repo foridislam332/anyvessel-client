@@ -13,6 +13,7 @@ import { toast } from "react-toastify";
 import InputField from "../components/InputField";
 import useAuth from "../hooks/useAuth";
 import useAxios from "../hooks/useAxios";
+import { Helmet } from "react-helmet";
 
 const BoatServicesRegister = () => {
   const [Axios] = useAxios();
@@ -96,6 +97,10 @@ const BoatServicesRegister = () => {
 
   return (
     <div className="bg-white bg-opacity-90 px-5 sm:px-10 py-10 md:px-[93px] md:py-[30px] mt-6 rounded-[10px]">
+      <Helmet>
+        <title>Boat Services Register | Anyvessel</title>
+      </Helmet>
+
       <div className="max-w-[715px] mx-auto text-center mb-6">
         <h2 className="text-lightBlue text-[19px]">
           Register a Boat profile to find a crew member:

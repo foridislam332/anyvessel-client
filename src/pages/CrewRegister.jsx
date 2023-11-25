@@ -9,6 +9,7 @@ import user2 from "../assets/images/user-3.png";
 import user from "../assets/images/user2.png";
 
 // internal files
+import { Helmet } from "react-helmet";
 import { toast } from "react-toastify";
 import useAuth from "../hooks/useAuth";
 import useAxios from "../hooks/useAxios";
@@ -79,6 +80,10 @@ const CrewRegister = () => {
 
   return (
     <div className="bg-white bg-opacity-90 px-5 sm:px-10 py-10 md:px-[93px] md:py-[30px] mt-16 rounded-[10px]">
+      <Helmet>
+        <title> Crew Register | Anyvessel</title>
+      </Helmet>
+
       <div className="max-w-[715px] mx-auto text-center mb-12">
         <h2 className="text-lightBlue text-[19px]">
           Register a Boat profile to find a crew member:

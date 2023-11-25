@@ -21,12 +21,12 @@ const RegisterHome = () => {
       <main>
         <section
           style={{ backgroundImage: `url(${RegisterBg})` }}
-          className="bg-cover bg-center md:h-[915px] py-16 flex flex-col items-center justify-center relative mb-28"
+          className="bg-cover bg-center md:h-[915px] py-16 flex flex-col items-center justify-center relative"
         >
           <div className="container">
             {/* register title */}
             <div className="flex flex-col items-center justify-center text-darkBlue">
-              <h1 className="text-[24px] font-semibold leading-[36px]">
+              <h1 className="text-[24px] font-semibold leading-[36px] mt-[30px]">
                 Welcome to Anyvessel,
               </h1>
               <p className="text-[24px] leading-[36px] text-center">
@@ -35,7 +35,9 @@ const RegisterHome = () => {
             </div>
 
             {/* register main */}
-            <Outlet />
+            <div className="max-h-[550px] overflow-x-auto no-scrollbar rounded-lg">
+              <Outlet />
+            </div>
           </div>
         </section>
         <AboutAnyvessel />

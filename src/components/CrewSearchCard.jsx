@@ -11,6 +11,7 @@ const CrewSearchCard = ({ service }) => {
       ? advert?.advert?.slice(0, 100) + "...."
       : advert?.advert;
 
+  console.log("service ", service);
   return (
     <>
       <div className="bg-white rounded-[10px] hover:shadow-3xl duration-300">
@@ -43,7 +44,6 @@ const CrewSearchCard = ({ service }) => {
               {location?.country}
             </p>
           </div>
-
         </div>
 
         <article className="px-4 h-18 md:h-20">
