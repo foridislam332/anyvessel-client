@@ -132,12 +132,12 @@ const BoatRegister = () => {
       picture: picture,
       role: "boat",
       identityPhoto: identityPhoto,
-      birthDay: `${data.day}, ${data.month} , ${data.year}`,
+      birthDay: `${data?.day}, ${data?.month} , ${data?.year}`,
     };
     // console.log(newData)
-    createUser(data.email, data.password)
+    createUser(data?.email, data?.password)
       .then((result) => {
-        upDateProfile(result.user, data.fullName, picture).then((res) => {
+        upDateProfile(result?.user, data?.fullName, picture).then((res) => {
           Axios.post("boats", newData).then((data) => {
             if (data.status === 200) {
               navigate("/", { replace: true });

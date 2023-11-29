@@ -34,7 +34,7 @@ const Cr_ServiceLocation = () => {
 
     Axios.patch("crew-data-location", newData)
       .then((res) => {
-        if (res?.status === 200) {
+        if (res?.status === 200 || res?.status === 201) {
           navigate("/sign-up-step/crew-contact-details", {
             replace: true,
           });
@@ -42,7 +42,7 @@ const Cr_ServiceLocation = () => {
       })
       .catch((err) => {
         toast.error("Somethings else!");
-        // console.log(err); 
+        // console.log(err);
       });
   };
 
@@ -65,7 +65,7 @@ const Cr_ServiceLocation = () => {
         <div className="flex flex-col md:gap-x-[37px] gap-y-5 text-sm">
           {/* Country */}
           <select
-           className="text-sm w-full outline-none p-[10px] text-darkBlue border-midBlue border rounded-[10px] placeholder:text-darkBlue/40"
+            className="text-sm w-full outline-none p-[10px] text-darkBlue border-midBlue border rounded-[10px] placeholder:text-darkBlue/40"
             {...register("country", { required: true })}
             name="country"
             id="country"
@@ -80,7 +80,7 @@ const Cr_ServiceLocation = () => {
 
           {/* City */}
           <select
-           className="text-sm w-full outline-none p-[10px] text-darkBlue border-midBlue border rounded-[10px] placeholder:text-darkBlue/40"
+            className="text-sm w-full outline-none p-[10px] text-darkBlue border-midBlue border rounded-[10px] placeholder:text-darkBlue/40"
             {...register("city")}
             name="city"
             id="city"

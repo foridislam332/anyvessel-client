@@ -16,7 +16,7 @@ const StepsOutlet = () => {
           <StepNavItems />
 
           {/* Outlet */}
-          <main className="bg-white p-2 mt-5">
+          <main className="max-h-[550px] overflow-x-auto no-scrollbar bg-white p-2 mt-5">
             <Outlet />
           </main>
         </div>

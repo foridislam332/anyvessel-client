@@ -13,8 +13,8 @@ const CrewProfile = ({ user, currentUserLoading, refetch }) => {
 
   const calculateAge = (birthDate) => {
     const today = new Date();
-    const birthDateArray = birthDate.split(",");
-    const birthMonth = birthDateArray[1].trim();
+    const birthDateArray = birthDate?.split(",");
+    const birthMonth = birthDateArray[1]?.trim();
     const birthDay = parseInt(birthDateArray[0], 10);
     const birthYear = parseInt(birthDateArray[2], 10);
 
@@ -33,10 +33,10 @@ const CrewProfile = ({ user, currentUserLoading, refetch }) => {
       "December",
     ];
 
-    const currentMonth = today.getMonth();
-    const currentDay = today.getDate();
+    const currentMonth = today?.getMonth();
+    const currentDay = today?.getDate();
 
-    const birthMonthIndex = months.findIndex(
+    const birthMonthIndex = months?.findIndex(
       (month) => month.toLowerCase() === birthMonth.toLowerCase()
     );
 
@@ -44,9 +44,9 @@ const CrewProfile = ({ user, currentUserLoading, refetch }) => {
       currentMonth < birthMonthIndex ||
       (currentMonth === birthMonthIndex && currentDay < birthDay)
     ) {
-      return today.getFullYear() - birthYear - 1;
+      return today?.getFullYear() - birthYear - 1;
     } else {
-      return today.getFullYear() - birthYear;
+      return today?.getFullYear() - birthYear;
     }
   };
 
@@ -100,7 +100,7 @@ const CrewProfile = ({ user, currentUserLoading, refetch }) => {
         <img
           className="w-full h-[400px]"
           src={
-            user.identityPhoto
+            user?.identityPhoto
               ? identityPhoto
               : "https://i.ibb.co/jZNpRKn/parts-service-header.jpg"
           }
@@ -114,7 +114,9 @@ const CrewProfile = ({ user, currentUserLoading, refetch }) => {
             <figure>
               <img
                 src={
-                  user.picture ? picture : "https://i.ibb.co/P5wMksM/images.jpg"
+                  user?.picture
+                    ? picture
+                    : "https://i.ibb.co/P5wMksM/images.jpg"
                 }
                 className="w-10 h-10 rounded-full"
                 alt=""
@@ -139,7 +141,9 @@ const CrewProfile = ({ user, currentUserLoading, refetch }) => {
           </div>
           <img
             className="w-40 h-40 rounded-full hover:scale-105 border-2 border-red-700  -mt-24"
-            src={user.picture ? picture : "https://i.ibb.co/P5wMksM/images.jpg"}
+            src={
+              user?.picture ? picture : "https://i.ibb.co/P5wMksM/images.jpg"
+            }
             alt=""
           />
         </div>
@@ -149,14 +153,14 @@ const CrewProfile = ({ user, currentUserLoading, refetch }) => {
             <BsFillFlagFill />{" "}
             <span className="text-xs ">
               {" "}
-              {user.nationality ? nationality : "N/A"}
+              {user?.nationality ? nationality : "N/A"}
             </span>
           </p>
           <p className=" flex items-center gap-2 border-2 border-midBlue px-4 py-2 duration-300 rounded-full hover:bg-transparent hover:shadow-lg hover:border-0">
             <LuLanguages />{" "}
             <span className="text-xs ">
               {" "}
-              {user.languages ? languages : "N/A"}
+              {user?.languages ? languages : "N/A"}
             </span>
           </p>
         </div>
@@ -170,7 +174,7 @@ const CrewProfile = ({ user, currentUserLoading, refetch }) => {
         </div>
         <div className="mt-4 shadow-md rounded-lg p-5">
           <p className="underline mb-2">About Me :</p>
-          {user.description ? description : "N/A"}
+          {user?.description ? description : "N/A"}
         </div>
 
         {/* TODO  */}

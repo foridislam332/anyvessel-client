@@ -14,7 +14,7 @@ const BoatServiceProfile = ({ user, currentUserLoading, refetch }) => {
 
   const calculateAge = (birthDate) => {
     const today = new Date();
-    const birthDateArray = birthDate.split(",");
+    const birthDateArray = birthDate?.split(",");
     const birthMonth = birthDateArray[1].trim();
     const birthDay = parseInt(birthDateArray[0], 10);
     const birthYear = parseInt(birthDateArray[2], 10);

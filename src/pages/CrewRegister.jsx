@@ -30,18 +30,18 @@ const CrewRegister = () => {
     }
 
     const newData = {
-      surname: data.surname,
-      email: data.email,
-      fullName: data.fullName,
-      gender: data.gender,
-      phone: data.phone,
+      surname: data?.surname,
+      email: data?.email,
+      fullName: data?.fullName,
+      gender: data?.gender,
+      phone: data?.phone,
       role: "crew",
-      birthDay: `${data.day}, ${data.month} , ${data.year}`,
+      birthDay: `${data?.day}, ${data?.month} , ${data?.year}`,
     };
 
     createUser(data.email, data.password)
       .then((result) => {
-        upDateProfile(result.user, data.fullName, data?.pictures).then(
+        upDateProfile(result?.user, data?.fullName, data?.pictures).then(
           (res) => {
             Axios.post("/crew", newData).then((data) => {
               if (data.status === 200) {

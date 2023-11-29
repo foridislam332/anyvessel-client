@@ -1,8 +1,6 @@
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-
-// icons image
 // icons image
 import user2 from "../../assets/images/user-3.png";
 import emailIcon from "../../assets/images/email.png";
@@ -54,7 +52,11 @@ const Cr_ContactDetails = () => {
           {...register(`${data}`)}
           className="w-full focus:outline-none border-none p-[10px] text-darkBlue placeholder:text-darkBlue"
         />
-        <img className="max-w-[18px] opacity-70" src={icons} alt={placeholder} />
+        <img
+          className="max-w-[18px] opacity-70"
+          src={icons}
+          alt={placeholder}
+        />
       </label>
     );
   };

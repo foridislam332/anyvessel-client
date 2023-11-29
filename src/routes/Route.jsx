@@ -48,7 +48,7 @@ const Route = createBrowserRouter([
         element: <Home />,
         children: [
           {
-            path: "/charter",
+            path: "/",
             element: <Charter />,
           },
           {
