@@ -307,6 +307,7 @@ const BoatProfile = ({ user, currentUserLoading, refetch }) => {
           Update Profile Information
         </button>
       </div>
+
       {isBasicInfoModalOpen && (
         <CustomModal
           isModalOpen={isBasicInfoModalOpen}

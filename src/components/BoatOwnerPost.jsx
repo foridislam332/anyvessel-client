@@ -1,4 +1,8 @@
+import { useState } from "react";
 import { AiFillHeart } from "react-icons/ai";
+import useAxios from "../hooks/useAxios";
+import useProfileData from "../hooks/useProfileData";
+import CustomModal from "./CustomModal";
 
 const posts = [
   {
@@ -23,18 +27,22 @@ const posts = [
 ];
 
 export default function BoatOwnerPost({ userId }) {
-  console.log("userId -> ", userId);
+  const [Axios] = useAxios();
+  const [isBasicInfoModalOpen, setIsBasicInfoModalOpen] = useState(false);
+  const [postText, setPostText] = useState("");
+  const { profileData } = useProfileData();
 
-  const handleAddNewPost = () => {
+  const handleAddNewPost = (e) => {
+    e.preventDefault();
+
     if (userId) {
       const newData = {
         userId,
-        ownerName,
-        ownerImage,
-        ownerAge,
-        role,
-        description,
-        numberOfLoveReact,
+        description: postText,
+        ownerName: profileData?.fullName,
+        ownerImage: profileData?.picture,
+        ownerAge: profileData?.birthDay,
+        numberOfLoveReact: 0,
       };
 
       console.log("newData ", newData);
@@ -46,7 +54,7 @@ export default function BoatOwnerPost({ userId }) {
       <div className="flex items-center justify-between my-2">
         <p className="font-light">Posts</p>
         <button
-          onClick={handleAddNewPost}
+          onClick={() => setIsBasicInfoModalOpen(true)}
           className="bg-blue text-white font-light py-1 px-5 rounded-lg hover:bg-transparent hover:text-blue border border-blue hover:border-blue duration-300 hover:shadow-lg hover:shadow-blue/20"
         >
           Add new post
@@ -98,6 +106,40 @@ export default function BoatOwnerPost({ userId }) {
           </div>
         ))}
       </div>
+
+      {isBasicInfoModalOpen && (
+        <CustomModal
+          isModalOpen={isBasicInfoModalOpen}
+          setIsModalOpen={setIsBasicInfoModalOpen}
+          // handleModal={handleBasicInfoModal}
+        >
+          <form className="text-black" onSubmit={handleAddNewPost}>
+            <h3 className="font-bold text-xl mb-2">Your Post Modal</h3>
+            <p className="border-t border-dark mb-5"></p>
+
+            {/* Language */}
+            <div className="w-full">
+              <label htmlFor="postText" className="text-dark text-sm">
+                Post Description here:
+              </label>
+              <textarea
+                id="postText"
+                name="postText"
+                onChange={(e) => setPostText(e.target.value)}
+                defaultValue={postText}
+                placeholder="Type Language"
+                className="w-full border  text-black bg-white border-dark/40 p-2 rounded-md focus:outline-none focus:border-primary mb-1 sm:mb-3 line-clamp-8 resize-none"
+              ></textarea>
+            </div>
+
+            <input
+              className="bg-blue text-white font-light py-1 px-5 rounded-lg hover:bg-transparent hover:text-blue border border-blue hover:border-blue duration-300 hover:shadow-lg hover:shadow-blue/20 mx-auto"
+              type="submit"
+              value="Post Now"
+            />
+          </form>
+        </CustomModal>
+      )}
     </>
   );
 }
