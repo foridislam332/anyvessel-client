@@ -35,7 +35,7 @@ const CrewSearchCard = ({ service }) => {
               <span className="text-base">
                 <CiRollingSuitcase />
               </span>
-              10 years
+              {service?.experience || 0} years
             </p>
             <p className="text-darkBlue flex items-center gap-1">
               <span className="text-base">

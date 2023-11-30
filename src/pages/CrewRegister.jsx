@@ -35,6 +35,7 @@ const CrewRegister = () => {
       fullName: data?.fullName,
       gender: data?.gender,
       phone: data?.phone,
+      experience: data?.experience,
       role: "crew",
       birthDay: `${data?.day}, ${data?.month} , ${data?.year}`,
     };
@@ -183,6 +184,22 @@ const CrewRegister = () => {
               className="w-full focus:outline-none border-none p-[10px] text-darkBlue placeholder:text-darkBlue"
             />
             <img src={angle} alt="angle" />
+          </label>
+
+          {/* Experience */}
+          <label
+            htmlFor="phone"
+            className="flex items-center border-midBlue border rounded-[10px] overflow-hidden pr-2"
+          >
+            <input
+              id="phone"
+              type="number"
+              placeholder="User Experience"
+              {...register("experience")}
+              className="w-full focus:outline-none border-none p-[10px] text-darkBlue placeholder:text-darkBlue"
+              required
+            />
+            <img src={phone} alt="phone" />
           </label>
 
           {/* gender */}

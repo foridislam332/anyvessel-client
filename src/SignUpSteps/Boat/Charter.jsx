@@ -29,10 +29,7 @@ function calculateAge(date) {
 }
 
 const Charter = () => {
-  const [vesselImages, setVesselImages] = useState([]);
   const { profileData } = useProfileData();
-  const [Axios] = useAxios();
-  const [images, setImages] = useState([]);
 
   return (
     <section>
@@ -79,7 +76,7 @@ const Charter = () => {
             <BoatOwnerImgGallery userId={profileData?._id} />
           </div>
 
-          <BoatOwnerPost userId={profileData?._id} />
+          <BoatOwnerPost />
         </>
       )}
     </section>

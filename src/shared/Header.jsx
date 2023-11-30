@@ -49,7 +49,7 @@ const Header = () => {
             className={` bg-white flex items-center justify-center rounded-b-[10px]  ${
               user?.email
                 ? "h-full w-full"
-                : "absolute -top-16 left-0 w-full h-48 shadow-3xl"
+                : "absolute -top-4 md:-top-8 lg:-top-16 left-0 w-full h-full md:h-32 lg:h-48 shadow-3xl"
             }`}
           >
             <img className="w-[120px]" src={Logo} alt="anyvessel" />

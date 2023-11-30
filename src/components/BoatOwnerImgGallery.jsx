@@ -10,20 +10,19 @@ export default function BoatOwnerImgGallery({ userId }) {
   const [vesselImages, setVesselImages] = useState([]);
   const [Axios] = useAxios();
   const [galleryId, setGalleryId] = useState("");
-  const [saved, setSaved] = useState(true);
 
   useEffect(() => {
     userId &&
       Axios.get(`/gallery/${userId}`)
         .then((res) => {
           const data = res?.data?.data;
-          setImages(data?.gallery?.vesselImages);
-          setGalleryId(data?.gallery?._id);
+          setImages(data?.vesselImages);
+          setGalleryId(data?._id);
         })
         .catch((err) => {
           console.log(`Axios.get(/gallery/`, err);
         });
-  }, [userId, saved, vesselImages]);
+  }, [userId, vesselImages]);
 
   // Image hosting
   const image_hosting_token = import.meta.env.VITE_Image_Upload_Token;
@@ -38,7 +37,7 @@ export default function BoatOwnerImgGallery({ userId }) {
       const response = await axios.post(image_hosting_url, formData);
       setVesselImages([
         ...vesselImages,
-        { image: response.data.data.display_url },
+        { image: response?.data?.data?.display_url },
       ]);
       toast.success("Photo uploaded!", {
         position: "top-right",
@@ -87,19 +86,21 @@ export default function BoatOwnerImgGallery({ userId }) {
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-[10px]">
-        {images.map((image, i) => (
-          <div key={i} className="relative">
-            <img
-              className="h-44 w-full object-cover object-center rounded-lg"
-              src={image?.image}
-              alt=""
-            />
-            <AiFillHeart
-              size="30"
-              className="absolute top-2 right-3 text-white"
-            />
-          </div>
-        ))}
+        {images?.length
+          ? images?.map((image, i) => (
+              <div key={i} className="relative">
+                <img
+                  className="h-44 w-full object-cover object-center rounded-lg"
+                  src={image?.image}
+                  alt=""
+                />
+                <AiFillHeart
+                  size="30"
+                  className="absolute top-2 right-3 text-white"
+                />
+              </div>
+            ))
+          : null}
         <label
           htmlFor="vessel"
           className="p-4 h-44 flex flex-col items-center justify-center border-2 border-dashed border-blue rounded-md bg-[#DCECFC]"
