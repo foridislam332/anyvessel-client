@@ -5,28 +5,6 @@ import useAxios from "../hooks/useAxios";
 import useProfileData from "../hooks/useProfileData";
 import CustomModal from "./CustomModal";
 
-const posts = [
-  {
-    ownerName: "John Doe",
-    ownerImage: "https://example.com/john-doe.jpg",
-    ownerCountry: "https://example.com/john-doe.jpg",
-    ownerAge: 35,
-    role: "Boat Owner",
-    description:
-      "I am passionate about sailing and own a beautiful yacht.Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptatem voluptates neque possimus ab quia id esse enim aliquid rerum impedit?",
-    numberOfLoveReact: 5500,
-  },
-  {
-    ownerName: "John Doe",
-    ownerImage: "https://example.com/john-doe.jpg",
-    ownerAge: 35,
-    role: "Boat Owner",
-    description:
-      "I am passionate about sailing and own a beautiful yacht.Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptatem voluptates neque possimus ab quia id esse enim aliquid rerum impedit?",
-    numberOfLoveReact: 540,
-  },
-];
-
 function calculateAge(date) {
   const userDateOfBirth = new Date(date);
   const currentDate = new Date();
@@ -48,12 +26,16 @@ function calculateAge(date) {
 
 export default function BoatOwnerPost() {
   const [Axios] = useAxios();
-  const [isBasicInfoModalOpen, setIsBasicInfoModalOpen] = useState(false);
   const [postText, setPostText] = useState("");
   const { profileData } = useProfileData();
   const [userId, setUserId] = useState(null);
   const [reCall, setReCall] = useState(true);
   const [posts, setPosts] = useState([]);
+  const [isPostModalOpen, setPostModalOpen] = useState(false);
+
+  const handleBasicInfoModal = (e) => {
+    if (e == "cancel") setPostModalOpen(false);
+  };
 
   useEffect(() => {
     setUserId(profileData?._id);
@@ -65,7 +47,6 @@ export default function BoatOwnerPost() {
       Axios.get(`/get-posts/${userId}`)
         .then((res) => {
           const data = res?.data?.data;
-          console.log("res data ", data);
           setPosts(data);
         })
         .catch((err) => {
@@ -75,7 +56,6 @@ export default function BoatOwnerPost() {
 
   const handleAddNewPost = (e) => {
     e.preventDefault();
-    console.log("userId ", userId);
 
     if (userId) {
       const newData = {
@@ -88,15 +68,15 @@ export default function BoatOwnerPost() {
         role: "BoatOwner",
       };
 
-      console.log("newData ", newData);
       Axios.post("/post-create", newData)
         .then((res) => {
           const data = res?.data?.data;
           if (data?.insertedId) {
             toast.success("post successful! ");
             setReCall(!reCall);
+            setPostText("");
+            setPostModalOpen(false);
           }
-          console.log("res data", data);
         })
         .catch((err) => {
           console.log("post-create ", err);
@@ -110,7 +90,7 @@ export default function BoatOwnerPost() {
       <div className="flex items-center justify-between my-2">
         <p className="font-light">Posts</p>
         <button
-          onClick={() => setIsBasicInfoModalOpen(true)}
+          onClick={() => setPostModalOpen(true)}
           className="bg-blue text-white font-light py-1 px-5 rounded-lg hover:bg-transparent hover:text-blue border border-blue hover:border-blue duration-300 hover:shadow-lg hover:shadow-blue/20"
         >
           Add new post
@@ -127,7 +107,7 @@ export default function BoatOwnerPost() {
               className="flex gap-5 px-7 py-4 border border-blue rounded-md"
             >
               <div className="flex-shrink-0 text-center">
-                <div className="relative w-20 h-20 ">
+                <div className="relative w-20 h-20 mx-auto">
                   <img
                     className="w-20 h-20 object-cover rounded-full"
                     src={post?.ownerImage}
@@ -142,7 +122,7 @@ export default function BoatOwnerPost() {
 
                 <div className="mb-3">
                   <h2 className="text-black font-medium mt-3">
-                    {post.ownerName}
+                    {post.ownerName?.split(" ", 2).join(" ")}
                   </h2>
                   <p className="text-gray text-[10px] -mt-[2px]">
                     ({calculateAge(post.ownerAge)})
@@ -167,11 +147,11 @@ export default function BoatOwnerPost() {
         </div>
       )}
 
-      {isBasicInfoModalOpen && (
+      {isPostModalOpen && (
         <CustomModal
-          isModalOpen={isBasicInfoModalOpen}
-          setIsModalOpen={setIsBasicInfoModalOpen}
-          // handleModal={handleBasicInfoModal}
+          isModalOpen={isPostModalOpen}
+          setIsModalOpen={setPostModalOpen}
+          handleModal={handleBasicInfoModal}
         >
           <form className="text-black" onSubmit={handleAddNewPost}>
             <div>

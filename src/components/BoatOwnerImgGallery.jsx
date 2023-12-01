@@ -1,13 +1,20 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { AiFillHeart } from "react-icons/ai";
-import { toast } from "react-toastify";
+import { RxCrossCircled } from "react-icons/rx";
 import uploadImg from "../assets/images/upload-ico.png";
 import useAxios from "../hooks/useAxios";
 
+const generateImgUrl = (file) => {
+  const url = URL.createObjectURL(file);
+  return url;
+};
+
 export default function BoatOwnerImgGallery({ userId }) {
+  const [files, setFiles] = useState([]);
   const [images, setImages] = useState([]);
   const [vesselImages, setVesselImages] = useState([]);
+  const [isUploading, setIsUploading] = useState(false);
   const [Axios] = useAxios();
   const [galleryId, setGalleryId] = useState("");
 
@@ -16,7 +23,7 @@ export default function BoatOwnerImgGallery({ userId }) {
       Axios.get(`/gallery/${userId}`)
         .then((res) => {
           const data = res?.data?.data;
-          setImages(data?.vesselImages);
+          setImages(data?.vesselImages || []);
           setGalleryId(data?._id);
         })
         .catch((err) => {
@@ -28,28 +35,47 @@ export default function BoatOwnerImgGallery({ userId }) {
   const image_hosting_token = import.meta.env.VITE_Image_Upload_Token;
   const image_hosting_url = `https://api.imgbb.com/1/upload?key=${image_hosting_token}`;
 
-  const handleVesselPhotoUpload = async (event) => {
-    const picture = event.target.files[0];
-    const formData = new FormData();
-    formData.append("image", picture);
-
-    try {
-      const response = await axios.post(image_hosting_url, formData);
-      setVesselImages([
-        ...vesselImages,
-        { image: response?.data?.data?.display_url },
-      ]);
-      toast.success("Photo uploaded!", {
-        position: "top-right",
-        autoClose: 2000,
-      });
-    } catch (error) {
-      console.error("Error uploading image:", error);
+  const promiseArr = [];
+  const uploadImages = async (data) => {
+    if (data?.length > 0) {
+      try {
+        // Check if multiple images are selected
+        const formData = new FormData();
+        for (const { id, file } of data) {
+          formData.append("image", file);
+          const response = await axios.post(image_hosting_url, formData);
+          const imageUrls = response.data.data.url;
+          setVesselImages((prev) => [
+            ...prev,
+            { id, image: imageUrls, loved: false },
+          ]);
+          setFiles([]);
+        }
+      } catch (error) {
+        console.error(error);
+      }
     }
+  };
+
+  const multipleFilesUpload = (e) => {
+    setIsUploading(true);
+    const selectedFiles = e.target.files;
+
+    for (let index = 0; index < selectedFiles.length; index++) {
+      const file = selectedFiles[index];
+      const url = generateImgUrl(file);
+      let id = "id" + Math.random().toString(16).slice(2);
+      setFiles((prevFiles) => [...prevFiles, { id, image: url, file }]);
+    }
+
+    setIsUploading(false);
   };
 
   // photo gallery save
   const handleSaveGallery = () => {
+    setIsUploading(true);
+    uploadImages(files);
+
     if (userId) {
       const newData = {
         userId: userId,
@@ -61,46 +87,145 @@ export default function BoatOwnerImgGallery({ userId }) {
           .then((res) => {
             const data = res?.data?.data;
             setImages(data?.vesselImages);
-            // setVesselImages([]);
-            // setSaved(!saved);
+            setVesselImages([]);
           })
           .catch((err) => console.log("gallery image save err", err));
     }
   };
 
+  // upload images
+  const handleUploadDelete = (name) => {
+    const obj = files?.filter((item) => item?.file?.name != name);
+    setFiles(obj);
+  };
+
+  // upload images
+  const handleLoved = (value) => {
+    console.log("handleLoved ", value);
+  };
+
+  console.log(" vesselImages ", { vesselImages, images });
+  console.log(" files ", files);
+  console.log(" promiseArr ", promiseArr);
+
   return (
     <>
-      <div className="flex justify-between gap-2 items-center flex-wrap">
+      <div className="flex justify-between gap-2 items-center flex-wrap mb-5">
         <p className="text-black font-light mb-2">Photo Gallery</p>
 
-        {vesselImages?.length ? (
-          <button
-            onClick={handleSaveGallery}
-            className="bg-blue text-white font-light py-1 px-5 rounded-lg hover:bg-transparent hover:text-blue border border-blue hover:border-blue duration-300 hover:shadow-lg hover:shadow-blue/20"
-          >
-            Save
-          </button>
-        ) : (
-          ""
-        )}
+        <div className="flex gap-4">
+          {files?.length ? (
+            <button
+              onClick={handleSaveGallery}
+              className="bg-blue text-white font-light py-1 px-5 rounded-lg hover:bg-transparent hover:text-blue border border-blue hover:border-blue duration-300 hover:shadow-lg hover:shadow-blue/20"
+            >
+              {isUploading ? (
+                <div className="relative">
+                  <div
+                    className="w-12 h-12 rounded-full absolute
+                            border-4 border-solid border-gray-200"
+                  ></div>
+
+                  <div
+                    className="w-12 h-12 rounded-full animate-spin absolute
+                            border-4 border-solid border-green-500 border-t-transparent shadow-md"
+                  ></div>
+                </div>
+              ) : (
+                "Upload Now"
+              )}
+            </button>
+          ) : (
+            ""
+          )}
+
+          {vesselImages?.length ? (
+            <button
+              onClick={handleSaveGallery}
+              className="bg-blue text-white font-light py-1 px-5 rounded-lg hover:bg-transparent hover:text-blue border border-blue hover:border-blue duration-300 hover:shadow-lg hover:shadow-blue/20"
+            >
+              {isUploading ? (
+                <div className="relative">
+                  <div
+                    className="w-12 h-12 rounded-full absolute
+                            border-4 border-solid border-gray-200"
+                  ></div>
+
+                  <div
+                    className="w-12 h-12 rounded-full animate-spin absolute
+                            border-4 border-solid border-green-500 border-t-transparent shadow-md"
+                  ></div>
+                </div>
+              ) : (
+                "Save"
+              )}
+            </button>
+          ) : (
+            ""
+          )}
+        </div>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-[10px]">
         {images?.length
-          ? images?.map((image, i) => (
+          ? images?.map((item, i) => (
+              <div key={i} className="relative">
+                <img
+                  className="h-44 w-full object-cover object-center rounded-lg"
+                  src={item?.image}
+                  alt=""
+                />
+                <span
+                  onClick={() => handleLoved(!item?.loved)}
+                  className={`cursor-pointer absolute top-2 right-3 border-2 rounded-full p-0.5 border-transparent flex items-center justify-center transition duration-300 ${
+                    item?.loved ? "hover:border-red-500" : "hover:border-white"
+                  }`}
+                  title="Favorite"
+                >
+                  <AiFillHeart
+                    size="30"
+                    className={`${item?.loved ? "text-red-500" : "text-white"}`}
+                  />
+                </span>
+              </div>
+            ))
+          : null}
+
+        {vesselImages?.length
+          ? vesselImages?.map((image, i) => (
               <div key={i} className="relative">
                 <img
                   className="h-44 w-full object-cover object-center rounded-lg"
                   src={image?.image}
                   alt=""
                 />
-                <AiFillHeart
-                  size="30"
-                  className="absolute top-2 right-3 text-white"
-                />
               </div>
             ))
           : null}
+
+        {files?.length
+          ? files?.map((image, i) => (
+              <div key={i} className="relative">
+                <img
+                  className="h-44 w-full object-cover object-center rounded-lg"
+                  src={image?.image}
+                  alt=""
+                />
+
+                <span
+                  className="cursor-pointer"
+                  onClick={() => handleUploadDelete(image?.file?.name)}
+                  title="Delete image"
+                >
+                  <RxCrossCircled
+                    size="30"
+                    className="absolute top-2 right-3 hover:text-red-400"
+                  />
+                </span>
+              </div>
+            ))
+          : null}
+
         <label
           htmlFor="vessel"
           className="p-4 h-44 flex flex-col items-center justify-center border-2 border-dashed border-blue rounded-md bg-[#DCECFC]"
@@ -110,7 +235,9 @@ export default function BoatOwnerImgGallery({ userId }) {
             name="vessel_image"
             type="file"
             accept="image/*"
-            onChange={handleVesselPhotoUpload}
+            multiple
+            // onChange={handleVesselPhotoUpload}
+            onChange={multipleFilesUpload}
             className="w-full hidden focus:outline-none border-none p-[10px] text-darkBlue placeholder:text-darkBlue"
           />
           <img src={uploadImg} alt="upload img" />
