@@ -2,14 +2,16 @@ import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 
 // icons image
-import angle from "../assets/images/angle-down.png";
 import email from "../assets/images/email.png";
 import phone from "../assets/images/phone.png";
 import user2 from "../assets/images/user-3.png";
 import user from "../assets/images/user2.png";
 
 // internal files
+import { useState } from "react";
 import { Helmet } from "react-helmet";
+import { FaUserTie } from "react-icons/fa6";
+import { LuEye, LuEyeOff } from "react-icons/lu";
 import { toast } from "react-toastify";
 import useAuth from "../hooks/useAuth";
 import useAxios from "../hooks/useAxios";
@@ -17,6 +19,7 @@ import useAxios from "../hooks/useAxios";
 const CrewRegister = () => {
   const [Axios] = useAxios();
   const { createUser, upDateProfile } = useAuth();
+  const [isShowPassword, setIsShowPassword] = useState(false);
   const navigate = useNavigate();
   const {
     register,
@@ -163,12 +166,17 @@ const CrewRegister = () => {
           >
             <input
               id="password"
-              type="password"
+              type={`${isShowPassword ? "text" : "password"}`}
               placeholder="Password"
               {...register("password")}
               className="w-full focus:outline-none border-none p-[10px] text-darkBlue placeholder:text-darkBlue"
             />
-            <img src={angle} alt="angle" />
+            <span
+              className="cursor-pointer"
+              onClick={() => setIsShowPassword(!isShowPassword)}
+            >
+              {isShowPassword ? <LuEye /> : <LuEyeOff />}
+            </span>
           </label>
 
           {/* Retype password */}
@@ -178,12 +186,17 @@ const CrewRegister = () => {
           >
             <input
               id="retypePassword"
-              type="password"
+              type={`${isShowPassword ? "text" : "password"}`}
               placeholder="Retype password"
               {...register("retypePassword")}
               className="w-full focus:outline-none border-none p-[10px] text-darkBlue placeholder:text-darkBlue"
             />
-            <img src={angle} alt="angle" />
+            <span
+              className="cursor-pointer"
+              onClick={() => setIsShowPassword(!isShowPassword)}
+            >
+              {isShowPassword ? <LuEye /> : <LuEyeOff />}
+            </span>
           </label>
 
           {/* Experience */}
@@ -199,14 +212,17 @@ const CrewRegister = () => {
               className="w-full focus:outline-none border-none p-[10px] text-darkBlue placeholder:text-darkBlue"
               required
             />
-            <img src={phone} alt="phone" />
+            <FaUserTie />
           </label>
 
           {/* gender */}
           <div className="flex items-center justify-between border-midBlue border rounded-[10px] overflow-hidden pr-2">
             <span className="text-darkBlue pl-[10px]">Gender</span>
             <div className="p-[10px] flex items-center gap-[30px]">
-              <label htmlFor="male" className="text-darkBlue flex gap-[19px]">
+              <label
+                htmlFor="male"
+                className="text-darkBlue flex gap-[19px] cursor-pointer"
+              >
                 <input
                   id="male"
                   name="gender"
@@ -217,7 +233,10 @@ const CrewRegister = () => {
                 Male
               </label>
 
-              <label htmlFor="female" className="text-darkBlue flex gap-4">
+              <label
+                htmlFor="female"
+                className="text-darkBlue flex gap-4 cursor-pointer"
+              >
                 <input
                   id="female"
                   name="gender"
@@ -238,12 +257,12 @@ const CrewRegister = () => {
               <div className="sm:px-[3px] py-[7px]">
                 <select
                   {...register("year", { required: true })}
-                  className="text-darkBlue border-b border-midBlue focus:outline-none focus:border-b focus:border-midBlue pr-1 sm:pr-3 py-[3px]"
+                  className="text-darkBlue border-b border-midBlue focus:outline-none focus:border-b focus:border-midBlue pr-1 sm:pr-3 py-[3px] cursor-pointer"
                 >
                   <option value="">Year</option>
                   {yearsRange &&
                     yearsRange.map((y) => (
-                      <option key={y} value={y}>
+                      <option className="!cursor-pointer" key={y} value={y}>
                         {y}
                       </option>
                     ))}
@@ -254,12 +273,12 @@ const CrewRegister = () => {
               <div className="sm:px-[3px] py-[7px]">
                 <select
                   {...register("month", { required: true })}
-                  className="text-darkBlue border-b border-midBlue focus:outline-none focus:border-b focus:border-midBlue pr-1 sm:pr-2 py-[3px]"
+                  className="text-darkBlue border-b border-midBlue focus:outline-none focus:border-b focus:border-midBlue pr-1 sm:pr-2 py-[3px] cursor-pointer"
                 >
                   <option value="">Month</option>
                   {months &&
                     months.map((m) => (
-                      <option key={m} value={m}>
+                      <option className="cursor-pointer" key={m} value={m}>
                         {m}
                       </option>
                     ))}
@@ -270,12 +289,12 @@ const CrewRegister = () => {
               <div className="sm:px-[3px] py-[7px]">
                 <select
                   {...register("day", { required: true })}
-                  className="text-darkBlue border-b border-midBlue focus:outline-none focus:border-b focus:border-midBlue pr-1 sm:pr-3 py-[3px]"
+                  className="text-darkBlue border-b border-midBlue focus:outline-none focus:border-b focus:border-midBlue pr-1 sm:pr-3 py-[3px] cursor-pointer"
                 >
                   <option value="">Day</option>
                   {daysRange &&
                     daysRange.map((d) => (
-                      <option key={d} value={d}>
+                      <option className="cursor-pointer" key={d} value={d}>
                         {d}
                       </option>
                     ))}

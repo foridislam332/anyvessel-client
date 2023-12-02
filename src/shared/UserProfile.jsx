@@ -7,44 +7,29 @@ const UserProfile = () => {
   const { user, logOut } = useAuth();
 
   return (
-    <div className="hidden lg:flex items-center gap-5">
+    <>
       {user?.email ? (
         <>
-          {/* <Link to="/profile">
-                  <div className="flex items-center gap-4 py-2 pl-3 pr-5 rounded-[50px]">
-                    <div className="h-[42px] w-[42px] overflow-hidden rounded-full shadow-lg flex items-center justify-center">
-                      {user?.photoURL?.length > 0 ? (
-                        <img
-                          className="w-full h-full object-cover object-center"
-                          src={user?.photoURL}
-                          alt={user?.displayName}
-                        />
-                      ) : (
-                        <h3 className="text-darkBlue text-xl font-semibold drop-shadow-xl uppercase">
-                          {user?.displayName?.slice(0, 2)}
-                        </h3>
-                      )}
-                    </div>
-                    <div>
-                      <p className="text-blue text-sm">Welcome</p>
-                      <h3 className="text-[#050F36] text-sm">
-                        {user?.displayName}
-                      </h3>
-                    </div>
-                  </div>
-                </Link>
-                <button onClick={() => logOut()}>Logout</button> */}
-
           <div className="relative group">
-            <div className="border-2 border-blue p-1.5 rounded-full cursor-pointer">
-              <div className="h-[38px] w-[38px] overflow-hidden rounded-full shadow-lg flex items-center justify-center">
-                {user?.photoURL?.length > 0 && (
+            <div className="flex items-center gap-4 py-2 pl-3 pr-5 rounded-[50px] border-2 border-blue">
+              <div className="h-[42px] w-[42px] overflow-hidden rounded-full shadow-lg flex items-center justify-center">
+                {user?.photoURL?.length > 0 ? (
                   <img
                     className="w-full h-full object-cover object-center"
                     src={user?.photoURL}
                     alt={user?.displayName}
                   />
+                ) : (
+                  <h3 className="text-darkBlue text-xl font-semibold drop-shadow-xl uppercase">
+                    {user?.displayName?.slice(0, 2)}
+                  </h3>
                 )}
+              </div>
+              <div>
+                <p className="text-blue text-sm">Welcome</p>
+                <h3 className="text-[#050F36] text-sm">
+                  {user?.displayName?.split(" ", 2).join(" ")}
+                </h3>
               </div>
             </div>
 
@@ -84,7 +69,7 @@ const UserProfile = () => {
           </Link>
         </>
       )}
-    </div>
+    </>
   );
 };
 

@@ -2,13 +2,12 @@ import { Link } from "react-router-dom";
 import NavItems from "../components/NavItems";
 
 // react icons
-import { AiOutlineUser } from "react-icons/ai";
-import { BiLogInCircle } from "react-icons/bi";
 import { FaXmark } from "react-icons/fa6";
 
 // logo
 import Logo from "../assets/images/logo.png";
 import useAuth from "../hooks/useAuth";
+import UserProfile from "./UserProfile";
 
 const SideNav = ({ isOpen, toggle }) => {
   const { user } = useAuth();
@@ -34,13 +33,17 @@ const SideNav = ({ isOpen, toggle }) => {
           </button>
         </div>
 
+        <div className="pt-5">
+          <UserProfile />
+        </div>
+
         {/* nav items */}
         <ul className="lg:hidden flex flex-col mt-4">
           <NavItems />
         </ul>
 
         {/* login & sign in buttons */}
-        {!user?.email && (
+        {/* {!user?.email && (
           <div className="flex flex-col items-center justify-center gap-5 mt-5">
             <Link to="/login" className="btn__primary flex items-center gap-5">
               <BiLogInCircle size="24" /> Log in
@@ -49,7 +52,7 @@ const SideNav = ({ isOpen, toggle }) => {
               <AiOutlineUser size="24" /> Sign In
             </Link>
           </div>
-        )}
+        )} */}
       </aside>
       {/* overlay */}
       <div

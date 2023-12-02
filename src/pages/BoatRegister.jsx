@@ -6,11 +6,13 @@ import { toast } from "react-toastify";
 import useAuth from "../hooks/useAuth";
 
 // icons image
+import { LuEye, LuEyeOff } from "react-icons/lu";
 import angle from "../assets/images/angle-down.png";
 import email from "../assets/images/email.png";
 import phone from "../assets/images/phone.png";
 import user2 from "../assets/images/user-3.png";
 import user from "../assets/images/user2.png";
+import InputNationality from "../components/InputNationality";
 import LanguagesSelect from "../components/LanguagesSelect";
 import useAxios from "../hooks/useAxios";
 
@@ -20,49 +22,17 @@ const BoatRegister = () => {
   const [Axios] = useAxios();
   const [picture, setPicture] = useState(null);
   const [identityPhoto, setIdentityPhoto] = useState(null);
+  const [isShowPassword, setIsShowPassword] = useState(false);
+  const [nationality, setNationality] = useState(null);
+  const [selectedLanguages, setSelectedLanguages] = useState([]);
   const {
     register,
     handleSubmit,
     formState: { errors },
+    watch,
   } = useForm();
 
-  const [inputValue, setInputValue] = useState("");
-  const [suggestions, setSuggestions] = useState([]);
-  const [selectedLanguages, setSelectedLanguages] = useState([]);
-
-  // Sample list of languages
-  const languageList = [
-    "English",
-    "Spanish",
-    "French",
-    "German",
-    "Chinese",
-    "Japanese",
-  ];
-
-  const handleInputChange = (e) => {
-    const newInputValue = e.target.value.toLowerCase();
-    setInputValue(newInputValue);
-    const filteredLanguages = languageList.filter((language) =>
-      language.toLowerCase().includes(newInputValue)
-    );
-    setSuggestions(filteredLanguages);
-  };
-
-  const handleSuggestionClick = (language) => {
-    if (!selectedLanguages.includes(language)) {
-      setSelectedLanguages([...selectedLanguages, language]);
-      setInputValue("");
-      setSuggestions([]);
-    }
-  };
-
-  const handleRemoveLanguage = (language) => {
-    const updatedLanguages = selectedLanguages.filter(
-      (lang) => lang !== language
-    );
-    setSelectedLanguages(updatedLanguages);
-  };
+  console.log("nationality ", nationality);
 
   // Image hosting
   const image_hosting_token = import.meta.env.VITE_Image_Upload_Token;
@@ -105,6 +75,8 @@ const BoatRegister = () => {
   };
 
   const onSubmit = (data) => {
+    console.log("data ", data);
+    console.log("errors ", errors);
     if (data.password !== data.retypePassword) {
       return toast.error("password did not match!", {
         position: "top-right",
@@ -126,7 +98,7 @@ const BoatRegister = () => {
       description: data.description,
       gender: data.gender,
       languages: selectedLanguages,
-      nationality: data.nationality,
+      nationality: nationality,
       phone: data.phone,
       romance: data.romance,
       picture: picture,
@@ -134,22 +106,25 @@ const BoatRegister = () => {
       identityPhoto: identityPhoto,
       birthDay: `${data?.day}, ${data?.month} , ${data?.year}`,
     };
-    // console.log(newData)
-    createUser(data?.email, data?.password)
-      .then((result) => {
-        upDateProfile(result?.user, data?.fullName, picture).then((res) => {
-          Axios.post("boats", newData).then((data) => {
-            if (data.status === 200) {
-              navigate("/", { replace: true });
-            }
-          });
-        });
-      })
-      .catch((err) => {
-        toast.error("Something Wrong!");
-        console.log(err);
-      });
+    console.log("newData ", newData);
+    // createUser(data?.email, data?.password)
+    //   .then((result) => {
+    //     upDateProfile(result?.user, data?.fullName, picture).then((res) => {
+    //       Axios.post("boats", newData).then((data) => {
+    //         if (data.status === 200) {
+    //           navigate("/", { replace: true });
+    //         }
+    //       });
+    //     });
+    //   })
+    //   .catch((err) => {
+    //     toast.error("Something Wrong!");
+    //     console.log(err);
+    //   });
   };
+
+  console.log("errors ", errors);
+
   // 1900 to 2025
   const yearsRange = Array.from({ length: 126 }, (_, i) => 1900 + i).reverse();
   // 1 to 31
@@ -249,12 +224,17 @@ const BoatRegister = () => {
           >
             <input
               id="password"
-              type="password"
+              type={`${isShowPassword ? "text" : "password"}`}
               placeholder="Password"
               {...register("password")}
               className="w-full focus:outline-none border-none p-[10px] text-darkBlue placeholder:text-darkBlue"
             />
-            <img src={angle} alt="angle" />
+            <span
+              className="cursor-pointer"
+              onClick={() => setIsShowPassword(!isShowPassword)}
+            >
+              {isShowPassword ? <LuEye /> : <LuEyeOff />}
+            </span>
           </label>
 
           {/* Retype password */}
@@ -264,12 +244,17 @@ const BoatRegister = () => {
           >
             <input
               id="retypePassword"
-              type="password"
+              type={`${isShowPassword ? "text" : "password"}`}
               placeholder="Retype password"
               {...register("retypePassword")}
               className="w-full focus:outline-none border-none p-[10px] text-darkBlue placeholder:text-darkBlue"
             />
-            <img src={angle} alt="angle" />
+            <span
+              className="cursor-pointer"
+              onClick={() => setIsShowPassword(!isShowPassword)}
+            >
+              {isShowPassword ? <LuEye /> : <LuEyeOff />}
+            </span>
           </label>
 
           {/* gender */}
@@ -307,9 +292,9 @@ const BoatRegister = () => {
           </div>
 
           {/* Birthday */}
-          <div className="flex items-center justify-between border-midBlue border rounded-[10px] overflow-hidden pr-2">
-            <span className="text-darkBlue pl-[10px]">Birthday</span>
-            <div className="px-[10px] flex items-center gap-2 sm:gap-[30px]">
+          <div className="flex items-center gap-1 justify-between flex-wrap border-midBlue border rounded-[10px] overflow-hidden pr-2">
+            <span className="text-darkBlue pl-[10px]">Birthday: </span>
+            <div className="px-[10px] flex items-center flex-wrap gap-2 sm:gap-x-[30px]">
               {/* year */}
               <div className="sm:px-[3px] py-[7px]">
                 <select
@@ -373,52 +358,16 @@ const BoatRegister = () => {
             />
             <img src={angle} alt="angle" />
           </label>
+          <InputNationality
+            nationality={nationality}
+            setNationality={setNationality}
+          />
 
           {/* languages */}
-          {/* <div className="relative">
-            <label
-              htmlFor="languages"
-              className="flex items-center flex-col border-midBlue border rounded-[10px] overflow-hidden pr-2"
-            >
-              <input
-                id="languages"
-                type="text"
-                className="w-full focus:outline-none border-none p-[10px] text-darkBlue placeholder:text-darkBlue "
-                value={inputValue}
-                onChange={handleInputChange}
-                placeholder="Languages spoken on board"
-              />
-            </label>
-
-            <div className="absolute right-0 top-10 border border-x-midBlue p-2 rounded">
-              {suggestions.length > 0 && (
-                <div>
-                  {suggestions.map((language, index) => (
-                    <div
-                      key={index}
-                      onClick={() => handleSuggestionClick(language)}
-                    >
-                      {language}
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
-            <div className=" top-10 p-2 absolute md:col-span-2 lg:col-span-1 flex items-center justify-between border-midBlue border rounded-[10px] overflow-hidden pr-2">
-              {selectedLanguages.map((language, index) => (
-                <div key={index} className="">
-                  {language}{" "}
-                  <button
-                    className="mr-5"
-                    onClick={() => handleRemoveLanguage(language)}
-                  >
-                    delete
-                  </button>
-                </div>
-              ))}
-            </div>
-          </div> */}
-          <LanguagesSelect />
+          <LanguagesSelect
+            selectedLanguages={selectedLanguages}
+            setSelectedLanguages={setSelectedLanguages}
+          />
 
           {/* romance */}
           <div className="md:col-span-2 lg:col-span-1 flex items-center justify-between border-midBlue border rounded-[10px] overflow-hidden pr-2">

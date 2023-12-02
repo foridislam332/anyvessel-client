@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { AiFillHeart } from "react-icons/ai";
 import { RxCrossCircled } from "react-icons/rx";
+import { TbRubberStampOff } from "react-icons/tb";
 import uploadImg from "../assets/images/upload-ico.png";
 import useAxios from "../hooks/useAxios";
 
@@ -42,6 +43,7 @@ export default function BoatOwnerImgGallery({ userId }) {
         // Check if multiple images are selected
         const formData = new FormData();
         for (const { id, file } of data) {
+          setIsUploading(TbRubberStampOff);
           formData.append("image", file);
           const response = await axios.post(image_hosting_url, formData);
           const imageUrls = response.data.data.url;
@@ -51,6 +53,8 @@ export default function BoatOwnerImgGallery({ userId }) {
           ]);
           setFiles([]);
         }
+
+        setIsUploading(false);
       } catch (error) {
         console.error(error);
       }
@@ -71,11 +75,14 @@ export default function BoatOwnerImgGallery({ userId }) {
     setIsUploading(false);
   };
 
-  // photo gallery save
-  const handleSaveGallery = () => {
+  const handleImageUpload = () => {
     setIsUploading(true);
     uploadImages(files);
+    setIsUploading(false);
+  };
 
+  // photo gallery save
+  const handleSaveGallery = () => {
     if (userId) {
       const newData = {
         userId: userId,
@@ -88,6 +95,7 @@ export default function BoatOwnerImgGallery({ userId }) {
             const data = res?.data?.data;
             setImages(data?.vesselImages);
             setVesselImages([]);
+            setIsUploading(false);
           })
           .catch((err) => console.log("gallery image save err", err));
     }
@@ -100,13 +108,21 @@ export default function BoatOwnerImgGallery({ userId }) {
   };
 
   // upload images
-  const handleLoved = (value) => {
-    console.log("handleLoved ", value);
+  const handleLoved = (id, value) => {
+    console.log("handleLoved ", { galleryId, id, value });
+
+    if ((galleryId, id)) {
+      const updatedLoved = { loved: value };
+      Axios.put(`gallery-img-update/${galleryId}/${id}`, updatedLoved)
+        .then((res) => {
+          const loved = res.data;
+          console.log(" loved ", loved);
+        })
+        .catch((err) => console.log("error ", err));
+    }
   };
 
-  console.log(" vesselImages ", { vesselImages, images });
-  console.log(" files ", files);
-  console.log(" promiseArr ", promiseArr);
+  console.log(" isUploading ", isUploading);
 
   return (
     <>
@@ -116,20 +132,21 @@ export default function BoatOwnerImgGallery({ userId }) {
         <div className="flex gap-4">
           {files?.length ? (
             <button
-              onClick={handleSaveGallery}
-              className="bg-blue text-white font-light py-1 px-5 rounded-lg hover:bg-transparent hover:text-blue border border-blue hover:border-blue duration-300 hover:shadow-lg hover:shadow-blue/20"
+              onClick={handleImageUpload}
+              disabled={isUploading}
+              className="bg-blue text-white font-light py-1 px-5 rounded-lg hover:bg-transparent hover:text-blue border border-blue hover:border-blue duration-300 hover:shadow-lg hover:shadow-blue/20 "
             >
               {isUploading ? (
-                <div className="relative">
-                  <div
-                    className="w-12 h-12 rounded-full absolute
+                <div className="relative flex items-center justify-center">
+                  uploading...
+                  <div className="absolute top-0 w-full h-full bg-blue/10 z-10">
+                    <div
+                      className="w-7 h-7 rounded-full absolute
                             border-4 border-solid border-gray-200"
-                  ></div>
+                    ></div>
 
-                  <div
-                    className="w-12 h-12 rounded-full animate-spin absolute
-                            border-4 border-solid border-green-500 border-t-transparent shadow-md"
-                  ></div>
+                    <div className="w-7 h-7 rounded-full animate-spin absolute border-4 border-solid border-transparent border-t-blue shadow-md"></div>
+                  </div>
                 </div>
               ) : (
                 "Upload Now"
@@ -142,19 +159,20 @@ export default function BoatOwnerImgGallery({ userId }) {
           {vesselImages?.length ? (
             <button
               onClick={handleSaveGallery}
-              className="bg-blue text-white font-light py-1 px-5 rounded-lg hover:bg-transparent hover:text-blue border border-blue hover:border-blue duration-300 hover:shadow-lg hover:shadow-blue/20"
+              disabled={isUploading}
+              className="bg-blue text-white font-light py-1 px-5 rounded-lg hover:bg-transparent hover:text-blue border border-blue hover:border-blue duration-300 hover:shadow-lg hover:shadow-blue/20 "
             >
               {isUploading ? (
-                <div className="relative">
-                  <div
-                    className="w-12 h-12 rounded-full absolute
+                <div className="relative flex items-center justify-center">
+                  Save...
+                  <div className="absolute top-0 w-full h-full bg-blue/10 z-10">
+                    <div
+                      className="w-7 h-7 rounded-full absolute
                             border-4 border-solid border-gray-200"
-                  ></div>
+                    ></div>
 
-                  <div
-                    className="w-12 h-12 rounded-full animate-spin absolute
-                            border-4 border-solid border-green-500 border-t-transparent shadow-md"
-                  ></div>
+                    <div className="w-7 h-7 rounded-full animate-spin absolute border-4 border-solid border-transparent border-t-blue shadow-md"></div>
+                  </div>
                 </div>
               ) : (
                 "Save"
@@ -176,7 +194,7 @@ export default function BoatOwnerImgGallery({ userId }) {
                   alt=""
                 />
                 <span
-                  onClick={() => handleLoved(!item?.loved)}
+                  onClick={() => handleLoved(item?.id, !item?.loved)}
                   className={`cursor-pointer absolute top-2 right-3 border-2 rounded-full p-0.5 border-transparent flex items-center justify-center transition duration-300 ${
                     item?.loved ? "hover:border-red-500" : "hover:border-white"
                   }`}

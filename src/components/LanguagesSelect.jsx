@@ -15,10 +15,9 @@ const deleteIcon = (
   </svg>
 );
 
-const LanguagesSelect = ({}) => {
+const LanguagesSelect = ({ selectedLanguages, setSelectedLanguages }) => {
   const [inputValue, setInputValue] = useState("");
   const [suggestions, setSuggestions] = useState([]);
-  const [selectedLanguages, setSelectedLanguages] = useState([]);
   const [focusedSuggestion, setFocusedSuggestion] = useState(null);
 
   // Sample list of languages
