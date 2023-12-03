@@ -13,6 +13,7 @@ import { Helmet } from "react-helmet";
 import { FaUserTie } from "react-icons/fa6";
 import { LuEye, LuEyeOff } from "react-icons/lu";
 import { toast } from "react-toastify";
+import InputNationality from "../components/InputNationality";
 import useAuth from "../hooks/useAuth";
 import useAxios from "../hooks/useAxios";
 
@@ -20,6 +21,7 @@ const CrewRegister = () => {
   const [Axios] = useAxios();
   const { createUser, upDateProfile } = useAuth();
   const [isShowPassword, setIsShowPassword] = useState(false);
+  const [nationality, setNationality] = useState(null);
   const navigate = useNavigate();
   const {
     register,
@@ -39,6 +41,7 @@ const CrewRegister = () => {
       gender: data?.gender,
       phone: data?.phone,
       experience: data?.experience,
+      nationality: nationality,
       role: "crew",
       birthDay: `${data?.day}, ${data?.month} , ${data?.year}`,
     };
@@ -214,6 +217,12 @@ const CrewRegister = () => {
             />
             <FaUserTie />
           </label>
+
+          {/* nationality */}
+          <InputNationality
+            nationality={nationality}
+            setNationality={setNationality}
+          />
 
           {/* gender */}
           <div className="flex items-center justify-between border-midBlue border rounded-[10px] overflow-hidden pr-2">

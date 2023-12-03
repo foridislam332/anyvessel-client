@@ -1,19 +1,57 @@
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 
 // icons image
-import user2 from "../../assets/images/user-3.png";
 import emailIcon from "../../assets/images/email.png";
-import phoneIcon from "../../assets/images/phone.png";
-import skypeIcon from "../../assets/images/skype.png";
 import facebookIcon from "../../assets/images/facebook.png";
 import instaIcon from "../../assets/images/insta.png";
 import internetIcon from "../../assets/images/internet.png";
+import phoneIcon from "../../assets/images/phone.png";
+import skypeIcon from "../../assets/images/skype.png";
+import user2 from "../../assets/images/user-3.png";
 
 // internal file
+import { useState } from "react";
+import InputField from "../../components/InputField";
 import useAuth from "../../hooks/useAuth";
 import useAxios from "../../hooks/useAxios";
+
+function validateEmail(email) {
+  const regex = `/^(([^<>()[\]\\.,;:\s@"]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/`;
+  return regex.test(email);
+}
+
+// number validation
+function validatePhoneNumber(phoneNumber) {
+  const regex = /^\d{10}$/;
+  return regex.test(phoneNumber);
+}
+
+// skype validation
+function validateSkypeLink(skypeLink) {
+  const regex = /^skype:[a-z0-9_.-]+?$/i;
+  return regex.test(skypeLink);
+}
+
+// website validation
+function validateWebsiteLink(websiteLink) {
+  const regex =
+    /^https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//\/=]*)$/i;
+  return regex.test(websiteLink);
+}
+
+// facebook validation
+function validateFacebookLink(facebookLink) {
+  console.log("facebookLink ", facebookLink);
+  const regex = /^(https?:\/\/)?(www\.)?facebook\.com\/[a-zA-Z0-9\.]+$/i;
+  return regex.test(facebookLink);
+}
+
+// Instagram validation
+function validateInstagramLink(instagramLink) {
+  const regex = /^(https?:\/\/)?(www\.)?instagram\.com\/[a-zA-Z0-9_.-]+$/i;
+  return regex.test(instagramLink);
+}
 
 const BS_ContactDetails = () => {
   const { user } = useAuth();
@@ -25,11 +63,115 @@ const BS_ContactDetails = () => {
     control,
     formState: { errors },
   } = useForm();
+  const [error, setError] = useState(null);
+  const [inputData, setInputData] = useState({
+    Skype: "",
+    Website: "",
+    contactEmail: "",
+    contactName: "",
+    facebook: "",
+    instagram: "",
+    phoneNumber: "",
+  });
+  const [validation, setValidation] = useState({
+    Skype: false,
+    Website: false,
+    contactEmail: false,
+    facebook: false,
+    instagram: false,
+    phoneNumber: false,
+  });
+
+  const handleInputChange = (e) => {
+    setInputData({
+      ...inputData,
+      [e?.id]: e?.value,
+    });
+  };
+
   const onSubmit = (data) => {
     const newData = {
+      Skype: inputData?.Skype,
+      Website: inputData?.Website,
+      contactEmail: inputData?.contactEmail,
+      contactName: inputData?.contactName,
+      facebook: inputData?.facebook,
+      instagram: inputData?.instagram,
+      phoneNumber: inputData?.phoneNumber,
       userEmail: user?.email,
-      ...data,
     };
+
+    const {
+      Skype,
+      Website,
+      contactEmail,
+      contactName,
+      facebook,
+      instagram,
+      phoneNumber,
+      userEmail,
+    } = newData;
+
+    console.log("newData - 1 ", newData);
+
+    // error handle
+    const errorArr = [];
+    for (const key of Object.keys(newData)) {
+      if (
+        newData[key] == "" ||
+        newData[key] == null ||
+        newData[key] == undefined
+      ) {
+        errorArr.push(key);
+      }
+    }
+    if (errorArr.length) return setError(errorArr);
+    setError(null);
+
+    // // validation
+    // for (const key of Object.keys(newData)) {
+    //   // console.log("newData[key] ", { [key]: newData[key] });
+    //   switch ([key]) {
+    //     case "Skype":
+    //       let skypeV = validateSkypeLink(newData[key]);
+    //       setValidation({ [key]: skypeV });
+    //       break;
+
+    //     case "Website":
+    //       setValidation({ [key]: validateWebsiteLink(newData[key]) });
+    //       break;
+
+    //     case "contactEmail":
+    //       let emailV = validateEmail(newData[key]);
+    //       console.log("emailV ", emailV);
+    //       setValidation({ [key]: emailV });
+    //       break;
+
+    //     case "facebook":
+    //       const facebookV = validateFacebookLink(newData[key]);
+    //       setValidation({ [key]: facebookV });
+    //       break;
+
+    //     case "phoneNumber":
+    //       setValidation({ [key]: validatePhoneNumber(newData[key]) });
+    //       break;
+
+    //     case "instagram":
+    //       setValidation({ [key]: validateInstagramLink(newData[key]) });
+    //       break;
+
+    //     case "userEmail":
+    //       setValidation({ [key]: validateEmail(newData[key]) });
+    //       break;
+
+    //     default:
+    //       true;
+    //       break;
+    //   }
+    // }
+
+    // console.log("newData - 2 ", newData);
+    // console.log("validation - 2 ", validation);
 
     Axios.patch("boat-services-data-contact", newData)
       .then((res) => {
@@ -48,24 +190,6 @@ const BS_ContactDetails = () => {
       });
   };
 
-  const inputField = (idName, placeholder, data, icons, type = "text") => {
-    return (
-      <label
-        htmlFor={idName}
-        className="flex items-center border-midBlue border rounded-[10px] overflow-hidden pr-2"
-      >
-        <input
-          id={idName}
-          placeholder={placeholder}
-          {...register(`${data}`)}
-          type={type}
-          className="text-sm w-full outline-none p-[10px] text-darkBlue border-midBlue placeholder:text-[#13518E]"
-        />
-        <img className="max-w-[18px] opacity-70" src={icons} alt={placeholder} />
-      </label>
-    );
-  };
-
   return (
     <div className="bg-white bg-opacity-90 px-5 sm:px-10 pb-10 md:px-[93px] md:pb-[30px] mt-6 rounded-[10px]">
       <div className="max-w-[715px] mx-auto text-center mb-6">
@@ -75,21 +199,74 @@ const BS_ContactDetails = () => {
       {/* form */}
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="flex flex-col md:gap-x-[37px] gap-y-5 text-sm">
-          {/* Name */}
-          {inputField("Name", "Name", "contactName", user2)}
+          {/* Name  */}
+          <InputField
+            id="contactName"
+            handle={handleInputChange}
+            placeholder="Name "
+            icons={user2}
+          />
+
           {/* Email address */}
-          {inputField("Email", "Email address", "contactEmail", emailIcon)}
+          <InputField
+            id="contactEmail"
+            handle={handleInputChange}
+            placeholder="Email address"
+            icons={emailIcon}
+          />
+
           {/* Phone number */}
-          {inputField("number", "Phone number", "phoneNumber", phoneIcon, "number")}
+          <InputField
+            id="phoneNumber"
+            type="number"
+            handle={handleInputChange}
+            placeholder="Phone number"
+            icons={phoneIcon}
+          />
+
           {/* Skype */}
-          {inputField("skype", "Skype", "Skype", skypeIcon)}
+          <InputField
+            id="Skype"
+            handle={handleInputChange}
+            placeholder="Skype"
+            icons={skypeIcon}
+          />
+
           {/* Website */}
-          {inputField("website", "website", "Website", internetIcon)}
+          <InputField
+            id="Website"
+            handle={handleInputChange}
+            placeholder="Website"
+            icons={internetIcon}
+          />
+
           {/* Facebook */}
-          {inputField("facebook", "Facebook", "facebook", facebookIcon)}
+          <InputField
+            id="facebook"
+            handle={handleInputChange}
+            placeholder="Facebook"
+            icons={facebookIcon}
+          />
+
           {/* instagram */}
-          {inputField("instagram", "Instagram", "instagram", instaIcon)}
+          <InputField
+            id="instagram"
+            handle={handleInputChange}
+            placeholder="Instagram"
+            icons={instaIcon}
+          />
         </div>
+
+        {/* show Error */}
+        {error && (
+          <p className="text-red-400 text-center mt-5">
+            {!error?.message ? (
+              <span> {error.join(", ")} - Please provide input </span>
+            ) : (
+              <span> {error?.message} </span>
+            )}
+          </p>
+        )}
 
         {/* buttons */}
         <div className="mt-12 w-fit mx-auto space-x-4">

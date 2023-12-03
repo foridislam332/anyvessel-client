@@ -7,7 +7,6 @@ import useAuth from "../hooks/useAuth";
 
 // icons image
 import { LuEye, LuEyeOff } from "react-icons/lu";
-import angle from "../assets/images/angle-down.png";
 import email from "../assets/images/email.png";
 import phone from "../assets/images/phone.png";
 import user2 from "../assets/images/user-3.png";
@@ -31,8 +30,6 @@ const BoatRegister = () => {
     formState: { errors },
     watch,
   } = useForm();
-
-  console.log("nationality ", nationality);
 
   // Image hosting
   const image_hosting_token = import.meta.env.VITE_Image_Upload_Token;
@@ -346,18 +343,6 @@ const BoatRegister = () => {
           </div>
 
           {/* nationality */}
-          <label
-            htmlFor="nationality"
-            className="flex items-center border-midBlue border rounded-[10px] overflow-hidden pr-2"
-          >
-            <input
-              id="nationality"
-              placeholder="Nationality"
-              {...register("nationality")}
-              className="w-full focus:outline-none border-none p-[10px] text-darkBlue placeholder:text-darkBlue"
-            />
-            <img src={angle} alt="angle" />
-          </label>
           <InputNationality
             nationality={nationality}
             setNationality={setNationality}

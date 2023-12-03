@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 import user2 from "../../assets/images/user-3.png";
 
 // internal file
+import InputField from "../../components/InputField";
 import useAxios from "../../hooks/useAxios";
 import useCurrentUser from "../../hooks/useCurrentUser";
 
@@ -19,6 +20,17 @@ const BS_Establishment = () => {
   const navigate = useNavigate();
   const [businessLogoUpload, setBusinessLogoUpload] = useState(null);
   const [paperPhoto, setPaperPhotoUpload] = useState(null);
+  const [error, setError] = useState(null);
+  const [inputData, setInputData] = useState({
+    ownerName: "",
+  });
+
+  const handleInputChange = (e) => {
+    setInputData({
+      ...inputData,
+      [e?.id]: e?.value,
+    });
+  };
 
   const {
     register,
@@ -28,12 +40,31 @@ const BS_Establishment = () => {
   } = useForm();
 
   const onSubmit = (data) => {
-    const { day, month, ownerName, year } = data;
+    const { day, month, year } = data;
+    const makeData = {
+      ownerName: inputData?.ownerName,
+      ...data,
+    };
+
+    // error handle
+    const errorArr = [];
+    for (const key of Object.keys(makeData)) {
+      if (
+        makeData[key] == "" ||
+        makeData[key] == null ||
+        makeData[key] == undefined
+      ) {
+        errorArr.push(key);
+      }
+    }
+    if (errorArr.length) return setError(errorArr);
+    setError(null);
+
     const newData = {
       userId: currentUser?._id,
       userEmail: currentUser?.email,
       establishment: {
-        ownerName,
+        ownerName: inputData?.ownerName,
         businessLogo: businessLogoUpload,
         paperPhoto: paperPhoto,
         date: { day, month, year },
@@ -78,7 +109,7 @@ const BS_Establishment = () => {
         }
       })
       .catch((err) => {
-        toast.error("Somethings else!");
+        toast.error("Somethings else !");
         // console.log(err);
       });
   };
@@ -150,18 +181,12 @@ const BS_Establishment = () => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="flex flex-col md:gap-x-[37px] gap-y-5 text-sm">
           {/* Name of the owner */}
-          <label
-            htmlFor="Name_owner"
-            className="flex items-center border-midBlue border rounded-[10px] overflow-hidden pr-2"
-          >
-            <input
-              id="Name_owner"
-              placeholder="Name of the owner"
-              {...register("ownerName")}
-              className="w-full focus:outline-none border-none p-[10px] text-darkBlue placeholder:text-darkBlue"
-            />
-            <img src={user2} alt="fullName" />
-          </label>
+          <InputField
+            id="ownerName"
+            handle={handleInputChange}
+            placeholder="Name of the owner"
+            icons={user2}
+          />
 
           {/* UPLOAD BUSINESS PHOTO OR LOGO */}
           <div className="md:col-span-2 flex items-center justify-between border-midBlue border rounded-[10px] overflow-hidden pr-2 py-4">
@@ -225,19 +250,25 @@ const BS_Establishment = () => {
           </div>
 
           {/* BUSINESS SINCE */}
-          <div className="flex items-center justify-between border-midBlue border rounded-[10px] overflow-hidden pr-2">
+          <div className="flex items-center justify-between border-midBlue border rounded-[10px] overflow-hidden pr-2 focus-within:scale-[1.01] focus-within:shadow-sm focus-within:shadow-midBlue">
             <span className="text-darkBlue pl-[10px]">BUSINESS SINCE : </span>
             <div className="px-[10px] flex items-center gap-2 sm:gap-[30px]">
               {/* year */}
               <div className="sm:px-[3px] py-[7px]">
                 <select
-                  {...register("year", { required: true })}
-                  className="text-darkBlue border-b border-midBlue focus:outline-none focus:border-b focus:border-midBlue pr-1 sm:pr-3 py-[3px]"
+                  {...register("year")}
+                  className="text-darkBlue border-b border-midBlue focus:outline-none focus:border-b focus:border-midBlue pr-1 sm:pr-3 py-[3px] focus-within:border-blue-500 focus-within:scale-[1.01] focus-within:shadow-sm focus-within:shadow-midBlue"
                 >
-                  <option value="year">Year</option>
+                  <option className="px-5 block w-24 text-center" value="year">
+                    Year
+                  </option>
                   {yearsRange &&
                     yearsRange.map((y) => (
-                      <option key={y} value={y}>
+                      <option
+                        className="px-5 block w-24 text-center"
+                        key={y}
+                        value={y}
+                      >
                         {y}
                       </option>
                     ))}
@@ -247,8 +278,8 @@ const BS_Establishment = () => {
               {/* month */}
               <div className="sm:px-[3px] py-[7px]">
                 <select
-                  {...register("month", { required: true })}
-                  className="text-darkBlue border-b border-midBlue focus:outline-none focus:border-b focus:border-midBlue pr-1 sm:pr-2 py-[3px]"
+                  {...register("month")}
+                  className="text-darkBlue border-b border-midBlue focus:outline-none focus:border-b focus:border-midBlue pr-1 sm:pr-2 py-[3px] focus-within:scale-[1.01] focus-within:shadow-sm focus-within:shadow-midBlue"
                 >
                   {months &&
                     months.map((m) => (
@@ -262,8 +293,8 @@ const BS_Establishment = () => {
               {/* day */}
               <div className="sm:px-[3px] py-[7px]">
                 <select
-                  {...register("day", { required: true })}
-                  className="text-darkBlue border-b border-midBlue focus:outline-none focus:border-b focus:border-midBlue pr-1 sm:pr-3 py-[3px]"
+                  {...register("day")}
+                  className="text-darkBlue border-b border-midBlue focus:outline-none focus:border-b focus:border-midBlue pr-1 sm:pr-3 py-[3px] focus-within:scale-[1.01] focus-within:shadow-sm focus-within:shadow-midBlue"
                 >
                   <option value="">Day</option>
                   {daysRange &&
@@ -277,6 +308,17 @@ const BS_Establishment = () => {
             </div>
           </div>
         </div>
+
+        {/* show Error */}
+        {error && (
+          <p className="text-red-400 text-center mt-5">
+            {!error?.message ? (
+              <span> {error.join(", ")} - Please provide input </span>
+            ) : (
+              <span> {error?.message} </span>
+            )}
+          </p>
+        )}
 
         {/* buttons */}
         <div className="mt-12 w-fit mx-auto space-x-4">

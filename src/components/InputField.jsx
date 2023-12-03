@@ -1,18 +1,44 @@
-const InputField = ({ id, type = "text", placeholder, register, icons }) => {
+import { useState } from "react";
+import { LuEye, LuEyeOff } from "react-icons/lu";
+
+const InputField = ({
+  id,
+  type = "text",
+  placeholder,
+  handle,
+  icons = null,
+  required = false,
+  valid = false,
+}) => {
+  const [isShowPassword, setIsShowPassword] = useState(false);
+
   return (
     <div>
       <label
-        htmlFor="full_name"
-        className="flex items-center border-midBlue border rounded-[10px] overflow-hidden pr-2 focus-within:border-blue-500 focus-within:scale-105 focus-within:shadow-md focus-within:shadow-midBlue"
+        htmlFor={id}
+        className={`flex items-center border-midBlue border rounded-[10px] overflow-hidden pr-2 focus-within:border-blue-500 focus-within:scale-[1.01] focus-within:shadow-sm focus-within:shadow-midBlue ${
+          valid && "border-red-300 shadow-sm shadow-red-200"
+        }`}
       >
         <input
           id={id}
-          type={type}
+          type={isShowPassword ? "text" : type}
           placeholder={placeholder}
-          {...register}
+          onChange={(e) => handle(e.target)}
+          required={required}
           className="w-full focus:outline-none border-none p-[10px] text-darkBlue placeholder:text-darkBlue"
         />
-        <img src={icons} alt={placeholder} />
+
+        {type === "password" ? (
+          <span
+            className="cursor-pointer px-3"
+            onClick={() => setIsShowPassword(!isShowPassword)}
+          >
+            {isShowPassword ? <LuEye /> : <LuEyeOff />}
+          </span>
+        ) : icons ? (
+          <img className="w-6 h-6" src={icons} alt={placeholder} />
+        ) : null}
       </label>
     </div>
   );

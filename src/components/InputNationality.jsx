@@ -1,20 +1,10 @@
 import { useEffect, useState } from "react";
 import { IoIosArrowDown } from "react-icons/io";
 
-export default function InputNationality({ setNationality, nationality }) {
-  const [countries, setCountries] = useState([]);
+export default function InputNationality({ nationality, setNationality }) {
   const [searchingData, setSearchingData] = useState([]);
   const [Input, setInput] = useState([]);
   const [showName, setShowName] = useState("");
-
-  //   const api = `https://restcountries.com/v3.1/all?fields=name,flags`;
-  //   useEffect(() => {
-  //     const api = `https://restcountries.com/v3.1/all?fields=name,flags`;
-  //     fetch(api)
-  //       .then((res) => res.json())
-  //       .then((data) => setCountries(data))
-  //       .catch((err) => console.log("err -> ", err));
-  //   }, []);
 
   useEffect(() => {
     const api = `https://restcountries.com/v3.1/name/${Input}`;
@@ -39,14 +29,13 @@ export default function InputNationality({ setNationality, nationality }) {
       <div>
         <label
           htmlFor="nationality2"
-          className="flex items-center border-midBlue border rounded-[10px] overflow-hidden pr-2"
+          className="flex items-center border-midBlue border rounded-[10px] overflow-hidden pr-2 focus-within:border-blue-500 focus-within:scale-[1.01] focus-within:shadow-sm focus-within:shadow-midBlue"
         >
           <input
             id="nationality2"
-            placeholder="Nationality test"
+            placeholder="Nationality"
             defaultValue={showName}
             value={showName}
-            // defaultValue={nationality?.name?.common}
             onChange={(e) => {
               setShowName(e.target.value);
               setInput(e.target.value);
