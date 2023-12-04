@@ -72,8 +72,6 @@ const BoatRegister = () => {
   };
 
   const onSubmit = (data) => {
-    console.log("data ", data);
-    console.log("errors ", errors);
     if (data.password !== data.retypePassword) {
       return toast.error("password did not match!", {
         position: "top-right",
@@ -103,24 +101,22 @@ const BoatRegister = () => {
       identityPhoto: identityPhoto,
       birthDay: `${data?.day}, ${data?.month} , ${data?.year}`,
     };
-    console.log("newData ", newData);
-    // createUser(data?.email, data?.password)
-    //   .then((result) => {
-    //     upDateProfile(result?.user, data?.fullName, picture).then((res) => {
-    //       Axios.post("boats", newData).then((data) => {
-    //         if (data.status === 200) {
-    //           navigate("/", { replace: true });
-    //         }
-    //       });
-    //     });
-    //   })
-    //   .catch((err) => {
-    //     toast.error("Something Wrong!");
-    //     console.log(err);
-    //   });
-  };
 
-  console.log("errors ", errors);
+    createUser(data?.email, data?.password)
+      .then((result) => {
+        upDateProfile(result?.user, data?.fullName, picture).then((res) => {
+          Axios.post("boats", newData).then((data) => {
+            if (data.status === 200) {
+              navigate("/", { replace: true });
+            }
+          });
+        });
+      })
+      .catch((err) => {
+        toast.error("Something Wrong!");
+        // console.log(err);
+      });
+  };
 
   // 1900 to 2025
   const yearsRange = Array.from({ length: 126 }, (_, i) => 1900 + i).reverse();

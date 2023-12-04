@@ -7,6 +7,7 @@ import { LuLanguages } from "react-icons/lu";
 import { MdAccountCircle, MdOutlineEmail } from "react-icons/md";
 import CustomModal from "../components/CustomModal";
 import useAxios from "../hooks/useAxios";
+import { toast } from "react-toastify";
 const BoatProfile = ({ user, currentUserLoading, refetch }) => {
   const {
     _id,
@@ -84,66 +85,59 @@ const BoatProfile = ({ user, currentUserLoading, refetch }) => {
     const picture = event.target.files[0];
     const formData = new FormData();
     formData.append("image", picture);
-    console.log("2222");
     fetch(image_hosting_url, {
       method: "POST",
       body: formData,
     })
       .then((res) => res.json())
       .then((imageResponse) => {
-        console.log(imageResponse);
         if (imageResponse.success) {
           const image = imageResponse.data.display_url;
           const profile = {
             url: image,
             email: email,
           };
-          console.log("2222");
           Axios.patch("/update-boat-cover", profile)
             .then((res) => {
               if (res.status === 200) {
-                console.log(res);
                 setProfileUpdateLoading(false);
                 refetch();
               }
             })
             .catch((error) => {
               console.log(error);
+              toast?.error("Somethings plz Wait");
             });
         }
       });
   };
   const handlePictureUpload = (event) => {
     setProfileUpdateLoading(true);
-    console.log("2222");
     const picture = event.target.files[0];
     const formData = new FormData();
     formData.append("image", picture);
-    console.log("2222");
     fetch(image_hosting_url, {
       method: "POST",
       body: formData,
     })
       .then((res) => res.json())
       .then((imageResponse) => {
-        console.log(imageResponse);
         if (imageResponse.success) {
           const image = imageResponse.data.display_url;
           const profile = {
             url: image,
             email: email,
           };
-          console.log("2222");
           Axios.patch("/update-boat-profile", profile)
             .then((res) => {
               if (res.status === 200) {
-                console.log(res);
                 setProfileUpdateLoading(false);
                 refetch();
               }
             })
             .catch((error) => {
               console.log(error);
+              toast?.error("Somethings plz Wait");
             });
         }
       });
@@ -157,7 +151,6 @@ const BoatProfile = ({ user, currentUserLoading, refetch }) => {
       languages: data.languages,
       description: data.description,
     };
-    console.log(updateData);
     Axios.patch("/boat/basic", updateData)
       .then((res) => {
         if (res.status === 200) {
@@ -168,6 +161,7 @@ const BoatProfile = ({ user, currentUserLoading, refetch }) => {
       })
       .catch((error) => {
         console.log(error);
+              toast?.error("Somethings plz Wait");
       });
   };
 

@@ -87,22 +87,20 @@ const BoatServicesRegister = () => {
 
     createUser(email, password)
       .then((result) => {
-        upDateProfile(result.user, data.fullName, data?.pictures).then(
-          (res) => {
-            Axios.post("boat-service", signUpData)
-              .then((data) => {
-                if (data.status === 200) {
-                  navigate("/sign-up-step/boat-services-establishment", {
-                    replace: true,
-                  });
-                }
-              })
-              .catch((err) => {
-                console.log(err);
-                toast.error("Something Wrong!");
-              });
-          }
-        );
+        upDateProfile(result.user, fullName).then((res) => {
+          Axios.post("boat-service", signUpData)
+            .then((data) => {
+              if (data.status === 200) {
+                navigate("/sign-up-step/boat-services-establishment", {
+                  replace: true,
+                });
+              }
+            })
+            .catch((err) => {
+              console.log(err);
+              toast.error("Something Wrong!");
+            });
+        });
       })
       .catch((err) => {
         // console.log(err);

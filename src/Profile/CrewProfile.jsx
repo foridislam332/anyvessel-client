@@ -76,7 +76,7 @@ const CrewProfile = ({ user, currentUserLoading, refetch }) => {
       // languages: data.languages,
       // description: data.description
     };
-    console.log(updateData);
+    // console.log(updateData);
     Axios.patch("/crew/basic", updateData)
       .then((res) => {
         if (res.status === 200) {
@@ -87,6 +87,7 @@ const CrewProfile = ({ user, currentUserLoading, refetch }) => {
       })
       .catch((error) => {
         console.log(error);
+              toast?.error("Somethings wrong plz try again");
       });
   };
   return (

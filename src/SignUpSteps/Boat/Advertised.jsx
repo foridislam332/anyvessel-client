@@ -69,7 +69,10 @@ const Advertised = () => {
           toast.success("Boat Sailing post already submitted!");
         }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+              toast?.error("Somethings wrong plz try again");
+        console.log(err)
+      });
   };
 
   return (

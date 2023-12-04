@@ -42,7 +42,7 @@ function validateWebsiteLink(websiteLink) {
 
 // facebook validation
 function validateFacebookLink(facebookLink) {
-  console.log("facebookLink ", facebookLink);
+  // console.log("facebookLink ", facebookLink);
   const regex = /^(https?:\/\/)?(www\.)?facebook\.com\/[a-zA-Z0-9\.]+$/i;
   return regex.test(facebookLink);
 }
@@ -101,19 +101,6 @@ const BS_ContactDetails = () => {
       userEmail: user?.email,
     };
 
-    const {
-      Skype,
-      Website,
-      contactEmail,
-      contactName,
-      facebook,
-      instagram,
-      phoneNumber,
-      userEmail,
-    } = newData;
-
-    console.log("newData - 1 ", newData);
-
     // error handle
     const errorArr = [];
     for (const key of Object.keys(newData)) {
@@ -127,51 +114,6 @@ const BS_ContactDetails = () => {
     }
     if (errorArr.length) return setError(errorArr);
     setError(null);
-
-    // // validation
-    // for (const key of Object.keys(newData)) {
-    //   // console.log("newData[key] ", { [key]: newData[key] });
-    //   switch ([key]) {
-    //     case "Skype":
-    //       let skypeV = validateSkypeLink(newData[key]);
-    //       setValidation({ [key]: skypeV });
-    //       break;
-
-    //     case "Website":
-    //       setValidation({ [key]: validateWebsiteLink(newData[key]) });
-    //       break;
-
-    //     case "contactEmail":
-    //       let emailV = validateEmail(newData[key]);
-    //       console.log("emailV ", emailV);
-    //       setValidation({ [key]: emailV });
-    //       break;
-
-    //     case "facebook":
-    //       const facebookV = validateFacebookLink(newData[key]);
-    //       setValidation({ [key]: facebookV });
-    //       break;
-
-    //     case "phoneNumber":
-    //       setValidation({ [key]: validatePhoneNumber(newData[key]) });
-    //       break;
-
-    //     case "instagram":
-    //       setValidation({ [key]: validateInstagramLink(newData[key]) });
-    //       break;
-
-    //     case "userEmail":
-    //       setValidation({ [key]: validateEmail(newData[key]) });
-    //       break;
-
-    //     default:
-    //       true;
-    //       break;
-    //   }
-    // }
-
-    // console.log("newData - 2 ", newData);
-    // console.log("validation - 2 ", validation);
 
     Axios.patch("boat-services-data-contact", newData)
       .then((res) => {

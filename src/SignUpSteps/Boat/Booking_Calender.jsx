@@ -10,7 +10,7 @@ const Booking_Calender = () => {
     const handleDateChange = (date) => {
         setSelectedDate(date);
     };
-    console.log(selectedDate)
+    
     return (
         <section>
             <form

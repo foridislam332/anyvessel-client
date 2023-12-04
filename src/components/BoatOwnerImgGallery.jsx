@@ -109,20 +109,20 @@ export default function BoatOwnerImgGallery({ userId }) {
 
   // upload images
   const handleLoved = (id, value) => {
-    console.log("handleLoved ", { galleryId, id, value });
+    // console.log("handleLoved ", { galleryId, id, value });
 
     if ((galleryId, id)) {
       const updatedLoved = { loved: value };
       Axios.put(`gallery-img-update/${galleryId}/${id}`, updatedLoved)
         .then((res) => {
           const loved = res.data;
-          console.log(" loved ", loved);
+          // console.log(" loved ", loved);
         })
         .catch((err) => console.log("error ", err));
     }
   };
 
-  console.log(" isUploading ", isUploading);
+  // console.log(" isUploading ", isUploading);
 
   return (
     <>

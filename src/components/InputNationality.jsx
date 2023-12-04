@@ -13,7 +13,9 @@ export default function InputNationality({ nationality, setNationality }) {
       .then((data) => {
         setSearchingData(data);
       })
-      .catch((err) => console.log("err -> ", err));
+      .catch((err) => {
+        // console.log("err -> ", err)
+      });
   }, [Input]);
 
   const handleSelectedNationality = (value) => {

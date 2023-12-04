@@ -6,6 +6,8 @@ import useAuth from "../hooks/useAuth";
 const UserProfile = () => {
   const { user, logOut } = useAuth();
 
+  // console.log("user ", user);
+
   return (
     <>
       {user?.email ? (

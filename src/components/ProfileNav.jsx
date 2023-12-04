@@ -35,9 +35,7 @@ const ProfileNav = () => {
         {currentUser?.role === "crew" && (
           <>
             <li>
-              <ProfileLink to="/crew-establishment">
-                Crew Establishment
-              </ProfileLink>
+              <ProfileLink to="/">Crew Establishment</ProfileLink>
             </li>
 
             <li>
@@ -64,9 +62,7 @@ const ProfileNav = () => {
         {currentUser?.role === "boatServices" && (
           <>
             <li>
-              <ProfileLink to="/boat-services-establishment">
-                Boat services establishment
-              </ProfileLink>
+              <ProfileLink to="/">Boat services establishment</ProfileLink>
             </li>
 
             <li>
@@ -78,7 +74,7 @@ const ProfileNav = () => {
             </li>
 
             <li>
-              <ProfileLink to="/service"> Service </ProfileLink>
+              <ProfileLink to="/boat-service"> Service </ProfileLink>
             </li>
 
             <li>

@@ -37,7 +37,7 @@ const InputField = ({
             {isShowPassword ? <LuEye /> : <LuEyeOff />}
           </span>
         ) : icons ? (
-          <img className="w-6 h-6" src={icons} alt={placeholder} />
+          <img className="w-4 h-4" src={icons} alt={placeholder} />
         ) : null}
       </label>
     </div>

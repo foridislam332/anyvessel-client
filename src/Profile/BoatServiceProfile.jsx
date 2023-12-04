@@ -76,7 +76,7 @@ const BoatServiceProfile = ({ user, currentUserLoading, refetch }) => {
       // languages: data.languages,
       // description: data.description
     };
-    console.log(updateData);
+
     Axios.patch("/boat-service/basic", updateData)
       .then((res) => {
         if (res.status === 200) {
@@ -87,6 +87,7 @@ const BoatServiceProfile = ({ user, currentUserLoading, refetch }) => {
       })
       .catch((error) => {
         console.log(error);
+        toast?.error("Somethings wrong plz try again");
       });
   };
 

@@ -59,7 +59,7 @@ const RadioBox = ({
       [idName]: selected,
     });
   }, [selected]);
-  console.log("radioValue ", radioValue);
+  // console.log("radioValue ", radioValue);
 
   return (
     <>
@@ -69,8 +69,8 @@ const RadioBox = ({
         </span>
         <div className="flex gap-20 items-center">
           <div
-            className={`form-control border border-dotted border-[#A1C7EC] rounded-md px-8 py-3 ${
-              selected == labelText1?.value && "bg-[#1FBAFF4D]"
+            className={`form-control border border-[#A1C7EC] rounded-md px-8 py-3 border-2 border-dashed ${
+              selected == labelText1?.value && "border-blue bg-[#1FBAFF4D]"
             }`}
           >
             <label className="label py-1.5 cursor-pointer flex gap-4 items-center">
@@ -90,8 +90,8 @@ const RadioBox = ({
           </div>
 
           <div
-            className={`form-control border border-dotted border-[#A1C7EC] rounded-md px-8 py-3 ${
-              selected == labelText2?.value && "bg-[#1FBAFF4D]"
+            className={`form-control border border-[#A1C7EC] rounded-md px-8 py-3 border-2 border-dashed ${
+              selected == labelText2?.value && "border-blue bg-[#1FBAFF4D]"
             }`}
           >
             <label className="label py-1.5 cursor-pointer flex gap-4 items-center">
