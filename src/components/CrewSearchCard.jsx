@@ -11,7 +11,7 @@ const CrewSearchCard = ({ service }) => {
       ? advert?.advert?.slice(0, 100) + "...."
       : advert?.advert;
 
-  console.log("service ", service);
+  // console.log("service ", service);
   return (
     <>
       <div className="bg-white rounded-[10px] hover:shadow-3xl duration-300">

@@ -3,7 +3,7 @@ import ProfileLink from "./ProfileLink";
 
 const ProfileNav = () => {
   const { currentUser } = useCurrentUser();
-  console.log("currentUser -> ", currentUser);
+  // console.log("currentUser -> ", currentUser);
   return (
     <nav className="bg-white px-8 py-5 rounded-lg">
       <ul className="flex items-center flex-wrap gap-x-10 gap-y-1">

@@ -18,6 +18,7 @@ export default function BoatOwnerImgGallery({ userId }) {
   const [isUploading, setIsUploading] = useState(false);
   const [Axios] = useAxios();
   const [galleryId, setGalleryId] = useState("");
+  const [reCall, setReCall] = useState(true);
 
   useEffect(() => {
     userId &&
@@ -30,7 +31,7 @@ export default function BoatOwnerImgGallery({ userId }) {
         .catch((err) => {
           console.log(`Axios.get(/gallery/`, err);
         });
-  }, [userId, vesselImages]);
+  }, [userId, vesselImages, reCall]);
 
   // Image hosting
   const image_hosting_token = import.meta.env.VITE_Image_Upload_Token;
@@ -107,22 +108,18 @@ export default function BoatOwnerImgGallery({ userId }) {
     setFiles(obj);
   };
 
-  // upload images
+  // images loved updated
   const handleLoved = (id, value) => {
-    // console.log("handleLoved ", { galleryId, id, value });
-
     if ((galleryId, id)) {
       const updatedLoved = { loved: value };
-      Axios.put(`gallery-img-update/${galleryId}/${id}`, updatedLoved)
+      Axios.put(`gallery-img-loved-update/${galleryId}/${id}`, updatedLoved)
         .then((res) => {
+          setReCall(!reCall);
           const loved = res.data;
-          // console.log(" loved ", loved);
         })
         .catch((err) => console.log("error ", err));
     }
   };
-
-  // console.log(" isUploading ", isUploading);
 
   return (
     <>
