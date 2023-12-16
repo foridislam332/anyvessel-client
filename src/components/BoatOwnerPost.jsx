@@ -4,25 +4,8 @@ import { toast } from "react-toastify";
 import useAxios from "../hooks/useAxios";
 import useProfileData from "../hooks/useProfileData";
 import CustomModal from "./CustomModal";
-
-function calculateAge(date) {
-  const userDateOfBirth = new Date(date);
-  const currentDate = new Date();
-
-  // Calculate the age difference
-  let ageDifference = currentDate.getFullYear() - userDateOfBirth.getFullYear();
-
-  if (
-    currentDate.getMonth() < userDateOfBirth.getMonth() ||
-    (currentDate.getMonth() === userDateOfBirth.getMonth() &&
-      currentDate.getDate() < userDateOfBirth.getDate())
-  ) {
-    ageDifference--;
-  }
-
-  // Return the age in the specified format
-  return `${ageDifference} years old`;
-}
+import { BsThreeDotsVertical } from "react-icons/bs";
+import BlogPostCart from "./BlogPostCart";
 
 export default function BoatOwnerPost() {
   const [Axios] = useAxios();
@@ -102,47 +85,7 @@ export default function BoatOwnerPost() {
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-[10px]">
           {posts.map((post, index) => (
-            <div
-              key={index}
-              className="flex gap-5 px-7 py-4 border border-blue rounded-md"
-            >
-              <div className="flex-shrink-0 text-center">
-                <div className="relative w-20 h-20 mx-auto">
-                  <img
-                    className="w-20 h-20 object-cover rounded-full"
-                    src={post?.ownerImage}
-                    alt=""
-                  />
-                  <img
-                    className="w-8 h-8 object-cover rounded-full absolute -bottom-2 -right-0 border-2 border-white"
-                    src="https://i.ibb.co/NnGgxrz/download-8.jpg"
-                    alt=""
-                  />
-                </div>
-
-                <div className="mb-3">
-                  <h2 className="text-black font-medium mt-3">
-                    {post.ownerName?.split(" ", 2).join(" ")}
-                  </h2>
-                  <p className="text-gray text-[10px] -mt-[2px]">
-                    ({calculateAge(post.ownerAge)})
-                  </p>
-                  <p className="text-blue text-[10px]">{post.role}</p>
-                </div>
-              </div>
-              <div>
-                <p className="font-light text-black line-clamp-4 mb-7">
-                  {post.description}
-                </p>
-
-                <p className="font-medium flex items-center gap-1">
-                  {post.numberOfLoveReact > 1000
-                    ? (post.numberOfLoveReact / 1000).toFixed(1) + "k"
-                    : post.numberOfLoveReact}
-                  <AiFillHeart className="text-xl text-[#D25269]" />
-                </p>
-              </div>
-            </div>
+            <BlogPostCart post={post} key={index} />
           ))}
         </div>
       )}
