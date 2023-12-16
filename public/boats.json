@@ -31,5 +31,38 @@
         "people": "30,46",
         "seat": "2",
         "price": 17.987
+    },
+    {
+        "_id": 4,
+        "name": "Anna Maria",
+        "image": "https://i.ibb.co/MMRbLht/boat1.png",
+        "location": "Caribbean",
+        "des": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+        "area": "30,46",
+        "people": "30,46",
+        "seat": "2",
+        "price": 8909
+    },
+    {
+        "_id": 5,
+        "name": "Anna Maria",
+        "image": "https://i.ibb.co/MMYkc60/boat2.png",
+        "location": "Caribbean",
+        "des": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+        "area": "30,46",
+        "people": "30,46",
+        "seat": "2",
+        "price": 9000
+    },
+    {
+        "_id": 6,
+        "name": "Anna Maria",
+        "image": "https://i.ibb.co/HtJVM96/boat3.png",
+        "location": "Caribbean",
+        "des": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+        "area": "30,46",
+        "people": "30,46",
+        "seat": "2",
+        "price": 17.987
     }
 ]

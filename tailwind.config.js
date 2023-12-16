@@ -25,11 +25,11 @@ export default {
     screens: {
       sm: "540px",
       md: "768px",
-      lg: "1120px",
+      lg: "1180px",
       xl: "1440px",
       xxl: "1420px"
     },
 
   },
-  plugins: [],
+  plugins: [require("daisyui")],
 };
