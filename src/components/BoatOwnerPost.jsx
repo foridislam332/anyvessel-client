@@ -85,7 +85,12 @@ export default function BoatOwnerPost() {
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-[10px]">
           {posts.map((post, index) => (
-            <BlogPostCart post={post} key={index} />
+            <BlogPostCart
+              key={index}
+              post={post}
+              setReCall={setReCall}
+              reCall={reCall}
+            />
           ))}
         </div>
       )}

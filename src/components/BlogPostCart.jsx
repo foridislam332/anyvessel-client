@@ -1,16 +1,85 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { AiFillHeart } from "react-icons/ai";
 import { BsThreeDotsVertical } from "react-icons/bs";
+import { toast } from "react-toastify";
+import useAxios from "../hooks/useAxios";
+import CustomModal from "./CustomModal";
 
-export default function BlogPostCart({ post }) {
+export default function BlogPostCart({ post, setReCall, reCall }) {
+  const [Axios] = useAxios();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [isPostModalOpen, setPostModalOpen] = useState(false);
+  const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
+  const [postText, setPostText] = useState("");
 
-  const deleteHandle = (id) => {
-    console.log(" id ", id);
+  const buttonRef = useRef(null);
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (buttonRef.current && !buttonRef.current.contains(event.target)) {
+        setMenuOpen(false);
+      }
+    };
+
+    document.addEventListener("click", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, []);
+
+  const handleBasicInfoModal = (e) => {
+    if (e == "cancel") setPostModalOpen(false);
+    if (e == "cancel") setDeleteModalOpen(false);
   };
 
-  const editHandle = (id) => {
-    console.log(" id ", id);
+  const deleteHandle = (data) => {
+    if (data) {
+      const postId = post?._id;
+
+      if (postId) {
+        Axios.delete(`/blog-post-cart-delete/${postId}`)
+          .then((res) => {
+            const data = res?.data;
+            if (data?.deletedCount) {
+              toast.success("post delete successful!");
+              setReCall(!reCall);
+              setDeleteModalOpen(false);
+            }
+          })
+          .catch((err) => {
+            console.log("error ", err);
+            toast.error("Somethings Wrong");
+          });
+      }
+    } else {
+      setDeleteModalOpen(false);
+    }
+  };
+
+  const editHandle = (e) => {
+    e.preventDefault();
+    const postId = post?._id;
+
+    if (postId || postText) {
+      const newData = {
+        postId,
+        description: postText,
+      };
+
+      Axios.patch("/blog-post-cart-update", newData)
+        .then((res) => {
+          const data = res?.data?.data;
+          if (data) {
+            toast.success("post update successful!");
+            setReCall(!reCall);
+            setPostText("");
+            setPostModalOpen(false);
+          }
+        })
+        .catch((err) => {
+          toast.error("Somethings Wrong");
+        });
+    }
   };
 
   return (
@@ -18,6 +87,7 @@ export default function BlogPostCart({ post }) {
       <div className="flex gap-5 px-7 py-4 border border-blue rounded-md relative">
         <div className="absolute top-1 left-1  z-[999]">
           <button
+            ref={buttonRef}
             onClick={() => setMenuOpen(!menuOpen)}
             className={`hover:bg-darkBlue/20 transition duration-300 w-7 h-7 rounded-full flex justify-center items-center cursor-pointer ${
               menuOpen && "bg-darkBlue/20"
@@ -38,7 +108,7 @@ export default function BlogPostCart({ post }) {
               <ul>
                 <li>
                   <button
-                    onClick={() => editHandle(post?._id)}
+                    onClick={() => setPostModalOpen(true)}
                     className="w-full text-left hover:bg-darkBlue/5 px-2 py-1 rounded-md"
                   >
                     Edit
@@ -46,7 +116,7 @@ export default function BlogPostCart({ post }) {
                 </li>
                 <li>
                   <button
-                    onClick={() => deleteHandle(post?._id)}
+                    onClick={() => setDeleteModalOpen(true)}
                     className="w-full text-left hover:bg-darkBlue/5 px-2 py-1 rounded-md"
                   >
                     Delete
@@ -94,6 +164,79 @@ export default function BlogPostCart({ post }) {
           </p>
         </div>
       </div>
+
+      {isPostModalOpen && (
+        <CustomModal
+          isModalOpen={isPostModalOpen}
+          setIsModalOpen={setPostModalOpen}
+          handleModal={handleBasicInfoModal}
+        >
+          <form
+            title="update post data"
+            className="text-black"
+            onSubmit={editHandle}
+          >
+            <div>
+              <h3 className="font-bold text-xl mb-2">Write your Post</h3>
+              <p className="border-t border-dark mb-5"></p>
+
+              {/* Language */}
+              <div className="w-full">
+                <label htmlFor="postText" className="text-dark text-sm">
+                  Post Description here:
+                </label>
+                <textarea
+                  id="postText"
+                  name="postText"
+                  onChange={(e) => setPostText(e.target.value)}
+                  defaultValue={post.description}
+                  placeholder="Type Language"
+                  className="w-full border  text-black bg-white border-dark/40 p-2 rounded-md focus:outline-none focus:border-primary mb-1 sm:mb-3 line-clamp-8 resize-none"
+                ></textarea>
+              </div>
+
+              <div>
+                <input
+                  className="bg-blue text-white font-light py-1 px-5 rounded-lg hover:bg-transparent hover:text-blue border border-blue hover:border-blue duration-300 hover:shadow-lg hover:shadow-blue/20 mx-auto cursor-pointer"
+                  type="submit"
+                  value="Post Now"
+                />
+              </div>
+            </div>
+          </form>
+        </CustomModal>
+      )}
+
+      {isDeleteModalOpen && (
+        <CustomModal
+          isModalOpen={isDeleteModalOpen}
+          setIsModalOpen={setDeleteModalOpen}
+          handleModal={handleBasicInfoModal}
+        >
+          <div title="Delete post" className="text-black">
+            <h3 className="font-bold text-xl mb-2">
+              Are Sure Delete Your post
+            </h3>
+            <p className="border-t border-dark/70 mb-5"></p>
+
+            <div className="flex flex-wrap gap-4 justify-end items-center">
+              <button
+                onClick={() => deleteHandle(false)}
+                className="bg-blue text-white font-light py-1 px-5 rounded-lg hover:bg-transparent hover:text-blue border border-blue hover:border-blue duration-300 hover:shadow-lg hover:shadow-blue/20"
+              >
+                cancel
+              </button>
+
+              <button
+                onClick={() => deleteHandle(true)}
+                className="bg-red-500 text-white font-light py-1 px-5 rounded-lg hover:bg-transparent hover:text-red-500 border border-red-500 hover:border-red-500 duration-300 hover:shadow-lg hover:shadow-red-500/20"
+              >
+                Yes Delete Now
+              </button>
+            </div>
+          </div>
+        </CustomModal>
+      )}
     </>
   );
 }
