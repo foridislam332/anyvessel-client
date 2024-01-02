@@ -27,6 +27,7 @@ const LanguagesSelect = ({ selectedLanguages, setSelectedLanguages }) => {
     "French",
     "German",
     "Chinese",
+    "Arabic",
     "Japanese",
   ];
 
@@ -76,32 +77,6 @@ const LanguagesSelect = ({ selectedLanguages, setSelectedLanguages }) => {
 
   return (
     <div className="relative">
-      {/* <label
-        htmlFor="languages"
-        className="flex items-center flex-col border-midBlue border rounded-[10px] overflow-hidden pr-2"
-      >
-        <input
-          id="languages"
-          type="text"
-          className="w-full focus:outline-none border-none p-[10px] text-darkBlue placeholder:text-darkBlue "
-          value={inputValue}
-          onChange={handleInputChange}
-          placeholder="Languages spoken on board"
-        />
-      </label>
-
-      {suggestions.length > 0 && (
-        <div className="absolute left-0 top-10 border border-x-midBlue bg-white backdrop-blur-md p-2 rounded">
-          <div>
-            {suggestions.map((language, index) => (
-              <div key={index} onClick={() => handleSuggestionClick(language)}>
-                {language}
-              </div>
-            ))}
-          </div>
-        </div>
-      )} */}
-
       <label
         htmlFor="languages"
         className="flex items-center flex-col border-midBlue border rounded-[10px] overflow-hidden pr-2"
