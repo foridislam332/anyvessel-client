@@ -1,4 +1,3 @@
-import axios from "axios";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
@@ -348,10 +347,35 @@ const BoatRegister = () => {
           </div>
 
           {/* Upload identity photo */}
-          <UploadImage id="identityPhoto" setUrl={setIdentityPhoto} />
+          <label
+            className="border-midBlue border rounded-[10px] overflow-hidden py-2 lg:py-2 px-2"
+            htmlFor="identityPhoto"
+          >
+            <div className="h-full max-h-28">
+              <UploadImage id="identityPhoto" setUrl={setIdentityPhoto}>
+                <p>
+                  Personal Identity verification
+                  <span className="text-lightBlue text-[12px]">
+                    (upload a passport photo)
+                  </span>
+                </p>
+              </UploadImage>
+            </div>
+          </label>
 
           {/* Upload your picture */}
-          <UploadImage id="picture" setUrl={setPicture} />
+          <label
+            className="border-midBlue border rounded-[10px] overflow-hidden py-2 lg:py-2 px-2"
+            htmlFor="picture"
+          >
+            <div className="h-full max-h-28">
+              <UploadImage id="picture" setUrl={setPicture}>
+                <p className="text-darkBlue pl-[10px] cursor-pointer">
+                  Upload your picture
+                </p>
+              </UploadImage>
+            </div>
+          </label>
 
           {/* description */}
           <textarea

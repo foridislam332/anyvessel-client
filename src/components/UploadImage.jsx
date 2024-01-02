@@ -2,7 +2,14 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
-const UploadImage = ({ id, setUrl, multipleImages = false }) => {
+const UploadImage = ({
+  id,
+  placeholder,
+  setUrl,
+  multipleImages = false,
+  children,
+  uploadBtn = true,
+}) => {
   const [uploadLoading, setUploadLoading] = useState(false);
   const [uploadedPhoto, setUploadedPhoto] = useState(multipleImages ? [] : "");
 
@@ -37,37 +44,30 @@ const UploadImage = ({ id, setUrl, multipleImages = false }) => {
   useEffect(() => setUrl(uploadedPhoto), [uploadedPhoto]);
 
   return (
-    <div>
+    <>
       {uploadLoading ? (
         <span
-          className="loading loading-spinner loading-md"
+          className="loading loading-spinner loading-lg"
           title="Image uploading"
         ></span>
       ) : (
         <label
-          //   htmlFor="identityPhoto"
-
           htmlFor={id}
-          className="md:col-span-2 lg:col-span-1 flex items-center justify-between border-midBlue border rounded-[10px] overflow-hidden py-2 lg:py-0 pr-2"
+          className="md:col-span-2 lg:col-span-1 flex items-center justify-between rounded-[10px] py-2 lg:py-0 pr-2 h-full"
         >
           {!uploadedPhoto?.length ? (
-            <p className="text-darkBlue pl-[10px]">
-              Personal Identity verification{" "}
-              <span className="text-lightBlue text-[12px]">
-                (upload a passport photo)
-              </span>
-            </p>
+            <>{children}</>
           ) : (
             <div className="text-darkBlue pl-[10px] flex items-center flex-wrap justify-start">
               {multipleImages ? (
                 uploadedPhoto?.length &&
                 uploadedPhoto?.map((url, idx) => (
-                  <figure className="w-28 h-28 p-1 bg-white shadow">
+                  <figure className="w-28 h-28 p-2 bg-white shadow">
                     <img className="w-full h-full" src={url} alt="" />
                   </figure>
                 ))
               ) : (
-                <figure className="w-28 h-28 p-1 bg-white shadow">
+                <figure className="w-full h-full p-2 bg-white shadow">
                   <img className="w-full h-full" src={uploadedPhoto} alt="" />
                 </figure>
               )}
@@ -75,8 +75,6 @@ const UploadImage = ({ id, setUrl, multipleImages = false }) => {
           )}
           <>
             <input
-              // id="identityPhoto"
-              // name="identityPhoto"
               id={id}
               name={id}
               type="file"
@@ -84,18 +82,18 @@ const UploadImage = ({ id, setUrl, multipleImages = false }) => {
               onChange={handleUpload}
               className="w-full hidden focus:outline-none border-none p-[10px] text-darkBlue placeholder:text-darkBlue"
             />
-            <label
-              htmlFor={id}
-              //   type="button"
-              //   onClick={() => document.getElementById({ id }).click()}
-              className="text-white bg-blue px-5 py-1 rounded-[26px] hover:bg-transparent hover:text-blue border border-blue duration-300"
-            >
-              Upload
-            </label>
+            {uploadBtn && (
+              <label
+                htmlFor={id}
+                className="text-white bg-blue px-5 py-1 rounded-[26px] hover:bg-transparent hover:text-blue border border-blue duration-300"
+              >
+                Upload
+              </label>
+            )}
           </>
         </label>
       )}
-    </div>
+    </>
   );
 };
 
