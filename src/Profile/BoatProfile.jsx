@@ -5,10 +5,12 @@ import { BiCalendar } from "react-icons/bi";
 import { BsCamera, BsFillFlagFill, BsTelephoneOutbound } from "react-icons/bs";
 import { LuLanguages } from "react-icons/lu";
 import { MdAccountCircle, MdOutlineEmail } from "react-icons/md";
+import { toast } from "react-toastify";
 import CustomModal from "../components/CustomModal";
 import useAxios from "../hooks/useAxios";
-import { toast } from "react-toastify";
+
 const BoatProfile = ({ user, currentUserLoading, refetch }) => {
+  console.log("user ", user);
   const {
     _id,
     surname,
@@ -25,6 +27,7 @@ const BoatProfile = ({ user, currentUserLoading, refetch }) => {
     identityPhoto,
     birthDay,
   } = user;
+
   // console.log(user)
   const calculateAge = (birthDate) => {
     const today = new Date();
@@ -161,7 +164,7 @@ const BoatProfile = ({ user, currentUserLoading, refetch }) => {
       })
       .catch((error) => {
         console.log(error);
-              toast?.error("Somethings plz Wait");
+        toast?.error("Somethings plz Wait");
       });
   };
 
@@ -260,10 +263,12 @@ const BoatProfile = ({ user, currentUserLoading, refetch }) => {
 
         <div className="flex gap-3 py-2 items-center">
           <p className=" flex items-center gap-2 border-2 border-midBlue px-4 py-2 duration-300 rounded-full hover:bg-transparent hover:shadow-lg hover:border-0">
-            <BsFillFlagFill /> <span className="text-xs "> {nationality}</span>
+            <BsFillFlagFill />{" "}
+            <span className="text-xs "> {nationality?.name?.common}</span>
           </p>
           <p className=" flex items-center gap-2 border-2 border-midBlue px-4 py-2 duration-300 rounded-full hover:bg-transparent hover:shadow-lg hover:border-0">
-            <LuLanguages /> <span className="text-xs "> {languages}</span>
+            <LuLanguages />{" "}
+            <span className="text-xs "> {languages?.join(", ")}</span>
           </p>
         </div>
         <div className="flex gap-3 py-2 items-center">

@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import useAuth from "./useAuth";
 import useAxios from "./useAxios";
-import { toast } from "react-toastify";
 
 const useProfileData = () => {
   const { user } = useAuth();
   const [Axios] = useAxios();
   const [profileData, setProfileData] = useState(null);
+  console.log("hossen12@gmail.com ", profileData);
 
   useEffect(() => {
     Axios(`user-data/${user?.email}`)

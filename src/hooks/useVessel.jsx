@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import useAxios from "./useAxios";
 import useAuth from "./useAuth";
 
-const useCurrentUser = () => {
+const useVessel = () => {
   const { user } = useAuth();
   const [Axios] = useAxios();
   const {
@@ -16,8 +16,7 @@ const useCurrentUser = () => {
       return res.data;
     },
   });
-
   return { currentUser, currentUserLoading, refetch };
 };
 
-export default useCurrentUser;
+export default useVessel;
