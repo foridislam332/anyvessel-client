@@ -1,17 +1,16 @@
 import { useState } from "react";
 import { HiOutlineLocationMarker } from "react-icons/hi";
 import { Link } from "react-router-dom";
-import { toast } from "react-toastify";
 
 // internal files
+import Area from "../assets/images/area.png";
 import Seat from "../assets/images/seat.png";
 import User from "../assets/images/user.png";
-import Area from "../assets/images/area.png";
 
 const BoatCards = ({ boat }) => {
   const { _id, vessel, contact, location } = boat;
   const [modal, setModal] = useState(false);
-// console.log(vessel);
+  // console.log(vessel);
   return (
     <>
       {/* single card */}
@@ -28,27 +27,25 @@ const BoatCards = ({ boat }) => {
         <div className="flex justify-between p-4">
           <h6 className="text-xl font-medium">{vessel.manufacturer}</h6>
           <p className="text-darkBlue flex items-center gap-3">
-            {" "}
             <span className="text-base">
               <HiOutlineLocationMarker />
             </span>
-            {location.boarding_city}
+            {location?.boarding_city}
           </p>
         </div>
-        <div className="px-4 py-2">  
-           <p className=" text-lightBlue text-sm font-light line-clamp-3">
-          {vessel.vessel_description}
-        </p>
+        <div className="px-4 py-2">
+          <p className=" text-lightBlue text-sm font-light line-clamp-3">
+            {vessel.vessel_description}
+          </p>
         </div>
-        
+
         <div className="text-center border-t mt-3 border-blue">
           {/* boat bottom area */}
           <div className="py-3">
             <div className="lg:px-8 flex items-center justify-center gap-10 md:gap-14 font-light">
               <p className="flex items-center gap-3">
                 <img src={Area} alt="" />
-                {vessel.vessel_area} M
-                {/* {area} M */}
+                {vessel.vessel_area} M{/* {area} M */}
               </p>
               <p className="flex items-center gap-3">
                 <img src={User} alt="" />
