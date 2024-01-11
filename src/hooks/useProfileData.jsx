@@ -7,7 +7,7 @@ const useProfileData = () => {
   const { user } = useAuth();
   const [Axios] = useAxios();
   const [profileData, setProfileData] = useState(null);
-  console.log("hossen12@gmail.com ", profileData);
+  // console.log("hossen12@gmail.com ", profileData);
 
   useEffect(() => {
     Axios(`user-data/${user?.email}`)

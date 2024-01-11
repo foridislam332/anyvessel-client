@@ -4,18 +4,21 @@ import { IoIosArrowDown } from "react-icons/io";
 export default function InputNationality({ nationality, setNationality }) {
   const [searchingData, setSearchingData] = useState([]);
   const [Input, setInput] = useState([]);
-  const [showName, setShowName] = useState("");
+  const [showName, setShowName] = useState(nationality?.name?.common);
 
   useEffect(() => {
-    const api = `https://restcountries.com/v3.1/name/${Input}`;
-    fetch(api)
-      .then((res) => res.json())
-      .then((data) => {
-        setSearchingData(data);
-      })
-      .catch((err) => {
-        // console.log("err -> ", err)
-      });
+    if (Input?.length) {
+      console.log("Input 2", Input);
+      const api = `https://restcountries.com/v3.1/name/${Input}`;
+      fetch(api)
+        .then((res) => res.json())
+        .then((data) => {
+          setSearchingData(data);
+        })
+        .catch((err) => {
+          // console.log("err -> ", err)
+        });
+    }
   }, [Input]);
 
   const handleSelectedNationality = (value) => {
@@ -49,7 +52,7 @@ export default function InputNationality({ nationality, setNationality }) {
 
         <div className="relative">
           {searchingData?.length ? (
-            <div className="shadow-lg shadow-blue/20 p-3 bg-white rounded-lg absolute top-0 left-0 overflow-y-scroll max-h-[150px]">
+            <div className="shadow-lg shadow-blue/20 p-3 bg-white rounded-lg absolute top-0 left-0 overflow-y-scroll max-h-[150px] z-50">
               <ul>
                 {searchingData.map((item, idx) => (
                   <li

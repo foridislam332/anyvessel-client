@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 import user2 from "../../assets/images/user-3.png";
 
 // internal file
-import InputField from "../../components/InputField";
+import InputField from "../../components/Inputs/InputField";
 import useAxios from "../../hooks/useAxios";
 import useCurrentUser from "../../hooks/useCurrentUser";
 

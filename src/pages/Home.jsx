@@ -8,38 +8,37 @@ import HeroBanner from "../sections/HeroBanner";
 
 // image
 import BgImg from "../assets/images/boat-bg.png";
+import useCurrentUser from "../hooks/useCurrentUser";
+import ProfileMain from "../sections/BoatProfile/ProfileMain";
 import BoatSell from "../sections/BoatSell";
 import MeetCrew from "../sections/MeetCrew";
 import Reviews from "../sections/Reviews";
-import useCurrentUser from "../hooks/useCurrentUser";
-import ProfileMain from "../sections/BoatProfile/ProfileMain";
 
 const Home = () => {
-    const { currentUser } = useCurrentUser();
-    console.log(currentUser)
-    return (
-        <>
-            <Helmet>
-                <title>Home | Anyvessel</title>
-            </Helmet>
+  const { currentUser } = useCurrentUser();
+  //   console.log("currentUser ", currentUser);
 
-            {/* sections */}
+  return (
+    <>
+      <Helmet>
+        <title>Home | Anyvessel</title>
+      </Helmet>
 
-            {/* <HeroBanner /> */}
-            <div className="">
-                {currentUser ? <ProfileMain /> : <HeroBanner />}
-            </div>
-            <BoatSearch />
-            <AboutAnyvessel />
-            <FeaturedBoats />
-            <section className="overflow-hidden">
-                <img className="w-full" src={BgImg} alt="" />
-            </section>
-            <MeetCrew />
-            <Reviews />
-            <BoatSell />
-        </>
-    );
+      {/* sections */}
+
+      {/* <HeroBanner /> */}
+      <div className="">{currentUser ? <ProfileMain /> : <HeroBanner />}</div>
+      <BoatSearch />
+      <AboutAnyvessel />
+      <FeaturedBoats />
+      <section className="overflow-hidden">
+        <img className="w-full" src={BgImg} alt="" />
+      </section>
+      <MeetCrew />
+      <Reviews />
+      <BoatSell />
+    </>
+  );
 };
 
 export default Home;

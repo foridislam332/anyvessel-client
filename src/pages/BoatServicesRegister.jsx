@@ -11,8 +11,8 @@ import { default as user, default as user2 } from "../assets/images/user2.png";
 import { useState } from "react";
 import { Helmet } from "react-helmet";
 import { toast } from "react-toastify";
-import InputField from "../components/InputField";
-import InputNationality from "../components/InputNationality";
+import InputField from "../components/Inputs/InputField";
+import InputNationality from "../components/Inputs/InputNationality";
 import useAuth from "../hooks/useAuth";
 import useAxios from "../hooks/useAxios";
 

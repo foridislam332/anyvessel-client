@@ -10,8 +10,8 @@ import email from "../assets/images/email.png";
 import phone from "../assets/images/phone.png";
 import user2 from "../assets/images/user-3.png";
 import user from "../assets/images/user2.png";
-import InputNationality from "../components/InputNationality";
-import LanguagesSelect from "../components/LanguagesSelect";
+import InputNationality from "../components/Inputs/InputNationality";
+import LanguagesSelect from "../components/Inputs/LanguagesSelect";
 import UploadImage from "../components/UploadImage";
 import useAxios from "../hooks/useAxios";
 
@@ -61,6 +61,8 @@ const BoatRegister = () => {
       identityPhoto: identityPhoto,
       birthDay: `${data?.day}, ${data?.month} , ${data?.year}`,
     };
+
+    // return console.log("const ", newData);
 
     createUser(data?.email, data?.password)
       .then((result) => {

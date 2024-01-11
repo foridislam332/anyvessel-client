@@ -13,7 +13,7 @@ import { Helmet } from "react-helmet";
 import { FaUserTie } from "react-icons/fa6";
 import { LuEye, LuEyeOff } from "react-icons/lu";
 import { toast } from "react-toastify";
-import InputNationality from "../components/InputNationality";
+import InputNationality from "../components/Inputs/InputNationality";
 import useAuth from "../hooks/useAuth";
 import useAxios from "../hooks/useAxios";
 

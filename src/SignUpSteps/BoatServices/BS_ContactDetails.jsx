@@ -12,7 +12,7 @@ import user2 from "../../assets/images/user-3.png";
 
 // internal file
 import { useState } from "react";
-import InputField from "../../components/InputField";
+import InputField from "../../components/Inputs/InputField";
 import useAuth from "../../hooks/useAuth";
 import useAxios from "../../hooks/useAxios";
 
