@@ -1,4 +1,4 @@
-import { Navigate, Outlet, useLocation } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 
 import useAuth from "../hooks/useAuth";
 import Footer from "../shared/Footer";
@@ -18,9 +18,9 @@ const Main = () => {
       </div>
     );
   }
-  if (user === null) {
-    return <Navigate to="/register" replace={true} />;
-  }
+  // if (user === null) {
+  //   return <Navigate to="/register" replace={true} />;
+  // }
   return (
     <>
       <Header />
