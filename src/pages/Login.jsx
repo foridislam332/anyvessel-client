@@ -37,7 +37,7 @@ const Login = () => {
             </Helmet>
 
             <section className="h-screen flex items-center justify-center">
-                <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 shadow-xl w-[450px] p-8 rounded-lg">
+                <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 shadow-xl w-full md:w-[450px] p-8 rounded-lg">
                     <div className="">
                         <label htmlFor="email" className="ml-[2px]">
                             Email
@@ -82,7 +82,7 @@ const Login = () => {
 
                     <div className="pt-4">
                         <input
-                            className="btn w-96 bg-slate-700 hover:bg-blue text-white duration-300"
+                            className="btn w-full bg-slate-700 hover:bg-blue text-white duration-300 "
                             type="submit"
                             value={loading ? "Loading..." : "LOGIN"}
                         />
