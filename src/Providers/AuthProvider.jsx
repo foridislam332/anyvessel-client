@@ -90,7 +90,7 @@ const AuthProvider = ({ children }) => {
         setLoading(true);
         const unsubscribe = onAuthStateChanged(auth, async (authUser) => {
             setUser(authUser)
-            setLoading(true);
+            setLoading(false);
         });
 
         return () => {

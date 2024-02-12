@@ -11,16 +11,10 @@ const Main = () => {
     const { user, loading } = useAuth();
     const location = useLocation();
 
-    if (loading) {
-        return (
-            <div className="h-screen flex items-center justify-center">
-                <h1 className="text-3xl text-blue font-medium">Loading ...</h1>
-            </div>
-        );
-    }
-    if (user === null) {
+    if (!loading && user === null) {
         return <Navigate to="/register" replace={true} />;
     }
+
     return (
         <>
             <Header />
