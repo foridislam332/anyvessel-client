@@ -31,7 +31,7 @@ export default function InputNationality({ nationality, setNationality }) {
       <div>
         <label
           htmlFor="nationality2"
-          className="flex items-center border-midBlue border rounded-[10px] overflow-hidden pr-2 focus-within:border-blue-500 focus-within:scale-[1.01] focus-within:shadow-sm focus-within:shadow-midBlue"
+          className="flex items-center border-midBlue border rounded-[10px] overflow-hidden pr-2"
         >
           <input
             id="nationality2"

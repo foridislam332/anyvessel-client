@@ -1,8 +1,8 @@
-import useCurrentUser from "../hooks/useCurrentUser";
+import useAuth from "../hooks/useAuth";
 import ProfileLink from "./ProfileLink";
 
 const ProfileNav = () => {
-  const { currentUser } = useCurrentUser();
+  const { currentUser } = useAuth();
   // console.log("currentUser -> ", currentUser);
   return (
     <nav className="bg-white px-8 py-5 rounded-lg">

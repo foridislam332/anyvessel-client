@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import useAuth from './useAuth';
 import useAxios from './useAxios';
-import useCurrentUser from './useCurrentUser';
 import { toast } from 'react-toastify';
 
 const useAllBoatSailingPost = () => {
-    const { currentUser } = useCurrentUser();
+    const { currentUser } = useAuth();
     const [Axios] = useAxios();
     const [boatSellPost, setBoatSellPost] = useState()
 

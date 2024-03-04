@@ -2,6 +2,7 @@ import { FacebookAuthProvider, GoogleAuthProvider, createUserWithEmailAndPasswor
 
 import { createContext, useEffect, useState } from 'react';
 import app from "../Firebase/firebase.config";
+import axios from "axios";
 
 export const AuthContext = createContext();
 
@@ -43,20 +44,6 @@ const AuthProvider = ({ children }) => {
         return updatePassword(user, newPassword);
     }
 
-    // google sign in
-    const googleSignIn = () => {
-        setLoading(true);
-        const googleProvider = new GoogleAuthProvider();
-        return signInWithPopup(auth, googleProvider)
-    }
-
-    // facebook sign in
-    const facebookSignIn = () => {
-        setLoading(true);
-        const gitHubProvider = new FacebookAuthProvider();
-        return signInWithPopup(auth, gitHubProvider);
-    };
-
     // reset password
     const resetPassword = (email) => {
         setLoading(true);
@@ -69,7 +56,6 @@ const AuthProvider = ({ children }) => {
     };
 
     const authInfo = {
-        auth,
         loading,
         user,
         setLoading,
@@ -77,8 +63,6 @@ const AuthProvider = ({ children }) => {
         signUpUser,
         signIn,
         profileUpdate,
-        googleSignIn,
-        facebookSignIn,
         resetPassword,
         logOut,
         changePassword,
@@ -91,6 +75,23 @@ const AuthProvider = ({ children }) => {
         const unsubscribe = onAuthStateChanged(auth, async (authUser) => {
             setUser(authUser)
             setLoading(false);
+            const api = axios.create({
+                baseURL: 'https://any-vessel.vercel.app',
+                // baseURL: 'http://localhost:5000',
+            });
+            if (authUser.email) {
+                await api.get(`/users/${authUser.email}`)
+                    .then((data) => {
+                        if (data.data.email) {
+                            setCurrentUser(data.data);
+                            setLoading(false);
+                        }
+                    })
+                    .catch((err) => {
+                        console.log(err)
+                        setLoading(false);
+                    });
+            }
         });
 
         return () => {

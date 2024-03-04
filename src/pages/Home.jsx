@@ -11,12 +11,12 @@ import BgImg from "../assets/images/boat-bg.png";
 import BoatSell from "../sections/BoatSell";
 import MeetCrew from "../sections/MeetCrew";
 import Reviews from "../sections/Reviews";
-import useCurrentUser from "../hooks/useCurrentUser";
 import ProfileMain from "../sections/BoatProfile/ProfileMain";
+import useAuth from "../hooks/useAuth";
 
 const Home = () => {
-    const { currentUser } = useCurrentUser();
-    console.log(currentUser)
+    const { currentUser } = useAuth();
+
     return (
         <>
             <Helmet>
