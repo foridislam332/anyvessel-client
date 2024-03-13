@@ -14,11 +14,11 @@ export default function BoatOwnerPost() {
     const [postText, setPostText] = useState("");
     const [isPostModalOpen, setPostModalOpen] = useState(false);
 
-    // useEffect(() => {
-    //     if (!loading && currentUser._id) {
-    //         refetch();
-    //     }
-    // }, [])
+    useEffect(() => {
+        if (currentUser._id) {
+            refetch();
+        }
+    }, [currentUser._id])
 
     const handleBasicInfoModal = (e) => {
         if (e == "cancel") setPostModalOpen(false);

@@ -74,7 +74,6 @@ const AuthProvider = ({ children }) => {
         setLoading(true);
         const unsubscribe = onAuthStateChanged(auth, async (authUser) => {
             setUser(authUser)
-            setLoading(false);
             const api = axios.create({
                 // baseURL: 'https://any-vessel.vercel.app',
                 baseURL: 'http://localhost:5000',
