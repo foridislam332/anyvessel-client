@@ -60,6 +60,7 @@ const AuthProvider = ({ children }) => {
         user,
         setLoading,
         currentUser,
+        setCurrentUser,
         signUpUser,
         signIn,
         profileUpdate,
@@ -79,6 +80,10 @@ const AuthProvider = ({ children }) => {
                 baseURL: 'https://anyvessel-server.onrender.com',
                 // baseURL: 'http://localhost:5000',
             });
+
+            if (currentUser._id) {
+                setLoading(false)
+            }
 
             if (authUser?.email) {
                 await api.get(`/users/${authUser.email}`)

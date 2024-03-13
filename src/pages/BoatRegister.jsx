@@ -16,7 +16,7 @@ import UploadImage from "../components/UploadImage";
 import useAxios from "../hooks/useAxios";
 
 const BoatRegister = () => {
-    const { signUpUser, profileUpdate } = useAuth();
+    const { signUpUser, profileUpdate, setCurrentUser } = useAuth();
     const navigate = useNavigate();
     const [Axios] = useAxios();
     const [picture, setPicture] = useState('');
@@ -77,12 +77,14 @@ const BoatRegister = () => {
 
         signUpUser(data?.email, data?.password)
             .then((result) => {
-                profileUpdate(result?.user, data?.fullName, picture).then((res) => {
-                    Axios.post("users", newData).then((data) => {
-                        if (data.status === 200) {
-                            navigate("/", { replace: true });
-                        }
-                    });
+                profileUpdate(result?.user, data?.fullName, picture).then(() => {
+                    Axios.post("users", newData)
+                        .then((res) => {
+                            if (res.status === 200) {
+                                setCurrentUser({ ...newData, _id: res.data.insertedId })
+                                navigate("/", { replace: true });
+                            }
+                        });
                 });
             })
             .catch((err) => {
