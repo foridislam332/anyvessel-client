@@ -76,21 +76,24 @@ const AuthProvider = ({ children }) => {
             setUser(authUser)
             const api = axios.create({
                 // baseURL: 'https://any-vessel.vercel.app',
-                baseURL: 'http://localhost:5000',
+                baseURL: 'https://anyvessel-server.onrender.com',
+                // baseURL: 'http://localhost:5000',
             });
 
-            if (authUser.email) {
+            if (authUser?.email) {
                 await api.get(`/users/${authUser.email}`)
-                    .then((data) => {
-                        if (data.data.email) {
-                            setCurrentUser(data.data);
+                    .then((res) => {
+                        if (res.data.email) {
                             setLoading(false);
+                            setCurrentUser(res.data);
                         }
                     })
                     .catch((err) => {
                         console.log(err)
                         setLoading(false);
                     });
+            } else {
+                setLoading(false)
             }
         });
 

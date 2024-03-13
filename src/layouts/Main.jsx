@@ -6,10 +6,15 @@ import Header from "../shared/Header";
 
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import PageLoading from "../components/PageLoading";
 
 const Main = () => {
     const { user, loading } = useAuth();
     const location = useLocation();
+
+    if (loading) {
+        return <PageLoading />
+    }
 
     if (!loading && user === null) {
         return <Navigate to="/register" replace={true} />;
