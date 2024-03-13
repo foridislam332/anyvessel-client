@@ -6,11 +6,10 @@ import useAxios from "../hooks/useAxios";
 import CustomModal from "./CustomModal";
 import Swal from "sweetalert2";
 
-export default function BlogPostCart({ post, setReCall, refetch }) {
+export default function BlogPostCart({ post, refetch }) {
     const [Axios] = useAxios();
     const [menuOpen, setMenuOpen] = useState(false);
-    const [isPostModalOpen, setPostModalOpen] = useState(false);
-    const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
+    const [isEditModalOpen, setEditModalOpen] = useState(false);
     const [postText, setPostText] = useState("");
 
     const buttonRef = useRef(null);
@@ -29,8 +28,7 @@ export default function BlogPostCart({ post, setReCall, refetch }) {
     }, []);
 
     const handleBasicInfoModal = (e) => {
-        if (e == "cancel") setPostModalOpen(false);
-        if (e == "cancel") setDeleteModalOpen(false);
+        if (e == "cancel") setEditModalOpen(false);
     };
 
     const handleDeletePost = (id) => {
@@ -54,39 +52,37 @@ export default function BlogPostCart({ post, setReCall, refetch }) {
                                 icon: "success"
                             });
                             refetch();
-                            setDeleteModalOpen(false);
                         }
                     })
                     .catch((err) => {
                         console.log("error ", err);
-                        toast.error("Somethings Wrong");
+                        toast.error("Deleted error");
                     });
             }
         });
     };
 
-    const editHandle = (e) => {
+    const handleEditPost = (e) => {
         e.preventDefault();
         const postId = post?._id;
 
         if (postId || postText) {
-            const newData = {
-                postId,
-                description: postText,
-            };
 
-            Axios.patch("/blog-post-cart-update", newData)
+            Axios.patch(`posts/${postId}`, { description: postText })
                 .then((res) => {
-                    const data = res?.data?.data;
-                    if (data) {
-                        toast.success("post update successful!");
-                        setReCall(!reCall);
+                    if (res.data.modifiedCount) {
+                        Swal.fire({
+                            position: "center",
+                            icon: "success",
+                            title: "Post updated!"
+                        });
+                        refetch();
                         setPostText("");
-                        setPostModalOpen(false);
+                        setEditModalOpen(false);
                     }
                 })
                 .catch((err) => {
-                    toast.error("Somethings Wrong");
+                    console.log(err)
                 });
         }
     };
@@ -115,7 +111,7 @@ export default function BlogPostCart({ post, setReCall, refetch }) {
                             <ul>
                                 <li>
                                     <button
-                                        onClick={() => setPostModalOpen(true)}
+                                        onClick={() => setEditModalOpen(true)}
                                         className="w-full text-left hover:bg-darkBlue/5 px-2 py-1 rounded-md"
                                     >
                                         Edit
@@ -172,16 +168,16 @@ export default function BlogPostCart({ post, setReCall, refetch }) {
                 </div>
             </div>
 
-            {isPostModalOpen && (
+            {isEditModalOpen && (
                 <CustomModal
-                    isModalOpen={isPostModalOpen}
-                    setIsModalOpen={setPostModalOpen}
+                    isModalOpen={isEditModalOpen}
+                    setIsModalOpen={setEditModalOpen}
                     handleModal={handleBasicInfoModal}
                 >
                     <form
                         title="update post data"
                         className="text-black"
-                        onSubmit={editHandle}
+                        onSubmit={handleEditPost}
                     >
                         <div>
                             <h3 className="font-bold text-xl mb-2">Write your Post</h3>
@@ -206,7 +202,7 @@ export default function BlogPostCart({ post, setReCall, refetch }) {
                                 <input
                                     className="bg-blue text-white font-light py-1 px-5 rounded-lg hover:bg-transparent hover:text-blue border border-blue hover:border-blue duration-300 hover:shadow-lg hover:shadow-blue/20 mx-auto cursor-pointer"
                                     type="submit"
-                                    value="Post Now"
+                                    value="Update"
                                 />
                             </div>
                         </div>
