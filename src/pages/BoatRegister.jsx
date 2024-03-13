@@ -19,16 +19,15 @@ const BoatRegister = () => {
     const { signUpUser, profileUpdate } = useAuth();
     const navigate = useNavigate();
     const [Axios] = useAxios();
-    const [picture, setPicture] = useState(null);
-    const [identityPhoto, setIdentityPhoto] = useState(null);
+    const [picture, setPicture] = useState('');
+    const [identityPhoto, setIdentityPhoto] = useState('');
     const [isShowPassword, setIsShowPassword] = useState(false);
-    const [nationality, setNationality] = useState(null);
+    const [nationality, setNationality] = useState('');
     const [selectedLanguages, setSelectedLanguages] = useState([]);
     const {
         register,
         handleSubmit,
-        formState: { errors },
-        watch,
+        formState: { errors }
     } = useForm();
 
     const onSubmit = (data) => {
@@ -39,7 +38,21 @@ const BoatRegister = () => {
             });
         }
 
-        if (picture === null || identityPhoto === null) {
+        if (nationality === '') {
+            return toast.warning("Please select nationality!", {
+                position: "top-right",
+                autoClose: 3000,
+            });
+        }
+
+        if (selectedLanguages.length === 0) {
+            return toast.warning("Please add Languages!", {
+                position: "top-right",
+                autoClose: 3000,
+            });
+        }
+
+        if (picture === '' || identityPhoto === '') {
             return toast.warning("Please Upload Photo!", {
                 position: "top-right",
                 autoClose: 3000,
@@ -65,7 +78,7 @@ const BoatRegister = () => {
         signUpUser(data?.email, data?.password)
             .then((result) => {
                 profileUpdate(result?.user, data?.fullName, picture).then((res) => {
-                    Axios.post("boats", newData).then((data) => {
+                    Axios.post("users", newData).then((data) => {
                         if (data.status === 200) {
                             navigate("/", { replace: true });
                         }
@@ -260,7 +273,7 @@ const BoatRegister = () => {
                     </div>
 
                     {/* Birthday */}
-                    <div className="flex items-center gap-1 justify-between flex-wrap border-midBlue border rounded-[10px] overflow-hidden pr-2">
+                    <div className={`flex items-center gap-1 justify-between flex-wrap border-midBlue border rounded-[10px] overflow-hidden pr-2 ${errors.year && 'border border-red-500'} ${errors.month && 'border border-red-500'} ${errors.day && 'border border-red-500'}`}>
                         <span className="text-darkBlue pl-[10px]">Birthday: </span>
                         <div className="px-[10px] flex items-center flex-wrap gap-2 sm:gap-x-[30px]">
                             {/* year */}
@@ -315,7 +328,6 @@ const BoatRegister = () => {
 
                     {/* nationality */}
                     <InputNationality
-                        nationality={nationality}
                         setNationality={setNationality}
                     />
 
@@ -326,7 +338,7 @@ const BoatRegister = () => {
                     />
 
                     {/* romance */}
-                    <div className={`md:col-span-2 lg:col-span-1 flex items-center justify-between border-midBlue border rounded-[10px] overflow-hidden pr-2 ${errors.gender && 'border border-red-500'}`}>
+                    <div className={`md:col-span-2 lg:col-span-1 flex items-center justify-between border-midBlue border rounded-[10px] overflow-hidden pr-2 ${errors.romance && 'border border-red-500'}`}>
                         <span className="text-darkBlue pl-[10px]">
                             May concider romance with crew
                         </span>
@@ -340,7 +352,7 @@ const BoatRegister = () => {
                                     name="romance"
                                     type="radio"
                                     value="yes"
-                                    {...register("romance")}
+                                    {...register("romance", { required: true })}
                                 />
                                 Yes
                             </label>
@@ -354,7 +366,7 @@ const BoatRegister = () => {
                                     name="romance"
                                     type="radio"
                                     value="no"
-                                    {...register("romance")}
+                                    {...register("romance", { required: true })}
                                 />
                                 No
                             </label>

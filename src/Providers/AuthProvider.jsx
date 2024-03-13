@@ -76,9 +76,10 @@ const AuthProvider = ({ children }) => {
             setUser(authUser)
             setLoading(false);
             const api = axios.create({
-                baseURL: 'https://any-vessel.vercel.app',
-                // baseURL: 'http://localhost:5000',
+                // baseURL: 'https://any-vessel.vercel.app',
+                baseURL: 'http://localhost:5000',
             });
+
             if (authUser.email) {
                 await api.get(`/users/${authUser.email}`)
                     .then((data) => {

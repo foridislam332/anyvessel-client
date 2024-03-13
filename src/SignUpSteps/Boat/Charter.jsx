@@ -8,6 +8,8 @@ import useAxios from "../../hooks/useAxios";
 import useProfileData from "../../hooks/useProfileData";
 import BoatOwnerImgGallery from "../../components/BoatOwnerImgGallery";
 import BoatOwnerPost from "../../components/BoatOwnerPost";
+import useAuth from "../../hooks/useAuth";
+import PageLoading from "../../components/PageLoading";
 
 function calculateAge(date) {
   const userDateOfBirth = new Date(date);
@@ -29,12 +31,12 @@ function calculateAge(date) {
 }
 
 const Charter = () => {
-  const { profileData } = useProfileData();
+  const { currentUser } = useAuth();
 
   return (
     <section>
-      {!profileData ? (
-        <p>Loading</p>
+      {!currentUser ? (
+        <PageLoading />
       ) : (
         <>
           <div className="flex gap-8 py-5">
@@ -42,38 +44,38 @@ const Charter = () => {
             <div className="relative shrink-0">
               <img
                 className="w-28 h-28 object-cover rounded-full"
-                src={profileData?.picture}
+                src={currentUser?.picture}
                 alt=""
               />
               <img
                 className="w-[52px] h-[52px] object-cover rounded-full absolute -bottom-1 sm:-bottom-5 -right-1 border-[3px] border-white"
-                src={profileData?.identityPhoto}
+                src={currentUser?.identityPhoto}
                 alt=""
               />
             </div>
 
             {/* company info */}
-            <div className="w-[750px]">
+            <div className="">
               <div className="mb-3">
                 <h2 className="text-xl text-[#050F36] font-medium">
-                  {profileData?.fullName}
+                  {currentUser?.fullName}
                   <span className="text-lightBlue text-sm sm:text-base block sm:inline">
                     {" "}
-                    ({calculateAge(profileData?.birthDay)})
+                    ({calculateAge(currentUser?.birthDay)})
                   </span>
                 </h2>
 
                 <p className="text-blue font-light">Boat Owner</p>
               </div>
               <p className="line-clamp-2 font-light text-black">
-                {profileData?.description}
+                {currentUser?.description}
               </p>
             </div>
           </div>
 
           {/* Photo Gallery */}
           <div className="mt-8 pb-5 border-b border-blue">
-            <BoatOwnerImgGallery userId={profileData?._id} />
+            <BoatOwnerImgGallery userId={currentUser?._id} />
           </div>
 
           <BoatOwnerPost />

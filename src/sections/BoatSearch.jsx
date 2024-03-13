@@ -12,7 +12,7 @@ import useCurrentUser from "../hooks/useCurrentUser";
 const BoatSearch = () => {
   const [length, setLength] = useState(0);
   const [price, setPrice] = useState(0);
-  const { currentUser }=useCurrentUser()
+  const { currentUser } = useCurrentUser()
 
   // hook form
   const {
@@ -27,7 +27,7 @@ const BoatSearch = () => {
   };
 
   return (
-    <section className={`${currentUser ? "relative  md:mt-0" : "relative sm:-mt-48 md:-mt-28"}`}>
+    <section className={`${currentUser ? "relative sm:-mt-28 md:-mt-20" : "relative sm:-mt-48 md:-mt-28"} z-40`}>
       <div className="container">
         <form
           onSubmit={handleSubmit(onSubmit)}

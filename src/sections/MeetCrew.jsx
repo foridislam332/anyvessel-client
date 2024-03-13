@@ -61,7 +61,7 @@ const MeetCrew = () => {
           >
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 py-5">
               {/* Fixed Swiper Container */}
-              <div className="swiper-container fixed top-0 right-0 bottom-0 left-0">
+              <div className="swiper-container">
                 {allCrewData?.crews.map((service, i) => (
                   <SwiperSlide key={i}>
                     <CrewSearchCard service={service} />

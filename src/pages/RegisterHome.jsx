@@ -21,7 +21,7 @@ const RegisterHome = () => {
             <main>
                 <section
                     style={{ backgroundImage: `url(${RegisterBg})` }}
-                    className="bg-cover bg-center py-20 flex flex-col items-center justify-center relative"
+                    className="bg-cover bg-center py-20 flex flex-col items-center justify-center relative z-40"
                 >
                     <div className="container">
                         {/* register title */}

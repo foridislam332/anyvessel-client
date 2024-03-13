@@ -5,7 +5,6 @@ import { toast } from "react-toastify";
 
 const UploadImage = ({
     id,
-    placeholder,
     setUrl,
     multipleImages = false,
     children,
@@ -27,7 +26,6 @@ const UploadImage = ({
 
         try {
             const response = await axios.post(image_hosting_url, formData);
-            console.log("response ", response);
 
             const url = response.data.data.display_url;
             setUploadedPhoto(multipleImages ? [...uploadedPhoto, url] : url);
