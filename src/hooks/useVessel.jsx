@@ -1,22 +1,16 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxios from "./useAxios";
-import useAuth from "./useAuth";
 
 const useVessel = () => {
-  const { user } = useAuth();
-  const [Axios] = useAxios();
-  const {
-    data: currentUser = [],
-    isLoading: currentUserLoading,
-    refetch,
-  } = useQuery({
-    queryKey: ["currentUser"],
-    queryFn: async () => {
-      const res = await Axios.get(`/users/${user?.email}`);
-      return res.data;
-    },
-  });
-  return { currentUser, currentUserLoading, refetch };
+    const [Axios] = useAxios();
+    const { data: vesselData = [], isLoading: loading, refetch, } = useQuery({
+        queryKey: ["vesselData"],
+        queryFn: async () => {
+            const res = await Axios.get('/vessel');
+            return res.data;
+        },
+    });
+    return { vesselData, loading, refetch };
 };
 
 export default useVessel;

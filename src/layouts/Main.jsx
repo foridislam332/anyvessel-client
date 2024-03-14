@@ -13,7 +13,9 @@ const Main = () => {
     const location = useLocation();
 
     if (loading) {
-        return <PageLoading />
+        return <div className="text-4xl h-screen flex items-center justify-center">
+            <PageLoading />
+        </div>
     }
 
     if (!loading && user === null) {
