@@ -17,7 +17,6 @@ import Cr_Establishment from "../SignUpSteps/Crew/Cr_Establishment";
 import Cr_ServiceLocation from "../SignUpSteps/Crew/Cr_ServiceLocation";
 import Cr_Services from "../SignUpSteps/Crew/Cr_Services";
 import StepsOutlet from "../SignUpSteps/StepsOutlet";
-import BoatSaleC from "../components/BoatSaleC";
 import Main from "../layouts/Main";
 import Register from "../layouts/Register";
 import About_Us from "../pages/About_Us";
@@ -33,9 +32,11 @@ import Home from "../pages/Home";
 import BoatSell from "../sections/BoatSell";
 import RegisterCard from "../sections/RegisterCard";
 import Login from "../pages/Login";
+import BoatDetails from "../pages/BoatDetails";
 
-// const baseURL = "http://localhost:5000";
-const baseURL = "https://any-vessel.vercel.app";
+// const baseURL = "http://localhost:5000/";
+// const baseURL = "https://any-vessel.vercel.app";
+const baseURL = "https://anyvessel-server.onrender.com/";
 
 const Route = createBrowserRouter([
     // Main Route
@@ -128,7 +129,7 @@ const Route = createBrowserRouter([
             {
                 path: "/crew-details/:id",
                 element: <CrewDetails />,
-                loader: ({ params }) => fetch(`${baseURL}/crew-data/${params.id}`),
+                loader: ({ params }) => fetch(`${baseURL}crew-data/${params.id}`),
             },
             {
                 path: "/boat_search",
@@ -137,7 +138,7 @@ const Route = createBrowserRouter([
             {
                 path: "/boat_search/:id",
                 element: <Boat_Search />,
-                loader: ({ params }) => fetch(`${baseURL}/boatDetails/${params.id}`),
+                loader: ({ params }) => fetch(`${baseURL}boatDetails/${params.id}`),
             },
             {
                 path: "/profile",
@@ -149,8 +150,8 @@ const Route = createBrowserRouter([
             },
             {
                 path: "/boat_details/:id",
-                element: <BoatSaleC />,
-                loader: ({ params }) => fetch(`${baseURL}/boatDetails/${params.id}`),
+                element: <BoatDetails />,
+                loader: ({ params }) => fetch(`${baseURL}vessel/details/${params.id}`),
             },
             {
                 path: "/boat_services",
