@@ -27,16 +27,14 @@ const CustomModal = ({
   return (
     <div
       id="modal-overlay"
-      className={`fixed inset-0 z-[999999] flex items-center justify-center bg-black bg-opacity-40 overflow-scroll transition-opacity duration-300 ${
-        isModalOpen
-          ? "opacity-100 pointer-events-auto"
-          : "opacity-0 pointer-events-none"
-      }`}
+      className={`fixed inset-0 z-[999] flex items-center justify-center bg-black bg-opacity-40 overflow-scroll transition-opacity duration-300 ${isModalOpen
+        ? "opacity-100 pointer-events-auto"
+        : "opacity-0 pointer-events-none"
+        }`}
     >
       <div
-        className={`relative bg-white ${
-          larger ? `w-[750px]` : "w-[480px]"
-        } rounded-lg`}
+        className={`relative bg-white ${larger ? `w-[750px]` : "w-[480px]"
+          } rounded-lg`}
       >
         <button
           className="absolute top-2 right-2 w-9 h-9 flex items-center justify-center bg-dark/20 text-purple text-xl hover:bg-red-400/20 hover:text-red-500 shadow-lg hover:shadow-red-400/20 rounded-full duration-300 z-30 group"

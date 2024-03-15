@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import useAuth from './useAuth';
 import useAxios from './useAxios';
-import { toast } from 'react-toastify';
 
 const useAllBoatSailingPost = () => {
     const { currentUser } = useAuth();
@@ -9,13 +8,12 @@ const useAllBoatSailingPost = () => {
     const [boatSellPost, setBoatSellPost] = useState()
 
     useEffect(() => {
-        Axios.get('boat-sailing')
+        Axios.get('vessel')
             .then(res => {
                 setBoatSellPost(res.data)
             })
             .catch(error => {
-                toast.error("Something Wrong!");
-                // console.log(error)
+                console.log(error)
             })
 
     }, [currentUser]);

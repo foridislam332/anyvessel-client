@@ -9,6 +9,7 @@ const UploadImage = ({
     multipleImages = false,
     children,
     uploadBtn = true,
+    showLink = true
 }) => {
     const [uploadLoading, setUploadLoading] = useState(false);
     const [uploadedPhoto, setUploadedPhoto] = useState(multipleImages ? [] : "");
@@ -45,10 +46,12 @@ const UploadImage = ({
     return (
         <>
             {uploadLoading ? (
-                <span
-                    className="loading loading-spinner loading-lg"
-                    title="Image uploading"
-                ></span>
+                <div className="h-full w-full flex items-center justify-center border-2 border-blue border-dashed rounded-lg p-2">
+                    <span
+                        className="loading loading-spinner loading-lg text-blue"
+                        title="Image uploading"
+                    ></span>
+                </div>
             ) : (
                 <label
                     htmlFor={id}
@@ -57,16 +60,18 @@ const UploadImage = ({
                     {!uploadedPhoto?.length ? (
                         <>{children}</>
                     ) : (
-                        <div className="text-darkBlue pl-[10px] flex items-center flex-wrap justify-start">
-                            {multipleImages ? (
-                                uploadedPhoto?.length &&
-                                uploadedPhoto?.map((url, idx) => (
-                                    <Link target="_blank" className="hover:underline" to={url}>{url}</Link>
-                                ))
-                            ) : (
-                                <Link target="_blank" className="hover:underline" to={uploadedPhoto}>{uploadedPhoto}</Link>
-                            )}
-                        </div>
+                        <>
+                            {showLink ? <div className="text-darkBlue pl-[10px] flex items-center flex-wrap justify-start">
+                                {multipleImages ? (
+                                    uploadedPhoto?.length &&
+                                    uploadedPhoto?.map((url, idx) => (
+                                        <Link target="_blank" className="hover:underline" to={url}>{url}</Link>
+                                    ))
+                                ) : (
+                                    <Link target="_blank" className="hover:underline" to={uploadedPhoto}>{uploadedPhoto}</Link>
+                                )}
+                            </div> : children}
+                        </>
                     )}
                     <>
                         <input
